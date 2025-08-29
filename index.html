@@ -19,6 +19,7 @@
       text-align: center;
       position: relative;
     }
+    /* hamburger dugme */
     .menu-toggle {
       position: absolute;
       top: 20px;
@@ -29,6 +30,7 @@
       border: none;
       color: #fff;
     }
+    /* overlay meni */
     .overlay {
       height: 100%;
       width: 0;
@@ -125,15 +127,15 @@
   <!-- overlay meni -->
   <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="index.html">🏠 Početna</a>
-    <a href="cjenovnik.html">💰 Cijene i akcije</a>
-    <a href="top15.html">🎬 Top 15</a>
-    <a href="komentari.html">💬 Komentari</a>
-    <a href="tim.html">👥 Postani dio tima</a>
-    <a href="onama.html">ℹ️ O nama</a>
-    <a href="kontakt.html">📞 Kontakt</a>
-    <a href="placanje.html">💳 Plaćanje</a>
-    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+    <a href="index.html">Početna</a>
+    <a href="cjenovnik.html">Cijene i akcije</a>
+    <a href="top15.html">Top 15</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="onama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+    <a href="kako-da-gledas.html">Kako da gledaš</a>
   </div>
 
   <section class="hero">
@@ -173,6 +175,30 @@
     </p>
   </section>
 
+  <!-- Novi opis IPTV-a -->
+  <section class="content">
+    <h2>Šta je Internet televizija (IPTV)?</h2>
+    <p>
+      Internet televizija ili IPTV je savremeni način gledanja TV kanala putem internet veze. 
+      Umjesto klasičnih kablovskih ili satelitskih sistema, IPTV koristi vašu internet konekciju 
+      da vam pruži stabilan i kvalitetan prenos slike i tona.
+    </p>
+    <h3>Prednosti IPTV-a:</h3>
+    <ul style="text-align:left; max-width:700px; margin:20px auto; line-height:1.6;">
+      <li>✔ Više hiljada TV kanala iz cijelog svijeta</li>
+      <li>✔ Velika videoteka sa filmovima i serijama na zahtjev</li>
+      <li>✔ Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
+      <li>✔ Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
+      <li>✔ Povoljnija cijena u poređenju sa klasičnim operaterima</li>
+    </ul>
+    <p>
+      Sve više ljudi prelazi na internet televiziju jer nudi 
+      <strong>fleksibilnost, jednostavnost i pristupačnost</strong>.  
+      Sa YUGO-Family TV dobijate sve najbolje na jednom mjestu – televiziju nove generacije 
+      prilagođenu vama i vašoj porodici.
+    </p>
+  </section>
+
   <footer>
     <p>&copy; 2025 YUGO-Family TV | Kontakt: 
       <a href="https://wa.me/4915755749502">WhatsApp</a> | 
@@ -181,6 +207,7 @@
   </footer>
 
   <script>
+    // hamburger meni funkcije
     function openNav() {
       document.getElementById("myNav").style.width = "100%";
     }
@@ -188,6 +215,7 @@
       document.getElementById("myNav").style.width = "0%";
     }
 
+    // animacija brojeva
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
       counter.innerText = '0';

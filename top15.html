@@ -22,6 +22,28 @@
     h1, h2 {
       margin: 10px 0;
     }
+
+    /* Navigacija */
+    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
+    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
+    nav a:hover { background:#e6f0ff; color:#0056a6; }
+
+    /* Hamburger dugme */
+    .menu-toggle { 
+      display:none; 
+      font-size:28px; 
+      background:none; 
+      border:none; 
+      color:white; 
+      cursor:pointer; 
+      padding:12px 18px; 
+    }
+    @media (max-width:768px) {
+      nav { display:none; flex-direction:column; text-align:center; }
+      nav.show { display:flex; }
+      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+    }
+
     .container {
       max-width: 1200px;
       margin: 20px auto;
@@ -54,7 +76,7 @@
       color: #fff;
       margin-top: 30px;
     }
-    a {
+    footer a {
       color: #ffcc00;
       text-decoration: none;
     }
@@ -65,6 +87,20 @@
     <h1>Top gledanih filmova i serija</h1>
     <p>Najpopularniji sadržaji na YUGO-Family TV</p>
   </header>
+
+  <!-- Hamburger dugme -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cijene.html">Cijene i akcije</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="onama.html">O nama</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="top15.html">Top 15</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+  </nav>
 
   <div class="container">
     <h2>🎬 Najgledaniji filmovi (Top 30)</h2>
@@ -119,5 +155,11 @@
   <footer>
     <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mainMenu").classList.toggle("show");
+    }
+  </script>
 </body>
 </html>

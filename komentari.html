@@ -3,51 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komentari korisnika - YUGO-Family TV</title>
+  <title>Komentari - YUGO-Family TV</title>
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
-    header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
-
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
-
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9fbff;
+      color: #333;
+    }
+    header {
+      background: #004080;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
     }
 
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+    /* Hamburger meni */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #fff;
+      background: none;
+      border: none;
+    }
+    nav {
+      display: none;
+      flex-direction: column;
+      background: #003366;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-bottom: 1px solid #002244;
+    }
+    nav a:hover {
+      background: #0055cc;
+    }
+    .show-menu {
+      display: flex;
     }
 
-    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
-    .comment { background:#fff; border:1px solid #007bff; border-radius:10px; padding:15px; margin-bottom:15px; box-shadow:0 2px 6px rgba(0,0,0,0.05); }
-    .comment h4 { margin:0; color:#0056a6; }
-    .stars { color:#ffcc00; font-size:1.2em; margin:5px 0; }
-
-    footer { background:#0056a6; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#ffdd00; text-decoration:none; }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .comment {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .comment strong {
+      color: #004080;
+    }
+    footer {
+      background: #004080;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Komentari korisnika</h1>
-    <p>Šta naši korisnici kažu o nama</p>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <h1>Komentari naših korisnika</h1>
   </header>
-
-  <!-- Hamburger dugme -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
   <nav id="mainMenu">
     <a href="index.html">Početna</a>
@@ -57,28 +97,49 @@
     <a href="tim.html">Postani dio tima</a>
     <a href="top15.html">Top 15</a>
     <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
   </nav>
 
   <div class="container">
-    <h2>Iskustva naših pretplatnika</h2>
-
-    <!-- 30 komentara -->
-    <div class="comment">
-      <h4>Marko Petrović</h4>
-      <div class="stars">★★★★★</div>
-      <p>Najbolja IPTV usluga, bez ikakvog prekida! Preporuka svima.</p>
-    </div>
-    <!-- ... ostali komentari (nisam dirao) ... -->
+    <div class="comment"><strong>Amir:</strong> Odlična usluga, preporučujem svima!</div>
+    <div class="comment"><strong>Jelena:</strong> Brza instalacija i super kvalitet slike.</div>
+    <div class="comment"><strong>Marko:</strong> Sve radi bez ikakvih problema.</div>
+    <div class="comment"><strong>Ivana:</strong> Ljubazna podrška, pomogli su mi odmah.</div>
+    <div class="comment"><strong>Nemanja:</strong> Najbolja IPTV usluga koju sam koristio.</div>
+    <div class="comment"><strong>Lejla:</strong> Cijene su veoma povoljne, a kvalitet odličan.</div>
+    <div class="comment"><strong>Petar:</strong> Preporučujem, mnogo kanala i bez štekanja.</div>
+    <div class="comment"><strong>Maja:</strong> Djeca uživaju u crtićima, hvala vam!</div>
+    <div class="comment"><strong>Armin:</strong> Radi perfektno i na mobitelu i na TV-u.</div>
+    <div class="comment"><strong>Sanja:</strong> Sve pohvale za podršku i kvalitet.</div>
+    <div class="comment"><strong>Dino:</strong> Bolje od svih drugih IPTV provajdera.</div>
+    <div class="comment"><strong>Selma:</strong> Plaćanje jednostavno, sve je sigurno.</div>
+    <div class="comment"><strong>Vlado:</strong> Gledam i sportske kanale bez ikakvih prekida.</div>
+    <div class="comment"><strong>Elma:</strong> Savršeno za cijelu porodicu.</div>
+    <div class="comment"><strong>Dejan:</strong> Stabilna konekcija, nema zastajkivanja.</div>
+    <div class="comment"><strong>Ana:</strong> Brzo sam dobila pristup nakon plaćanja.</div>
+    <div class="comment"><strong>Adnan:</strong> Odlično iskustvo, nastavljam pretplatu.</div>
+    <div class="comment"><strong>Milica:</strong> Sve pohvale, imate moju preporuku.</div>
+    <div class="comment"><strong>Haris:</strong> Radi i na starijem smart TV-u bez problema.</div>
+    <div class="comment"><strong>Nina:</strong> Najbolja odluka, odlična zabava za cijelu kuću.</div>
+    <div class="comment"><strong>Filip:</strong> Super ponuda i mnogo kanala.</div>
+    <div class="comment"><strong>Kristina:</strong> Veoma sam zadovoljna, sve radi glatko.</div>
+    <div class="comment"><strong>Darko:</strong> Dobar kvalitet slike čak i na sporijem internetu.</div>
+    <div class="comment"><strong>Marina:</strong> Moja preporuka, odličan tim.</div>
+    <div class="comment"><strong>Edin:</strong> Instalacija brza i jednostavna.</div>
+    <div class="comment"><strong>Ivona:</strong> Hvala na ljubaznosti i pomoći.</div>
+    <div class="comment"><strong>Goran:</strong> Veoma povoljno i stabilno.</div>
+    <div class="comment"><strong>Sofija:</strong> Preporučujem svima, odlična usluga.</div>
+    <div class="comment"><strong>Damir:</strong> IPTV bez greške, svaka čast!</div>
+    <div class="comment"><strong>Lidija:</strong> Svi kanali rade savršeno, hvala vam.</div>
   </div>
 
   <footer>
-    <p>&copy; 2025 YUGO-Family TV</p>
-    <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
+    <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
   </footer>
 
   <script>
     function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
+      document.getElementById("mainMenu").classList.toggle("show-menu");
     }
   </script>
 </body>

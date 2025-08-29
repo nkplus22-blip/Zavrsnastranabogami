@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kako da gledaš | YUGO-Family TV</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f9f9f9; color: #333; }
+    header { background: #004080; color: #fff; padding: 20px; text-align: center; position: relative; }
+    .menu-toggle { position: absolute; top: 20px; right: 20px; font-size: 28px; cursor: pointer; background: none; border: none; color: #fff; }
+    .overlay { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: rgba(0, 64, 128, 0.95); overflow-x: hidden; transition: 0.4s; padding-top: 60px; }
+    .overlay a { display: block; text-decoration: none; font-size: 1.5em; color: #fff; padding: 15px; text-align: center; transition: 0.3s; }
+    .overlay a:hover { background: #0066cc; }
+    .overlay .closebtn { position: absolute; top: 15px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
+    .content { max-width: 900px; margin: auto; padding: 30px 20px; }
+    .device { background: #fff; margin-bottom: 20px; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .device h2 { color: #004080; margin-bottom: 10px; }
+    footer { background: #004080; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
+    footer a { color: #ffcc00; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Kako da gledaš YUGO-Family TV</h1>
+    <button class="menu-toggle" onclick="openNav()">☰</button>
+  </header>
+
+  <div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="index.html">🏠 Početna</a>
+    <a href="cjenovnik.html">💰 Cijene i akcije</a>
+    <a href="top15.html">🎬 Top 15</a>
+    <a href="komentari.html">💬 Komentari</a>
+    <a href="tim.html">👥 Postani dio tima</a>
+    <a href="onama.html">ℹ️ O nama</a>
+    <a href="kontakt.html">📞 Kontakt</a>
+    <a href="placanje.html">💳 Plaćanje</a>
+    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+  </div>
+
+  <main class="content">
+    <p>YUGO-Family TV možeš gledati na više različitih uređaja. Izaberi ono što ti najviše odgovara i uživaj u omiljenim kanalima gdje god da se nalaziš.</p>
+
+    <div class="device">
+      <h2>📺 Smart TV</h2>
+      <p>Na većini modernih Smart TV uređaja dovoljno je instalirati aplikaciju i prijaviti se sa svojim korisničkim podacima. Bez dodatnih uređaja ili komplikacija.</p>
+    </div>
+
+    <div class="device">
+      <h2>💻 Kompjuter ili Laptop</h2>
+      <p>Otvorite našu web aplikaciju u svom internet pretraživaču i gledajte TV direktno na ekranu računara, bilo kod kuće ili na putovanju.</p>
+    </div>
+
+    <div class="device">
+      <h2>📱 Tablet ili Telefon</h2>
+      <p>Preuzmite našu aplikaciju na Android ili iOS uređaju i pratite omiljene kanale bilo gdje, uz stabilnu internet konekciju.</p>
+    </div>
+
+    <div class="device">
+      <h2>▶️ Streaming uređaji</h2>
+      <p>Koristite Chromecast, Amazon Fire Stick, Nvidia Shield ili slične uređaje i gledajte YUGO-Family TV na velikom ekranu.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 YUGO-Family TV | Kontakt: <a href="https://wa.me/4915755749502">WhatsApp</a> | Email: nkplus22@gmail.com</p>
+  </footer>
+
+  <script>
+    function openNav() { document.getElementById("myNav").style.width = "100%"; }
+    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+  </script>
+</body>
+</html>

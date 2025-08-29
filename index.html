@@ -19,7 +19,6 @@
       text-align: center;
       position: relative;
     }
-    /* hamburger dugme */
     .menu-toggle {
       position: absolute;
       top: 20px;
@@ -30,7 +29,6 @@
       border: none;
       color: #fff;
     }
-    /* overlay meni */
     .overlay {
       height: 100%;
       width: 0;
@@ -127,14 +125,15 @@
   <!-- overlay meni -->
   <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="top15.html">Top 15</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="onama.html">O nama</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
+    <a href="index.html">🏠 Početna</a>
+    <a href="cjenovnik.html">💰 Cijene i akcije</a>
+    <a href="top15.html">🎬 Top 15</a>
+    <a href="komentari.html">💬 Komentari</a>
+    <a href="tim.html">👥 Postani dio tima</a>
+    <a href="onama.html">ℹ️ O nama</a>
+    <a href="kontakt.html">📞 Kontakt</a>
+    <a href="placanje.html">💳 Plaćanje</a>
+    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
   </div>
 
   <section class="hero">
@@ -182,7 +181,6 @@
   </footer>
 
   <script>
-    // hamburger meni funkcije
     function openNav() {
       document.getElementById("myNav").style.width = "100%";
     }
@@ -190,7 +188,6 @@
       document.getElementById("myNav").style.width = "0%";
     }
 
-    // animacija brojeva
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
       counter.innerText = '0';

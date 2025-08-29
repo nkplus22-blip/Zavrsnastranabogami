@@ -7,9 +7,28 @@
   <style>
     body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
     header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
+
+    /* Navigacija */
     nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
     nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
     nav a:hover { background:#e6f0ff; color:#0056a6; }
+
+    /* Hamburger dugme */
+    .menu-toggle { 
+      display:none; 
+      font-size:28px; 
+      background:none; 
+      border:none; 
+      color:white; 
+      cursor:pointer; 
+      padding:12px 18px; 
+    }
+    @media (max-width:768px) {
+      nav { display:none; flex-direction:column; text-align:center; }
+      nav.show { display:flex; }
+      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+    }
+
     .container { max-width:1000px; margin:40px auto; padding:0 20px; }
     h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
     p { line-height:1.8; font-size:1.1em; text-align:justify; }
@@ -27,7 +46,10 @@
     <p>Započni saradnju sa nama i ostvari dodatnu zaradu</p>
   </header>
 
-  <nav>
+  <!-- Hamburger dugme -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainMenu">
     <a href="index.html">Početna</a>
     <a href="cijene.html">Cijene i akcije</a>
     <a href="komentari.html">Komentari</a>
@@ -35,6 +57,7 @@
     <a href="tim.html">Postani dio tima</a>
     <a href="top15.html">Top 15</a>
     <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
   </nav>
 
   <div class="container">
@@ -69,5 +92,11 @@
     <p>&copy; 2025 YUGO-Family TV</p>
     <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mainMenu").classList.toggle("show");
+    }
+  </script>
 </body>
 </html>

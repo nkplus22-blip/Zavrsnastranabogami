@@ -7,9 +7,41 @@
   <style>
     body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
     header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
+
+    /* Navigacija */
     nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
     nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
     nav a:hover { background:#e6f0ff; color:#0056a6; }
+
+    /* Hamburger meni */
+    .menu-toggle {
+      display:none;
+      flex-direction:column;
+      cursor:pointer;
+      padding:10px;
+      position:absolute;
+      top:20px;
+      right:20px;
+    }
+    .menu-toggle div {
+      width:30px;
+      height:4px;
+      background:#fff;
+      margin:5px 0;
+      transition:0.3s;
+    }
+
+    /* Mobile prikaz */
+    @media (max-width:768px) {
+      nav {
+        display:none;
+        flex-direction:column;
+        text-align:center;
+      }
+      nav.active { display:flex; }
+      .menu-toggle { display:flex; }
+    }
+
     .container { max-width:1100px; margin:40px auto; padding:0 20px; }
     h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
@@ -28,11 +60,18 @@
   <header>
     <h1>Cijene i akcije</h1>
     <p>Najbolja IPTV ponuda za cijelu porodicu</p>
+
+    <!-- Hamburger dugme -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </header>
 
-  <nav>
+  <nav id="navbar">
     <a href="index.html">Početna</a>
-    <a href="cijene.html">Cijene i akcije</a>
+    <a href="cjenovnik.html">Cijene i akcije</a>
     <a href="komentari.html">Komentari</a>
     <a href="onama.html">O nama</a>
     <a href="tim.html">Postani dio tima</a>
@@ -88,5 +127,11 @@
     <p>&copy; 2025 YUGO-Family TV</p>
     <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navbar").classList.toggle("active");
+    }
+  </script>
 </body>
 </html>

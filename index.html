@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YUGO-Family TV</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f9ff;
+      color: #333;
+    }
+    header {
+      background: #004080;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #0066cc;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ffcc00;
+    }
+    .hero {
+      background: linear-gradient(rgba(0,64,128,0.8), rgba(0,64,128,0.8)), url('') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+    .counters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+    .counter-box {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      width: 180px;
+    }
+    .counter-box h2 {
+      color: #004080;
+      font-size: 2em;
+      margin: 0;
+    }
+    .counter-box p {
+      margin: 10px 0 0;
+      font-size: 1em;
+    }
+    .content {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    footer {
+      background: #004080;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>YUGO-Family TV</h1>
+    <p>Vaša porodica, vaša televizija – najbolji IPTV servis</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Početna</a>
+    <a href="cjenovnik.html">Cijene i akcije</a>
+    <a href="top15.html">Top 15</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="onama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Dobrodošli u YUGO-Family TV</h1>
+    <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
+  </section>
+
+  <section class="counters">
+    <div class="counter-box">
+      <h2 class="counter" data-target="16000">0</h2>
+      <p>Zadovoljnih korisnika</p>
+    </div>
+    <div class="counter-box">
+      <h2 class="counter" data-target="9">0</h2>
+      <p>Godina sa vama</p>
+    </div>
+    <div class="counter-box">
+      <h2 class="counter" data-target="2100">0</h2>
+      <p>Live kanala</p>
+    </div>
+    <div class="counter-box">
+      <h2 class="counter" data-target="75000">0</h2>
+      <p>Videoteka</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2>Zašto odabrati YUGO-Family TV?</h2>
+    <p>
+      Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene.  
+      Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta.  
+      Vaše zadovoljstvo nam je uvijek na prvom mjestu!
+    </p>
+    <p>
+      📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, pogledajte <a href="top15.html">Top 15 filmova i serija</a>  
+      ili pročitajte šta naši korisnici kažu u <a href="komentari.html">komentarima</a>.
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 YUGO-Family TV | Kontakt: 
+      <a href="https://wa.me/4915755749502">WhatsApp</a> | 
+      Email: nkplus22@gmail.com
+    </p>
+  </footer>
+
+  <script>
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      counter.innerText = '0';
+      const updateCounter = () => {
+        const target = +counter.getAttribute('data-target');
+        const current = +counter.innerText.replace(/\D/g,'');
+        const increment = target / 200;
+
+        if (current < target) {
+          counter.innerText = Math.ceil(current + increment).toLocaleString();
+          setTimeout(updateCounter, 20);
+        } else {
+          if(target >= 1000){
+            counter.innerText = target.toLocaleString() + "+";
+          } else {
+            counter.innerText = target + "+";
+          }
+        }
+      };
+      updateCounter();
+    });
+  </script>
+
+</body>
+</html>

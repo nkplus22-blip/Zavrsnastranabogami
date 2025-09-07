@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  color: #333;
+  color: #ffffff; /* sve tekstove na bijelo */
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -31,6 +31,10 @@ header {
   padding: 20px;
   text-align: center;
   position: relative;
+}
+
+header a, header p, header h1 {
+  color: #ffffff;
 }
 
 .menu-toggle {
@@ -82,7 +86,7 @@ header {
 /* Hero sekcija */
 .hero {
   position: relative;
-  color: #fff;
+  color: #ffffff; /* bijeli tekst */
   text-align: center;
   padding: 80px 20px;
   z-index: 1;
@@ -104,17 +108,15 @@ header {
 
 .counter-box {
   text-align: center;
-  background: #fff;
+  background: #001f3f; /* tamnija pozadina da brojači budu vidljivi */
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   width: 180px;
 }
 
-.counter-box h2 {
-  color: #004080;
-  font-size: 2em;
-  margin: 0;
+.counter-box h2, .counter-box p {
+  color: #ffffff;
 }
 
 /* Content sekcije */
@@ -125,12 +127,11 @@ header {
   text-align: center;
   position: relative;
   z-index: 1;
+  color: #ffffff;
 }
 
-.content h2 {
-  font-size: 1.8em;
-  color: #004080;
-  margin-bottom: 15px;
+.content h2, .content h3 {
+  color: #ffffff;
 }
 
 .content ul {
@@ -138,6 +139,10 @@ header {
   max-width: 700px;
   margin: 20px auto;
   line-height: 1.6;
+}
+
+.content a {
+  color: #ffcc00; /* linkovi ostaju žuti */
 }
 
 /* Footer */

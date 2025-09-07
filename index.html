@@ -33,8 +33,10 @@
 
   <!-- Hero sekcija -->
   <section class="hero">
-    <h1>Dobrodošli u YUGO-Family TV</h1>
-    <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
+    <div class="hero-box">
+      <h1>Dobrodošli u YUGO-Family TV</h1>
+      <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
+    </div>
   </section>
 
   <!-- Brojači -->
@@ -47,39 +49,43 @@
 
   <!-- Sekcije sadržaja -->
   <section class="content">
-    <h2>Zašto odabrati YUGO-Family TV?</h2>
-    <p>
-      Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene.  
-      Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta.  
-      Vaše zadovoljstvo nam je uvijek na prvom mjestu!
-    </p>
-    <p>
-      📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, pogledajte <a href="top15.html">Top 15 filmova i serija</a>  
-      ili pročitajte šta naši korisnici kažu u <a href="komentari.html">komentarima</a>.
-    </p>
+    <div class="content-box">
+      <h2>Zašto odabrati YUGO-Family TV?</h2>
+      <p>
+        Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene.  
+        Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta.  
+        Vaše zadovoljstvo nam je uvijek na prvom mjestu!
+      </p>
+      <p>
+        📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, pogledajte <a href="top15.html">Top 15 filmova i serija</a>  
+        ili pročitajte šta naši korisnici kažu u <a href="komentari.html">komentarima</a>.
+      </p>
+    </div>
   </section>
 
   <section class="content">
-    <h2>Šta je Internet televizija (IPTV)?</h2>
-    <p>
-      Internet televizija ili IPTV je savremeni način gledanja TV kanala putem internet veze. 
-      Umjesto klasičnih kablovskih ili satelitskih sistema, IPTV koristi vašu internet konekciju 
-      da vam pruži stabilan i kvalitetan prenos slike i tona.
-    </p>
-    <h3>Prednosti IPTV-a:</h3>
-    <ul>
-      <li>✔ Više hiljada TV kanala iz cijelog svijeta</li>
-      <li>✔ Velika videoteka sa filmovima i serijama na zahtjev</li>
-      <li>✔ Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
-      <li>✔ Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
-      <li>✔ Povoljnija cijena u poređenju sa klasičnim operaterima</li>
-    </ul>
-    <p>
-      Sve više ljudi prelazi na internet televiziju jer nudi 
-      <strong>fleksibilnost, jednostavnost i pristupačnost</strong>.  
-      Sa YUGO-Family TV dobijate sve najbolje na jednom mjestu – televiziju nove generacije 
-      prilagođenu vama i vašoj porodici.
-    </p>
+    <div class="content-box">
+      <h2>Šta je Internet televizija (IPTV)?</h2>
+      <p>
+        Internet televizija ili IPTV je savremeni način gledanja TV kanala putem internet veze. 
+        Umjesto klasičnih kablovskih ili satelitskih sistema, IPTV koristi vašu internet konekciju 
+        da vam pruži stabilan i kvalitetan prenos slike i tona.
+      </p>
+      <h3>Prednosti IPTV-a:</h3>
+      <ul>
+        <li>✔ Više hiljada TV kanala iz cijelog svijeta</li>
+        <li>✔ Velika videoteka sa filmovima i serijama na zahtjev</li>
+        <li>✔ Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
+        <li>✔ Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
+        <li>✔ Povoljnija cijena u poređenju sa klasičnim operaterima</li>
+      </ul>
+      <p>
+        Sve više ljudi prelazi na internet televiziju jer nudi 
+        <strong>fleksibilnost, jednostavnost i pristupačnost</strong>.  
+        Sa YUGO-Family TV dobijate sve najbolje na jednom mjestu – televiziju nove generacije 
+        prilagođenu vama i vašoj porodici.
+      </p>
+    </div>
   </section>
 
   <footer>
@@ -91,11 +97,9 @@
 
   <!-- JS -->
   <script>
-    // Hamburger meni
     function openNav(){ document.getElementById("myNav").style.width="100%"; }
     function closeNav(){ document.getElementById("myNav").style.width="0%"; }
 
-    // Brojači
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
       counter.innerText = '0';
@@ -113,7 +117,6 @@
       updateCounter();
     });
 
-    // Tech pozadina + lebdeće ikone
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -135,49 +138,15 @@
     const iconImgs = iconUrls.map(src => { const i = new Image(); i.src=src; return i; });
 
     class Particle {
-      constructor(){
-        this.x = Math.random()*width;
-        this.y = Math.random()*height;
-        this.size = Math.random()*2+1;
-        this.speedX = Math.random()*1-0.5;
-        this.speedY = Math.random()*1-0.5;
-      }
-      update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if(this.x>width) this.x=0;
-        if(this.x<0) this.x=width;
-        if(this.y>height) this.y=0;
-        if(this.y<0) this.y=height;
-      }
-      draw(){
-        ctx.fillStyle = 'rgba(0,150,255,0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
-      }
+      constructor(){ this.x=Math.random()*width; this.y=Math.random()*height; this.size=Math.random()*2+1; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; }
+      update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; }
+      draw(){ ctx.fillStyle='rgba(0,150,255,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
     }
 
     class Icon {
-      constructor(img){
-        this.img = img;
-        this.x = Math.random()*width;
-        this.y = Math.random()*height;
-        this.size = 32 + Math.random()*16;
-        this.speedX = Math.random()*1-0.5;
-        this.speedY = Math.random()*1-0.5;
-      }
-      update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if(this.x>width) this.x=0;
-        if(this.x<0) this.x=width;
-        if(this.y>height) this.y=0;
-        if(this.y<0) this.y=height;
-      }
-      draw(){
-        ctx.drawImage(this.img,this.x,this.y,this.size,this.size);
-      }
+      constructor(img){ this.img=img; this.x=Math.random()*width; this.y=Math.random()*height; this.size=32+Math.random()*16; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; }
+      update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; }
+      draw(){ ctx.drawImage(this.img,this.x,this.y,this.size,this.size); }
     }
 
     for(let i=0;i<particleCount;i++) particles.push(new Particle());
@@ -185,23 +154,16 @@
 
     function animate(){
       ctx.clearRect(0,0,width,height);
-      particles.forEach(p => {p.update(); p.draw();});
+      particles.forEach(p=>{p.update();p.draw();});
       for(let i=0;i<particles.length;i++){
         for(let j=i+1;j<particles.length;j++){
           let dx=particles[i].x-particles[j].x;
           let dy=particles[i].y-particles[j].y;
           let dist=Math.sqrt(dx*dx+dy*dy);
-          if(dist<100){
-            ctx.strokeStyle='rgba(0,150,255,0.1)';
-            ctx.lineWidth=1;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.stroke();
-          }
+          if(dist<100){ ctx.strokeStyle='rgba(0,150,255,0.1)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }
         }
       }
-      icons.forEach(ic=>{ic.update(); ic.draw();});
+      icons.forEach(ic=>{ic.update();ic.draw();});
       requestAnimationFrame(animate);
     }
     animate();

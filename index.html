@@ -98,6 +98,11 @@
       transform: translateY(0);
     }
 
+    /* ✅ Gornja slika lagano providna */
+    .hero-image img {
+      opacity: 0.8;
+    }
+
     /* Hero sekcija */
     .hero {
       text-align: center;
@@ -121,10 +126,11 @@
     }
 
     .counter-box {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.08);
       padding: 20px;
       border-radius: 12px;
       width: 150px;
+      box-shadow: 0 0 12px rgba(0,191,255,0.3);
     }
 
     .counter {
@@ -139,12 +145,26 @@
       margin: 0 auto;
       background: rgba(255,255,255,0.05);
       border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,191,255,0.1);
     }
 
     ul {
       text-align: left;
       display: inline-block;
       margin-top: 10px;
+    }
+
+    /* ✅ Video sekcija */
+    .video-section {
+      text-align: center;
+      margin: 50px auto;
+    }
+
+    .video-section video {
+      width: 90%;
+      max-width: 800px;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0,191,255,0.3);
     }
 
     footer {
@@ -160,11 +180,13 @@
       text-decoration: none;
     }
 
+    /* Canvas pozadina */
     canvas#tech-bg {
       position: fixed;
       top: 0;
       left: 0;
       z-index: 0;
+      opacity: 0.4; /* ✅ pojačana vidljivost animacije */
     }
   </style>
 </head>
@@ -214,6 +236,14 @@
   <h2>Zašto odabrati YUGO-Family TV?</h2>
   <p>Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene. Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta. Vaše zadovoljstvo nam je uvijek na prvom mjestu!</p>
   <p>📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, <a href="top15.html">Top 15 filmova i serija</a> ili <a href="komentari.html">komentare</a>.</p>
+</section>
+
+<!-- ✅ Video sekcija dodana ovdje -->
+<section class="video-section">
+  <video controls autoplay muted loop>
+    <source src="ponudepaketa.mp4" type="video/mp4">
+    Vaš pretraživač ne podržava video prikaz.
+  </video>
 </section>
 
 <section class="content">
@@ -281,7 +311,7 @@ class Icon{ constructor(img){ this.img=img; this.x=Math.random()*width; this.y=M
 for(let i=0;i<particleCount;i++)particles.push(new Particle());
 for(let i=0;i<20;i++)icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
 
-function animate(){ ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw();}); for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctx.strokeStyle='rgba(0,150,255,0.1)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }}} icons.forEach(ic=>{ic.update();ic.draw();}); requestAnimationFrame(animate);}
+function animate(){ ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw();}); for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctx.strokeStyle='rgba(0,150,255,0.15)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }}} icons.forEach(ic=>{ic.update();ic.draw();}); requestAnimationFrame(animate);}
 animate();
 
 // Fade-in efekat za slike

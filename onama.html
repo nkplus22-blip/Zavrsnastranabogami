@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O nama - YUGO-Family TV</title>
+
+<style>
+/* ===========================
+   GLOBAL STYLE
+=========================== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f8ff;
+    color: #222;
+    overflow-x: hidden;
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Sliding animation */
+.slide-up {
+    animation: slideUp 1s ease forwards;
+    transform: translateY(40px);
+    opacity: 0;
+}
+@keyframes slideUp {
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero {
+    position: relative;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+
+    /* animirana tehnološka pozadina */
+    background: url('https://i.imgur.com/sb0Nq4H.gif') center/cover no-repeat;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.55);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.hero p { font-size: 18px; }
+
+/* ===========================
+   NAVIGATION
+=========================== */
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    padding: 12px 18px;
+    background: #0056a6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align:right;
+}
+
+nav {
+    background: #007bff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: 0.4s;
+}
+
+nav a {
+    padding: 14px 20px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: #e6f0ff;
+    color: #003c7a;
+}
+
+@media(max-width: 768px){
+    nav { display: none; flex-direction: column; text-align: center; }
+    nav.show { display: flex; }
+    .menu-toggle { display: block; }
+}
+
+/* ===========================
+   COUNTERS
+=========================== */
+.counter-section {
+    background: white;
+    padding: 40px 20px;
+    text-align:center;
+}
+
+.counter-boxes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.counter-box {
+    background: #ffffffaa;
+    padding: 25px;
+    width: 260px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    margin: 10px;
+}
+
+.counter-number {
+    font-size: 38px;
+    font-weight: bold;
+    color: #0054a4;
+}
+
+/* ===========================
+   TIMELINE
+=========================== */
+.timeline {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+.timeline-item {
+    background: white;
+    border-left: 4px solid #0056a6;
+    margin: 20px 0;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ===========================
+   INFO BOXES
+=========================== */
+.info-section {
+    padding: 40px 0;
+    text-align:center;
+}
+.info-box-container {
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+.info-box {
+    width: 260px;
+    background: linear-gradient(145deg, #ffffff, #e3edff);
+    padding: 25px;
+    margin: 10px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+.info-box:hover {
+    transform: translateY(-5px);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+    background: #0056a6;
+    padding: 20px;
+    color:white;
+    text-align:center;
+}
+footer a { color: #ffdd00; }
+</style>
+</head>
+
+<body>
+
+<!-- HERO SECTION -->
+<div class="hero fade-in">
+    <div class="hero-content">
+        <h1>O nama</h1>
+        <p>9+ godina sa Vama — povjerenje koje raste zajedno s nama.</p>
+    </div>
+</div>
+
+<!-- MENU TOGGLE -->
+<button class="menu-toggle" onclick="toggleMenu()">☰ Meni</button>
+
+<!-- NAVIGATION -->
+<nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cijene.html">Cijene i akcije</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="onama.html">O nama</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="top15.html">Top 30</a>
+    <a href="kontakt.html">Kontakt</a>
+</nav>
+
+<!-- COUNTERS -->
+<section class="counter-section slide-up">
+    <div class="counter-boxes">
+
+        <div class="counter-box">
+            <div class="counter-number" data-target="16000">0</div>
+            <p>Zadovoljnih korisnika</p>
+        </div>
+
+        <div class="counter-box">
+            <div class="counter-number" data-target="9">0</div>
+            <p>Godina sa Vama</p>
+        </div>
+
+        <div class="counter-box">
+            <div class="counter-number" data-target="3000">0</div>
+            <p>Aktivnih kanala</p>
+        </div>
+
+        <div class="counter-box">
+            <div class="counter-number" data-target="116000">0</div>
+            <p>Backup kanala dostupno na zahtjev</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- INFO BOXES -->
+<section class="info-section fade-in">
+    <h2>Zašto baš YUGO-Family TV?</h2>
+
+    <div class="info-box-container">
+
+        <div class="info-box">
+            <h3>Vrhunski serveri</h3>
+            <p>Najstabilnija infrastruktura bez trzanja i prekida.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Brza aktivacija</h3>
+            <p>Dodavanje novih kanala u samo par minuta.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>3.000+ kanala</h3>
+            <p>Glavni programi odmah aktivni, ostali dostupni po želji.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Podrška 24/7</h3>
+            <p>Uvijek dostupni — brza i jednostavna pomoć.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="timeline slide-up">
+    <h2 style="text-align:center;color:#0056a6;">Naša priča</h2>
+
+    <div class="timeline-item">
+        <strong>2016 — Početak</strong>
+        <p>Startali smo sa željom da stvorimo najbolju uslugu na tržištu.</p>
+    </div>
+
+    <div class="timeline-item">
+        <strong>2018 — Stabilizacija servera</strong>
+        <p>Uspostavili smo kvalitetnu i pouzdanu mrežnu infrastrukturu.</p>
+    </div>
+
+    <div class="timeline-item">
+        <strong>2020 — Veliko širenje</strong>
+        <p>Broj kanala i korisnika rapidno raste. Uvodimo HD/4K sadržaje.</p>
+    </div>
+
+    <div class="timeline-item">
+        <strong>2023 — Optimizacija & Premium streaming</strong>
+        <p>Usklađeni premium streamovi bez kašnjenja i problema.</p>
+    </div>
+
+    <div class="timeline-item">
+        <strong>2025 — Danas</strong>
+        <p>YUGO-Family TV: 16.000+ korisnika i preko 3.000 aktivnih kanala.</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 YUGO-Family TV</p>
+    <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
+</footer>
+
+<script>
+function toggleMenu(){
+    document.getElementById("mainMenu").classList.toggle("show");
+}
+
+/* COUNTER ANIMATION */
+const counters = document.querySelectorAll('.counter-number');
+
+counters.forEach(counter => {
+    const target = +counter.dataset.target;
+    let count = 0;
+
+    const updateCount = () => {
+        let speed = target / 80;
+        if(count < target){
+            count += speed;
+            counter.textContent = Math.floor(count);
+            requestAnimationFrame(updateCount);
+        } else {
+            counter.textContent = target.toLocaleString();
+        }
+    };
+    updateCount();
+});
+</script>
+
+</body>
+</html>

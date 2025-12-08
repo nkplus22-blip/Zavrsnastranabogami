@@ -10,13 +10,13 @@
 
 <style>
   :root{
-    --bg-1:#061028;    /* deep navy */
-    --bg-2:#071f3a;    /* darker blue */
-    --accent-1:#2ab0ff; /* cyan */
-    --accent-2:#4a6bff; /* bluish */
+    --bg-1:#061028;
+    --bg-2:#071f3a;
+    --accent-1:#2ab0ff;
+    --accent-2:#4a6bff;
     --neon:#6ce0ff;
+    --neon-strong:#2bd1ff;
     --glass: rgba(255,255,255,0.06);
-    --card: rgba(255,255,255,0.04);
     --muted: rgba(230,235,245,0.7);
     --radius:14px;
     --glass-blur: 12px;
@@ -26,11 +26,11 @@
   html,body{height:100%;margin:0;background: linear-gradient(180deg,var(--bg-1),var(--bg-2));font-family:Inter,system-ui,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
 
   /* Page container */
-  .wrap{max-width:1200px;margin:28px auto;padding:0 20px;position:relative;z-index:2}
+  .wrap{max-width:1200px;margin:28px auto;padding:0 20px;position:relative;z-index:3}
 
   /* Header / nav */
   .top{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:relative;
   }
   .brand{display:flex;gap:12px;align-items:center}
   .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#002;box-shadow:0 10px 40px rgba(42,176,255,0.08);font-size:20px}
@@ -38,7 +38,25 @@
   .nav{display:flex;gap:10px;align-items:center}
   .nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px}
   .nav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
-  .controls{display:flex;gap:8px;align-items:center}
+  .controls{display:flex;gap:8px;align-items:center;position:relative}
+
+  /* Hamburger (desktop hidden) */
+  .hamburger {
+    display: none;
+    width: 44px; height: 36px; position: relative; background: transparent; border: none; cursor: pointer; z-index: 1005;
+  }
+  .hamburger span {
+    position: absolute; left: 6px; width: 32px; height: 4px; background: var(--neon-strong); border-radius: 6px;
+    transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .28s, top .36s;
+    box-shadow: 0 0 10px rgba(108,224,255,0.35);
+  }
+  .hamburger span:nth-child(1){ top: 6px; }
+  .hamburger span:nth-child(2){ top: 16px; }
+  .hamburger span:nth-child(3){ top: 26px; }
+
+  .hamburger.active span:nth-child(1){ transform: rotate(45deg); top: 16px; }
+  .hamburger.active span:nth-child(2){ opacity: 0; transform: scaleX(0.2); }
+  .hamburger.active span:nth-child(3){ transform: rotate(-45deg); top: 16px; }
 
   /* Hero glass */
   .hero{
@@ -51,7 +69,7 @@
     display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:center;
   }
 
-  /* Animated lines behind */
+  /* Animated background lines */
   .hero::after{
     content:"";position:absolute;inset:-20% -10% -10% -10%;
     background:
@@ -63,7 +81,7 @@
   }
   @keyframes slowShift {0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
 
-  .hero-left{position:relative;z-index:1;padding-right:12px}
+  .hero-left{position:relative;z-index:2;padding-right:12px}
   .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.12), rgba(74,107,255,0.06));color:var(--neon);font-weight:700;margin-bottom:12px}
   .hero-left h2{margin:0;font-size:30px;line-height:1.05;color:var(--text);text-shadow:0 8px 30px rgba(2,8,20,0.55)}
   .hero-left p{color:var(--muted);margin-top:8px;max-width:680px}
@@ -71,43 +89,54 @@
   /* Stats */
   .stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
   .stat{background:transparent;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:140px}
-  .stat .num{font-weight:800;color:var(--neon);font-size:20px}
+  .stat .num{font-weight:800;color:var(--neon-strong);font-size:20px}
   .stat .lbl{font-size:13px;color:var(--muted)}
 
-  /* Team card (image) */
+  /* Team card (with blur glass frame + neon border anim) */
   .team-card{
-    z-index:2;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);
-    box-shadow:0 10px 40px rgba(2,8,30,0.6);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:3; position:relative;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border-radius:16px; padding:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.012));
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 18px 60px rgba(2,8,30,0.6);
+    overflow: visible;
   }
-  .team-frame{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+
+  /* neon animated frame */
+  .team-frame {
+    position:relative; width:100%; display:flex;align-items:center;justify-content:center;
+  }
+  .neon-frame {
+    position:absolute; inset:6px; border-radius:12px; pointer-events:none;
+    background: linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.06));
+    filter: blur(18px); opacity:0.95; z-index:0; transform: translateZ(0);
+    transition: transform 0.6s ease;
+  }
+
   .team-img{
-    width:94%;border-radius:12px;display:block;object-fit:cover;filter:contrast(1.02) saturate(1.05) brightness(0.98);
+    width:94%; border-radius:12px; display:block; object-fit:cover;
+    filter:contrast(1.03) saturate(1.06) brightness(0.98);
     box-shadow: 0 20px 60px rgba(10,30,60,0.6);
+    position:relative; z-index:1;
     transition: transform 0.9s cubic-bezier(.2,.9,.2,1), filter 0.6s;
-    transform-origin:center;
   }
-  /* neon glow overlay around image */
-  .team-card::before{
-    content:"";position:absolute;inset:auto 10px 12px 10px;border-radius:12px;z-index:0;
-    background: linear-gradient(90deg, rgba(42,176,255,0.12), rgba(76,90,255,0.10));
-    filter: blur(28px);opacity:0.9;pointer-events:none;
-  }
-  .team-card:hover .team-img{transform:scale(1.02) translateY(-4px);filter:brightness(1.03) saturate(1.07)}
+  .team-card:hover .neon-frame{ transform: scale(1.03) rotate(-0.6deg) }
+  .team-card:hover .team-img{ transform: translateY(-6px) scale(1.02) }
 
   /* Cinematic / 3D netflix-like title */
-  .title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px}
+  .title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;z-index:4}
   .netflix-title{
-    font-family:'Bebas Neue', sans-serif;font-size:72px;letter-spacing:4px;color:#ff2b2b;
+    font-family:'Bebas Neue', sans-serif;font-size:62px;letter-spacing:4px;color:#ff2b2b;
     text-transform:uppercase;text-align:center;line-height:1;position:relative;
     text-shadow:
       0 6px 18px rgba(0,0,0,0.55),
-      0 0 28px rgba(255,43,43,0.18),
+      0 0 28px rgba(255,43,43,0.14),
       0 0 56px rgba(42,176,255,0.06);
     transform:translateZ(0);
   }
-  /* subtle animated red bloom flicker */
   .netflix-title::after{
-    content:"";position:absolute;inset:-6px;-webkit-mask-image:linear-gradient(90deg,transparent,black,transparent);opacity:0.6;
+    content:"";position:absolute;inset:-6px;-webkit-mask-image:linear-gradient(90deg,transparent,black,transparent);opacity:0.5;
     background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
     mix-blend-mode:screen;animation: flicker 3.2s infinite;
   }
@@ -129,7 +158,7 @@
   .input, .select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
   .range{width:100%}
   .result{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);margin-top:10px}
-  .big{font-weight:800;color:var(--neon);font-size:18px}
+  .big{font-weight:800;color:var(--neon-strong);font-size:18px}
 
   /* CTA and footer */
   .cta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
@@ -143,26 +172,53 @@
   .wa{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1ebea5);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,20,0.6);z-index:999}
   .wa img{width:28px;height:28px}
 
-  /* small responsive tweaks */
-  @media(max-width:640px){
+  /* Mobile styles (hamburger shows) */
+  @media(max-width:880px){
     .nav{display:none}
+    .hamburger{display:block}
+    .hero{grid-template-columns:1fr}
+    .title-wrap { margin-top: 10px;}
     .netflix-title{font-size:36px}
     .team-img{width:100%}
+    .main{grid-template-columns:1fr}
+  }
+
+  /* Mobile menu (slide-down panel, neon border) */
+  #mainMenu{
+    display:flex; gap:10px; align-items:center;
+  }
+  @media(max-width:880px){
+    #mainMenu{
+      display:none; position: absolute; right: 12px; top: 72px; width: calc(100% - 36px);
+      max-width:360px; padding:14px; border-radius:14px; z-index:1004;
+      background: linear-gradient(180deg, rgba(2,8,20,0.9), rgba(6,18,36,0.85));
+      border: 1px solid rgba(108,224,255,0.08); backdrop-filter: blur(8px);
+      box-shadow: 0 18px 60px rgba(2,6,18,0.6);
+      transform-origin: top right; animation: slideDown .28s ease;
+    }
+    #mainMenu.show{display:block}
+    @keyframes slideDown{from{opacity:0; transform:translateY(-8px) scale(.995)} to{opacity:1; transform:translateY(0) scale(1)}}
+    #mainMenu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);text-decoration:none}
+    #mainMenu a:hover{background:rgba(255,255,255,0.02); color:var(--neon-strong)}
+  }
+
+  /* small responsive tweaks */
+  @media(max-width:480px){
+    .netflix-title{font-size:30px}
   }
 
 </style>
 </head>
 <body>
 
-<!-- decorative animated background (subtle lines) -->
-<svg style="position:fixed;inset:0;z-index:0;opacity:0.08;pointer-events:none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<!-- subtle decorative gradient overlay -->
+<svg style="position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="g1" x1="0" x2="1">
       <stop offset="0" stop-color="#2ab0ff"/><stop offset="1" stop-color="#4a6bff"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#g1)" opacity="0.02"/>
-  <!-- animated lines could be complex; we have CSS layers above -->
 </svg>
 
 <div class="wrap">
@@ -178,12 +234,19 @@
     </div>
 
     <div class="controls">
-      <nav class="nav" aria-label="glavna navigacija">
+      <!-- HAMBURGER (C: transform to X) -->
+      <button class="hamburger" id="hambBtn" onclick="toggleMenu()" aria-label="Otvori meni">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- MAIN MENU (desktop visible, mobile replaced by hamburger) -->
+      <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
         <a href="index.html">Početna</a>
         <a href="cjenovnik.html">Cijene</a>
         <a href="komentari.html">Komentari</a>
         <a href="onama.html">O nama</a>
         <a href="tim.html" aria-current="page">Postani dio tima</a>
+        <a href="kontakt.html">Kontakt</a>
       </nav>
     </div>
   </div>
@@ -202,9 +265,11 @@
       </div>
     </div>
 
+    <!-- Team card with neon blur frame -->
     <aside class="team-card" aria-label="Team card">
       <div class="team-frame">
-        <!-- team image: make sure yfteam.png is in same folder -->
+        <div class="neon-frame" aria-hidden="true"></div>
+        <!-- URADI: stavi yfteam.png u isti folder -->
         <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg">
       </div>
 
@@ -220,7 +285,7 @@
     <!-- LEFT -->
     <section>
       <div class="panel">
-        <h3 style="margin:0 0 8px 0;color:var(--neon)">Otvorene pozicije</h3>
+        <h3 style="margin:0 0 8px 0;color:var(--neon-strong)">Otvorene pozicije</h3>
         <p style="color:var(--muted);margin-top:6px">Tražimo saradnike za online prodaju, tehničku podršku i administraciju — fleksibilno radno vrijeme, provizije i bonusi.</p>
 
         <div class="jobs" style="margin-top:12px">
@@ -232,15 +297,24 @@
       </div>
 
       <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon);margin-bottom:8px">Kako funkcioniše saradnja — 4 koraka</h3>
-        <div class="step"><div class="num" style="background:linear-gradient(135deg,#e8faff,#dff6ff);color:var(--accent-1)">1</div><div class="txt"><h4 style="margin:0">Kontakt i onboarding</h4><p style="color:var(--muted);margin:6px 0 0">Pošaljemo instrukcije i pristup.</p></div></div>
-        <div class="step"><div class="num" style="background:linear-gradient(135deg,#e8faff,#dff6ff);color:var(--accent-1)">2</div><div class="txt"><h4 style="margin:0">Nabavka kredita</h4><p style="color:var(--muted);margin:6px 0 0">Kupuješ kredite po <strong>3 €</strong> — odmah dostupni.</p></div></div>
-        <div class="step"><div class="num" style="background:linear-gradient(135deg,#e8faff,#dff6ff);color:var(--accent-1)">3</div><div class="txt"><h4 style="margin:0">Preprodaja</h4><p style="color:var(--muted);margin:6px 0 0">Prodaješ kredite klijentima po cijeni koju postaviš (9–12€).</p></div></div>
-        <div class="step"><div class="num" style="background:linear-gradient(135deg,#e8faff,#dff6ff);color:var(--accent-1)">4</div><div class="txt"><h4 style="margin:0">Isplata & podrška</h4><p style="color:var(--muted);margin:6px 0 0">Pratiš zaradu i dobijaš podršku 0–24.</p></div></div>
+        <h3 style="color:var(--neon-strong);margin-bottom:8px">Kako funkcioniše saradnja — 4 koraka</h3>
+        <div style="display:grid;gap:12px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">1</div>
+            <div><strong>Kontakt i onboarding</strong><div style="color:var(--muted)">Pošaljemo instrukcije i pristup.</div></div></div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">2</div>
+            <div><strong>Nabavka kredita</strong><div style="color:var(--muted)">Kupuješ kredite po <strong>3 €</strong> — odmah dostupni.</div></div></div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">3</div>
+            <div><strong>Preprodaja</strong><div style="color:var(--muted)">Prodaješ kredite klijentima po cijeni koju postaviš (9–12€).</div></div></div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">4</div>
+            <div><strong>Isplata & podrška</strong><div style="color:var(--muted)">Pratiš zaradu i dobijaš podršku 0–24.</div></div></div>
+        </div>
       </div>
 
       <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon)">Zašto saradnici biraju nas?</h3>
+        <h3 style="color:var(--neon-strong)">Zašto saradnici biraju nas?</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
           <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">3.000+</div><div class="lbl">Aktivnih kanala</div></div>
           <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">116.000+</div><div class="lbl">Dostupnih na zahtjev</div></div>
@@ -250,7 +324,7 @@
       </div>
 
       <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon)">FAQ</h3>
+        <h3 style="color:var(--neon-strong)">FAQ</h3>
         <div style="margin-top:8px">
           <div style="padding:10px 0;border-top:1px dashed rgba(255,255,255,0.03)"><strong>Pitanje:</strong> Kako se obračunava profit?<div style="color:var(--muted);margin-top:6px">Profit = (prodajna cijena − 3€) × broj prodatih kredita. Godišnji plan = 12 kredita.</div></div>
           <div style="padding:10px 0;border-top:1px dashed rgba(255,255,255,0.03)"><strong>Pitanje:</strong> Moram li imati firmu?<div style="color:var(--muted);margin-top:6px">Ne, sarađujemo i s fizičkim osobama.</div></div>
@@ -260,7 +334,7 @@
 
     <!-- RIGHT (calculator + trust) -->
     <aside class="panel calc" style="height:max-content">
-      <h3 style="color:var(--neon);margin-top:0">Calculator zarade — paralelno</h3>
+      <h3 style="color:var(--neon-strong);margin-top:0">Calculator zarade — paralelno</h3>
       <p style="color:var(--muted)">Unesi koliko novih korisnika dovedeš mjesečno i izaberi prodajnu cijenu (9–12€).</p>
 
       <div style="margin-top:10px">
@@ -269,7 +343,7 @@
       </div>
 
       <div style="margin-top:10px">
-        <label style="font-size:13px;color:var(--muted)">Prodajna cijena / kredit: <span id="sellLabel" style="color:var(--neon)">9.00 €</span></label>
+        <label style="font-size:13px;color:var(--muted)">Prodajna cijena / kredit: <span id="sellLabel" style="color:var(--neon-strong)">9.00 €</span></label>
         <input id="sell" type="range" min="9" max="12" step="0.1" value="9" class="range">
       </div>
 
@@ -301,7 +375,7 @@
       </div>
 
       <div style="margin-top:12px">
-        <h4 style="margin:8px 0 6px 0;color:var(--neon)">Povjerenje</h4>
+        <h4 style="margin:8px 0 6px 0;color:var(--neon-strong)">Povjerenje</h4>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <div style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">16.000+ korisnika</div>
           <div style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">117 partnera</div>
@@ -314,7 +388,7 @@
 
   <div class="footer">
     <div style="font-size:13px">&copy; 2025 YUGO-Family TV</div>
-    <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon)">WhatsApp</a></div>
+    <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a></div>
   </div>
 
 </div>
@@ -332,14 +406,12 @@ const io = new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       counters.forEach(c=>{
         const target = +c.dataset.target;
-        let start = 0;
-        const duration = 1200;
-        const t0 = performance.now();
+        const duration = 1100;
+        const start = performance.now();
         function step(now){
-          const t = Math.min((now - t0)/duration,1);
+          const t = Math.min((now - start)/duration,1);
           const val = Math.floor(target * t);
-          if(target >= 1000) c.textContent = val.toLocaleString() + (t===1?'+':'');
-          else c.textContent = val + (t===1?'+':'');
+          c.textContent = (target >= 1000) ? (val.toLocaleString() + (t===1?'+':'')) : (val + (t===1?'+':''));
           if(t < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
@@ -348,22 +420,26 @@ const io = new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.25});
-io.observe(document.querySelector('.hero'));
+const heroEl = document.querySelector('.hero');
+if(heroEl) io.observe(heroEl);
 
-/* ========== Team image subtle vignette / focus ========== */
+/* ========== Team image subtle vignette / parallax ========== */
 const teamImg = document.getElementById('teamImg');
-if(teamImg){
-  // Add cinematic color grading via CSS filters on load
-  teamImg.style.filter = 'contrast(1.04) saturate(1.06) brightness(0.98)';
-  // small parallax on mouse move
-  document.querySelector('.team-card').addEventListener('mousemove', (ev)=>{
-    const r = ev.currentTarget.getBoundingClientRect();
+const neonFrame = document.querySelector('.neon-frame');
+if(teamImg && neonFrame){
+  teamImg.style.filter = 'contrast(1.04) saturate(1.06) brightness(0.99)';
+  // parallax on mouse move (desktop)
+  const frame = document.querySelector('.team-card');
+  frame.addEventListener('mousemove', (ev)=>{
+    const r = frame.getBoundingClientRect();
     const mx = (ev.clientX - r.left - r.width/2)/r.width;
     const my = (ev.clientY - r.top - r.height/2)/r.height;
-    teamImg.style.transform = `translate(${mx*6}px,${my*6*-1}px) scale(1.02)`;
+    teamImg.style.transform = `translate(${mx*8}px,${my*8*-1}px) scale(1.02)`;
+    neonFrame.style.transform = `translate(${mx*6}px,${my*6*-1}px) scale(1.01)`;
   });
-  document.querySelector('.team-card').addEventListener('mouseleave', ()=>{
+  frame.addEventListener('mouseleave', ()=>{
     teamImg.style.transform = '';
+    neonFrame.style.transform = '';
   });
 }
 
@@ -385,7 +461,6 @@ const ppkY = document.getElementById('ppkY');
 const BUY = 3.0;
 
 function fmtMoney(v){ return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
-function fmtPct(v){ return Number(v).toFixed(1) + ' %'; }
 
 function animateVal(el, from, to, ms=420){
   const s = Number(String(from).replace(/[^0-9.-]+/g,"")) || 0;
@@ -411,11 +486,10 @@ function recalc(){
   const profit_month = rev_month - cost_month;
   const profitPerCredit = users>0 ? (sell - BUY) : 0;
 
-  // yearly (12 credits per user), monthly-equivalent as demonstration
-  const rev_year_eq_month = sell * users;
-  const cost_year_eq_month = BUY * users;
-  const profit_year_eq_month = rev_year_eq_month - cost_year_eq_month;
-  const profit_year_total = profit_year_eq_month * 12;
+  // yearly totals (12 credits per user)
+  const rev_year = sell * users * 12;
+  const cost_year = BUY * users * 12;
+  const profit_year = profit_month * 12;
   const profitPerUserYear = (sell - BUY) * 12;
 
   animateVal(revM, revM.textContent||'0 €', rev_month);
@@ -423,9 +497,9 @@ function recalc(){
   animateVal(profitM, profitM.textContent||'0 €', profit_month);
   animateVal(ppkM, ppkM.textContent||'0 €', profitPerCredit);
 
-  animateVal(revY, revY.textContent||'0 €', rev_year_eq_month);
-  animateVal(costY, costY.textContent||'0 €', cost_year_eq_month);
-  animateVal(profitY, profitY.textContent||'0 €', profit_year_eq_month);
+  animateVal(revY, revY.textContent||'0 €', rev_year);
+  animateVal(costY, costY.textContent||'0 €', cost_year);
+  animateVal(profitY, profitY.textContent||'0 €', profit_year);
   animateVal(ppkY, ppkY.textContent||'0 €', profitPerUserYear);
 }
 
@@ -433,7 +507,7 @@ sellEl.addEventListener('input', recalc);
 usersEl.addEventListener('input', recalc);
 recalc(); // init
 
-/* ========== Join & PDF ========= */
+/* ========== Join & PDF actions ========== */
 document.getElementById('join').addEventListener('click', ()=>{
   const users = Number(usersEl.value) || 0;
   const sell = Number(sellEl.value).toFixed(2);
@@ -462,8 +536,41 @@ document.getElementById('pdf').addEventListener('click', ()=>{
   const w = window.open('', '_blank'); w.document.write(html); w.document.close(); w.print();
 });
 
-/* small accessibility: toggle menu (for mobile) */
-function toggleMenu(){ document.getElementById('mainMenu').classList.toggle('show'); }
+/* ========== Hamburger toggle (transforms to X) ========== */
+function toggleMenu(){
+  const menu = document.getElementById('mainMenu');
+  const btn = document.getElementById('hambBtn');
+  menu.classList.toggle('show');
+  btn.classList.toggle('active');
+  // close menu if clicked outside (mobile)
+  if(menu.classList.contains('show')){
+    setTimeout(()=>{
+      document.addEventListener('click', outsideClick);
+    }, 50);
+  } else {
+    document.removeEventListener('click', outsideClick);
+  }
+}
+function outsideClick(e){
+  const menu = document.getElementById('mainMenu');
+  const btn = document.getElementById('hambBtn');
+  if(!menu.contains(e.target) && !btn.contains(e.target)){
+    menu.classList.remove('show');
+    btn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+}
+
+/* Accessibility: close mobile menu on resize to desktop */
+window.addEventListener('resize', ()=>{
+  if(window.innerWidth > 880){
+    const menu = document.getElementById('mainMenu');
+    const btn = document.getElementById('hambBtn');
+    menu.classList.remove('show');
+    btn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+});
 </script>
 
 </body>

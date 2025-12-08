@@ -1,136 +1,233 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Postani dio tima - YUGO-Family TV</title>
+
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
-    header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
+    body { margin:0; font-family:Arial, sans-serif; background:#f5f9ff; color:#222; }
 
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
-
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
+    header {
+      background:linear-gradient(135deg,#0056a6,#003d73);
+      color:white; padding:60px 20px; text-align:center;
+      animation: fadeIn 1.4s ease-out;
     }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(-20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    nav {
+      background:#007bff; display:flex; justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    nav a {
+      color:white; padding:14px 20px; text-decoration:none;
+      font-weight:bold;
+    }
+
+    nav a:hover { background:white; color:#0056a6; }
+
+    .menu-toggle {
+      display:none; background:#007bff; color:white;
+      border:none; font-size:28px; padding:12px 18px;
+      cursor:pointer; width:100%; text-align:right;
+    }
+
     @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
+      nav { display:none; flex-direction:column; }
       nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+      .menu-toggle { display:block; }
     }
 
-    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
-    p { line-height:1.8; font-size:1.1em; text-align:justify; }
-    ul { line-height:1.8; font-size:1.1em; }
+    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
 
-    /* Sekcija slike sa animacijom */
-    .team-image {
-      text-align:center;
-      margin:40px 0;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 1.2s ease-out, transform 1.2s ease-out;
-    }
-    .team-image.visible {
-      opacity:1;
-      transform:translateY(0);
-    }
-    .team-image img {
-      max-width:100%;
-      height:auto;
-      border-radius:10px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    /* STATISTIKE */
+    .stats {
+      display:flex; justify-content:space-between; flex-wrap:wrap;
+      margin:40px 0; text-align:center;
     }
 
-    .cta { text-align:center; margin:30px 0; }
-    .cta a { background:#007bff; color:#fff; padding:12px 24px; border-radius:6px; text-decoration:none; font-size:1.1em; }
+    .stat {
+      flex:1 1 30%; background:white; margin:10px; padding:25px;
+      border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      animation: rise 1.1s ease-out;
+    }
+
+    @keyframes rise {
+      from {opacity:0; transform:translateY(20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    .stat strong { font-size:2.2em; color:#0056a6; }
+
+    /* SEKCIJE */
+    h2 { color:#0056a6; text-align:center; margin-bottom:10px; }
+    p { line-height:1.7; font-size:1.15em; }
+
+    /* KARTICE PLANOVA */
+    .plans { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+
+    .plan {
+      background:white; border-radius:12px; padding:25px;
+      width:320px; box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      text-align:center; transition:0.3s;
+    }
+
+    .plan:hover { transform:scale(1.05); }
+
+    .plan h3 { margin-bottom:5px; color:#0056a6; }
+
+    /* KALKULATOR */
+    .kalkulator {
+      background:#ffffff; padding:30px; border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      margin-top:40px;
+    }
+
+    input {
+      width:100%; padding:12px; margin-top:10px;
+      border:2px solid #007bff; border-radius:8px;
+      font-size:1.1em;
+    }
+
+    .rezultat {
+      background:#e8f1ff; margin-top:20px; padding:15px;
+      border-radius:8px; font-weight:bold; color:#003d73;
+      font-size:1.2em; text-align:center;
+    }
+
+    /* CTA */
+    .cta { text-align:center; margin:50px 0; }
+    .cta a {
+      background:#007bff; color:white; padding:14px 26px;
+      border-radius:10px; text-decoration:none; font-size:1.3em;
+      font-weight:bold; box-shadow:0 6px 20px rgba(0,0,0,0.18);
+    }
     .cta a:hover { background:#0056a6; }
-    footer { background:#0056a6; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+
+    footer {
+      background:#003d73; color:white; text-align:center;
+      padding:25px; margin-top:50px;
+    }
+
     footer a { color:#ffdd00; text-decoration:none; }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Postani dio našeg tima</h1>
-    <p>Započni saradnju sa nama i ostvari dodatnu zaradu</p>
-  </header>
 
-  <!-- Hamburger dugme -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<header>
+  <h1>Postani dio YUGO-Family TV tima</h1>
+  <p>Uđi u jedan od najbrže rastućih sistema u regiji</p>
+</header>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 15</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
-  </nav>
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <div class="container">
-    <h2>Pridruži se našem timu</h2>
-    <p>
-      Tražimo motivisane i odgovorne ljude koji žele postati dio našeg uspješnog tima.  
-      Ako voliš rad sa ljudima, komunikativan si i spreman za izazove – ovo je prava prilika za tebe!
-    </p>
+<nav id="mainMenu">
+  <a href="index.html">Početna</a>
+  <a href="cijene.html">Cijene i akcije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="onama.html">O nama</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="top15.html">Top 15</a>
+  <a href="kontakt.html">Kontakt</a>
+</nav>
 
-    <h3>Šta nudimo?</h3>
-    <ul>
-      <li>Rad u dinamičnom i prijateljskom okruženju</li>
-      <li>Mogućnost dodatne zarade</li>
-      <li>Fleksibilno radno vrijeme</li>
-      <li>Obuku i podršku u radu</li>
-    </ul>
+<div class="container">
 
-    <h3>Šta očekujemo od tebe?</h3>
-    <ul>
-      <li>Da si odgovoran i pouzdan</li>
-      <li>Da imaš osnovne komunikacijske vještine</li>
-      <li>Da si spreman učiti i pratiti naše smjernice</li>
-    </ul>
-
-    <!-- Slika sa fade-in efektom -->
-    <div class="team-image" id="teamImage">
-      <img src="image33.jpg" alt="Naš tim - YUGO Family TV">
+  <div class="stats">
+    <div class="stat">
+      <strong>16.000+</strong><br>Aktivnih korisnika
     </div>
 
-    <div class="cta">
-      <p>📩 Zainteresovan? Javi nam se i postani dio našeg uspješnog tima!</p>
-      <a href="https://wa.me/4915755749502">Pridruži se odmah</a>
+    <div class="stat">
+      <strong>117</strong><br>Partnera u timu
+    </div>
+
+    <div class="stat">
+      <strong>9+ godina</strong><br>Iskustva i stabilnosti
     </div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 YUGO-Family TV</p>
-    <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
-  </footer>
+  <h2>Kako funkcioniše sistem kredita?</h2>
+  <p>
+    Naš model rada je jednostavan i svako ga može shvatiti:
+  </p>
 
-  <script>
-    // Hamburger meni
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
-    }
+  <ul style="font-size:1.15em; line-height:1.7;">
+    <li>✔ <strong>1 kredit = 1 mjesec pretplate</strong></li>
+    <li>✔ <strong>12 kredita = 1 godina pretplate</strong></li>
+    <li>✔ Tebi 1 kredit košta <strong>3€</strong></li>
+    <li>✔ Prodaješ ga za <strong>9–12€</strong></li>
+    <li>✔ Tvoja zarada je čista i odmah isplaćiva</li>
+  </ul>
 
-    // Fade-in efekat slike
-    window.addEventListener("load", () => {
-      const image = document.getElementById("teamImage");
-      setTimeout(() => {
-        image.classList.add("visible");
-      }, 300); // blago kašnjenje za ljepši efekat
-    });
-  </script>
+  <h2>Ponude za tvoje korisnike</h2>
+
+  <div class="plans">
+    <div class="plan">
+      <h3>MJESEČNI PLAN</h3>
+      <p>1 kredit = 1 mjesec</p>
+      <strong style="font-size:1.8em;">9–12€</strong>
+      <p>Preporučena prodajna cijena</p>
+    </div>
+
+    <div class="plan">
+      <h3>GODIŠNJI PLAN</h3>
+      <p>12 kredita = 12 mjeseci</p>
+      <strong style="font-size:1.8em;">60–100€</strong>
+      <p>Tvoja zarada po godišnjem korisniku je ogromna</p>
+    </div>
+  </div>
+
+  <h2>Kalkulator tvoje zarade</h2>
+
+  <div class="kalkulator">
+    <label>Unesi broj korisnika mjesečno:</label>
+    <input type="number" id="korisnici" placeholder="Npr. 10" oninput="izracunaj()" />
+
+    <div class="rezultat" id="rezultatBox">
+      Unesi broj korisnika da vidiš zaradu...
+    </div>
+  </div>
+      <div class="cta">
+    <p style="margin-bottom:15px; font-size:1.3em;">Spreman za početak?</p>
+    <a href="https://wa.me/4915755749502">Pridruži nam se odmah</a>
+  </div>
+    <footer>
+  <p>&copy; 2025 YUGO-Family TV</p>
+  <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> |
+     WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById("mainMenu").classList.toggle("show");
+}
+
+function izracunaj() {
+  let k = parseInt(document.getElementById("korisnici").value);
+  let box = document.getElementById("rezultatBox");
+
+  if (!k || k < 1) {
+    box.innerHTML = "Unesi broj korisnika da vidiš zaradu...";
+    return;
+  }
+
+  let zaradaMjesec = k * (9 - 3); // 6€ profit minimalno
+  let zaradaMax = k * (12 - 3);   // 9€ profit maksimalno
+  let godinaMin = zaradaMjesec * 12;
+  let godinaMax = zaradaMax * 12;
+
+  box.innerHTML =
+    "<strong>MJESEČNO:</strong> " + zaradaMjesec + "€ – " + zaradaMax + "€<br>" +
+    "<strong>GODIŠNJE:</strong> " + godinaMin + "€ – " + godinaMax + "€";
+}
+</script>
+
 </body>
 </html>

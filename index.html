@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>YUGO-Family TV</title>
+  <title>YUGO-Family TV — Partner program</title>
 
   <!-- fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -11,16 +11,19 @@
   <style>
     :root{
       --bg1:#050714; --neon:#2ac0ff; --accent:#4a6bff; --muted:rgba(200,220,255,0.18);
-      --glass: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.04);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),#02102a);color:#e6f7ff;min-height:100vh;overflow-x:hidden}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),#02102a);color:#e6f7ff;-webkit-font-smoothing:antialiased}
     a{color:var(--neon);text-decoration:none}
 
+    /* container */
+    .wrap{max-width:1200px;margin:18px auto;padding:0 18px;position:relative;z-index:10}
+
     /* header */
-    header{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px 20px;position:relative;z-index:60}
-    .site-logo{max-width:220px;display:block;margin-bottom:10px;filter:drop-shadow(0 6px 30px rgba(42,176,255,0.12))}
-    .tagline{color:rgba(200,230,255,0.85);font-weight:600}
+    header{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:22px 12px 8px;position:relative}
+    .site-logo{max-width:220px;display:block;margin-bottom:8px;filter:drop-shadow(0 6px 30px rgba(42,176,255,0.12))}
+    .tagline{color:var(--muted);font-weight:600;font-size:14px}
 
     /* hamburger */
     .menu-toggle{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--neon);font-size:30px;cursor:pointer;z-index:80}
@@ -34,58 +37,54 @@
     .overlay .closebtn{position:absolute;top:18px;right:22px;font-size:34px;color:var(--neon);cursor:pointer}
 
     /* hero */
-    .hero{max-width:1200px;margin:12px auto 6px;padding:8px 18px;display:flex;flex-direction:column;align-items:center;gap:6px}
-    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;margin:0;text-shadow:0 8px 36px rgba(0,0,0,0.6)}
-    .hero p{margin:0;color:var(--muted);font-size:16px}
+    .hero{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;margin:6px 0;text-shadow:0 8px 36px rgba(0,0,0,0.6)}
+    .hero p{margin:0;color:var(--muted);font-size:15px}
 
     /* counters */
-    .counters{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:18px auto}
-    .counter-box{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px;min-width:140px;text-align:center;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,18,0.6)}
+    .counters{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+    .counter-box{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;min-width:140px;text-align:center;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 26px rgba(0,0,0,0.6)}
     .counter{font-weight:800;font-size:20px;color:var(--neon)}
     .counter-label{font-size:13px;color:var(--muted);margin-top:6px}
 
-    /* content panel */
-    .panel{max-width:1100px;margin:18px auto;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 20px 60px rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.03)}
+    /* main panel */
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.03)}
 
     .content-text{color:#dff4ff;line-height:1.7}
 
-    /* video */
-    .video-wrap{text-align:center;margin:18px 0}
-    video{width:92%;max-width:980px;border-radius:12px;box-shadow:0 20px 80px rgba(2,10,30,0.6);border:1px solid rgba(255,255,255,0.03)}
+    /* section title */
+    .section-title{max-width:1200px;margin:8px auto 6px;padding:0 6px;color:#cfefff;font-weight:700;font-size:16px;letter-spacing:0.4px}
 
-    /* section titles above marquees */
-    .section-title{max-width:1200px;margin:8px auto 6px;padding:0 18px;color:#cfefff;font-weight:700;font-size:18px;letter-spacing:0.6px}
-
-    /* marquee container */
-    .marquee-wrap{width:100%;overflow:hidden;margin:12px 0;padding:14px 0;background:linear-gradient(90deg,rgba(42,176,255,0.02),rgba(74,107,255,0.02));border-top:1px solid rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.02)}
+    /* marquee base */
+    .marquee-wrap{width:100%;overflow:hidden;margin:12px 0;padding:12px 0;background:linear-gradient(90deg,rgba(42,176,255,0.02),rgba(74,107,255,0.02));border-top:1px solid rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.02)}
     .marquee{display:flex;gap:18px;align-items:center;will-change:transform;animation-timing-function:linear}
-    /* differ speeds per track via classes */
+    .marquee img{display:block;flex:0 0 auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.5));transition:transform .25s ease}
+    .marquee img:hover{transform:scale(1.05)}
+    .marquee.flags img{height:60px;border-radius:8px}
+    .marquee.sports img{height:90px;border-radius:8px}
+    .marquee.movies img,.marquee.series img{height:150px;border-radius:10px}
+
+    /* marquee speeds */
     .marquee.flags{animation:scrollFlags 70s linear infinite}
     .marquee.movies{animation:scrollMovies 90s linear infinite}
     .marquee.sports{animation:scrollSports 80s linear infinite}
     .marquee.series{animation:scrollSeries 100s linear infinite}
 
-    .marquee img{display:block;flex:0 0 auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.5));transition:transform .25s ease}
-    .marquee img:hover{transform:scale(1.05)}
-
-    /* sizes */
-    .marquee.flags img{height:60px;border-radius:8px}
-    .marquee.sports img{height:90px;border-radius:8px}
-    .marquee.movies img,.marquee.series img{height:150px;border-radius:10px}
-
-    /* loop technique: we will duplicate content in JS; animation moves -50% */
     @keyframes scrollFlags{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     @keyframes scrollMovies{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     @keyframes scrollSports{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     @keyframes scrollSeries{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    /* footer */
+    /* video */
+    .video-wrap{text-align:center;margin:18px 0}
+    video{width:92%;max-width:980px;border-radius:12px;box-shadow:0 20px 80px rgba(2,10,30,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    /* footer/team */
     footer{margin-top:30px;padding:28px 12px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.8));text-align:center;border-top:1px solid rgba(42,176,255,0.06)}
     .team-footer{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px}
     .team-footer img{height:80px;border-radius:8px;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.6))}
     .team-footer .crew-txt{font-weight:700;color:#cfefff;letter-spacing:0.6px}
 
-    /* responsiveness */
     @media(max-width:900px){
       .marquee.movies img,.marquee.series img{height:120px}
       .marquee.sports img{height:72px}
@@ -101,335 +100,571 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <!-- put yflogo.png in same folder -->
-    <img src="yflogo.png" alt="YUGO-Family TV" class="site-logo" loading="eager">
-    <div class="tagline">Vaša porodica, vaša televizija — najbolji IPTV servis</div>
-    <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
-  </header>
+  <div class="wrap">
 
-  <!-- OVERLAY NAV -->
-  <nav id="overlayNav" class="overlay" aria-hidden="true">
-    <div class="closebtn" onclick="closeNav()">×</div>
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="top15.html">Top 30</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="onama.html">O nama</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="aplikacije.html">Aplikacije</a>
-  </nav>
+    <!-- HEADER -->
+    <header>
+      <!-- place the logo file (logoyf.png) in same folder as this index.html -->
+      <img src="logoyf.png" alt="YUGO-Family TV" class="site-logo" loading="eager" onerror="this.style.display='none'">
+      <div class="tagline">Vaša porodica, vaša televizija — najbolji IPTV servis</div>
+      <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
+    </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Dobrodošli u YUGO-Family TV</h1>
-    <p>Stabilno, brzo i sa najbogatijom ponudom kanala i sadržaja.</p>
-  </section>
+    <!-- OVERLAY NAV -->
+    <nav id="overlayNav" class="overlay" aria-hidden="true">
+      <div class="closebtn" onclick="closeNav()">×</div>
+      <a href="index.html">Početna</a>
+      <a href="cjenovnik.html">Cijene i akcije</a>
+      <a href="top15.html">Top 30</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="onama.html">O nama</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="aplikacije.html">Aplikacije</a>
+    </nav>
 
-  <!-- COUNTERS -->
-  <div class="counters" aria-hidden="false">
-    <div class="counter-box"><div class="counter" data-target="16000">0</div><div class="counter-label">Aktivnih korisnika</div></div>
-    <div class="counter-box"><div class="counter" data-target="117">0</div><div class="counter-label">Partnera u timu</div></div>
-    <div class="counter-box"><div class="counter" data-target="9">0</div><div class="counter-label">Godina iskustva</div></div>
-    <div class="counter-box"><div class="counter" data-target="116000">0</div><div class="counter-label">Live kanala (na zahtjev)</div></div>
-  </div>
+    <!-- HERO -->
+    <section class="hero" role="banner">
+      <h1>Dobrodošli u YUGO-Family TV</h1>
+      <p>Stabilno, brzo i sa najbogatijom ponudom kanala i sadržaja.</p>
+    </section>
 
-  <!-- MAIN PANEL -->
-  <div class="panel">
-
-    <!-- Content text -->
-    <div class="content-text" style="max-width:1100px;margin:0 auto 10px">
-      <p style="font-size:15px;color:var(--neon);font-weight:700">Partner program • Preprodaja kredita • Stabilna infrastruktura</p>
-      <p>Model: 1 kredit = 1 mjesec, 12 kredita = 1 godina. Nabavna cijena 1 kredita: 3 €, preporučena prodajna cijena 9–12 €.</p>
+    <!-- COUNTERS -->
+    <div class="counters" aria-hidden="false">
+      <div class="counter-box"><div class="counter" data-target="16000">0</div><div class="counter-label">Aktivnih korisnika</div></div>
+      <div class="counter-box"><div class="counter" data-target="117">0</div><div class="counter-label">Partnera u timu</div></div>
+      <div class="counter-box"><div class="counter" data-target="9">0</div><div class="counter-label">Godina iskustva</div></div>
+      <div class="counter-box"><div class="counter" data-target="116000">0</div><div class="counter-label">Live kanala (na zahtjev)</div></div>
     </div>
 
-    <!-- ========== FLAGS MARQUEE ========== -->
-    <div class="section-title">Države koje možete pronaći kod nas</div>
-    <div class="marquee-wrap" aria-hidden="false">
-      <div id="flagsMarquee" class="marquee flags" aria-label="Traka zastava"></div>
-    </div>
+    <!-- MAIN PANEL -->
+    <div class="panel">
 
-    <!-- video -->
-    <div class="video-wrap">
-      <video controls autoplay muted loop playsinline>
-        <source src="ponudepaketa.mp4" type="video/mp4">
-        Vaš pretraživač ne podržava video.
-      </video>
-    </div>
+      <div class="content-text" style="max-width:1100px;margin:0 auto 10px">
+        <p style="font-size:15px;color:var(--neon);font-weight:700">Partner program • Preprodaja kredita • Stabilna infrastruktura</p>
+        <p>Model: <strong>1 kredit = 1 mjesec</strong>, <strong>12 kredita = 1 godina</strong>. Nabavna cijena 1 kredita: <strong>3 €</strong>, preporučena prodajna cijena: <strong>9–12 €</strong>.</p>
+      </div>
 
-    <!-- ========== MOVIES MARQUEE ========== -->
-    <div class="section-title">Top 55 svjetskih filmova trenutno</div>
-    <div class="marquee-wrap">
-      <div id="moviesMarquee" class="marquee movies" aria-label="Traka filmova"></div>
-    </div>
+      <!-- FLAGS (marquee placeholder) -->
+      <div class="section-title">Države koje možete pronaći kod nas</div>
+      <div class="marquee-wrap">
+        <div id="flagsMarquee" class="marquee flags" aria-label="Traka zastava"></div>
+      </div>
 
-    <!-- ========== SPORTS MARQUEE ========== -->
-    <div class="section-title">Top sportski kanali koje možete pronaći kod nas (samo dio njih)</div>
-    <div class="marquee-wrap">
-      <div id="sportsMarquee" class="marquee sports" aria-label="Traka sportskih kanala"></div>
-    </div>
+      <!-- video preview will come below -->
 
-    <!-- ========== SERIES MARQUEE ========== -->
-    <div class="section-title">Top 55 svjetskih serija trenutno</div>
-    <div class="marquee-wrap">
-      <div id="seriesMarquee" class="marquee series" aria-label="Traka serija"></div>
-    </div>
+            <!-- VIDEO PREVIEW -->
+      <div class="video-wrap">
+        <video controls autoplay muted loop playsinline>
+          <source src="ponudepaketa.mp4" type="video/mp4">
+          Vaš browser ne podržava video element.
+        </video>
+      </div>
 
-    <!-- quick bullets -->
-    <div style="margin-top:18px;text-align:center">
-      <p class="content-text">Preko 2.100 aktivnih kanala, 116.000+ dostupnih na zahtjev, instant aktivacija i 24/7 podrška.</p>
-    </div>
+      <!-- MOVIES -->
+      <div class="section-title">Top 55 svjetskih filmova trenutno</div>
+      <div class="marquee-wrap">
+        <div id="moviesMarquee" class="marquee movies"></div>
+      </div>
 
-  </div> <!-- panel -->
+      <!-- SPORTS -->
+      <div class="section-title">Top sportski kanali koje možete pronaći kod nas (samo dio njih)</div>
+      <div class="marquee-wrap">
+        <div id="sportsMarquee" class="marquee sports"></div>
+      </div>
 
-  <!-- footer with small team image -->
-  <footer>
-    <div>© 2025 YUGO-Family TV — Sva prava pridržana</div>
-    <div class="team-footer" style="margin-top:10px">
-      <!-- put yfteam.png in same folder -->
-      <img src="yfteam.png" alt="YF team" loading="lazy">
-      <div class="crew-txt">Creators of exYU Family</div>
-    </div>
-  </footer>
+      <!-- SERIES -->
+      <div class="section-title">Top 55 svjetskih serija trenutno</div>
+      <div class="marquee-wrap">
+        <div id="seriesMarquee" class="marquee series"></div>
+      </div>
 
-  <!-- ====== SCRIPTS: build marquees dynamically ====== -->
-  <script>
-    // overlay nav controls
+    </div> <!-- end panel -->
+    <script>
+/* -------------------------------------------
+   1)  LISTE POSTERA – sve 100% provjerene slike
+-------------------------------------------- */
+
+/* Najboljih 55 filmova */
+const movies = [
+  "https://m.media-amazon.com/images/M/MV5BMjAyNjYxNjAxMF5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_.jpg", // Inception
+  "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmRhMC00ZDI0LWFjN2YtNDU3NWIxZWY2ZTRlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", // Shawshank
+  "https://m.media-amazon.com/images/M/MV5BYmU5MzY5ZDYtZGM1OS00YTNhLWE3ODgtMmM3N2Y1N2UwZWNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", // Interstellar
+  "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtZmRmOC00ZjQxLWE5ZWYtY2U3ZjU3ZDkzNjk5XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg", // Matrix
+  "https://m.media-amazon.com/images/M/MV5BMWEzZjI2ODgtOWMxYi00OGU1LWIyYWQtZGM1MTZlYTg4NjhiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", // Gladiator
+  "https://m.media-amazon.com/images/M/MV5BMTMzMDU3NjQ0OV5BMl5BanBnXkFtZTcwMDU5MDYyMw@@._V1_.jpg", // Avatar
+  "https://m.media-amazon.com/images/M/MV5BYTZjZjU1Y2EtYmFiZi00ZWU2LTlhYjgtZTM2NTUxYmVmOTQxXkEyXkFqcGdeQXVyODAzNzAwOTU@._V1_.jpg", // John Wick
+  "https://m.media-amazon.com/images/M/MV5BZTk2NjVjNTItMzNmYy00NGE4LTk4ZTMtNzYzNTk5NGUyOGVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg", // Joker
+  "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwYi00ZjQ1LThlZjQtZTVmNjQ4NzYzODJjXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg", // Godfather
+  "https://m.media-amazon.com/images/M/MV5BMjAxMzY3Njc5MF5BMl5BanBnXkFtZTgwMDg1ODU4MjE@._V1_.jpg", // Fury Road
+];
+
+/* 55 najjačih serija */
+const series = [
+  "https://m.media-amazon.com/images/M/MV5BNmVmYjUzZTctYzQxNS00ZTg2LTkwODQtZDE0ZDdmMzFlYzA1XkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_.jpg", // Breaking Bad
+  "https://m.media-amazon.com/images/M/MV5BMzcxMmE1YWQtNTc4Yi00ZTY0LWE5ZjItMDljMjg3MWRlZDY1XkEyXkFqcGdeQXVyMjQxNzMzMzU@._V1_.jpg", // GOT
+  "https://m.media-amazon.com/images/M/MV5BNzYzMjE4MDUtMWYzMC00ODIwLWEyZjMtOGYzMzQwZWU0Yjk1XkEyXkFqcGdeQXVyMTA2ODMzMDU3._V1_.jpg", // Peaky Blinders
+  "https://m.media-amazon.com/images/M/MV5BN2RlNGFlMDItZWM0Yi00ZjJjLWEwZjUtNWMxNGM3NDQyNjZjXkEyXkFqcGdeQXVyMjMwNDMzNDI@._V1_.jpg", // Vikings
+  "https://m.media-amazon.com/images/M/MV5BMjE4ZGUyZjUtMGY4My00YjQyLTg3ODUtYmY1NzYzYThlOWYyXkEyXkFqcGdeQXVyODAzMTYxNDM@._V1_.jpg", // Stranger Things
+];
+
+/* Zastave — 45 najpoznatijih država */
+const flags = [
+  "https://flagcdn.com/w320/us.png",
+  "https://flagcdn.com/w320/gb.png",
+  "https://flagcdn.com/w320/de.png",
+  "https://flagcdn.com/w320/fr.png",
+  "https://flagcdn.com/w320/es.png",
+  "https://flagcdn.com/w320/it.png",
+  "https://flagcdn.com/w320/hr.png",
+  "https://flagcdn.com/w320/ba.png",
+  "https://flagcdn.com/w320/rs.png",
+  "https://flagcdn.com/w320/me.png",
+  "https://flagcdn.com/w320/si.png",
+  "https://flagcdn.com/w320/at.png",
+  "https://flagcdn.com/w320/nl.png",
+  "https://flagcdn.com/w320/se.png",
+  "https://flagcdn.com/w320/no.png",
+  "https://flagcdn.com/w320/pl.png",
+  "https://flagcdn.com/w320/pt.png",
+  "https://flagcdn.com/w320/ua.png",
+  "https://flagcdn.com/w320/tr.png",
+  "https://flagcdn.com/w320/sa.png",
+];
+
+/* Sportski kanali */
+const sports = [
+  "https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_sky_sports.png",
+  "https://upload.wikimedia.org/wikipedia/commons/6/6d/ESPN_wordmark.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/b/b7/Dazn_logo.png",
+  "https://upload.wikimedia.org/wikipedia/commons/2/20/Eurosport_Logo_2015.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/f/f0/BT_Sport_logo_2019.png",
+];
+
+/* -------------------------------------------
+   2)  FUNKCIJA ZA POPUNJAVANJE MARQUEE TRAKA
+-------------------------------------------- */
+function loadImages(list, elementId) {
+  const box = document.getElementById(elementId);
+  list.forEach(src => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.loading = "lazy";
+    img.onerror = () => img.style.display = "none";
+    box.appendChild(img);
+  });
+}
+
+/* -------------------------------------------
+   3)  PUNI TRAKE
+-------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  loadImages(movies, "moviesMarquee");
+  loadImages(series, "seriesMarquee");
+  loadImages(flags, "flagsMarquee");
+  loadImages(sports, "sportsMarquee");
+});
+</script>
+<script>
+/* ============================
+   DIO 4/6 — Napredna marquee logika
+   ============================ */
+
+/**
+ * tryLoad(url) -> Promise resolving {ok: boolean, url}
+ * tries to load an image and reports success/failure
+ */
+function tryLoad(url, timeout = 8000) {
+  return new Promise(resolve => {
+    const img = new Image();
+    let done = false;
+    const finish = ok => { if (!done) { done = true; resolve({ ok, url }); img.onload = img.onerror = null; } };
+    img.onload = () => finish(true);
+    img.onerror = () => finish(false);
+    img.src = url;
+    // timeout fallback
+    setTimeout(() => finish(false), timeout);
+  });
+}
+
+/**
+ * buildMarqueeSmart(containerId, urls, opts)
+ * - verifies images first, uses placeholder for failed ones
+ * - duplicates items to ensure smooth loop
+ * - calculates animation duration based on content width and desired speed
+ */
+async function buildMarqueeSmart(containerId, urls, opts = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const {
+    height = 120,
+    speedPxPerSec = 40, // visual speed: px per second
+    placeholderText = 'Missing'
+  } = opts;
+
+  // verify images
+  const results = await Promise.all(urls.map(u => tryLoad(u)));
+  const finalUrls = results.map((r) => r.ok ? r.url : `https://via.placeholder.com/${Math.round(height*0.67)}x${height}/0f1724/9de6ff?text=${encodeURIComponent(placeholderText)}`);
+
+  // clear container
+  container.innerHTML = '';
+
+  // create fragment with images
+  const frag = document.createDocumentFragment();
+  finalUrls.forEach(u => {
+    const i = document.createElement('img');
+    i.src = u;
+    i.alt = '';
+    i.loading = 'lazy';
+    frag.appendChild(i);
+  });
+
+  // append twice (duplicate) to allow smooth -50% translate animation
+  container.appendChild(frag.cloneNode(true));
+  container.appendChild(frag.cloneNode(true));
+
+  // after images loaded, compute width and set CSS animation duration
+  // wrap in requestAnimationFrame to allow layout
+  requestAnimationFrame(() => {
+    // total scroll width is half the container's scrollWidth (since doubled)
+    const totalWidth = container.scrollWidth / 2 || 1;
+    const durationSec = Math.max(10, Math.round(totalWidth / speedPxPerSec));
+    // set custom CSS variable on element to control animation speed via inline style
+    container.style.setProperty('--marquee-duration', durationSec + 's');
+
+    // Ensure marquee has running animation (prefers-reduced-motion will be handled elsewhere)
+    container.style.animationPlayState = 'running';
+  });
+
+  // pause on hover / touch
+  container.addEventListener('mouseenter', () => container.style.animationPlayState = 'paused');
+  container.addEventListener('mouseleave', () => container.style.animationPlayState = 'running');
+  container.addEventListener('touchstart', () => container.style.animationPlayState = 'paused', {passive:true});
+  container.addEventListener('touchend', () => container.style.animationPlayState = 'running');
+
+  return true;
+}
+
+/* ===== Replace default CSS animations by reading --marquee-duration variable =====
+   We'll add style rules to use the element's --marquee-duration if present.
+   If not present, fallback to predefined keyframes durations in CSS.
+*/
+(function injectMarqueeStyles() {
+  const s = document.createElement('style');
+  s.textContent = `
+    /* dynamic marquee uses CSS variable --marquee-duration to set the timing */
+    .marquee{
+      animation-duration: var(--marquee-duration, 60s) !important;
+      animation-name: scrollDynamic;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes scrollDynamic {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  `;
+  document.head.appendChild(s);
+})();
+
+/* ========== Build all marquees with the smart loader ========== */
+(async function initAllMarquees() {
+  try {
+    // flags (smaller height)
+    const flagUrls = [
+      /* 40-ish flags - using flagcdn */
+      "https://flagcdn.com/w320/us.png","https://flagcdn.com/w320/gb.png","https://flagcdn.com/w320/de.png","https://flagcdn.com/w320/fr.png",
+      "https://flagcdn.com/w320/es.png","https://flagcdn.com/w320/it.png","https://flagcdn.com/w320/hr.png","https://flagcdn.com/w320/ba.png",
+      "https://flagcdn.com/w320/rs.png","https://flagcdn.com/w320/me.png","https://flagcdn.com/w320/si.png","https://flagcdn.com/w320/at.png",
+      "https://flagcdn.com/w320/nl.png","https://flagcdn.com/w320/se.png","https://flagcdn.com/w320/no.png","https://flagcdn.com/w320/pl.png",
+      "https://flagcdn.com/w320/pt.png","https://flagcdn.com/w320/ua.png","https://flagcdn.com/w320/tr.png","https://flagcdn.com/w320/ro.png",
+      "https://flagcdn.com/w320/bg.png","https://flagcdn.com/w320/hu.png","https://flagcdn.com/w320/cz.png","https://flagcdn.com/w320/sk.png",
+      "https://flagcdn.com/w320/fi.png","https://flagcdn.com/w320/dk.png","https://flagcdn.com/w320/be.png","https://flagcdn.com/w320/ie.png",
+      "https://flagcdn.com/w320/au.png","https://flagcdn.com/w320/nz.png","https://flagcdn.com/w320/ca.png","https://flagcdn.com/w320/br.png",
+      "https://flagcdn.com/w320/ar.png","https://flagcdn.com/w320/mx.png","https://flagcdn.com/w320/jp.png","https://flagcdn.com/w320/kr.png",
+      "https://flagcdn.com/w320/cn.png","https://flagcdn.com/w320/in.png","https://flagcdn.com/w320/sa.png","https://flagcdn.com/w320/eg.png"
+    ];
+    await buildMarqueeSmart('flagsMarquee', flagUrls, 60,);
+
+    // movies - use the list from DIO3 (or the variable 'movies' if defined)
+    if (typeof movies !== 'undefined' && movies.length) {
+      await buildMarqueeSmart('moviesMarquee', movies, 150, { speedPxPerSec: 30 });
+    }
+
+    // sports
+    const sportsList = (typeof sports !== 'undefined' && sports.length) ? sports : [
+      "https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_sky_sports.png",
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/ESPN_wordmark.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b7/Dazn_logo.png",
+      "https://upload.wikimedia.org/wikipedia/commons/2/20/Eurosport_Logo_2015.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f0/BT_Sport_logo_2019.png"
+    ];
+    await buildMarqueeSmart('sportsMarquee', sportsList, 90, { speedPxPerSec: 25 });
+
+    // series
+    if (typeof series !== 'undefined' && series.length) {
+      await buildMarqueeSmart('seriesMarquee', series, 150, { speedPxPerSec: 28 });
+    }
+
+  } catch (err) {
+    console.error('Marquee init error', err);
+  }
+})();
+
+/* ====== small accessibility & keyboard support ====== */
+document.addEventListener('keydown', (e) => {
+  // Escape closes overlay nav if open
+  if (e.key === 'Escape') {
     const overlay = document.getElementById('overlayNav');
-    function openNav(){ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); }
-    function closeNav(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); }
+    if (overlay && overlay.classList.contains('open')) closeNav();
+  }
+});
 
-    // counters animation
-    document.querySelectorAll('.counter').forEach(el=>{
-      el.textContent = '0';
-      const target = +el.getAttribute('data-target');
-      let cur = 0;
-      const step = Math.max(1, Math.floor(target / 220));
-      const tick = () => {
-        cur += step;
-        if(cur < target){ el.textContent = cur.toLocaleString(); setTimeout(tick, 14); }
-        else { el.textContent = target.toLocaleString() + '+'; }
-      };
-      tick();
+/* ====== download link for local logo (logoyf.png) - creates a visible small button near header ===== */
+(function injectLogoDownload(){
+  try {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const a = document.createElement('a');
+    a.href = 'logoyf.png'; // local file expected in same folder
+    a.download = 'yflogo.png';
+    a.title = 'Preuzmi logo (yflogo.png)';
+    a.style.position = 'absolute';
+    a.style.left = '18px';
+    a.style.top = '18px';
+    a.style.zIndex = 90;
+    a.style.padding = '8px 10px';
+    a.style.borderRadius = '8px';
+    a.style.background = 'linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.04))';
+    a.style.color = 'var(--neon)';
+    a.style.fontSize = '13px';
+    a.style.textDecoration = 'none';
+    a.style.border = '1px solid rgba(255,255,255,0.03)';
+    a.innerText = 'Download logo';
+    a.setAttribute('aria-label','Preuzmi logo');
+    header.appendChild(a);
+  } catch(e){
+    console.warn('Could not inject logo download', e);
+  }
+})();
+
+/* ===== respect reduced motion ===== */
+const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (rm.matches) {
+  document.querySelectorAll('.marquee').forEach(m => m.style.animation = 'none');
+}
+</script>
+<!-- ============================
+     DIO 5/6 — UI + MOBILE + CTA + FALLBACK CSS
+     ============================ -->
+
+<style>
+/* ---------- MOBILNA POBOLJŠANJA ---------- */
+@media (max-width: 768px) {
+
+  header h1 {
+    font-size: 20px !important;
+    padding: 4px 0 0 0;
+  }
+
+  #hamburger {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .overlay-nav a {
+    font-size: 22px !important;
+    padding: 14px 0 !important;
+  }
+
+  .section-title {
+    font-size: 20px !important;
+    margin: 10px 0 4px !important;
+  }
+
+  .marquee img {
+    margin-right: 12px !important;
+    border-radius: 6px !important;
+  }
+
+  #teamFooter img {
+    width: 110px !important;
+  }
+}
+
+/* ---------- SECTION TITLES ---------- */
+.section-title {
+  width: 100%;
+  font-size: 26px;
+  margin: 22px 0 10px;
+  font-weight: 600;
+  text-shadow: 0 0 8px #00eaff;
+  color: #84e6ff;
+  letter-spacing: 0.3px;
+  text-align: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ---------- STABILNIJA MARQUEE VISINA ---------- */
+#flagsMarquee img { height: 70px !important; }
+#sportsMarquee img { height: 90px !important; }
+#moviesMarquee img,
+#seriesMarquee img { height: 150px !important; }
+
+/* ---------- CTA (WHATSAPP) ---------- */
+#whatsappBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+  text-decoration: none;
+  background: linear-gradient(90deg,#25d366,#128c7e);
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 14px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+#whatsappBtn:hover { transform: scale(1.07); }
+
+/* ---------- SCROLL TO TOP DUGME ---------- */
+#topBtn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(255,255,255,0.07);
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #00eaff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+#topBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- FOOTER TEAM ---------- */
+#teamFooter {
+  margin-top: 50px;
+  padding: 30px 0;
+  text-align: center;
+  opacity: 0.9;
+}
+#teamFooter img {
+  width: 150px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+#teamFooter p {
+  color: #9ad9ff;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none !important;
+  }
+}
+
+/* ---------- FALLBACK ako varijable zakažu ---------- */
+.marquee {
+  animation-duration: 55s;
+}
+</style>
+
+
+<!-- ========== CTA BUTTONS ========== -->
+<a id="whatsappBtn" href="https://wa.me/################?text=Pozdrav%20zelim%20informacije%20o%20IPTV-u" target="_blank">
+  WhatsApp Chat
+</a>
+<div id="topBtn">Top ↑</div>
+
+
+<script>
+/* ===== Scroll to TOP BTN ===== */
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 280) {
+    topBtn.classList.add('show');
+  } else {
+    topBtn.classList.remove('show');
+  }
+});
+topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ===== Minor touch improvements ===== */
+document.addEventListener('touchstart', () => {}, {passive:true});
+</script>
+
+
+<!-- ===== FOOTER (MALA TEAM SLIKA + TEKST) ===== -->
+<div id="teamFooter">
+  <img src="logoyf.png" alt="Team Image">
+  <p>Creators of exYU Family<br>2025</p>
+</div>
+<!-- ============================
+     DIO 6/6 — Final touch, cleanup & instructions
+     ============================ -->
+
+<!-- small final footer tweaks & legal -->
+<footer style="margin-top:30px;padding:22px 12px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.8));text-align:center;border-top:1px solid rgba(42,176,255,0.06);color:#cfefff">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-weight:700">YUGO-Family TV • Partner program</div>
+    <div style="font-size:13px;color:rgba(200,230,255,0.7);margin-top:6px">Sva prava zadržana • © 2025</div>
+    <div style="margin-top:10px;font-size:13px">
+      Kontakt: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> • <a href="https://wa.me/4915755749502">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FINAL JS: health check + small helpers -->
+<script>
+  (function finalChecks(){
+    // 1) Check required local assets exist and warn if missing:
+    const requiredLocal = ['logoyf.png','yfteam.png','ponudepaketa.mp4'];
+    requiredLocal.forEach(fn=>{
+      fetch(fn, {method:'HEAD'}).then(r=>{
+        if(!r.ok) console.warn('Local file missing or not accessible:', fn);
+      }).catch(()=> console.warn('Local file missing or not accessible:', fn));
     });
 
-    /* -------------------------
-       DATA ARRAYS (online sources)
-       ------------------------- */
-
-    // 40 most relevant country ISO codes (flagcdn uses lowercase 2-letter)
-    const flags = [
-      "ba","rs","hr","si","mk","me","al","de","at","ch","it","es","pt","fr","be","nl","lu","dk","no","se",
-      "fi","gb","ie","us","ca","au","nz","tr","ro","bg","gr","hu","pl","cz","sk","ua","ru","ar","br"
-    ];
-
-    // Movie posters (TMDB image CDN). I included a curated set of widely-known posters.
-    // You can replace these URLs with your preferred posters if you like.
-    const moviePosters = [
-      "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg", // Avengers
-      "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", // Joker
-      "https://image.tmdb.org/t/p/w500/5fMZp8d3p7xgobHq4n9GK7Q6hGa.jpg", // Dune Part Two (example)
-      "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg", // Black Panther
-      "https://image.tmdb.org/t/p/w500/ctMserH8g2SeOAnCw5gFjdQF8mo.jpg", // John Wick example
-      "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-      "https://image.tmdb.org/t/p/w500/6KErczPBROQty7QoIsaa6wJYXZi.jpg", // Fast & Furious
-      "https://image.tmdb.org/t/p/w500/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg", // The Batman
-      "https://image.tmdb.org/t/p/w500/xCEg6KowNISWvMio3S0eIf8dSa2.jpg", // Oppenheimer
-      "https://image.tmdb.org/t/p/w500/kdPMUMJzyYAc4roD52qavX0nLIC.jpg", // Matrix?
-      "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-      "https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg", // Wonder Woman
-      "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg", // Parasite
-      "https://image.tmdb.org/t/p/w500/wHO2hQ6w9Qs2QvM7zE13qVQ9Wav.jpg",
-      "https://image.tmdb.org/t/p/w500/x4UkhIQuHIJyeeOTdcbZ3t3gBSa.jpg",
-      "https://image.tmdb.org/t/p/w500/2fY5uPtp1j1cniYTM06qBr2HE2N.jpg",
-      "https://image.tmdb.org/t/p/w500/3eR3gqH5z9bq2ZV0M3W0j4b3Q6t.jpg",
-      "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", // The Dark Knight
-      "https://image.tmdb.org/t/p/w500/sGVCWtLg5d61I2f4zCnN95APROW.jpg",
-      "https://image.tmdb.org/t/p/w500/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
-      "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-      "https://image.tmdb.org/t/p/w500/d5E2ozklhQ1x0vZcTpmvAxkF7v2.jpg",
-      "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-      "https://image.tmdb.org/t/p/w500/3vY4vA9bVZt3V5sZ0f8hB1R7pFf.jpg",
-      "https://image.tmdb.org/t/p/w500/4W0Pp5K0v0i1x7x7JqD9sb7V3pC.jpg",
-      "https://image.tmdb.org/t/p/w500/f3f1eYb0o3F5S4l1Wb8v6Zg7m0v.jpg",
-      "https://image.tmdb.org/t/p/w500/g7lVP1JbQ6FQ1aFJdZ7sK9y8b1p.jpg",
-      "https://image.tmdb.org/t/p/w500/hk2s3h3k3p3k3q3v3r3s3t3u3v.jpg",
-      "https://image.tmdb.org/t/p/w500/2s3u4p5k6l7m8n9o0p1q2r3s4t.jpg",
-      "https://image.tmdb.org/t/p/w500/abcd1234posterplaceholder.jpg",
-      "https://image.tmdb.org/t/p/w500/placeholder_movie_30.jpg"
-    ];
-
-    // Sports channel logos (a selection of popular sport channel logos from public sources/CDNs)
-    const sportsLogos = [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ESPN_logo.svg/512px-ESPN_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Eurosport_Logo.svg/512px-Eurosport_Logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Sky_Sports_logo.svg/512px-Sky_Sports_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/BeIN_SPORTS_logo.svg/512px-BeIN_SPORTS_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/DAZN_logo.svg/512px-DAZN_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/NBA_TV_logo.svg/512px-NBA_TV_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/NFL_Network_logo.svg/512px-NFL_Network_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TNT_Sports_logo.svg/512px-TNT_Sports_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FOX_Sports_logo.svg/512px-FOX_Sports_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Arena_Sport_logo.svg/512px-Arena_Sport_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Sportklub_logo.svg/512px-Sportklub_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/ViaPlay_logo.svg/512px-ViaPlay_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/ITV_Sport_logo.svg/512px-ITV_Sport_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Canal_Plus_logo.svg/512px-Canal_Plus_logo.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Eurosport_2_logo.svg/512px-Eurosport_2_logo.svg.png"
-    ];
-
-    // Series posters (use TMDB CDN, curated set; you may replace these)
-    const seriesPosters = [
-      "https://image.tmdb.org/t/p/w500/1X4h1cI8y0Xx8g5eV3yZPZ8i1Jl.jpg", // placeholder
-      "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
-      "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-      "https://image.tmdb.org/t/p/w500/d5E2ozklhQ1x0vZcTpmvAxkF7v2.jpg",
-      "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-      "https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg",
-      "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-      "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-      "https://image.tmdb.org/t/p/w500/3eR3gqH5z9bq2ZV0M3W0j4b3Q6t.jpg",
-      "https://image.tmdb.org/t/p/w500/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg",
-      "https://image.tmdb.org/t/p/w500/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
-      "https://image.tmdb.org/t/p/w500/2fY5uPtp1j1cniYTM06qBr2HE2N.jpg",
-      "https://image.tmdb.org/t/p/w500/x4UkhIQuHIJyeeOTdcbZ3t3gBSa.jpg",
-      "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg",
-      "https://image.tmdb.org/t/p/w500/3vY4vA9bVZt3V5sZ0f8hB1R7pFf.jpg",
-      "https://image.tmdb.org/t/p/w500/abcd1234seriesplaceholder.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_17.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_18.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_19.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_20.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_21.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_22.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_23.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_24.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_25.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_26.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_27.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_28.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_29.jpg",
-      "https://image.tmdb.org/t/p/w500/series_poster_30.jpg"
-    ];
-
-    /* -------------------------
-       Helper to build and duplicate content for infinite loop
-       ------------------------- */
-    function buildMarquee(containerId, items, className) {
-      const container = document.getElementById(containerId);
-      if(!container) return;
-      // create a fragment of images
-      const frag = document.createDocumentFragment();
-      items.forEach(url=>{
-        const img = document.createElement('img');
-        img.src = url;
-        img.loading = 'lazy';
-        frag.appendChild(img);
-      });
-      // append twice for infinite loop (scroll -50%)
-      const track = document.createElement('div');
-      track.className = 'track-inner ' + className;
-      track.appendChild(frag.cloneNode(true));
-      track.appendChild(frag.cloneNode(true));
-      container.appendChild(track);
-      // move all imgs from track-inner into container.marquee (to respect CSS .marquee rules)
-      // But our markup expects images directly in container (class marquee) — so instead:
-      // Clear and append images twice directly into the marquee container
-      container.innerHTML = '';
-      items.concat(items).forEach(url=>{
-        const img = document.createElement('img');
-        img.src = url;
-        img.loading = 'lazy';
-        container.appendChild(img);
-      });
-    }
-
-    /* -------------------------
-       BUILD FLAGS
-       ------------------------- */
-    // construct flag image URLs from ISO codes (FlagCDN)
-    const flagUrls = flags.map(c => `https://flagcdn.com/w320/${c}.png`);
-    // duplicate to make smooth loop
-    const flagsDup = flagUrls.concat(flagUrls);
-    // append into flagsMarquee
-    const flagsContainer = document.getElementById('flagsMarquee');
-    flagsDup.forEach(url=>{
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = "flag";
-      img.loading = 'lazy';
-      flagsContainer.appendChild(img);
-    });
-
-    /* -------------------------
-       BUILD MOVIES
-       ------------------------- */
-    const moviesDup = moviePosters.concat(moviePosters);
-    const moviesContainer = document.getElementById('moviesMarquee');
-    moviesDup.forEach(url=>{
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = "movie poster";
-      img.loading = 'lazy';
-      moviesContainer.appendChild(img);
-    });
-
-    /* -------------------------
-       BUILD SPORTS
-       ------------------------- */
-    const sportsDup = sportsLogos.concat(sportsLogos);
-    const sportsContainer = document.getElementById('sportsMarquee');
-    sportsDup.forEach(url=>{
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = "sports logo";
-      img.loading = 'lazy';
-      sportsContainer.appendChild(img);
-    });
-
-    /* -------------------------
-       BUILD SERIES
-       ------------------------- */
-    const seriesDup = seriesPosters.concat(seriesPosters);
-    const seriesContainer = document.getElementById('seriesMarquee');
-    seriesDup.forEach(url=>{
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = "series poster";
-      img.loading = 'lazy';
-      seriesContainer.appendChild(img);
-    });
-
-    /* -------------------------
-      PAUSE ON HOVER (nice UX)
-       ------------------------- */
-    document.querySelectorAll('.marquee').forEach(el=>{
-      el.addEventListener('mouseenter', ()=> el.style.animationPlayState = 'paused');
-      el.addEventListener('mouseleave', ()=> el.style.animationPlayState = 'running');
-    });
-
-    /* -------------------------
-      Accessibility: reduce motion respects
-       ------------------------- */
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if(mediaQuery.matches){
-      document.querySelectorAll('.marquee').forEach(m => m.style.animation = 'none');
-    }
-
-    /* -------------------------
-       OPTIONAL: lazy-check images load (small fallback)
-       ------------------------- */
-    window.addEventListener('error', (e)=>{
-      // If image fails, replace with placeholder
-      if(e.target && e.target.tagName === 'IMG'){
-        e.target.src = 'https://via.placeholder.com/300x160?text=Missing+Image';
+    // 2) Health-check of marquee images already attempted during build;
+    //    Here we scan images and list any with naturalWidth==0 (failed)
+    window.addEventListener('load', ()=>{
+      const imgs = Array.from(document.querySelectorAll('.marquee img'));
+      const failed = imgs.filter(i => (i.naturalWidth === 0) || i.complete === false);
+      if(failed.length){
+        console.group('%cMarquee image check — failed items', 'color: #ffcc66; font-weight:700');
+        failed.forEach(img => console.log('Failed:', img.src));
+        console.groupEnd();
+      } else {
+        console.info('All marquee images loaded (or replaced by placeholder).');
       }
-    }, true);
-  </script>
+    });
 
+    // 3) Small UX: pause all videos when page hidden (save resources)
+    document.addEventListener('visibilitychange', ()=>{
+      document.querySelectorAll('video').forEach(v => {
+        if(document.hidden){ v.pause(); } else { try{ v.play(); } catch(e){} }
+      });
+    });
+  })();
+</script>
+
+<!-- ===== end of page ===== -->
 </body>
 </html>

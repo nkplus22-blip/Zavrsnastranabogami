@@ -17,16 +17,12 @@ body {
     overflow-x: hidden;
 }
 
-/* Fade-in animation */
 .fade-in {
     animation: fadeIn 1.2s ease forwards;
     opacity: 0;
 }
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
+@keyframes fadeIn { to { opacity: 1; } }
 
-/* Sliding animation */
 .slide-up {
     animation: slideUp 1s ease forwards;
     transform: translateY(40px);
@@ -37,7 +33,7 @@ body {
 }
 
 /* ===========================
-   HERO SECTION
+   BRUTALNA ANIMIRANA HERO POZADINA
 =========================== */
 .hero {
     position: relative;
@@ -47,32 +43,118 @@ body {
     align-items: center;
     color: white;
     text-align: center;
-
-    /* animirana tehnološka pozadina */
-    background: url('https://i.imgur.com/sb0Nq4H.gif') center/cover no-repeat;
+    overflow: hidden;
+    background: #001933;
 }
 
+/* Sloj 1 – kratke crtice */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to top,
+        rgba(0, 153, 255, 0.25) 0px,
+        rgba(0, 153, 255, 0.25) 2px,
+        transparent 2px,
+        transparent 22px
+    );
+    animation: rise1 7s linear infinite;
+    opacity: 0.45;
+}
+@keyframes rise1 {
+    0% { background-position-y: 100%; }
+    100% { background-position-y: 0%; }
+}
+
+/* Sloj 2 – duže crtice */
 .hero::after {
     content: "";
     position: absolute;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.55);
+    inset: 0;
+    background: repeating-linear-gradient(
+        to top,
+        rgba(0, 153, 255, 0.15) 0px,
+        rgba(0, 153, 255, 0.15) 4px,
+        transparent 4px,
+        transparent 40px
+    );
+    animation: rise2 12s linear infinite;
+    opacity: 0.35;
+}
+@keyframes rise2 {
+    0% { background-position-y: 130%; }
+    100% { background-position-y: 0%; }
+}
+
+/* Sloj 3 – neon glow */
+.hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+        rgba(0, 150, 255, 0.22),
+        transparent 70%
+    );
+    animation: glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.55; }
+}
+
+/* Sloj 4 – brze duge linije */
+.hero-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.hero-lines span {
+    position: absolute;
+    width: 2px;
+    height: 120px;
+    background: rgba(0, 200, 255, 0.55);
+    bottom: -150px;
+    filter: blur(1px);
+    animation: longLineRise linear infinite;
+}
+
+.hero-lines span:nth-child(1) { left: 5%; animation-duration: 4s; }
+.hero-lines span:nth-child(2) { left: 12%; animation-duration: 6s; }
+.hero-lines span:nth-child(3) { left: 20%; animation-duration: 5s; }
+.hero-lines span:nth-child(4) { left: 28%; animation-duration: 7s; }
+.hero-lines span:nth-child(5) { left: 36%; animation-duration: 4.5s; }
+.hero-lines span:nth-child(6) { left: 44%; animation-duration: 6.5s; }
+.hero-lines span:nth-child(7) { left: 55%; animation-duration: 5.5s; }
+.hero-lines span:nth-child(8) { left: 63%; animation-duration: 4.8s; }
+.hero-lines span:nth-child(9) { left: 71%; animation-duration: 7.2s; }
+.hero-lines span:nth-child(10) { left: 79%; animation-duration: 6.2s; }
+.hero-lines span:nth-child(11) { left: 88%; animation-duration: 5.3s; }
+.hero-lines span:nth-child(12) { left: 94%; animation-duration: 7.5s; }
+
+@keyframes longLineRise {
+    0% { transform: translateY(0) scaleY(0.7); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-600px) scaleY(1); opacity: 0; }
+}
+
+/* gradient na dnu */
+.hero-bottom-fade {
+    position: absolute;
+    left:0; right:0; bottom:0; height:130px;
+    background: linear-gradient(to top, #001933, transparent);
+    z-index: 3;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
-    max-width: 700px;
+    z-index: 5;
 }
-
-.hero h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-.hero p { font-size: 18px; }
+.hero-content h1 { font-size: 42px; margin: 0; }
+.hero-content p { font-size: 18px; }
 
 /* ===========================
-   NAVIGATION
+   NAVIGACIJA
 =========================== */
 .menu-toggle {
     display: none;
@@ -91,26 +173,20 @@ nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    transition: 0.4s;
 }
-
 nav a {
     padding: 14px 20px;
-    display: block;
     color: white;
     text-decoration: none;
-    transition: 0.3s;
 }
-
 nav a:hover {
     background: #e6f0ff;
     color: #003c7a;
 }
-
-@media(max-width: 768px){
-    nav { display: none; flex-direction: column; text-align: center; }
-    nav.show { display: flex; }
-    .menu-toggle { display: block; }
+@media(max-width:768px){
+    nav { display:none; flex-direction:column; }
+    nav.show { display:flex; }
+    .menu-toggle { display:block; }
 }
 
 /* ===========================
@@ -121,44 +197,23 @@ nav a:hover {
     padding: 40px 20px;
     text-align:center;
 }
-
 .counter-boxes {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
-
 .counter-box {
-    background: #ffffffaa;
+    background: white;
     padding: 25px;
     width: 260px;
     border-radius: 12px;
-    backdrop-filter: blur(8px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     margin: 10px;
 }
-
 .counter-number {
     font-size: 38px;
     font-weight: bold;
     color: #0054a4;
-}
-
-/* ===========================
-   TIMELINE
-=========================== */
-.timeline {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-}
-.timeline-item {
-    background: white;
-    border-left: 4px solid #0056a6;
-    margin: 20px 0;
-    padding: 15px 20px;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* ===========================
@@ -187,6 +242,24 @@ nav a:hover {
 }
 
 /* ===========================
+   TIMELINE
+=========================== */
+.timeline {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.timeline-item {
+    background: white;
+    border-left: 4px solid #0056a6;
+    margin: 20px 0;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ===========================
    FOOTER
 =========================== */
 footer {
@@ -196,30 +269,40 @@ footer {
     text-align:center;
 }
 footer a { color: #ffdd00; }
+
 </style>
 </head>
 
 <body>
 
 <!-- HERO SECTION -->
-<div class="hero fade-in">
+<div class="hero">
+
+    <div class="hero-glow"></div>
+
+    <div class="hero-lines">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="hero-bottom-fade"></div>
+
     <div class="hero-content">
         <h1>O nama</h1>
-        <p>9+ godina sa Vama — povjerenje koje raste zajedno s nama.</p>
+        <p>9+ godina sa Vama — stabilnost, povjerenje i konstantan napredak.</p>
     </div>
 </div>
 
-<!-- MENU TOGGLE -->
+<!-- MENU -->
 <button class="menu-toggle" onclick="toggleMenu()">☰ Meni</button>
 
-<!-- NAVIGATION -->
 <nav id="mainMenu">
     <a href="index.html">Početna</a>
     <a href="cijene.html">Cijene i akcije</a>
     <a href="komentari.html">Komentari</a>
     <a href="onama.html">O nama</a>
     <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 30</a>
+    <a href="top15.html">Top 15</a>
     <a href="kontakt.html">Kontakt</a>
 </nav>
 
@@ -285,22 +368,22 @@ footer a { color: #ffdd00; }
 
     <div class="timeline-item">
         <strong>2016 — Početak</strong>
-        <p>Startali smo sa željom da stvorimo najbolju uslugu na tržištu.</p>
+        <p>Startali smo sa željom da stvorimo najkvalitetniju IPTV uslugu.</p>
     </div>
 
     <div class="timeline-item">
-        <strong>2018 — Stabilizacija servera</strong>
-        <p>Uspostavili smo kvalitetnu i pouzdanu mrežnu infrastrukturu.</p>
+        <strong>2018 — Stabilizacija</strong>
+        <p>Uspostavili smo vrhunsku i pouzdanu mrežnu infrastrukturu.</p>
     </div>
 
     <div class="timeline-item">
         <strong>2020 — Veliko širenje</strong>
-        <p>Broj kanala i korisnika rapidno raste. Uvodimo HD/4K sadržaje.</p>
+        <p>Proširenje kanala, HD/4K sadržaji i rapidni porast korisnika.</p>
     </div>
 
     <div class="timeline-item">
-        <strong>2023 — Optimizacija & Premium streaming</strong>
-        <p>Usklađeni premium streamovi bez kašnjenja i problema.</p>
+        <strong>2023 — Premium streaming</strong>
+        <p>Savršeno optimizirani streamovi bez kašnjenja i problema.</p>
     </div>
 
     <div class="timeline-item">

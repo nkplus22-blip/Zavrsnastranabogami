@@ -4,327 +4,484 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YUGO-Family TV</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
   <style>
-    /* Osnovni izgled */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      background-color: #000;
-      overflow-x: hidden;
+    /* ------------- ROOT & BASE ------------- */
+    :root{
+      --primary:#00bfff;
+      --bg:#000;
+      --muted:#bfcbd6;
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --neon: rgba(0,191,255,0.14);
+      --accent: #6ce0ff;
+      --watermark-color: rgba(255,255,255,0.03);
     }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial; color:#fff;-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
 
+    /* prevent accidental image drag (anti-copy measure) */
+    img{user-drag: none; user-select: none; -webkit-user-drag: none; -webkit-user-select: none;}
+
+    /* subtle page container */
+    main.wrap{max-width:1100px;margin:18px auto;padding:0 18px;position:relative;z-index:3}
+
+    /* ------------- HEADER ------------- */
     header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      background: rgba(0,0,0,0.7);
-      position: relative;
-      z-index: 2;
+      text-align:center;
+      padding:44px 20px 20px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.5));
+      position:relative;
+      z-index:4;
+      border-radius:10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      overflow:visible;
     }
-
-    header h1 {
-      font-size: 2.2rem;
-      color: #00bfff;
+    header .brand-line{
+      display:flex;align-items:center;justify-content:center;gap:12px;
     }
-
-    header p {
-      color: #ccc;
-      margin-top: 10px;
+    .logo-badge{
+      width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--primary));color:#001;font-weight:800;font-size:20px;
+      box-shadow: 0 6px 30px rgba(108,224,255,0.08);
+      transition: transform .5s ease, box-shadow .5s;
     }
+    .logo-badge.pulse{ animation: logoPulse 3s infinite; }
+    @keyframes logoPulse{ 0%{transform:scale(1);box-shadow:0 6px 30px rgba(108,224,255,0.08)}50%{transform:scale(1.04);box-shadow:0 12px 40px rgba(108,224,255,0.14)}100%{transform:scale(1);box-shadow:0 6px 30px rgba(108,224,255,0.08)} }
+    header h1{ font-size:2.05rem; color:var(--primary); margin:6px 0 0; font-weight:700; letter-spacing:0.2px; text-shadow: 0 6px 22px rgba(0,0,0,0.6);}
+    header p{ color:var(--muted); margin:8px 0 0; font-size:0.98rem; max-width:900px; margin-left:auto;margin-right:auto; line-height:1.45; }
 
+    /* device badge */
+    .device-badge{ position:absolute; left:18px; top:18px; padding:8px 10px; border-radius:999px; background:rgba(255,255,255,0.03); color:var(--muted); font-size:13px; z-index:6; display:flex; gap:8px; align-items:center; box-shadow: 0 6px 16px rgba(0,0,0,0.5);}
+    .device-badge strong{ color:var(--primary); font-weight:700; font-size:13px;}
+
+    /* menu toggle kept (overlay menu) */
     .menu-toggle {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: #00bfff;
-      cursor: pointer;
+      position:absolute; top:18px; right:18px; background: none; border: 1px solid rgba(255,255,255,0.06); color:var(--primary); font-size:22px; cursor:pointer; padding:8px 12px; border-radius:10px;
+      z-index:6;
+      transition: background .22s, transform .18s;
+    }
+    .menu-toggle:hover{ transform:translateY(-2px); background: rgba(255,255,255,0.02); }
+
+    /* ------------- HERO IMAGE ------------- */
+    .hero-image{ margin-top:16px; text-align:center; position:relative; z-index:3; }
+    .banner-img{
+      width:100%; height:auto; max-height:420px; object-fit:cover;
+      border-radius:12px; box-shadow: 0 18px 60px rgba(0,0,0,0.7);
+      margin:16px 0; opacity:0; transform:translateY(18px); transition:opacity 1s ease, transform 1s ease;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.25));
+      /* AI-depth-shadow (layered) */
+      box-shadow:
+        0 8px 24px rgba(0,0,0,0.6),
+        0 28px 80px rgba(2,12,30,0.65),
+        0 0 80px rgba(0,191,255,0.03) inset;
+    }
+    .banner-img.visible{ opacity:1; transform:none; }
+
+    /* watermark overlay on images (repeating, subtle) - anti-copy visual */
+    .banner-img::after{
+      content:"YUGO-FAMILY   YUGO-FAMILY   YUGO-FAMILY";
+      position:absolute; left:0; top:0; width:100%; height:100%;
+      display:block; pointer-events:none; z-index:2; opacity:0.06;
+      mix-blend-mode:overlay; font-size:20px; color:var(--watermark-color);
+      transform: rotate(-12deg) translateY(-14px);
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.00) 0 120px, rgba(255,255,255,0.00) 120px 240px);
     }
 
-    /* Overlay meni */
-    .overlay {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      background-color: rgba(0,0,0,0.95);
-      overflow-x: hidden;
-      transition: 0.5s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+    /* ------------- HERO CONTENT ------------- */
+    .hero{ text-align:center; padding:18px 14px 20px; margin-top: -6px; z-index:3; position:relative; }
+    .hero h1{ color:var(--primary); margin:0; font-size:1.6rem; font-weight:700; text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+    .hero p{ color:var(--muted); margin:10px auto 0; max-width:900px; line-height:1.5; font-size:1rem; }
 
-    .overlay a {
-      padding: 10px;
-      font-size: 22px;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+    /* ------------- COUNTERS ------------- */
+    .counters{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; padding:28px 10px; z-index:3; }
+    .counter-box{ background:var(--card-bg); padding:18px; border-radius:10px; width:160px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.02); }
+    .counter{ font-size:1.9rem; color:var(--primary); font-weight:800; letter-spacing:0.4px; text-shadow:0 6px 20px rgba(0,0,0,0.6); }
+    .counter + p{ color:var(--muted); margin:8px 0 0; font-size:0.95rem; }
 
-    .overlay a:hover {
-      color: #00bfff;
-    }
+    /* ------------- CONTENT ------------- */
+    .content{ padding:30px 20px; max-width:920px; margin:18px auto; background:rgba(255,255,255,0.014); border-radius:10px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.02); color:var(--muted); line-height:1.6; }
+    .content h2{ color:var(--primary); font-size:1.25rem; margin:6px 0 10px; font-weight:700; letter-spacing:0.6px; font-family:'Bebas Neue', sans-serif; text-transform:uppercase; }
+    .content a{ color:var(--primary); text-decoration:underline; }
 
-    .overlay .closebtn {
-      position: absolute;
-      top: 20px;
-      right: 45px;
-      font-size: 40px;
-    }
+    ul{ text-align:left; display:inline-block; margin-top:10px; color:var(--muted); font-size:0.98rem; }
 
-    /* Slike s fade-in efektom */
-    .banner-img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      margin: 20px 0;
-      display: block;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
+    /* ------------- VIDEO SECTION ------------- */
+    .video-section{ text-align:center; margin:38px auto; }
+    .video-section video{ width:90%; max-width:820px; border-radius:12px; box-shadow: 0 18px 60px rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.03); }
 
-    .banner-img.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ------------- BOTTOM IMAGE ------------- */
+    .bottom-image{ margin:24px 0; text-align:center; }
+    .banner-img.small{ max-height:280px; }
 
-    /* ✅ Gornja slika lagano providna */
-    .hero-image img {
-      opacity: 0.8;
-    }
+    /* ------------- FOOTER ------------- */
+    footer{ text-align:center; padding:26px 20px; background:rgba(0,0,0,0.7); color:var(--muted); border-radius:8px; margin-top:18px; }
+    footer a{ color:var(--primary); text-decoration:none; }
 
-    /* Hero sekcija */
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background: rgba(0,0,0,0.6);
-      z-index: 2;
-      position: relative;
-    }
+    /* ------------- CANVAS TECH BACKGROUND ------------- */
+    canvas#tech-bg{ position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; opacity:0.42; pointer-events:none; filter: blur(0.6px); }
 
-    .hero h1 {
-      color: #00bfff;
+    /* ------------- EASTER-EGG OVERLAY ------------- */
+    #egg {
+      position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center;
+      pointer-events:none; opacity:0; transition: opacity .28s ease;
     }
-
-    .counters {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 40px 20px;
-      text-align: center;
+    #egg.active{ opacity:1; pointer-events:auto; }
+    #egg .card{
+      background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.45));
+      border:1px solid rgba(108,224,255,0.12); padding:28px 36px; border-radius:12px; text-align:center;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+      transform:translateY(0); opacity:1;
     }
+    #egg h2{ font-family:'Bebas Neue',sans-serif; font-size:56px; margin:0; color:#ff2b2b; text-transform:uppercase; letter-spacing:3px; text-shadow:0 12px 40px rgba(0,0,0,0.6);}
+    #egg p{ margin-top:12px; color:var(--primary); font-weight:700; }
 
-    .counter-box {
-      background: rgba(255,255,255,0.08);
-      padding: 20px;
-      border-radius: 12px;
-      width: 150px;
-      box-shadow: 0 0 12px rgba(0,191,255,0.3);
+    /* ------------- MICRO-INTERACTIONS ------------- */
+    .logo-badge:hover{ transform:translateY(-6px) scale(1.02); }
+    .counter-box:hover{ transform:translateY(-6px); box-shadow:0 26px 80px rgba(0,0,0,0.7); transition: all .28s ease; }
+
+    /* ------------- RESPONSIVE ------------- */
+    @media(max-width:860px){
+      header{ padding:32px 12px 12px; }
+      header h1{ font-size:1.5rem; }
+      .banner-img{ max-height:360px; }
+      .counter-box{ width:130px; }
+      .content{ padding:20px; }
+      .device-badge{ display:none; }
     }
-
-    .counter {
-      font-size: 2rem;
-      color: #00bfff;
-    }
-
-    .content {
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,191,255,0.1);
-    }
-
-    ul {
-      text-align: left;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    /* ✅ Video sekcija */
-    .video-section {
-      text-align: center;
-      margin: 50px auto;
-    }
-
-    .video-section video {
-      width: 90%;
-      max-width: 800px;
-      border-radius: 12px;
-      box-shadow: 0 4px 25px rgba(0,191,255,0.3);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(0,0,0,0.8);
-      color: #aaa;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #00bfff;
-      text-decoration: none;
-    }
-
-    /* Canvas pozadina */
-    canvas#tech-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      opacity: 0.4; /* ✅ pojačana vidljivost animacije */
+    @media(max-width:520px){
+      .logo-badge{ width:48px; height:48px; font-size:18px; }
+      .banner-img{ max-height:260px; }
+      .content h2{ font-size:16px; }
     }
   </style>
 </head>
 <body>
 
-<canvas id="tech-bg"></canvas>
+  <!-- Canvas background (tech particles & icons) - preserved and enhanced -->
+  <canvas id="tech-bg" aria-hidden="true"></canvas>
 
-<header>
-  <h1>YUGO-Family TV</h1>
-  <p>Vaša porodica, vaša televizija – najbolji IPTV servis</p>
-  <button class="menu-toggle" onclick="openNav()">☰</button>
-</header>
+  <main class="wrap">
+    <!-- Device badge -->
+    <div class="device-badge" id="deviceBadge" aria-hidden="true">Device: <strong>--</strong></div>
 
-<!-- ✅ Slika ispod naslova -->
-<section class="hero-image">
-  <img src="image11.png" alt="YUGO-Family TV baner" class="banner-img fade-img">
-</section>
+    <header role="banner" aria-label="YUGO Family header">
+      <div class="brand-line">
+        <div class="logo-badge" id="logoBadge" title="YUGO-Family">YF</div>
+      </div>
+      <h1>YUGO-Family TV</h1>
+      <p>Vaša porodica, vaša televizija – najbolji IPTV servis</p>
+      <button class="menu-toggle" onclick="openNav()" aria-expanded="false" aria-label="Otvori meni">☰</button>
+    </header>
 
-<!-- Navigacija -->
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="index.html">Početna</a>
-  <a href="cjenovnik.html">Cijene i akcije</a>
-  <a href="top15.html">Top 30</a>
-  <a href="komentari.html">Komentari</a>
-  <a href="tim.html">Postani dio tima</a>
-  <a href="onama.html">O nama</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a href="placanje.html">Plaćanje</a>
-  <a href="kako-da-gledas.html">Kako da gledaš</a>
-  <a href="aplikacije.html">Aplikacije za korištenje</a>
-</div>
+    <!-- hero image banner -->
+    <section class="hero-image" aria-hidden="false">
+      <img src="image11.png" alt="YUGO-Family TV baner" class="banner-img fade-img" draggable="false">
+    </section>
 
-<section class="hero">
-  <h1>Dobrodošli u YUGO-Family TV</h1>
-  <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
-</section>
+    <!-- overlay nav (kept) -->
+    <div id="myNav" class="overlay" aria-hidden="true">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Zatvori meni">×</a>
+      <a href="index.html">Početna</a>
+      <a href="cjenovnik.html">Cijene i akcije</a>
+      <a href="top15.html">Top 30</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="onama.html">O nama</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="aplikacije.html">Aplikacije za korištenje</a>
+    </div>
 
-<section class="counters">
-  <div class="counter-box"><h2 class="counter" data-target="16000">0</h2><p>Zadovoljnih korisnika</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="9">0</h2><p>Godina sa vama</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="2100">0</h2><p>Live kanala</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="75000">0</h2><p>Videoteka</p></div>
-</section>
+    <section class="hero" aria-label="Hero">
+      <h1>Dobrodošli u YUGO-Family TV</h1>
+      <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
+    </section>
 
-<section class="content">
-  <h2>Zašto odabrati YUGO-Family TV?</h2>
-  <p>Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene. Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta. Vaše zadovoljstvo nam je uvijek na prvom mjestu!</p>
-  <p>📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, <a href="top15.html">Top 15 filmova i serija</a> ili <a href="komentari.html">komentare</a>.</p>
-</section>
+    <section class="counters" aria-label="Statistike">
+      <div class="counter-box"><h2 class="counter" data-target="16000">0</h2><p>Zadovoljnih korisnika</p></div>
+      <div class="counter-box"><h2 class="counter" data-target="9">0</h2><p>Godina sa vama</p></div>
+      <div class="counter-box"><h2 class="counter" data-target="3000">0</h2><p>Aktivnih kanala</p></div>
+      <div class="counter-box"><h2 class="counter" data-target="116000">0</h2><p>Dostupnih na zahtjev</p></div>
+    </section>
 
-<!-- ✅ Video sekcija dodana ovdje -->
-<section class="video-section">
-  <video controls autoplay muted loop>
-    <source src="ponudepaketa.mp4" type="video/mp4">
-    Vaš pretraživač ne podržava video prikaz.
-  </video>
-</section>
+    <section class="content" aria-label="Opis">
+      <h2>Zašto odabrati YUGO-Family TV?</h2>
+      <p>Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene. Bez ikakvih prekida i nepotrebnog opterećenja, uz servere i streamove najvišeg kvaliteta. Vaše zadovoljstvo nam je uvijek na prvom mjestu!</p>
+      <p>📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, <a href="top15.html">Top 15 filmova i serija</a> ili <a href="komentari.html">komentare</a>.</p>
+    </section>
 
-<section class="content">
-  <h2>Šta je Internet televizija (IPTV)?</h2>
-  <ul>
-    <li>Više hiljada TV kanala iz cijelog svijeta</li>
-    <li>Velika videoteka sa filmovima i serijama na zahtjev</li>
-    <li>Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
-    <li>Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
-    <li>Povoljnija cijena u poređenju sa klasičnim operaterima</li>
-  </ul>
-</section>
+    <section class="video-section" aria-label="Video o ponudama">
+      <video controls autoplay muted loop playsinline poster="">
+        <source src="ponudepaketa.mp4" type="video/mp4">
+        Vaš pretraživač ne podržava video prikaz.
+      </video>
+    </section>
 
-<!-- ✅ Slika pri dnu stranice -->
-<section class="bottom-image">
-  <img src="image22.png" alt="IPTV ponuda" class="banner-img fade-img">
-</section>
+    <section class="content" aria-label="Šta je IPTV">
+      <h2>Šta je Internet televizija (IPTV)?</h2>
+      <ul>
+        <li>Više hiljada TV kanala iz cijelog svijeta</li>
+        <li>Velika videoteka sa filmovima i serijama na zahtjev</li>
+        <li>Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
+        <li>Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
+        <li>Povoljnija cijena u poređenju sa klasičnim operaterima</li>
+      </ul>
+    </section>
 
-<footer>
-  <p>&copy; 2025 YUGO-Family TV | Kontakt: 
-    <a href="https://wa.me/4915755749502">WhatsApp</a> | 
-    Email: nkplus22@gmail.com
-  </p>
-</footer>
+    <section class="bottom-image" aria-hidden="false">
+      <img src="image22.png" alt="IPTV ponuda" class="banner-img fade-img small" draggable="false">
+    </section>
 
-<script>
-function openNav(){ document.getElementById("myNav").style.width="100%"; }
-function closeNav(){ document.getElementById("myNav").style.width="0%"; }
+    <footer>
+      <p>&copy; 2025 YUGO-Family TV | Kontakt: 
+        <a href="https://wa.me/4915755749502">WhatsApp</a> | 
+        Email: nkplus22@gmail.com
+      </p>
+    </footer>
+  </main>
 
-// Brojači
-const counters = document.querySelectorAll('.counter');
-counters.forEach(counter=>{
-  counter.innerText='0';
-  const updateCounter=()=>{
-    const target=+counter.getAttribute('data-target');
-    const current=+counter.innerText.replace(/\D/g,'');
-    const increment=target/200;
-    if(current<target){
-      counter.innerText=Math.ceil(current+increment).toLocaleString();
-      setTimeout(updateCounter,20);
-    } else {
-      counter.innerText=target>=1000?target.toLocaleString()+"+":target+"+";
+  <!-- Easter-egg overlay (Y+F) -->
+  <div id="egg" aria-hidden="true">
+    <div class="card">
+      <h2>WELCOME</h2>
+      <p>To the YUGO-Family Universe</p>
+    </div>
+  </div>
+
+  <script>
+    /* ---------------- COUNTERS (improved and intersection-aware) ---------------- */
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          const target = +el.dataset.target;
+          let start = 0;
+          const duration = 1100;
+          const startTime = performance.now();
+          function frame(now){
+            const t = Math.min((now - startTime)/duration,1);
+            const current = Math.floor(target * t);
+            el.textContent = (target >= 1000) ? current.toLocaleString() : current;
+            if(t < 1) requestAnimationFrame(frame);
+            else el.textContent = (target >= 1000) ? target.toLocaleString() + '+' : target + '+';
+          }
+          requestAnimationFrame(frame);
+          obs.unobserve(el);
+        }
+      });
+    }, {threshold:0.4});
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* ---------------- FADE-IN IMAGES ---------------- */
+    const fadeImgs = document.querySelectorAll('.fade-img');
+    const fadeObserver = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.2});
+    fadeImgs.forEach(img => fadeObserver.observe(img));
+
+    /* ---------------- CANVAS TECH BACKGROUND (particles + icons) ---------------- */
+    const canvas = document.getElementById('tech-bg');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+    window.addEventListener('resize', ()=>{ w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
+
+    const particleCount = Math.max(40, Math.floor((w*h)/80000)); // scalable
+    const particles = [];
+    const icons = [];
+    const iconUrls = [
+      'https://cdn-icons-png.flaticon.com/32/1087/1087863.png',
+      'https://cdn-icons-png.flaticon.com/32/4140/4140048.png',
+      'https://cdn-icons-png.flaticon.com/32/715/715676.png'
+    ];
+    const iconImgs = iconUrls.map(src => { const i = new Image(); i.src = src; return i; });
+
+    class Particle {
+      constructor(){
+        this.x = Math.random()*w; this.y = Math.random()*h;
+        this.size = Math.random()*2 + 0.8;
+        this.vx = Math.random()*0.8 - 0.4;
+        this.vy = Math.random()*0.8 - 0.4;
+      }
+      update(){
+        this.x += this.vx; this.y += this.vy;
+        if(this.x > w) this.x = 0; if(this.x < 0) this.x = w;
+        if(this.y > h) this.y = 0; if(this.y < 0) this.y = h;
+      }
+      draw(){
+        ctx.fillStyle = 'rgba(0,150,255,0.6)';
+        ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();
+      }
     }
-  };
-  updateCounter();
-});
 
-// Canvas pozadina
-const canvas=document.getElementById('tech-bg');
-const ctx=canvas.getContext('2d');
-let width=canvas.width=window.innerWidth;
-let height=canvas.height=window.innerHeight;
-
-window.addEventListener('resize',()=>{ width=canvas.width=window.innerWidth; height=canvas.height=window.innerHeight; });
-
-const particleCount=80;
-const particles=[];
-const icons=[];
-const iconUrls=['https://cdn-icons-png.flaticon.com/32/1087/1087863.png','https://cdn-icons-png.flaticon.com/32/4140/4140048.png','https://cdn-icons-png.flaticon.com/32/715/715676.png'];
-const iconImgs=iconUrls.map(src=>{ const i=new Image(); i.src=src; return i; });
-
-class Particle{ constructor(){ this.x=Math.random()*width; this.y=Math.random()*height; this.size=Math.random()*2+1; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; } update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; } draw(){ ctx.fillStyle='rgba(0,150,255,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
-class Icon{ constructor(img){ this.img=img; this.x=Math.random()*width; this.y=Math.random()*height; this.size=32+Math.random()*16; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; } update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; } draw(){ ctx.drawImage(this.img,this.x,this.y,this.size,this.size); } }
-
-for(let i=0;i<particleCount;i++)particles.push(new Particle());
-for(let i=0;i<20;i++)icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
-
-function animate(){ ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw();}); for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctx.strokeStyle='rgba(0,150,255,0.15)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }}} icons.forEach(ic=>{ic.update();ic.draw();}); requestAnimationFrame(animate);}
-animate();
-
-// Fade-in efekat za slike
-const fadeImgs = document.querySelectorAll('.fade-img');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+    class Icon {
+      constructor(img){
+        this.img = img;
+        this.x = Math.random()*w; this.y = Math.random()*h;
+        this.size = 18 + Math.random()*22;
+        this.vx = Math.random()*1.1 - 0.55;
+        this.vy = Math.random()*1.1 - 0.55;
+      }
+      update(){
+        this.x += this.vx; this.y += this.vy;
+        if(this.x > w) this.x = 0; if(this.x < 0) this.x = w;
+        if(this.y > h) this.y = 0; if(this.y < 0) this.y = h;
+      }
+      draw(){
+        if(this.img.complete) ctx.drawImage(this.img, this.x, this.y, this.size, this.size);
+      }
     }
-  });
-});
-fadeImgs.forEach(img => observer.observe(img));
-</script>
 
+    for(let i=0;i<particleCount;i++) particles.push(new Particle());
+    for(let i=0;i<Math.max(6,Math.floor(particleCount/8)); i++) icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
+
+    function animateBg(){
+      ctx.clearRect(0,0,w,h);
+      // connect lines
+      for(let i=0;i<particles.length;i++){
+        particles[i].update(); particles[i].draw();
+        for(let j=i+1;j<particles.length;j++){
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if(d < 110){
+            ctx.strokeStyle = 'rgba(0,150,255,' + (0.12 - (d/110)*0.08) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+          }
+        }
+      }
+      icons.forEach(ic => { ic.update(); ic.draw(); });
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    /* ---------------- MENU (overlay) ---------------- */
+    function openNav(){
+      const nav = document.getElementById('myNav');
+      nav.style.width = '100%';
+      nav.setAttribute('aria-hidden','false');
+      document.querySelector('.menu-toggle').setAttribute('aria-expanded','true');
+    }
+    function closeNav(){
+      const nav = document.getElementById('myNav');
+      nav.style.width = '0%';
+      nav.setAttribute('aria-hidden','true');
+      document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');
+    }
+
+    /* ---------------- DEVICE DETECTION (shows friendly message) ---------------- */
+    const deviceBadge = document.getElementById('deviceBadge');
+    function detectDevice(){
+      const ua = navigator.userAgent;
+      let dev = 'Web';
+      if(/smarttv|smart-tv|appletv|googletv|hbbtv|pov_tv|netcast/i.test(ua)) dev = 'Smart TV';
+      else if(/tablet|ipad|playbook|android(?!.*mobile)/i.test(ua)) dev = 'Tablet';
+      else if(/mobi|iphone|android.*mobile|phone/i.test(ua)) dev = 'Mobile';
+      else dev = 'Desktop';
+      deviceBadge.querySelector('strong').textContent = dev;
+      // small toast for TV users
+      if(dev === 'Smart TV'){
+        showTemporaryToast('Smart TV detected — optimizovano za velike ekrane');
+      }
+    }
+    detectDevice();
+
+    /* small temporary toast */
+    function showTemporaryToast(text, duration=3500){
+      const t = document.createElement('div');
+      t.textContent = text;
+      Object.assign(t.style, {
+        position:'fixed', left:'50%', transform:'translateX(-50%)', bottom:'22px', zIndex:9999,
+        background:'rgba(0,0,0,0.75)', color:'#fff', padding:'10px 16px', borderRadius:'10px', boxShadow:'0 8px 40px rgba(0,0,0,0.6)', fontSize:'14px'
+      });
+      document.body.appendChild(t);
+      setTimeout(()=> t.style.opacity='0', duration - 400);
+      setTimeout(()=> t.remove(), duration);
+    }
+
+    /* ---------------- EASTER-EGG (press Y then F quickly) ---------------- */
+    let seq = '';
+    const egg = document.getElementById('egg');
+    let eggTimer;
+    window.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+      seq += k;
+      if(seq.length > 4) seq = seq.slice(-4);
+      if(seq.includes('yf') || seq.includes('fy')) {
+        triggerEgg();
+        seq = '';
+      }
+      clearTimeout(eggTimer);
+      eggTimer = setTimeout(()=> seq = '', 1200);
+    });
+
+    function triggerEgg(){
+      egg.classList.add('active');
+      egg.setAttribute('aria-hidden','false');
+      // small animation: pulse logo
+      const lb = document.getElementById('logoBadge');
+      lb.classList.add('pulse');
+      setTimeout(()=> {
+        lb.classList.remove('pulse');
+      }, 3200);
+      // auto-hide
+      setTimeout(()=> {
+        egg.classList.remove('active');
+        egg.setAttribute('aria-hidden','true');
+      }, 2800);
+    }
+
+    /* ---------------- AI DEPTH SHADOW on hover for images (subtle) ---------------- */
+    document.querySelectorAll('.banner-img').forEach(img => {
+      img.addEventListener('mousemove', (ev) => {
+        const rect = img.getBoundingClientRect();
+        const mx = (ev.clientX - rect.left) / rect.width;
+        const my = (ev.clientY - rect.top) / rect.height;
+        const rx = (mx - 0.5) * 12; // rotate amount
+        const ry = (my - 0.5) * -12;
+        img.style.transform = `perspective(800px) rotateX(${ry}deg) rotateY(${rx}deg) translateZ(0) scale(1.01)`;
+      });
+      img.addEventListener('mouseleave', ()=> { img.style.transform = ''; });
+    });
+
+    /* ---------------- ANTI-COPY WATERMARK (subtle background layer) ---------------- */
+    // Already visual with ::after pseudo; add optional lightweight protection: disable context menu on images
+    document.querySelectorAll('img').forEach(i => {
+      i.addEventListener('contextmenu', (e) => {
+        // allow a single copy action if CTRL pressed; otherwise show small hint
+        if(!e.ctrlKey && !e.metaKey){
+          e.preventDefault();
+          showTemporaryToast('Slike su zaštićene — kontaktirajte nas za materijale', 1800);
+        }
+      });
+    });
+
+    /* ---------------- MICRO-INTERACTIONS: logo pulse every 30s ---------------- */
+    setInterval(()=> {
+      const lb = document.getElementById('logoBadge');
+      lb.classList.add('pulse');
+      setTimeout(()=> lb.classList.remove('pulse'), 2200);
+    }, 30000);
+
+    /* ---------------- small accessibility: close overlay on ESC ---------------- */
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeNav();
+    });
+
+    /* END OF SCRIPT */
+  </script>
 </body>
 </html>

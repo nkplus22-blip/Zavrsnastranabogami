@@ -156,5 +156,53 @@
     <div class="comment"><strong>Sofija:</strong> Preporučujem svima, odlična usluga.</div>
     <div class="comment"><strong>Damir:</strong> IPTV bez greške, svaka čast!</div>
     <div class="comment"><strong>Lidija:</strong> Svi kanali rade savršeno, hvala vam.</div>
+  
   </div>
+  
+  <footer>
+  <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
+</footer>
+
+<!-- ======== JAVASCRIPT + LOCALSTORAGE ======== -->
+<script>
+  function toggleMenu() {
+    document.getElementById("mainMenu").classList.toggle("show-menu");
+  }
+
+  // Učitavanje komentara iz LocalStorage
+  window.onload = function() {
+    let savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+    savedComments.forEach(comment => {
+      displayComment(comment.name, comment.location, comment.message);
+    });
+  };
+
+  function displayComment(name, location, message) {
+    let newComment = document.createElement("div");
+    newComment.className = "comment";
+    newComment.innerHTML = `<strong>${name} (${location}):</strong> ${message}`;
+
+    let container = document.querySelector(".container:last-of-type");
+    container.insertBefore(newComment, container.firstChild);
+  }
+
+  function addComment(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let location = document.getElementById("location").value;
+    let message = document.getElementById("message").value;
+
+    displayComment(name, location, message);
+
+    let saved = JSON.parse(localStorage.getItem("comments")) || [];
+    saved.unshift({ name, location, message });
+    localStorage.setItem("comments", JSON.stringify(saved));
+
+    document.getElementById("commentForm").reset();
+  }
+</script>
+
+</body>
+</html>
   

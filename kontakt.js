@@ -1,136 +1,126 @@
-/* ---------- Utility & DOM ---------- */
+/* ====== Hamburger (top-right) ====== */
 const hambBtn = document.getElementById('hambBtn');
 const mainMenu = document.getElementById('mainMenu');
-const themeBtn = document.getElementById('themeBtn');
-const langSelect = document.getElementById('langSelect');
-const onlineCountEl = document.getElementById('onlineCount');
-const contactForm = document.getElementById('contactForm');
 
-/* ---------- Hamburger (same style as 'postani dio tima') ---------- */
-function toggleMenu() {
+hambBtn.addEventListener('click', ()=>{
   mainMenu.classList.toggle('show');
   hambBtn.classList.toggle('active');
-}
-hambBtn.addEventListener('click', toggleMenu);
-// close menu on outside click for mobile
-document.addEventListener('click', (e) => {
-  if (!mainMenu.contains(e.target) && !hambBtn.contains(e.target)) {
-    mainMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-  }
+  hambBtn.setAttribute('aria-expanded', hambBtn.classList.contains('active'));
 });
-// close on resize > desktop
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 900) {
+
+// Close nav on outside click (mobile)
+document.addEventListener('click', (e)=>{
+  if(!mainMenu.contains(e.target) && !hambBtn.contains(e.target) && mainMenu.classList.contains('show')){
     mainMenu.classList.remove('show');
     hambBtn.classList.remove('active');
   }
 });
 
-/* ---------- Theme auto-detect + toggle ---------- */
-function applyTheme(pref) {
-  if (pref === 'dark') document.documentElement.classList.remove('light');
-  else document.documentElement.classList.add('light');
+/* ====== Theme: autodetect + toggle ====== */
+const themeBtn = document.getElementById('themeBtn');
+function applyInitialTheme(){
+  const saved = localStorage.getItem('yf_theme');
+  if(saved) {
+    if(saved === 'light') document.body.classList.add('light');
+    return;
+  }
+  // autodetect
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  if(prefersLight) document.body.classList.add('light');
 }
-const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-applyTheme(systemPref);
+applyInitialTheme();
 
-themeBtn.addEventListener('click', () => {
-  document.documentElement.classList.toggle('light');
+themeBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('light');
+  localStorage.setItem('yf_theme', document.body.classList.contains('light') ? 'light' : 'dark');
 });
 
-/* ---------- Language auto-detect + simple translations ---------- */
-const i18n = {
-  bs: {
-    subtitle: 'Partner program — futuristički neon',
-    heroTitle: 'Uvijek tu za vas',
-    heroLead: 'Kontaktirajte nas putem e-maila, WhatsApp-a ili popunite formu — šaljemo odmah poruku.',
-    emailText: 'Pišite nam bilo kada:',
-    waText: 'Odgovor obično u roku od par minuta',
-    workText: 'Podrška dostupna 24/7',
-    fastResponse: 'Brz odgovor u svako doba',
-    formTitle: 'Pošaljite poruku',
-    sendBtn: 'Pošalji na WhatsApp',
-    sendEmail: 'Pošalji mail',
-    openWhats: 'Otvori WhatsApp',
-    trustedTitle: 'Trusted & Partners',
-    trustedNote: 'Prikazani partneri su referentni. Prava partnerstva su moguća samo uz dogovor.'
-  },
-  en: {
-    subtitle: 'Partner program — futuristic neon',
-    heroTitle: 'We are here for you',
-    heroLead: 'Contact us via email, WhatsApp or fill the form — we will send the message.',
-    emailText: 'Write to us anytime:',
-    waText: 'Usually replies within minutes',
-    workText: 'Support available 24/7',
-    fastResponse: 'Quick replies any time',
-    formTitle: 'Send a message',
-    sendBtn: 'Send via WhatsApp',
-    sendEmail: 'Send email',
-    openWhats: 'Open WhatsApp',
-    trustedTitle: 'Trusted & Partners',
-    trustedNote: 'Displayed partners are references. Real partnerships only on agreement.'
-  },
-  de: {
-    subtitle: 'Partnerprogramm — futuristisches Neon',
-    heroTitle: 'Wir sind für Sie da',
-    heroLead: 'Kontaktieren Sie uns per E-Mail, WhatsApp oder Formular — wir senden die Nachricht.',
-    emailText: 'Schreiben Sie uns jederzeit:',
-    waText: 'Antwort meist innerhalb von Minuten',
-    workText: 'Support 24/7 verfügbar',
-    fastResponse: 'Schnelle Antworten jederzeit',
-    formTitle: 'Nachricht senden',
-    sendBtn: 'Per WhatsApp senden',
-    sendEmail: 'E-Mail senden',
-    openWhats: 'WhatsApp öffnen',
-    trustedTitle: 'Trusted & Partners',
-    trustedNote: 'Angezeigte Partner sind Referenzen. Echte Partnerschaften nur nach Vereinbarung.'
-  }
-};
-
-function setLanguage(lang) {
-  // fill elements that have data-i18n attributes
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
-  });
-  langSelect.value = lang;
-}
-
-// Try auto-detect browser language (user requested "oba autodetect")
-const browserLang = (navigator.language || navigator.userLanguage || 'bs').slice(0,2);
-if (['bs','en','de'].includes(browserLang)) setLanguage(browserLang); else setLanguage('bs');
-
-langSelect.addEventListener('change', (e)=> setLanguage(e.target.value));
-
-/* ---------- Online counter 10.000 - 13.450 (updates every 5s) ---------- */
-function updateOnline() {
-  const min = 10000, max = 13450;
-  const num = Math.floor(Math.random()*(max-min+1))+min;
-  onlineCountEl.textContent = num.toLocaleString('de-DE');
-}
-updateOnline();
-setInterval(updateOnline, 5000);
-
-/* ---------- CONTACT FORM -> opens WhatsApp with prefilled text ---------- */
+/* ====== Contact form -> opens WhatsApp with filled text ====== */
+const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e)=>{
   e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+  const name = encodeURIComponent(document.getElementById('fullName').value.trim() || 'Anonim');
+  const phone = encodeURIComponent(document.getElementById('phone').value.trim() || '');
+  const email = encodeURIComponent(document.getElementById('email').value.trim() || '');
+  const msg = encodeURIComponent(document.getElementById('message').value.trim());
 
-  if (!name || !message) return alert('Molimo unesite ime i poruku.');
+  const text = `👤 Ime: ${name}%0A📞 Telefon: ${phone}%0A📧 Email: ${email}%0A%0A💬 Poruka:%0A${msg}`;
+  const waNumber = '4915755749502';
+  const url = `https://wa.me/${waNumber}?text=${text}`;
 
-  // encode and open wa link
-  const phone = '4915755749502';
-  const text = `Ime: ${name}\nEmail: ${email || 'Nije naveden'}\nPoruka: ${message}`;
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 });
 
-/* ---------- Accessibility: close menu with Escape ---------- */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
+/* clear form button */
+document.getElementById('clearForm').addEventListener('click', ()=>{
+  contactForm.reset();
+});
+
+/* ====== Trusted partners (13 default, editable) ====== */
+const defaultPartners = [
+  "ServerOne IPTV",
+  "StreamMasters",
+  "Nebula Streams",
+  "BlueWave IPTV",
+  "MegaChannels",
+  "UltraStream Pro",
+  "CityStream Hub",
+  "PrimeMedia Server",
+  "OptiStream Network",
+  "Skyline IPTV",
+  "RapidCast Services",
+  "VividChannels",
+  "GlobalStream X"
+];
+
+const partnersGrid = document.getElementById('partnersGrid');
+
+function renderPartners(list){
+  partnersGrid.innerHTML = '';
+  list.forEach((p, i)=>{
+    const card = document.createElement('div');
+    card.className = 'partner-card';
+    // show verified badge for all (pulse) — you can change logic
+    card.innerHTML = `<div class="partner-name">${escapeHtml(p)}</div><div class="verified-badge"><span class="verified-icon" aria-hidden="true"></span><span style="font-size:12px;color:var(--muted)">Verified</span></div>`;
+    partnersGrid.appendChild(card);
+  });
+}
+
+// escape utility to avoid injection if user pastes HTML
+function escapeHtml(unsafe){
+  return unsafe.replace(/[&<"'>]/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]); });
+}
+
+// initial render (either from storage or default)
+function loadPartners(){
+  const saved = localStorage.getItem('yf_partners');
+  if(saved){
+    try{
+      const arr = JSON.parse(saved);
+      if(Array.isArray(arr) && arr.length) { renderPartners(arr); return; }
+    }catch(e){}
+  }
+  renderPartners(defaultPartners);
+}
+loadPartners();
+
+// edit partners button (prompts comma-separated list)
+document.getElementById('editPartnersBtn').addEventListener('click', ()=>{
+  const current = localStorage.getItem('yf_partners') || JSON.stringify(defaultPartners);
+  let txt = prompt('Unesite partnere odvojene zarezom (max 30). Npr: Partner A, Partner B, Partner C', JSON.parse(current).join(', '));
+  if(txt === null) return;
+  const arr = txt.split(',').map(s=>s.trim()).filter(Boolean).slice(0,30);
+  if(arr.length === 0){ alert('Niste unijeli nijedan partner.'); return; }
+  localStorage.setItem('yf_partners', JSON.stringify(arr));
+  renderPartners(arr);
+});
+
+/* ====== Prevent large top blank (ensure body margin zero) ====== */
+window.addEventListener('load', ()=>{ document.body.style.marginTop = '0';});
+
+/* ====== Accessibility: close nav with ESC ====== */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && mainMenu.classList.contains('show')){
     mainMenu.classList.remove('show');
     hambBtn.classList.remove('active');
   }

@@ -3,97 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komentari - YUGO-Family TV</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9fbff;
-      color: #333;
-    }
-    header {
-      background: #004080;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-    h1 { margin: 0; }
-
-    /* Hamburger meni */
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      color: #fff;
-      background: none;
-      border: none;
-    }
-
-    nav {
-      display: none;
-      flex-direction: column;
-      background: #003366;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-bottom: 1px solid #002244;
-    }
-    nav a:hover {
-      background: #0055cc;
-    }
-    .show-menu {
-      display: flex;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    .comment {
-      background: #fff;
-      padding: 15px 20px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .comment strong {
-      color: #004080;
-    }
-
-    footer {
-      background: #004080;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
-    footer a {
-      color: #ffcc00;
-      text-decoration: none;
-    }
-  </style>
+  <title>Komentari – YUGO-Family TV</title>
+  <link rel="stylesheet" href="komentari.css">
 </head>
 
 <body>
 
-<header>
+<header class="header">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <h1>Komentari naših korisnika</h1>
+
+  <div class="header-top">
+    <div class="online-box">
+      🔵 Online: <span id="onlineCount">0</span>
+    </div>
+
+    <div class="lang-box">
+      <select id="languageSelect" onchange="changeLanguage()">
+        <option value="bs">🇧🇦 Bosanski</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+      </select>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
+  </div>
+
+  <h1 data-text="commentsTitle">Komentari naših korisnika</h1>
 </header>
 
-<nav id="mainMenu">
+<nav id="mainMenu" class="nav">
   <a href="index.html">Početna</a>
   <a href="cijene.html">Cijene i akcije</a>
   <a href="komentari.html">Komentari</a>
@@ -104,105 +42,285 @@
   <a href="placanje.html">Plaćanje</a>
 </nav>
 
-<!-- ======== FORMULAR ZA KOMENTARE ======== -->
-<div class="container">
-  <h2>Ostavi komentar</h2>
+<section class="container">
+  <h2 data-text="leaveComment">Ostavi komentar</h2>
 
-  <form id="commentForm" onsubmit="addComment(event)">
-    <input type="text" id="name" placeholder="Vaše ime" required 
-           style="width:100%; padding:10px; margin-bottom:10px;">
+  <form id="commentForm" onsubmit="addComment(event)" class="form-box">
 
-    <input type="text" id="location" placeholder="Odakle dolazite" required
-           style="width:100%; padding:10px; margin-bottom:10px;">
+    <input type="text" id="name" placeholder="Vaše ime" required>
+    <input type="text" id="location" placeholder="Odakle dolazite" required>
+    <textarea id="message" placeholder="Vaš komentar" required></textarea>
 
-    <textarea id="message" placeholder="Vaš komentar" required
-              style="width:100%; padding:10px; margin-bottom:10px; height:100px;"></textarea>
+    <button type="submit" class="btn-glow">Pošalji</button>
 
-    <button type="submit" 
-            style="background:#004080; color:#fff; padding:10px 20px; border:none; cursor:pointer; border-radius:5px;">
-      Pošalji
-    </button>
+    <div id="spamWarning" class="warning">Sačekajte još malo prije slanja...</div>
   </form>
 
-  <hr style="margin:30px 0;">
-  <div class="container">
-    <div class="comment"><strong>Amir:</strong> Odlična usluga, preporučujem svima!</div>
-    <div class="comment"><strong>Jelena:</strong> Brza instalacija i super kvalitet slike.</div>
-    <div class="comment"><strong>Marko:</strong> Sve radi bez ikakvih problema.</div>
-    <div class="comment"><strong>Ivana:</strong> Ljubazna podrška, pomogli su mi odmah.</div>
-    <div class="comment"><strong>Nemanja:</strong> Najbolja IPTV usluga koju sam koristio.</div>
-    <div class="comment"><strong>Lejla:</strong> Cijene su veoma povoljne, a kvalitet odličan.</div>
-    <div class="comment"><strong>Petar:</strong> Preporučujem, mnogo kanala i bez štekanja.</div>
-    <div class="comment"><strong>Maja:</strong> Djeca uživaju u crtićima, hvala vam!</div>
-    <div class="comment"><strong>Armin:</strong> Radi perfektno i na mobitelu i na TV-u.</div>
-    <div class="comment"><strong>Sanja:</strong> Sve pohvale za podršku i kvalitet.</div>
-    <div class="comment"><strong>Dino:</strong> Bolje od svih drugih IPTV provajdera.</div>
-    <div class="comment"><strong>Selma:</strong> Plaćanje jednostavno, sve je sigurno.</div>
-    <div class="comment"><strong>Vlado:</strong> Gledam i sportske kanale bez ikakvih prekida.</div>
-    <div class="comment"><strong>Elma:</strong> Savršeno za cijelu porodicu.</div>
-    <div class="comment"><strong>Dejan:</strong> Stabilna konekcija, nema zastajkivanja.</div>
-    <div class="comment"><strong>Ana:</strong> Brzo sam dobila pristup nakon plaćanja.</div>
-    <div class="comment"><strong>Adnan:</strong> Odlično iskustvo, nastavljam pretplatu.</div>
-    <div class="comment"><strong>Milica:</strong> Sve pohvale, imate moju preporuku.</div>
-    <div class="comment"><strong>Haris:</strong> Radi i na starijem smart TV-u bez problema.</div>
-    <div class="comment"><strong>Nina:</strong> Najbolja odluka, odlična zabava za cijelu kuću.</div>
-    <div class="comment"><strong>Filip:</strong> Super ponuda i mnogo kanala.</div>
-    <div class="comment"><strong>Kristina:</strong> Veoma sam zadovoljna, sve radi glatko.</div>
-    <div class="comment"><strong>Darko:</strong> Dobar kvalitet slike čak i na sporijem internetu.</div>
-    <div class="comment"><strong>Marina:</strong> Moja preporuka, odličan tim.</div>
-    <div class="comment"><strong>Edin:</strong> Instalacija brza i jednostavna.</div>
-    <div class="comment"><strong>Ivona:</strong> Hvala na ljubaznosti i pomoći.</div>
-    <div class="comment"><strong>Goran:</strong> Veoma povoljno i stabilno.</div>
-    <div class="comment"><strong>Sofija:</strong> Preporučujem svima, odlična usluga.</div>
-    <div class="comment"><strong>Damir:</strong> IPTV bez greške, svaka čast!</div>
-    <div class="comment"><strong>Lidija:</strong> Svi kanali rade savršeno, hvala vam.</div>
-  
+  <h2 data-text="userComments">Komentari korisnika</h2>
+
+  <div id="commentsArea" class="comments-box"></div>
+
+  <div class="trusted-section">
+    <h3>🔥 Trusted & Verified</h3>
+    <div class="trusted-logos">
+      <div class="badge">✔ Verified Service</div>
+      <div class="badge">⭐ 4.9/5 Rating</div>
+      <div class="badge">🔒 Secure Payment</div>
+      <div class="badge">⚡ Instant Activation</div>
+    </div>
   </div>
-  
-  <footer>
-  <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
+</section>
+
+<footer class="footer">
+  <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Početna</a></p>
 </footer>
 
-<!-- ======== JAVASCRIPT + LOCALSTORAGE ======== -->
-<script>
-  function toggleMenu() {
-    document.getElementById("mainMenu").classList.toggle("show-menu");
-  }
-
-  // Učitavanje komentara iz LocalStorage
-  window.onload = function() {
-    let savedComments = JSON.parse(localStorage.getItem("comments")) || [];
-    savedComments.forEach(comment => {
-      displayComment(comment.name, comment.location, comment.message);
-    });
-  };
-
-  function displayComment(name, location, message) {
-    let newComment = document.createElement("div");
-    newComment.className = "comment";
-    newComment.innerHTML = `<strong>${name} (${location}):</strong> ${message}`;
-
-    let container = document.querySelector(".container:last-of-type");
-    container.insertBefore(newComment, container.firstChild);
-  }
-
-  function addComment(event) {
-    event.preventDefault();
-
-    let name = document.getElementById("name").value;
-    let location = document.getElementById("location").value;
-    let message = document.getElementById("message").value;
-
-    displayComment(name, location, message);
-
-    let saved = JSON.parse(localStorage.getItem("comments")) || [];
-    saved.unshift({ name, location, message });
-    localStorage.setItem("comments", JSON.stringify(saved));
-
-    document.getElementById("commentForm").reset();
-  }
-</script>
-
+<script src="komentari.js"></script>
 </body>
 </html>
-  
+/* GLOBAL */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #080010;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.light {
+  background: #f2f6ff;
+  color: #222;
+}
+
+/* HEADER */
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #111;
+  position: relative;
+  border-bottom: 2px solid #6900ff;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.nav {
+  display: none;
+  flex-direction: column;
+  background: #130020;
+  padding: 10px;
+}
+
+.nav.show-menu {
+  display: flex;
+}
+
+.nav a {
+  color: #fff;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background: #6900ff;
+}
+
+/* FORM */
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  padding-top: 25px;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 2px solid #6900ff;
+  background: #0f001b;
+  color: #fff;
+}
+
+.form-box textarea {
+  height: 120px;
+}
+
+.btn-glow {
+  width: 100%;
+  padding: 12px;
+  background: #6900ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px #6900ff;
+  transition: 0.3s;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 22px #9f4dff;
+}
+
+.warning {
+  display: none;
+  color: #ff5555;
+  margin-top: 8px;
+}
+
+/* COMMENTS */
+.comments-box {
+  margin-top: 30px;
+}
+
+.comment-card {
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #12001e;
+  border-left: 4px solid #6900ff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #4b02aa;
+  animation: fadeIn 0.4s ease;
+}
+
+.comment-card strong {
+  color: #b56aff;
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* TRUSTED */
+.trusted-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #6900ff;
+  margin: 5px;
+  border-radius: 8px;
+  background: #140026;
+  box-shadow: 0 0 12px #6900ff;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 50px;
+  background: #090014;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+/* HAMBURGER */
+function toggleMenu() {
+  document.getElementById("mainMenu").classList.toggle("show-menu");
+}
+
+/* DAY/NIGHT */
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+/* ONLINE FAKE COUNTER */
+function onlineCounter() {
+  let count = Math.floor(50 + Math.random() * 120);
+  document.getElementById("onlineCount").innerText = count;
+}
+setInterval(onlineCounter, 3000);
+onlineCounter();
+
+/* MULTI LANGUAGE */
+const translations = {
+  bs: {
+    commentsTitle: "Komentari naših korisnika",
+    leaveComment: "Ostavi komentar",
+    userComments: "Komentari korisnika"
+  },
+  en: {
+    commentsTitle: "User Reviews",
+    leaveComment: "Leave a Comment",
+    userComments: "User Comments"
+  },
+  de: {
+    commentsTitle: "Benutzerkommentare",
+    leaveComment: "Kommentar hinterlassen",
+    userComments: "Kommentare"
+  }
+};
+
+function changeLanguage() {
+  let lang = document.getElementById("languageSelect").value;
+  document.querySelectorAll("[data-text]").forEach(el => {
+    let key = el.getAttribute("data-text");
+    el.innerText = translations[lang][key];
+  });
+}
+
+/* LOAD SAVED COMMENTS */
+window.onload = function () {
+  let saved = JSON.parse(localStorage.getItem("comments")) || [];
+  saved.forEach(c => displayComment(c.name, c.location, c.message));
+};
+
+/* DISPLAY COMMENT */
+function displayComment(name, location, msg) {
+  let box = document.getElementById("commentsArea");
+
+  let div = document.createElement("div");
+  div.className = "comment-card";
+  div.innerHTML = `<strong>${name} (${location})</strong><br>${msg}`;
+
+  box.prepend(div);
+}
+
+/* ANTI SPAM */
+let lastSubmit = 0;
+
+/* ADD COMMENT */
+function addComment(e) {
+  e.preventDefault();
+
+  let now = Date.now();
+  if (now - lastSubmit < 5000) {
+    document.getElementById("spamWarning").style.display = "block";
+    return;
+  }
+  document.getElementById("spamWarning").style.display = "none";
+  lastSubmit = now;
+
+  let name = document.getElementById("name").value;
+  let location = document.getElementById("location").value;
+  let message = document.getElementById("message").value;
+
+  displayComment(name, location, message);
+
+  let saved = JSON.parse(localStorage.getItem("comments")) || [];
+  saved.unshift({ name, location, message });
+  localStorage.setItem("comments", JSON.stringify(saved));
+
+  document.getElementById("commentForm").reset();
+}

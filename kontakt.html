@@ -3,107 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontakt - YUGO-Family TV</title>
+  <title>Kontakt – YUGO-Family TV</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
-    header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
-
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
-
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7ff;
+      color: #333;
+      overflow-x: hidden;
     }
 
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+    /* ===== HEADER ===== */
+    header {
+      background: #0056a6;
+      padding: 25px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
-    p { font-size:1.1em; line-height:1.8; text-align:center; }
-    .contact-info { text-align:center; margin:30px 0; }
-    .contact-info a { color:#007bff; text-decoration:none; }
-    .form-box { background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); max-width:600px; margin:0 auto; }
-    form { display:flex; flex-direction:column; }
-    input, textarea { margin:10px 0; padding:12px; border:1px solid #ccc; border-radius:6px; font-size:1em; }
-    button { background:#25d366; color:#fff; border:none; padding:12px; border-radius:6px; font-size:1.1em; cursor:pointer; }
-    button:hover { background:#1ebc57; }
-    footer { background:#0056a6; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#ffdd00; text-decoration:none; }
+    /* ===== NAV ===== */
+    nav {
+      background: #007bff;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      transition: 0.3s;
+    }
+    nav a {
+      color: #fff;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      background: #e6f0ff;
+      color: #0056a6;
+    }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      background: #007bff;
+      color: white;
+      border: none;
+      width: 100%;
+      text-align: right;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      nav { display: none; flex-direction: column; }
+      nav.show { display: flex; }
+      .menu-toggle { display: block; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(145deg, #e7f1ff, #ffffff);
+      animation: fadeHero 1.2s ease forwards;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      color: #0056a6;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeHero {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== CONTACT CARDS ===== */
+    .cards {
+      display: flex;
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      width: 320px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s;
+      animation: fadeCard 1s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    }
+
+    @keyframes fadeCard {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card h3 {
+      margin-top: 10px;
+      color: #0056a6;
+      font-size: 22px;
+    }
+
+    .card p a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ===== WHATSAPP FORMA ===== */
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      max-width: 650px;
+      margin: 40px auto;
+      animation: fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(40px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+
+    form { display: flex; flex-direction: column; }
+    input, textarea {
+      margin: 10px 0;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    button {
+      background: #25d366;
+      color: white;
+      padding: 14px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1cbb58;
+      transform: translateY(-2px);
+    }
+
+    /* ===== FIXED WHATSAPP & EMAIL BUTTONS ===== */
+    .fixed-buttons {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    .fixed-buttons a {
+      background: white;
+      color: #0056a6;
+      padding: 14px 18px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .fixed-buttons a:hover {
+      transform: scale(1.06);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0056a6;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      margin-top: 50px;
+    }
+    footer a {
+      color: #ffdd00;
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Kontaktirajte nas</h1>
-    <p>Tu smo da odgovorimo na sva vaša pitanja</p>
-  </header>
 
-  <!-- Hamburger dugme -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<header>
+  <h1>Kontaktirajte nas</h1>
+</header>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cijene.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 30</a>
-    <a href="kontakt.html">Kontakt</a>
-  </nav>
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <div class="container">
-    <h2>Naši kontakt podaci</h2>
-    <div class="contact-info">
-      <p>📧 Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
-      <p>💬 WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
-    </div>
+<nav id="mainMenu">
+  <a href="index.html">Početna</a>
+  <a href="cijene.html">Cijene i akcije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="onama.html">O nama</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="top15.html">Top 30</a>
+  <a href="kontakt.html">Kontakt</a>
+</nav>
 
-    <div class="form-box">
-      <h2>Pošaljite nam WhatsApp poruku</h2>
-      <form id="whatsappForm">
-        <input type="text" id="ime" placeholder="Vaše ime" required>
-        <input type="email" id="email" placeholder="Vaš email" required>
-        <textarea id="poruka" rows="6" placeholder="Vaša poruka" required></textarea>
-        <button type="submit">Pošalji na WhatsApp</button>
-      </form>
-    </div>
+<div class="hero">
+  <h1>Uvijek tu za vas</h1>
+  <p>Kontaktirajte nas putem emaila, WhatsAppa ili direktne poruke</p>
+</div>
+
+<!-- CONTACT CARDS -->
+<div class="cards">
+
+  <div class="card">
+    <h3>📧 Email podrška</h3>
+    <p>Pišite nam bilo kada:</p>
+    <p><a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
   </div>
 
-  <footer>
-    <p>&copy; 2025 YUGO-Family TV</p>
-    <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
-  </footer>
+  <div class="card">
+    <h3>💬 WhatsApp podrška</h3>
+    <p>Odgovor u roku od 1-5 minuta</p>
+    <p><a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
+  </div>
 
-  <script>
-    // Toggle meni
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
-    }
+  <div class="card">
+    <h3>⏱ Radno vrijeme</h3>
+    <p>Podrška dostupna 24/7</p>
+    <p>Brz odgovor u svako doba</p>
+  </div>
 
-    // WhatsApp forma
-    document.getElementById("whatsappForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      let ime = document.getElementById("ime").value;
-      let email = document.getElementById("email").value;
-      let poruka = document.getElementById("poruka").value;
+</div>
 
-      let broj = "4915755749502"; // tvoj WhatsApp broj
-      let tekst = `👤 Ime: ${ime}%0A📧 Email: ${email}%0A💬 Poruka: ${poruka}`;
-      let link = `https://wa.me/${broj}?text=${tekst}`;
-      window.open(link, "_blank");
-    });
-  </script>
+<!-- WHATSAPP FORMA -->
+<div class="form-box">
+  <h2>Pošaljite direktnu WhatsApp poruku</h2>
+  <form id="whatsappForm">
+    <input type="text" id="ime" placeholder="Vaše ime" required>
+    <input type="email" id="email" placeholder="Vaš email" required>
+    <textarea id="poruka" rows="6" placeholder="Vaša poruka" required></textarea>
+    <button type="submit">Pošalji na WhatsApp</button>
+  </form>
+</div>
+
+<!-- FIXED BUTTONS -->
+<div class="fixed-buttons">
+  <a href="mailto:nkplus22@gmail.com">📧 Email</a>
+  <a href="https://wa.me/4915755749502">💬 WhatsApp</a>
+</div>
+
+<footer>
+  <p>&copy; 2025 YUGO-Family TV</p>
+  <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById("mainMenu").classList.toggle("show");
+}
+
+document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let ime = document.getElementById("ime").value;
+  let email = document.getElementById("email").value;
+  let poruka = document.getElementById("poruka").value;
+
+  let broj = "4915755749502";
+  let tekst = `👤 Ime: ${ime}%0A📧 Email: ${email}%0A💬 Poruka: ${poruka}`;
+  let link = `https://wa.me/${broj}?text=${tekst}`;
+  window.open(link, "_blank");
+});
+</script>
+
 </body>
 </html>

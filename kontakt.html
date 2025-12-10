@@ -1,428 +1,162 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kontakt – YUGO-Family TV</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kontakt – YUGO-Family TV</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
-<!-- Meta for nicer sharing -->
-<meta name="description" content="Kontaktirajte YUGO-Family TV — WhatsApp, email, 24/7 podrška.">
-
-<style>
-  :root{
-    --bg-1:#061028;
-    --bg-2:#071f3a;
-    --accent-1:#2ab0ff;
-    --accent-2:#4a6bff;
-    --neon:#6ce0ff;
-    --neon-strong:#2bd1ff;
-    --muted: rgba(230,235,245,0.75);
-    --glass: rgba(255,255,255,0.04);
-    --radius:14px;
-    --text: #e6f7ff;
-    --card:#0b1120;
-  }
-  /* Reset + base */
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));}
-  a{color:inherit}
-
-  /* Preloader */
-  #preloader{position:fixed;inset:0;background:linear-gradient(180deg,#02040a,#061028);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .45s}
-  #preloader.hide{opacity:0;pointer-events:none}
-  .loader{width:110px;height:110px;border-radius:18px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;box-shadow:0 30px 80px rgba(42,176,255,0.06);font-size:20px}
-
-  /* scroll progress */
-  #progress{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:0;z-index:9998}
-
-  /* page wrap */
-  .wrap{max-width:1200px;margin:28px auto;padding:20px;position:relative;z-index:3}
-
-  /* header */
-  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;box-shadow:0 10px 40px rgba(42,176,255,0.08);font-size:20px}
-  .brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
-  .sub{font-size:12px;color:var(--muted)}
-
-  /* controls */
-  .controls{display:flex;align-items:center;gap:10px}
-  .online{background:linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.04));padding:8px 12px;border-radius:12px;color:var(--neon);font-weight:700}
-  .lang-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--text)}
-  .theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--text);cursor:pointer}
-
-  /* hamburger (same style as other pages) */
-  .hamburger{display:none;width:46px;height:40px;position:relative;background:transparent;border:none;cursor:pointer;z-index:1005}
-  .hamburger span{position:absolute;left:6px;width:34px;height:4px;background:var(--neon-strong);border-radius:6px;transition:transform .36s,opacity .28s,top .36s;box-shadow:0 0 10px rgba(108,224,255,0.35)}
-  .hamburger span:nth-child(1){top:8px}
-  .hamburger span:nth-child(2){top:18px}
-  .hamburger span:nth-child(3){top:28px}
-  .hamburger.active span:nth-child(1){transform:rotate(45deg);top:18px}
-  .hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0.2)}
-  .hamburger.active span:nth-child(3){transform:rotate(-45deg);top:18px}
-
-  /* nav panel */
-  nav.mainNav{display:flex;gap:10px;align-items:center}
-  nav.mainNav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
-  nav.mainNav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
-  #mobileMenu{display:none}
-
-  /* hero */
-  .hero{border-radius:18px;padding:26px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(2,6,18,0.6);display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:center}
-  .hero h2{margin:0;font-size:28px;color:var(--text)}
-  .hero p{color:var(--muted);margin-top:8px}
-
-  /* contact cards */
-  .cards{display:flex;flex-wrap:wrap;gap:18px}
-  .card{flex:1 1 280px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(2,6,18,0.6)}
-  .card h3{margin:0;color:var(--neon-strong)}
-  .card p{color:var(--muted);margin:8px 0}
-
-  /* form */
-  .form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-  .form input,.form textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);margin-bottom:10px}
-  .form button{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#001}
-
-  /* trusted badges */
-  .trusted{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .badge{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.06));border:1px solid rgba(255,255,255,0.03);color:var(--neon-strong);font-weight:700}
-
-  /* fixed buttons */
-  .fixed{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:999}
-  .fixed a{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#25d366,#1ebea5);padding:12px;border-radius:999px;color:white;text-decoration:none;box-shadow:0 12px 36px rgba(2,8,20,0.6)}
-
-  /* cookie */
-  .cookie{position:fixed;left:20px;bottom:18px;background:rgba(2,8,18,0.9);padding:12px 14px;border-radius:10px;color:var(--muted);z-index:9999;display:flex;gap:10px;align-items:center}
-  .cookie button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent-2);cursor:pointer;color:#001;font-weight:700}
-
-  /* footer */
-  footer{margin-top:30px;padding:22px;text-align:center;color:var(--muted)}
-
-  /* responsive */
-  @media(max-width:980px){.hero{grid-template-columns:1fr}.top{padding-right:10px}}
-  @media(max-width:880px){
-    nav.mainNav{display:none}
-    .hamburger{display:block}
-    #mobileMenu{display:none;position:absolute;right:12px;top:82px;width:calc(100% - 36px);max-width:360px;padding:14px;border-radius:14px;z-index:1004;background: linear-gradient(180deg, rgba(2,8,20,0.95), rgba(6,18,36,0.9));border:1px solid rgba(108,224,255,0.08);backdrop-filter:blur(8px);box-shadow:0 18px 60px rgba(2,6,18,0.6)}
-    #mobileMenu.show{display:block}
-  }
-
-  /* light mode overrides */
-  .light body, .light { }
-  .light .hero{background:#fff;border-color:rgba(0,0,0,0.04);color:#0b1220}
-  .light .card{background:#fff;color:#0b1220}
-  .light .form input,.light .form textarea{background:#fff;color:#0b1220}
-
-  /* small niceties */
-  .muted{color:var(--muted)}
-  .h3{margin:0;color:var(--neon-strong)}
-  .row{display:flex;gap:12px;align-items:center}
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="kontakt.css">
 </head>
 <body>
 
-<!-- preloader -->
-<div id="preloader"><div class="loader">YF</div></div>
-<div id="progress"></div>
+<!-- decorative background (neon) -->
+<svg class="bg-deco" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#2ab0ff"/><stop offset="1" stop-color="#4a6bff"/></linearGradient></defs>
+  <rect width="100%" height="100%" fill="url(#g1)" opacity="0.02"/>
+</svg>
 
 <div class="wrap">
 
   <!-- header -->
-  <div class="top" role="banner">
+  <header class="top" role="banner">
     <div class="brand">
       <div class="logo" aria-hidden="true">YF</div>
       <div>
         <h1>YUGO-Family TV</h1>
-        <div class="sub">Kontakt & podrška — neon stil</div>
+        <div class="sub">Kontakt — podrška i saradnja</div>
       </div>
     </div>
 
     <div class="controls">
+      <!-- ONLINE COUNTER -->
       <div class="online">🔵 <span id="onlineCount">0</span> online</div>
 
-      <select id="languageSelect" class="lang-select" aria-label="Jezik" title="Promijeni jezik">
+      <!-- LANG SELECT -->
+      <select id="langSelect" class="lang" aria-label="Promijeni jezik">
         <option value="bs">BS</option>
         <option value="en">EN</option>
         <option value="de">DE</option>
       </select>
 
-      <button class="theme-btn" id="themeBtn" aria-label="Promijeni temu">🌙</button>
+      <!-- THEME -->
+      <button id="themeBtn" class="icon-btn" aria-label="Promijeni temu">🌙</button>
 
-      <nav class="mainNav" aria-label="glavna navigacija">
-        <a href="index.html">Početna</a>
-        <a href="cijene.html">Cijene</a>
-        <a href="komentari.html">Komentari</a>
-        <a href="onama.html">O nama</a>
-        <a href="tim.html">Postani dio tima</a>
-        <a href="kontakt.html" aria-current="page">Kontakt</a>
-      </nav>
-
-      <button class="hamburger" id="hambBtn" aria-label="Otvori meni">
+      <!-- HAMBURGER (always right) -->
+      <button id="hambBtn" class="hamburger" aria-label="Otvori meni">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </div>
+  </header>
 
-  <!-- mobile menu -->
-  <div id="mobileMenu">
+  <!-- MAIN MENU (mobile slide panel) -->
+  <nav id="mainMenu" class="mainMenu" aria-label="glavna navigacija">
     <a href="index.html">Početna</a>
     <a href="cijene.html">Cijene</a>
     <a href="komentari.html">Komentari</a>
     <a href="onama.html">O nama</a>
     <a href="tim.html">Postani dio tima</a>
-    <a href="kontakt.html">Kontakt</a>
-  </div>
+    <a href="top15.html">Top 30</a>
+    <a href="kontakt.html" class="active">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+  </nav>
 
-  <!-- hero -->
-  <section class="hero" aria-label="Hero kontakt">
-    <div>
-      <h2 data-i18n="title">Uvijek tu za vas</h2>
-      <p data-i18n="lead">Kontaktirajte nas putem emaila, WhatsAppa ili direktne poruke. Podrška 24/7.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="kicker">Kontakt & Podrška</div>
+      <h2>Uvijek tu za tebe — piši, zovi ili pošalji poruku</h2>
+      <p class="muted">Odgovaramo brzo. Možeš koristiti email, WhatsApp ili ovu formu koja otvara WhatsApp s popunjenim podacima.</p>
 
-      <div style="margin-top:16px" class="trusted">
+      <div class="trusted">
         <div class="badge">✔ Verified Service</div>
-        <div class="badge">⭐ 4.9/5 Rating</div>
-        <div class="badge">🔒 Secure Payment</div>
+        <div class="badge">⭐ 4.9/5</div>
+        <div class="badge">🔒 Secure</div>
       </div>
     </div>
 
-    <aside>
-      <div class="card" aria-hidden="false">
+    <aside class="hero-right">
+      <div class="card">
         <h3>Email podrška</h3>
-        <p class="muted">Pišite nam za fakture i tehničke upite</p>
         <p><a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
       </div>
 
-      <div style="height:12px"></div>
+      <div class="card">
+        <h3>WhatsApp</h3>
+        <p><a id="waLink" href="https://wa.me/4915755749502" target="_blank">+49 157 55749502</a></p>
+      </div>
 
       <div class="card">
-        <h3>WhatsApp podrška</h3>
-        <p class="muted">Odgovor u roku od 1-5 minuta</p>
-        <p><a href="https://wa.me/4915755749502" target="_blank">+49 157 55749502</a></p>
+        <h3>Radno vrijeme</h3>
+        <p>24/7 — podrška dostupna uvijek</p>
       </div>
     </aside>
   </section>
 
-  <!-- main content -->
-  <main style="margin-top:22px">
-    <div class="cards">
-      <div class="card">
-        <h3>Brza podrška</h3>
-        <p class="muted">Naš tim odgovara brzo i stručno, 24/7.</p>
-      </div>
-
-      <div class="card">
-        <h3>Plaćanje & Aktivacija</h3>
-        <p class="muted">Instant aktivacija nakon uplate. Podržavamo razne načine plaćanja.</p>
-      </div>
-
-      <div class="card">
-        <h3>Sigurnost</h3>
-        <p class="muted">Štitimo podatke; sigurna plaćanja.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:26px" class="form">
-      <h3 data-i18n="formTitle">Pošaljite direktnu WhatsApp poruku</h3>
-
+  <!-- CONTACT FORM (opens WhatsApp) -->
+  <main class="main">
+    <section class="form-panel">
+      <h3>Pošalji poruku — otvori WhatsApp</h3>
       <form id="contactForm">
-        <input id="c_name" type="text" placeholder="Vaše ime" required>
-        <input id="c_email" type="email" placeholder="Vaš email" required>
-        <input id="c_phone" type="text" placeholder="Telefon (opcionalno)">
-        <textarea id="c_message" placeholder="Vaša poruka" required rows="6"></textarea>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button id="sendWhats" type="button">Pošalji na WhatsApp</button>
-          <button id="sendMail" type="button" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">Pošalji email</button>
+        <div class="row">
+          <input id="cf_name" type="text" placeholder="Vaše ime" required>
+          <input id="cf_email" type="email" placeholder="Vaš email" required>
         </div>
+        <input id="cf_tel" type="text" placeholder="Broj telefona (opcional)">
+        <textarea id="cf_msg" placeholder="Poruka" required></textarea>
+
+        <div class="row split">
+          <button type="button" id="sendWa" class="btn btn-primary">Pošalji poruku (WhatsApp)</button>
+          <a href="mailto:nkplus22@gmail.com" class="btn btn-ghost">Pošalji email</a>
+        </div>
+
+        <div class="help muted">Klikom na "Pošalji poruku" otvorit će se WhatsApp s popunjenim tekstom.</div>
       </form>
-    </div>
+    </section>
+
+    <aside class="info-panel">
+      <div class="info-card">
+        <h4>Brzi kontakti</h4>
+        <ul>
+          <li>📧 <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></li>
+          <li>💬 <a href="https://wa.me/4915755749502" target="_blank">WhatsApp +49 157 55749502</a></li>
+          <li>⏱ Podrška: 24/7</li>
+        </ul>
+      </div>
+
+      <div class="faq-card">
+        <h4>FAQ</h4>
+        <details>
+          <summary>Koliko brzo odgovarate?</summary>
+          <p>Obično odgovorimo u roku 1–15 minuta putem WhatsAppa ili emaila.</p>
+        </details>
+        <details>
+          <summary>Da li trebam račun?</summary>
+          <p>Nije potreban račun — dovoljna je komunikacija putem WhatsAppa.</p>
+        </details>
+      </div>
+
+      <div class="trusted-card">
+        <h4>Trusted partners</h4>
+        <div class="logos">
+          <div class="mini-badge">Partner A</div>
+          <div class="mini-badge">Partner B</div>
+          <div class="mini-badge">Partner C</div>
+        </div>
+      </div>
+    </aside>
   </main>
 
-  <footer>
-    <div style="font-size:13px">&copy; 2025 YUGO-Family TV</div>
-    <div class="muted" style="margin-top:6px">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">+49 157 55749502</a></div>
+  <footer class="footer">
+    <div>&copy; 2025 YUGO-Family TV</div>
+    <div class="muted">Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502">WhatsApp</a></div>
   </footer>
 </div>
 
-<!-- fixed buttons -->
-<div class="fixed" aria-hidden="false">
-  <a href="https://wa.me/4915755749502" target="_blank">💬 WhatsApp</a>
-  <a href="mailto:nkplus22@gmail.com">📧 Email</a>
-</div>
-
-<!-- cookie consent -->
-<div id="cookieBox" class="cookie" style="display:none">
-  <div style="max-width:320px">Koristimo kolačiće za bolji rad sajta i analitiku. Nastavkom korištenja prihvatate to.</div>
-  <div>
-    <button id="acceptCookies">Prihvati</button>
-  </div>
-</div>
-
-<script>
-/* ---------------------------
-   Preloader + progress bar
-   --------------------------- */
-document.addEventListener('DOMContentLoaded', ()=> {
-  // preloader hide after resources start
-  setTimeout(()=> {
-    document.getElementById('preloader').classList.add('hide');
-  }, 700);
-
-  // scroll progress
-  window.addEventListener('scroll', ()=> {
-    const h = document.documentElement;
-    const percent = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    document.getElementById('progress').style.width = percent + '%';
-  });
-
-  // show cookie if not accepted
-  if(!localStorage.getItem('yf_cookies_accepted')){
-    document.getElementById('cookieBox').style.display = 'flex';
-  }
-});
-
-/* ---------------------------
-   Hamburger menu (same as other pages)
-   --------------------------- */
-const hambBtn = document.getElementById('hambBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-hambBtn.addEventListener('click', ()=>{
-  hambBtn.classList.toggle('active');
-  mobileMenu.classList.toggle('show');
-});
-
-// close mobile menu on outside click
-document.addEventListener('click', (e)=>{
-  if(!mobileMenu.contains(e.target) && !hambBtn.contains(e.target)){
-    mobileMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-  }
-});
-// close on resize
-window.addEventListener('resize', ()=> {
-  if(window.innerWidth > 880){
-    mobileMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-  }
-});
-
-/* ---------------------------
-   Theme toggle (day/night)
-   --------------------------- */
-const themeBtn = document.getElementById('themeBtn');
-const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-if(localStorage.getItem('yf_theme')==='light'){ document.body.classList.remove('light'); }
-if(localStorage.getItem('yf_theme')==='dark'){ document.body.classList.add('light'); } // default neon is dark - 'light' toggles to bright
-
-themeBtn.addEventListener('click', ()=>{
-  document.body.classList.toggle('light');
-  // store simple flag (we invert because CSS uses .light for bright)
-  const isLight = document.body.classList.contains('light');
-  localStorage.setItem('yf_theme', isLight ? 'dark' : 'light');
-});
-
-/* ---------------------------
-   Language (auto-detect + manual)
-   --------------------------- */
-const translations = {
-  bs: { title: "Uvijek tu za vas", lead: "Kontaktirajte nas putem emaila, WhatsAppa ili direktne poruke. Podrška 24/7.", formTitle: "Pošaljite direktnu WhatsApp poruku" },
-  en: { title: "Always here for you", lead: "Contact us via email, WhatsApp or direct message. Support 24/7.", formTitle: "Send a direct WhatsApp message" },
-  de: { title: "Immer für Sie da", lead: "Kontaktieren Sie uns per E-Mail, WhatsApp oder Direktnachricht. Support 24/7.", formTitle: "Senden Sie eine direkte WhatsApp-Nachricht" }
-};
-
-function setLanguage(lang){
-  document.getElementById('languageSelect').value = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k = el.getAttribute('data-i18n');
-    el.innerText = translations[lang][k] || el.innerText;
-  });
-  // store
-  localStorage.setItem('yf_lang', lang);
-}
-
-// auto-detect if not set
-const storedLang = localStorage.getItem('yf_lang');
-if(storedLang) setLanguage(storedLang);
-else {
-  // try browser lang
-  const navLang = (navigator.language || navigator.userLanguage || 'bs').slice(0,2);
-  setLanguage(['bs','en','de'].includes(navLang) ? navLang : 'bs');
-}
-
-document.getElementById('languageSelect').addEventListener('change',(e)=>{
-  setLanguage(e.target.value);
-});
-
-/* ---------------------------
-   Cookie consent
-   --------------------------- */
-document.getElementById('acceptCookies').addEventListener('click', ()=>{
-  localStorage.setItem('yf_cookies_accepted', '1');
-  document.getElementById('cookieBox').style.display = 'none';
-});
-
-/* ---------------------------
-   Online fake counter 10k-13.45k
-   --------------------------- */
-function onlineCounter(){
-  const min = 10000, max = 13450;
-  const n = Math.floor(min + Math.random() * (max - min + 1));
-  document.getElementById('onlineCount').innerText = n.toLocaleString('de-DE');
-}
-setInterval(onlineCounter, 5000);
-onlineCounter();
-
-/* ---------------------------
-   Contact form actions
-   --------------------------- */
-const whatsappNumber = "4915755749502";
-
-document.getElementById('sendWhats').addEventListener('click', ()=>{
-  const name = document.getElementById('c_name').value.trim();
-  const email = document.getElementById('c_email').value.trim();
-  const phone = document.getElementById('c_phone').value.trim();
-  const msg = document.getElementById('c_message').value.trim();
-  if(!name || !email || !msg){ alert('Molimo ispuni ime, email i poruku.'); return; }
-
-  const text = encodeURIComponent(`Ime: ${name}\nEmail: ${email}\nTelefon: ${phone}\nPoruka: ${msg}`);
-  window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
-  saveContactDraft({name,email,phone,msg,via:'whatsapp'});
-});
-
-document.getElementById('sendMail').addEventListener('click', ()=>{
-  const name = document.getElementById('c_name').value.trim();
-  const email = document.getElementById('c_email').value.trim();
-  const phone = document.getElementById('c_phone').value.trim();
-  const msg = document.getElementById('c_message').value.trim();
-  if(!name || !email || !msg){ alert('Molimo ispuni ime, email i poruku.'); return; }
-
-  const subject = encodeURIComponent('Kontakt sa weba - YUGO-Family TV');
-  const body = encodeURIComponent(`Ime: ${name}\nEmail: ${email}\nTelefon: ${phone}\n\nPoruka:\n${msg}`);
-  window.location.href = `mailto:nkplus22@gmail.com?subject=${subject}&body=${body}`;
-  saveContactDraft({name,email,phone,msg,via:'email'});
-});
-
-/* small persistence for convenience */
-function saveContactDraft(obj){
-  const drafts = JSON.parse(localStorage.getItem('yf_contact_drafts')||'[]');
-  drafts.unshift({time:Date.now(),...obj});
-  localStorage.setItem('yf_contact_drafts', JSON.stringify(drafts.slice(0,10)));
-}
-
-/* ---------------------------
-   Quick accessibility: focus outlines on keyboard
-   --------------------------- */
-document.body.addEventListener('keyup',(e)=> {
-  if(e.key === 'Tab') document.documentElement.classList.add('show-focus');
-});
-
-/* ---------------------------
-   END
-   --------------------------- */
-</script>
+<!-- JS -->
+<script src="kontakt.js"></script>
 </body>
 </html>

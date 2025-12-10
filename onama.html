@@ -1,425 +1,679 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>O nama - YUGO-Family TV</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
 /* ===========================
-   GLOBAL STYLE
-=========================== */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f8ff;
-    color: #222;
-    overflow-x: hidden;
+   VARIABLES & RESET
+   =========================== */
+:root{
+  --bg-1:#061028;
+  --bg-2:#071f3a;
+  --accent-1:#2ab0ff;
+  --accent-2:#4a6bff;
+  --neon:#6ce0ff;
+  --neon-strong:#2bd1ff;
+  --muted: rgba(230,235,245,0.7);
+  --glass: rgba(255,255,255,0.06);
+  --radius:14px;
+  --glass-blur:12px;
+  --text:#e6f7ff;
+  --max-w:1200px;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --transition: 0.28s ease;
+}
+html[data-theme="light"]{
+  --bg-1:#f6f9fb;
+  --bg-2:#eef6ff;
+  --text:#071028;
+  --muted: rgba(20,30,40,0.6);
+  --neon-strong:#0a9;
+  --card-bg: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
 }
 
-.fade-in {
-    animation: fadeIn 1.2s ease forwards;
-    opacity: 0;
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  transition: background .36s, color .36s;
 }
-@keyframes fadeIn { to { opacity: 1; } }
 
-.slide-up {
-    animation: slideUp 1s ease forwards;
-    transform: translateY(40px);
-    opacity: 0;
+/* Page container */
+.wrap{max-width:var(--max-w);margin:28px auto;padding:0 20px;position:relative;z-index:3}
+
+/* ===========================
+   Sticky header / nav (same behavior as "Postani dio tima")
+   =========================== */
+.top{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:sticky;top:12px;z-index:1002;padding:10px;border-radius:12px;
+  background: var(--card-bg);
+  border:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
 }
-@keyframes slideUp {
-    to { transform: translateY(0); opacity: 1; }
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;font-size:20px}
+.brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
+.sub{font-size:12px;color:var(--muted)}
+
+.controls{display:flex;gap:8px;align-items:center;position:relative}
+
+/* Desktop nav */
+.nav{display:flex;gap:10px;align-items:center}
+.nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px}
+.nav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
+
+/* Language selector + theme button */
+.lang-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
+.theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
+
+/* Hamburger (IDENTICAL) */
+.hamburger{
+  display:none;
+  width:44px;height:36px;position:relative;background:transparent;border:none;cursor:pointer;z-index:1005;
+}
+.hamburger span{
+  position:absolute;left:6px;width:32px;height:4px;background:var(--neon-strong);border-radius:6px;
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .28s, top .36s;
+  box-shadow:0 0 10px rgba(108,224,255,0.35);
+}
+.hamburger span:nth-child(1){ top: 6px; }
+.hamburger span:nth-child(2){ top: 16px; }
+.hamburger span:nth-child(3){ top: 26px; }
+.hamburger.active span:nth-child(1){ transform: rotate(45deg); top: 16px; }
+.hamburger.active span:nth-child(2){ opacity: 0; transform: scaleX(0.2); }
+.hamburger.active span:nth-child(3){ transform: rotate(-45deg); top: 16px; }
+
+/* Mobile menu (slide-down) - IDENTICAL style & position as previous page */
+#mainMenu{ display:flex; gap:10px; align-items:center; }
+@media(max-width:880px){
+  .nav{display:none}
+  .hamburger{display:block}
+  #mainMenu{
+    display:none; position:absolute; right:12px; top:72px; width:calc(100% - 36px);
+    max-width:360px; padding:14px; border-radius:14px; z-index:1004;
+    background: linear-gradient(180deg, rgba(2,8,20,0.95), rgba(6,18,36,0.92));
+    border: 1px solid rgba(108,224,255,0.08); backdrop-filter: blur(8px);
+    box-shadow:0 18px 60px rgba(2,6,18,0.6);
+    transform-origin: top right; animation: slideDown .28s ease;
+  }
+  #mainMenu.show{display:block}
+  @keyframes slideDown{from{opacity:0; transform:translateY(-8px) scale(.995)} to{opacity:1; transform:translateY(0) scale(1)}}
+  #mainMenu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);text-decoration:none}
+  #mainMenu a:hover{background:rgba(255,255,255,0.02); color:var(--neon-strong)}
 }
 
 /* ===========================
-   BRUTALNA ANIMIRANA HERO POZADINA
-=========================== */
-.hero {
-    position: relative;
-    height: 380px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    overflow: hidden;
-    background: #001933;
+   HERO
+   =========================== */
+.hero{
+  border-radius:18px;padding:26px;
+  background: var(--card-bg);
+  border:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 20px 60px rgba(2,6,18,0.45);
+  position:relative; overflow:hidden;
+  display:grid;grid-template-columns:1fr minmax(260px,420px);gap:28px;align-items:center;
 }
+.hero::after{
+  content:"";position:absolute;inset:-20% -10% -10% -10%;
+  background:
+    radial-gradient(800px 200px at 15% 20%, rgba(42,176,255,0.06), transparent 12%),
+    radial-gradient(600px 200px at 85% 70%, rgba(74,107,255,0.06), transparent 10%),
+    linear-gradient(90deg, rgba(42,176,255,0.03), rgba(74,107,255,0.02));
+  z-index:0;pointer-events:none;animation: slowShift 12s linear infinite;
+}
+@keyframes slowShift {0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
 
-/* Sloj 1 – kratke crtice */
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to top,
-        rgba(0, 153, 255, 0.25) 0px,
-        rgba(0, 153, 255, 0.25) 2px,
-        transparent 2px,
-        transparent 22px
-    );
-    animation: rise1 7s linear infinite;
-    opacity: 0.45;
-}
-@keyframes rise1 {
-    0% { background-position-y: 100%; }
-    100% { background-position-y: 0%; }
-}
+.hero-left{position:relative;z-index:2;padding-right:12px}
+.kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.12), rgba(74,107,255,0.06));color:var(--neon);font-weight:700;margin-bottom:12px}
+.hero-left h2{margin:0;font-size:30px;line-height:1.05;color:var(--text);text-shadow:0 8px 30px rgba(2,8,20,0.55)}
+.lead{color:var(--muted);margin-top:8px;max-width:680px}
 
-/* Sloj 2 – duže crtice */
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to top,
-        rgba(0, 153, 255, 0.15) 0px,
-        rgba(0, 153, 255, 0.15) 4px,
-        transparent 4px,
-        transparent 40px
-    );
-    animation: rise2 12s linear infinite;
-    opacity: 0.35;
-}
-@keyframes rise2 {
-    0% { background-position-y: 130%; }
-    100% { background-position-y: 0%; }
-}
+/* Stats in hero */
+.stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.stat{background:transparent;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:140px}
+.stat .num{font-weight:800;color:var(--neon-strong);font-size:20px}
+.stat .lbl{font-size:13px;color:var(--muted)}
 
-/* Sloj 3 – neon glow */
-.hero-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center,
-        rgba(0, 150, 255, 0.22),
-        transparent 70%
-    );
-    animation: glowPulse 6s ease-in-out infinite;
-}
-@keyframes glowPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.55; }
-}
+/* Team card */
+.team-card{z-index:3; position:relative; display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px; padding:12px; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 18px 60px rgba(2,8,30,0.45); overflow: visible;}
+.team-frame{position:relative; width:100%; display:flex;align-items:center;justify-content:center;}
+.neon-frame{position:absolute; inset:6px; border-radius:12px; pointer-events:none; background: linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.06)); filter: blur(18px); opacity:0.95; z-index:0; transform: translateZ(0); transition: transform 0.6s ease;}
+.team-img{width:94%; border-radius:12px; display:block; object-fit:cover; filter:contrast(1.03) saturate(1.06) brightness(0.98); box-shadow: 0 20px 60px rgba(10,30,60,0.4); position:relative; z-index:1; transition: transform 0.9s cubic-bezier(.2,.9,.2,1), filter 0.6s}
+.team-card:hover .neon-frame{ transform: scale(1.03) rotate(-0.6deg) }
+.team-card:hover .team-img{ transform: translateY(-6px) scale(1.02) }
 
-/* Sloj 4 – brze duge linije */
-.hero-lines {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-}
-
-.hero-lines span {
-    position: absolute;
-    width: 2px;
-    height: 120px;
-    background: rgba(0, 200, 255, 0.55);
-    bottom: -150px;
-    filter: blur(1px);
-    animation: longLineRise linear infinite;
-}
-
-.hero-lines span:nth-child(1) { left: 5%; animation-duration: 4s; }
-.hero-lines span:nth-child(2) { left: 12%; animation-duration: 6s; }
-.hero-lines span:nth-child(3) { left: 20%; animation-duration: 5s; }
-.hero-lines span:nth-child(4) { left: 28%; animation-duration: 7s; }
-.hero-lines span:nth-child(5) { left: 36%; animation-duration: 4.5s; }
-.hero-lines span:nth-child(6) { left: 44%; animation-duration: 6.5s; }
-.hero-lines span:nth-child(7) { left: 55%; animation-duration: 5.5s; }
-.hero-lines span:nth-child(8) { left: 63%; animation-duration: 4.8s; }
-.hero-lines span:nth-child(9) { left: 71%; animation-duration: 7.2s; }
-.hero-lines span:nth-child(10) { left: 79%; animation-duration: 6.2s; }
-.hero-lines span:nth-child(11) { left: 88%; animation-duration: 5.3s; }
-.hero-lines span:nth-child(12) { left: 94%; animation-duration: 7.5s; }
-
-@keyframes longLineRise {
-    0% { transform: translateY(0) scaleY(0.7); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-600px) scaleY(1); opacity: 0; }
-}
-
-/* gradient na dnu */
-.hero-bottom-fade {
-    position: absolute;
-    left:0; right:0; bottom:0; height:130px;
-    background: linear-gradient(to top, #001933, transparent);
-    z-index: 3;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 5;
-}
-.hero-content h1 { font-size: 42px; margin: 0; }
-.hero-content p { font-size: 18px; }
+/* netflix-like title */
+.title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;z-index:4}
+.netflix-title{font-family:'Bebas Neue', sans-serif;font-size:56px;letter-spacing:4px;color:#ff2b2b;text-transform:uppercase;text-align:center;line-height:1;position:relative;text-shadow:0 6px 18px rgba(0,0,0,0.55),0 0 28px rgba(255,43,43,0.14),0 0 56px rgba(42,176,255,0.06);transform:translateZ(0)}
+.netflix-title::after{content:"";position:absolute;inset:-6px;-webkit-mask-image:linear-gradient(90deg,transparent,black,transparent);opacity:0.5;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));mix-blend-mode:screen;animation:flicker 3.2s infinite}
+@keyframes flicker{0%{opacity:0.3;transform:translateX(-10px)}10%{opacity:1;transform:translateX(0)}30%{opacity:0.4;transform:translateX(8px)}60%{opacity:0.9;transform:translateX(-4px)}100%{opacity:0.6;transform:translateX(0)}}
 
 /* ===========================
-   NAVIGACIJA
-=========================== */
-.menu-toggle {
-    display: none;
-    font-size: 30px;
-    padding: 12px 18px;
-    background: #0056a6;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align:right;
-}
+   MAIN GRID & PANELS
+   =========================== */
+.main{display:grid;grid-template-columns:1fr 380px;gap:28px;margin-top:26px}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.main{grid-template-columns:1fr}}
+.panel{background:var(--card-bg);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,18,0.45)}
+.panel-title{margin:0 0 8px 0;color:var(--neon-strong);font-size:18px}
+.muted{color:var(--muted)}
 
-nav {
-    background: #007bff;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-nav a {
-    padding: 14px 20px;
-    color: white;
-    text-decoration: none;
-}
-nav a:hover {
-    background: #e6f0ff;
-    color: #003c7a;
-}
-@media(max-width:768px){
-    nav { display:none; flex-direction:column; }
-    nav.show { display:flex; }
-    .menu-toggle { display:block; }
-}
+.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.job{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.02);transition:transform var(--transition)}
+.job:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,18,0.45)}
 
-/* ===========================
-   COUNTERS
-=========================== */
-.counter-section {
-    background: white;
-    padding: 40px 20px;
-    text-align:center;
-}
-.counter-boxes {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-.counter-box {
-    background: white;
-    padding: 25px;
-    width: 260px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    margin: 10px;
-}
-.counter-number {
-    font-size: 38px;
-    font-weight: bold;
-    color: #0054a4;
-}
+/* calculator */
+.input, .select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.range{width:100%}
+.result{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);margin-top:10px}
+.big{font-weight:800;color:var(--neon-strong);font-size:18px}
 
-/* ===========================
-   INFO BOXES
-=========================== */
-.info-section {
-    padding: 40px 0;
-    text-align:center;
-}
-.info-box-container {
-    display: flex;
-    justify-content:center;
-    flex-wrap: wrap;
-}
-.info-box {
-    width: 260px;
-    background: linear-gradient(145deg, #ffffff, #e3edff);
-    padding: 25px;
-    margin: 10px;
-    border-radius: 14px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    transition: 0.3s;
-}
-.info-box:hover {
-    transform: translateY(-5px);
-}
+/* CTA / Footer */
+.cta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
+.btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.btn-primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#001}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-/* ===========================
-   TIMELINE
-=========================== */
-.timeline {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-}
+.footer{margin-top:30px;text-align:center;color:var(--muted);padding:24px}
 
-.timeline-item {
-    background: white;
-    border-left: 4px solid #0056a6;
-    margin: 20px 0;
-    padding: 15px 20px;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+/* WhatsApp bubble */
+.wa{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1ebea5);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,20,0.6);z-index:999}
+.wa img{width:28px;height:28px}
 
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-    background: #0056a6;
-    padding: 20px;
-    color:white;
-    text-align:center;
+/* responsive tweaks */
+@media(max-width:880px){
+  .nav{display:none}
+  .hamburger{display:block}
+  .title-wrap { margin-top: 10px;}
+  .netflix-title{font-size:36px}
+  .team-img{width:100%}
+  .main{grid-template-columns:1fr}
 }
-footer a { color: #ffdd00; }
+@media(max-width:480px){.netflix-title{font-size:30px}}
 
+/* PARTCLS canvas */
+#particles{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:0.9}
+
+/* scroll progress */
+#scrollProgress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));z-index:2000;border-radius:0 0 4px 4px}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:2002}
+.modal{background:var(--card-bg);padding:20px;border-radius:12px;max-width:720px;width:100%;border:1px solid rgba(255,255,255,0.04)}
+
+/* FAQ */
+.accordion-item{border-top:1px dashed rgba(255,255,255,0.04);padding:10px 0}
+.accordion-btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:none;color:var(--text);padding:8px 0;cursor:pointer}
+.accordion-panel{max-height:0;overflow:hidden;transition:max-height .28s ease;color:var(--muted)}
+
+/* timeline */
+.timeline{position:relative;padding-left:18px}
+.timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));opacity:0.12}
+.tl-item{position:relative;margin-bottom:18px;padding-left:18px}
+.tl-item::before{content:"";position:absolute;left:-2px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--neon-strong);box-shadow:0 0 12px rgba(43,209,255,0.15)}
+
+/* small utilities */
+.hidden{display:none!important}
+.animation {opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
 </style>
 </head>
-
 <body>
 
-<!-- HERO SECTION -->
-<div class="hero">
+<!-- PARTICLES CANVAS -->
+<canvas id="particles" aria-hidden="true"></canvas>
 
-    <div class="hero-glow"></div>
+<!-- SCROLL PROGRESS -->
+<div id="scrollProgress" aria-hidden="true"></div>
 
-    <div class="hero-lines">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
+<div class="wrap">
+
+  <!-- header / nav -->
+  <div class="top" role="banner" aria-label="Glavna navigacija">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">YF</div>
+      <div>
+        <h1 id="siteTitle">YUGO-Family TV</h1>
+        <div class="sub" id="siteSub">Partner program — futuristički neon</div>
+      </div>
     </div>
 
-    <div class="hero-bottom-fade"></div>
+    <div class="controls">
+      <!-- Hamburger -->
+      <button class="hamburger" id="hambBtn" aria-label="Otvori meni" type="button">
+        <span></span><span></span><span></span>
+      </button>
 
-    <div class="hero-content">
-        <h1>O nama</h1>
-        <p>9+ godina sa Vama — stabilnost, povjerenje i konstantan napredak.</p>
+      <!-- Main nav -->
+      <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="cjenovnik.html">Cijene</a>
+        <a href="komentari.html">Komentari</a>
+        <a href="onama.html" aria-current="page">O nama</a>
+        <a href="tim.html">Postani dio tima</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+
+      <!-- Language selector -->
+      <select id="lang" class="lang-select" aria-label="Izaberite jezik">
+        <option value="bs">Bosanski</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+      </select>
+
+      <!-- Theme toggle -->
+      <button class="theme-btn" id="themeBtn" title="Tema">🌗</button>
     </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <div class="kicker">O nama</div>
+      <h2>Mi smo YUGO-Family — stvaramo i podržavamo</h2>
+      <p class="lead">Dugogodišnje iskustvo u medijima i distribuciji sadržaja. Povezujemo kreatore, kanale i publiku — nudeći pouzdane servise i partnerske programe.</p>
+
+      <div class="stats" role="status" aria-live="polite">
+        <div class="stat"><div class="num counter" data-target="16000" id="cntUsers">0</div><div class="lbl">Aktivnih korisnika</div></div>
+        <div class="stat"><div class="num counter" data-target="117" id="cntPartners">0</div><div class="lbl">Pridruženih partnera</div></div>
+        <div class="stat"><div class="num counter" data-target="9" id="cntYears">0</div><div class="lbl">Godina iskustva</div></div>
+      </div>
+
+      <div class="cta-hero" style="margin-top:12px">
+        <button id="joinTop" class="btn btn-primary">Pridruži se sada</button>
+        <button id="learn" class="btn btn-ghost">Saznaj više</button>
+        <button id="openModal" class="btn btn-ghost" style="margin-left:8px">Detalji</button>
+      </div>
+    </div>
+
+    <!-- Team card -->
+    <aside class="team-card" aria-label="Team card">
+      <div class="team-frame">
+        <div class="neon-frame" aria-hidden="true"></div>
+        <!-- zamijeni put ako želiš -->
+        <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg" loading="lazy">
+      </div>
+
+      <div class="title-wrap" aria-hidden="false">
+        <div class="netflix-title" role="heading" aria-level="1">CREATORS OF YUGOFAMILY</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- MAIN GRID -->
+  <main class="main" role="main">
+
+    <!-- LEFT -->
+    <section>
+      <div class="panel">
+        <h3 class="panel-title">Naša priča</h3>
+        <p class="muted">Počeli smo kao grupa zaljubljenika u medije i tehnologiju. Od 2016. kontinuirano gradimo infrastrukturu i razvijamo partnerstva s ciljem brze aktivacije i podrške klijentima.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h3 class="panel-title">Vrednosti</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+          <div class="panel"><strong>Pouzdanost</strong><p class="muted">Brza aktivacija i stabilna podrška.</p></div>
+          <div class="panel"><strong>Transparentnost</strong><p class="muted">Jasni uslovi saradnje i isplate.</p></div>
+          <div class="panel"><strong>Inovacija</strong><p class="muted">Uvijek tražimo bolje načine za rast partnera.</p></div>
+        </div>
+      </div>
+
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Portfolio / Projekti</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Brand Revamp</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>UI/UX Dashboard</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Campaign Strategy</strong></div></div>
+        </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Timeline</h3>
+        <div class="panel timeline" style="margin-top:12px">
+          <div class="tl-item"><strong>2016</strong><div class="muted">Početak rada i prva partnerstva.</div></div>
+          <div class="tl-item"><strong>2019</strong><div class="muted">Širenje tima i automatizacija aktivacija.</div></div>
+          <div class="tl-item"><strong>2023</strong><div class="muted">Laniranje partner programa.</div></div>
+        </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <h3 class="panel-title">FAQ</h3>
+        <div style="margin-top:8px">
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false"><span>Kako se obračunava profit?</span><span aria-hidden="true">+</span></button>
+            <div class="accordion-panel"><div class="muted">Profit = (prodajna cijena − 3€) × broj prodatih kredita. Godišnji plan = 12 kredita.</div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false"><span>Moram li imati firmu?</span><span aria-hidden="true">+</span></button>
+            <div class="accordion-panel"><div class="muted">Ne, sarađujemo i s fizičkim osobama.</div></div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- RIGHT (contact + trust + calc) -->
+    <aside class="panel calc" style="height:max-content">
+      <h3 class="panel-title">Kontakt</h3>
+      <p class="muted">Pošaljite nam poruku i odgovorićemo u najkraćem roku.</p>
+
+      <form id="contactForm" style="margin-top:10px">
+        <div style="margin-top:8px">
+          <label class="muted" for="name">Ime</label>
+          <input id="name" name="name" class="input" required>
+        </div>
+        <div style="margin-top:8px">
+          <label class="muted" for="email">Email</label>
+          <input id="email" name="email" type="email" class="input" required>
+        </div>
+        <div style="margin-top:8px">
+          <label class="muted" for="message">Poruka</label>
+          <textarea id="message" name="message" rows="4" class="input" required></textarea>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:space-between">
+          <button type="submit" class="btn btn-primary">Pošalji</button>
+          <button type="button" id="contactWhats" class="btn btn-ghost">WhatsApp</button>
+        </div>
+        <div id="contactMsg" class="muted" style="margin-top:8px;display:none"></div>
+      </form>
+
+      <div style="margin-top:16px">
+        <h4 style="margin:8px 0 6px 0;color:var(--neon-strong)">Povjerenje</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">16.000+ korisnika</div>
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">117 partnera</div>
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">9+ godina</div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <div class="footer">
+    <div style="font-size:13px">&copy; <span id="year">2025</span> YUGO-Family TV</div>
+    <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a></div>
+  </div>
+
 </div>
 
-<!-- MENU -->
-<button class="menu-toggle" onclick="toggleMenu()">☰ Meni</button>
+<!-- WhatsApp bubble -->
+<a class="wa" href="https://wa.me/4915755749502" target="_blank" aria-label="WhatsApp">
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .001 5.373.001 12c0 2.113.553 4.148 1.6 5.942L0 24l6.378-1.574A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12 0-3.213-1.253-6.209-3.48-8.52zM12 22.2c-1.64 0-3.246-.39-4.69-1.13l-.34-.17-3.79.94.95-3.69-.22-.36A9.2 9.2 0 012.8 12c0-5.08 4.12-9.2 9.2-9.2 2.46 0 4.72.95 6.43 2.69C21.05 8.82 22 10.99 22 13.2 22 18.28 17.28 22.2 12 22.2z'/></svg>" alt="WA">
+</a>
 
-<nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 30</a>
-    <a href="kontakt.html">Kontakt</a>
-</nav>
-
-<!-- COUNTERS -->
-<section class="counter-section slide-up">
-    <div class="counter-boxes">
-
-        <div class="counter-box">
-            <div class="counter-number" data-target="16000">0</div>
-            <p>Zadovoljnih korisnika</p>
-        </div>
-
-        <div class="counter-box">
-            <div class="counter-number" data-target="9">0</div>
-            <p>Godina sa Vama</p>
-        </div>
-
-        <div class="counter-box">
-            <div class="counter-number" data-target="3000">0</div>
-            <p>Aktivnih kanala</p>
-        </div>
-
-        <div class="counter-box">
-            <div class="counter-number" data-target="116000">0</div>
-            <p>Backup kanala dostupno na zahtjev</p>
-        </div>
-
+<!-- Modal -->
+<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Detalji partner programa</h3>
+    <p class="muted">Ovdje možeš dodati dodatne informacije, PDF, linkove i objašnjenja. Klikni 'Zatvori' za povratak.</p>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+      <button id="modalClose" class="btn btn-ghost">Zatvori</button>
     </div>
-</section>
-
-<!-- INFO BOXES -->
-<section class="info-section fade-in">
-    <h2>Zašto baš YUGO-Family TV?</h2>
-
-    <div class="info-box-container">
-
-        <div class="info-box">
-            <h3>Vrhunski serveri</h3>
-            <p>Najstabilnija infrastruktura bez trzanja i prekida.</p>
-        </div>
-
-        <div class="info-box">
-            <h3>Brza aktivacija</h3>
-            <p>Dodavanje novih kanala u samo par minuta.</p>
-        </div>
-
-        <div class="info-box">
-            <h3>3.000+ kanala</h3>
-            <p>Glavni programi odmah aktivni, ostali dostupni po želji.</p>
-        </div>
-
-        <div class="info-box">
-            <h3>Podrška 24/7</h3>
-            <p>Uvijek dostupni — brza i jednostavna pomoć.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- TIMELINE -->
-<div class="timeline slide-up">
-    <h2 style="text-align:center;color:#0056a6;">Naša priča</h2>
-
-    <div class="timeline-item">
-        <strong>2016 — Početak</strong>
-        <p>Startali smo sa željom da stvorimo najkvalitetniju IPTV uslugu.</p>
-    </div>
-
-    <div class="timeline-item">
-        <strong>2018 — Stabilizacija</strong>
-        <p>Uspostavili smo vrhunsku i pouzdanu mrežnu infrastrukturu.</p>
-    </div>
-
-    <div class="timeline-item">
-        <strong>2020 — Veliko širenje</strong>
-        <p>Proširenje kanala, HD/4K sadržaji i rapidni porast korisnika.</p>
-    </div>
-
-    <div class="timeline-item">
-        <strong>2023 — Premium streaming</strong>
-        <p>Savršeno optimizirani streamovi bez kašnjenja i problema.</p>
-    </div>
-
-    <div class="timeline-item">
-        <strong>2025 — Danas</strong>
-        <p>YUGO-Family TV: 16.000+ korisnika i preko 3.000 aktivnih kanala.</p>
-    </div>
+  </div>
 </div>
-
-<footer>
-    <p>&copy; 2025 YUGO-Family TV</p>
-    <p>Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></p>
-</footer>
 
 <script>
-function toggleMenu(){
-    document.getElementById("mainMenu").classList.toggle("show");
+/* =========================
+   INTERACTIVITY SCRIPT
+   ========================= */
+
+/* Helpers */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+/* ---------- Prefs: language & theme ---------- */
+(function initPrefs(){
+  // language
+  const savedLang = localStorage.getItem('yf-lang') || navigator.language.slice(0,2) || 'bs';
+  const langSelect = $('#lang');
+  if(langSelect) langSelect.value = (['bs','en','de'].includes(savedLang) ? savedLang : 'bs');
+  // theme
+  const savedTheme = localStorage.getItem('yf-theme');
+  if(savedTheme === 'light') document.documentElement.setAttribute('data-theme','light');
+  else if(savedTheme === 'dark') document.documentElement.removeAttribute('data-theme');
+  else {
+    // auto detect
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }
+})();
+
+/* ---------- THEME BUTTON ---------- */
+const themeBtn = $('#themeBtn');
+themeBtn && themeBtn.addEventListener('click', ()=>{
+  const root = document.documentElement;
+  if(root.getAttribute('data-theme') === 'light'){
+    root.removeAttribute('data-theme'); localStorage.setItem('yf-theme','dark');
+  } else {
+    root.setAttribute('data-theme','light'); localStorage.setItem('yf-theme','light');
+  }
+});
+
+/* ---------- LANGUAGE - simple translate object (can be expanded) ---------- */
+const translations = {
+  bs: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristički neon', joinTop:'Pridruži se sada', learn:'Saznaj više', details:'Detalji', contactSuccess:'Poruka poslana! Hvala.', contactErr:'Došlo je do greške. Pokušajte kasnije.' },
+  en: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristic neon', joinTop:'Join now', learn:'Learn more', details:'Details', contactSuccess:'Message sent! Thank you.', contactErr:'Something went wrong. Try again later.' },
+  de: { siteTitle:'YUGO-Family TV', siteSub:'Partnerprogramm — futuristisches Neon', joinTop:'Jetzt beitreten', learn:'Mehr erfahren', details:'Details', contactSuccess:'Nachricht gesendet! Danke.', contactErr:'Fehler. Versuche es später nochmal.' }
+};
+function applyTranslations(lang){
+  const dict = translations[lang] || translations.bs;
+  $('#siteTitle').textContent = dict.siteTitle;
+  $('#siteSub').textContent = dict.siteSub;
+  $('#joinTop').textContent = dict.joinTop;
+  $('#learn').textContent = dict.learn;
+  $('#openModal') && ($('#openModal').textContent = dict.details);
+  localStorage.setItem('yf-lang', lang);
 }
+$('#lang') && $('#lang').addEventListener('change', (e)=> applyTranslations(e.target.value));
+applyTranslations(localStorage.getItem('yf-lang') || (navigator.language.slice(0,2) || 'bs') );
 
-/* COUNTER ANIMATION */
-const counters = document.querySelectorAll('.counter-number');
+/* ---------- HAMBURGER (slide-down identical behavior) ---------- */
+const hambBtn = $('#hambBtn');
+const menu = $('#mainMenu');
+function outsideClick(e){
+  if(!menu.contains(e.target) && !hambBtn.contains(e.target)){
+    menu.classList.remove('show');
+    hambBtn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+}
+function toggleMenu(){
+  menu.classList.toggle('show');
+  hambBtn.classList.toggle('active');
+  if(menu.classList.contains('show')){
+    setTimeout(()=>document.addEventListener('click', outsideClick),50);
+  } else {
+    document.removeEventListener('click', outsideClick);
+  }
+}
+hambBtn && hambBtn.addEventListener('click', toggleMenu);
+window.addEventListener('resize', ()=>{ if(window.innerWidth > 880){ menu.classList.remove('show'); hambBtn.classList.remove('active'); document.removeEventListener('click', outsideClick); } });
+$$('#mainMenu a').forEach(a=> a.addEventListener('click', ()=> { if(window.innerWidth <= 880){ menu.classList.remove('show'); hambBtn.classList.remove('active'); } }));
 
-counters.forEach(counter => {
-    const target = +counter.dataset.target;
-    let count = 0;
+/* ---------- SCROLL PROGRESS ---------- */
+const progress = $('#scrollProgress');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop || document.body.scrollTop);
+  const height = (h.scrollHeight - h.clientHeight);
+  const pct = (height>0) ? (scrolled / height * 100) : 0;
+  progress.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
 
-    const updateCount = () => {
-        let speed = target / 80;
-        if(count < target){
-            count += speed;
-            counter.textContent = Math.floor(count);
-            requestAnimationFrame(updateCount);
-        } else {
-            counter.textContent = target.toLocaleString();
-        }
-    };
-    updateCount();
+/* ---------- PARTICLES (lightweight) ---------- */
+(function particles(){
+  const canvas = document.getElementById('particles');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = window.innerWidth;
+  let H = canvas.height = window.innerHeight;
+  const particles = [];
+  const N = Math.max(80, Math.floor(W*H/90000));
+  for(let i=0;i<N;i++){
+    particles.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*1.8+0.6,
+      vx: (Math.random()-0.5)*0.3,
+      vy: (Math.random()-0.5)*0.3
+    });
+  }
+  window.addEventListener('resize', ()=>{ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < -10) p.x = W+10; if(p.x > W+10) p.x = -10;
+      if(p.y < -10) p.y = H+10; if(p.y > H+10) p.y = -10;
+      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+      g.addColorStop(0, 'rgba(43,209,255,0.16)');
+      g.addColorStop(0.2,'rgba(43,209,255,0.06)');
+      g.addColorStop(1,'rgba(43,209,255,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------- REVEAL (IntersectionObserver) ---------- */
+(function reveal(){
+  const items = document.querySelectorAll('.panel, .job, .team-card, .netflix-title, .panel-title');
+  const ro = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'translateY(0)';
+        ro.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12});
+  items.forEach(i=>{ i.style.opacity = 0; i.style.transform = 'translateY(12px)'; ro.observe(i); });
+})();
+
+/* ---------- COUNTERS + FAKE LIVE ---------- */
+(function counters(){
+  const counters = document.querySelectorAll('.counter');
+  const heroEl = document.querySelector('.hero');
+  if(!heroEl) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        counters.forEach(c=>{
+          const target = +c.dataset.target;
+          animateCounter(c, target, 1100);
+        });
+        io.disconnect();
+        // start fake live loop
+        fakeLive();
+      }
+    });
+  },{threshold:0.25});
+  io.observe(heroEl);
+
+  function animateCounter(el,to,duration=1000){
+    const start = performance.now();
+    const from = Number(String(el.textContent).replace(/[^0-9]+/g,'') || 0);
+    function step(now){
+      const t = Math.min((now-start)/duration,1);
+      const v = Math.floor(from + (to-from)*t);
+      el.textContent = (to>=1000) ? (v.toLocaleString() + (t===1?'+':'')) : (v + (t===1?'+':'')) ;
+      if(t<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function fakeLive(){
+    const usersEl = $('#cntUsers'), partnersEl = $('#cntPartners');
+    if(!usersEl || !partnersEl) return;
+    let u = parseInt(usersEl.dataset.target), p = parseInt(partnersEl.dataset.target);
+    setInterval(()=>{
+      const du = Math.floor(Math.random()*60 - 6); // -6..53
+      const dp = Math.floor(Math.random()*3); // 0..2
+      u = Math.max(1200, u + du);
+      p = Math.max(50, p + dp);
+      animateCounter(usersEl, u);
+      animateCounter(partnersEl, p);
+    }, 4000 + Math.random()*6000);
+  }
+})();
+
+/* ---------- Team image parallax (desktop) ---------- */
+(function teamParallax(){
+  const img = $('#teamImg'), neon = document.querySelector('.neon-frame'), frame = document.querySelector('.team-card');
+  if(!img || !neon || !frame) return;
+  frame.addEventListener('mousemove', (ev)=>{
+    const r = frame.getBoundingClientRect();
+    const mx = (ev.clientX - r.left - r.width/2)/r.width;
+    const my = (ev.clientY - r.top - r.height/2)/r.height;
+    img.style.transform = `translate(${mx*8}px,${-my*8}px) scale(1.02)`;
+    neon.style.transform = `translate(${mx*6}px,${-my*6}px) scale(1.01)`;
+  });
+  frame.addEventListener('mouseleave', ()=>{ img.style.transform=''; neon.style.transform=''; });
+})();
+
+/* ---------- Modal ---------- */
+const modalBackdrop = $('#modalBackdrop');
+$('#openModal') && $('#openModal').addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; });
+$('#modalClose') && $('#modalClose').addEventListener('click', ()=>{ modalBackdrop.style.display='none'; });
+modalBackdrop && modalBackdrop.addEventListener('click',(e)=>{ if(e.target===modalBackdrop) modalBackdrop.style.display='none'; });
+
+/* ---------- FAQ accordion ---------- */
+$$('.accordion-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const panel = btn.nextElementSibling;
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if(open) panel.style.maxHeight = null; else panel.style.maxHeight = panel.scrollHeight + 'px';
+  });
+});
+
+/* ---------- Contact form (client-side only) ---------- */
+const contactForm = $('#contactForm');
+const contactMsg = $('#contactMsg');
+contactForm && contactForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = $('#name').value.trim();
+  const email = $('#email').value.trim();
+  const msg = $('#message').value.trim();
+  if(!name || !email || !msg){ contactMsg.style.display='block'; contactMsg.textContent = 'Popunite sva polja.'; return; }
+  // simple email validation
+  if(!/^\S+@\S+\.\S+$/.test(email)){ contactMsg.style.display='block'; contactMsg.textContent = 'Nevažeći email.'; return; }
+  contactMsg.style.display='block'; contactMsg.textContent = 'Slanje...';
+  // fake send (since no backend) - simulate delay
+  setTimeout(()=>{ contactMsg.textContent = 'Poruka poslana! Hvala.'; contactForm.reset(); }, 900);
+});
+$('#contactWhats') && $('#contactWhats').addEventListener('click', ()=>{
+  const text = encodeURIComponent('Zdravo! Zainteresovan sam za saradnju. Molim vas kontaktirajte me.');
+  window.open('https://wa.me/4915755749502?text=' + text, '_blank');
+});
+
+/* ---------- Year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- Accessibility: ESC to close menus/modals ---------- */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    menu.classList.remove('show'); hambBtn.classList.remove('active');
+    modalBackdrop && (modalBackdrop.style.display='none');
+  }
 });
 </script>
 

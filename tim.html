@@ -21,24 +21,46 @@
     --radius:14px;
     --glass-blur: 12px;
     --text: #e6f7ff;
+    --card: rgba(255,255,255,0.03);
+    --max-w:1200px;
+    --transition: 0.28s ease;
+    --safe-mobile-break:880px;
   }
+  /* Dark/Light helper (optional) */
+  :root[data-theme="light"]{
+    --bg-1:#f6f9fb;
+    --bg-2:#eef6ff;
+    --text:#001;
+    --muted: rgba(20,30,40,0.7);
+    --card: rgba(0,0,0,0.04);
+    --neon-strong:#0a9;
+  }
+
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background: linear-gradient(180deg,var(--bg-1),var(--bg-2));font-family:Inter,system-ui,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+  html,body{height:100%;margin:0;background: linear-gradient(180deg,var(--bg-1),var(--bg-2));font-family:Inter,system-ui,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 
   /* Page container */
-  .wrap{max-width:1200px;margin:28px auto;padding:0 20px;position:relative;z-index:3}
+  .wrap{max-width:var(--max-w);margin:28px auto;padding:0 20px;position:relative;z-index:3}
 
-  /* Header / nav */
+  /* Sticky header */
   .top{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:relative;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:sticky;top:12px;z-index:1002;padding:10px;border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(8px);
   }
   .brand{display:flex;gap:12px;align-items:center}
   .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#002;box-shadow:0 10px 40px rgba(42,176,255,0.08);font-size:20px}
   .brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
+  .sub{font-size:12px;color:var(--muted)}
+
+  /* Nav */
   .nav{display:flex;gap:10px;align-items:center}
-  .nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px}
+  .nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px;display:inline-block}
   .nav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
   .controls{display:flex;gap:8px;align-items:center;position:relative}
+
+  /* Toggle theme button small */
+  .theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
 
   /* Hamburger (desktop hidden) */
   .hamburger {
@@ -66,7 +88,7 @@
     backdrop-filter: blur(var(--glass-blur));
     box-shadow: 0 20px 60px rgba(2,6,18,0.6);
     position:relative; overflow:hidden;
-    display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:center;
+    display:grid;grid-template-columns: 1fr minmax(260px,420px);gap:28px;align-items:center;
   }
 
   /* Animated background lines */
@@ -84,7 +106,7 @@
   .hero-left{position:relative;z-index:2;padding-right:12px}
   .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.12), rgba(74,107,255,0.06));color:var(--neon);font-weight:700;margin-bottom:12px}
   .hero-left h2{margin:0;font-size:30px;line-height:1.05;color:var(--text);text-shadow:0 8px 30px rgba(2,8,20,0.55)}
-  .hero-left p{color:var(--muted);margin-top:8px;max-width:680px}
+  .lead{color:var(--muted);margin-top:8px;max-width:680px}
 
   /* Stats */
   .stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
@@ -127,7 +149,7 @@
   /* Cinematic / 3D netflix-like title */
   .title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;z-index:4}
   .netflix-title{
-    font-family:'Bebas Neue', sans-serif;font-size:62px;letter-spacing:4px;color:#ff2b2b;
+    font-family:'Bebas Neue', sans-serif;font-size:48px;letter-spacing:4px;color:#ff2b2b;
     text-transform:uppercase;text-align:center;line-height:1;position:relative;
     text-shadow:
       0 6px 18px rgba(0,0,0,0.55),
@@ -149,8 +171,10 @@
   @media(max-width:980px){.hero{grid-template-columns:1fr}.main{grid-template-columns:1fr}}
 
   .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,18,0.6)}
+  .panel-title{margin:0 0 8px 0;color:var(--neon-strong);font-size:18px}
+  .muted{color:var(--muted)}
   .jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .job{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.02);transition:transform .25s ease}
+  .job{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.02);transition:transform var(--transition)}
   .job:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,18,0.6)}
 
   /* Right column calc */
@@ -207,12 +231,14 @@
     .netflix-title{font-size:30px}
   }
 
+  /* subtle helper */
+  .hidden{display:none!important}
 </style>
 </head>
 <body>
 
 <!-- subtle decorative gradient overlay -->
-<svg style="position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<svg style="position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <linearGradient id="g1" x1="0" x2="1">
       <stop offset="0" stop-color="#2ab0ff"/><stop offset="1" stop-color="#4a6bff"/>
@@ -229,13 +255,13 @@
       <div class="logo" aria-hidden="true">YF</div>
       <div>
         <h1>YUGO-Family TV</h1>
-        <div style="font-size:12px;color:var(--muted)">Partner program — futuristički neon</div>
+        <div class="sub">Partner program — futuristički neon</div>
       </div>
     </div>
 
-    <div class="controls">
+    <div class="controls" role="navigation" aria-label="glavna navigacija">
       <!-- HAMBURGER (C: transform to X) -->
-      <button class="hamburger" id="hambBtn" onclick="toggleMenu()" aria-label="Otvori meni">
+      <button class="hamburger" id="hambBtn" aria-label="Otvori meni" type="button">
         <span></span><span></span><span></span>
       </button>
 
@@ -248,6 +274,8 @@
         <a href="tim.html" aria-current="page">Postani dio tima</a>
         <a href="kontakt.html">Kontakt</a>
       </nav>
+
+      <button class="theme-btn" id="themeBtn" title="Promijeni temu (tamno/svijetlo)">🌗</button>
     </div>
   </div>
 
@@ -256,12 +284,17 @@
     <div class="hero-left">
       <div class="kicker">Partner program</div>
       <h2>Započni odmah — prodaj kredite, zaradi stabilno</h2>
-      <p>1 kredit = 1 mjesec; 12 kredita = 1 godina. Kupuj kredite po <strong>3 €</strong>, prodaj ih po <strong>9–12 €</strong>.</p>
+      <p class="lead">1 kredit = 1 mjesec; 12 kredita = 1 godina. Kupuj kredite po <strong>3 €</strong>, prodaj ih po <strong>9–12 €</strong>.</p>
 
       <div class="stats" role="status" aria-live="polite">
-        <div class="stat"><div class="num counter" data-target="16000">0</div><div class="lbl">Aktivnih korisnika</div></div>
+        <div class="stat" aria-hidden="false"><div class="num counter" data-target="16000">0</div><div class="lbl">Aktivnih korisnika</div></div>
         <div class="stat"><div class="num counter" data-target="117">0</div><div class="lbl">Pridruženih partnera</div></div>
         <div class="stat"><div class="num counter" data-target="9">0</div><div class="lbl">Godina iskustva</div></div>
+      </div>
+
+      <div class="cta-hero" style="margin-top:12px">
+        <button id="joinTop" class="btn btn-primary">Pridruži se sada</button>
+        <button id="learn" class="btn btn-ghost">Saznaj više</button>
       </div>
     </div>
 
@@ -269,8 +302,8 @@
     <aside class="team-card" aria-label="Team card">
       <div class="team-frame">
         <div class="neon-frame" aria-hidden="true"></div>
-        <!-- URADI: stavi yfteam.png u isti folder -->
-        <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg">
+        <!-- URADI: stavi yfteam.png u isti folder ili promijeni putanju -->
+        <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg" loading="lazy">
       </div>
 
       <div class="title-wrap" aria-hidden="false">
@@ -285,36 +318,36 @@
     <!-- LEFT -->
     <section>
       <div class="panel">
-        <h3 style="margin:0 0 8px 0;color:var(--neon-strong)">Otvorene pozicije</h3>
-        <p style="color:var(--muted);margin-top:6px">Tražimo saradnike za online prodaju, tehničku podršku i administraciju — fleksibilno radno vrijeme, provizije i bonusi.</p>
+        <h3 class="panel-title">Otvorene pozicije</h3>
+        <p class="muted">Tražimo saradnike za online prodaju, tehničku podršku i administraciju — fleksibilno radno vrijeme, provizije i bonusi.</p>
 
         <div class="jobs" style="margin-top:12px">
-          <div class="job"><h4>Prodajni saradnik (remote)</h4><p style="color:var(--muted)">Prodaja kredita, komunikacija s klijentima i evidencija narudžbi.</p></div>
-          <div class="job"><h4>Tehnička podrška</h4><p style="color:var(--muted)">Instalacija i pomoć korisnicima; obuka osigurana.</p></div>
-          <div class="job"><h4>Menadžer partnera</h4><p style="color:var(--muted)">Upravljanje partner programom i onboarding.</p></div>
-          <div class="job"><h4>Marketing & Growth</h4><p style="color:var(--muted)">Promocija partner programa i praćenje performansi.</p></div>
+          <div class="job"><h4>Prodajni saradnik (remote)</h4><p class="muted">Prodaja kredita, komunikacija s klijentima i evidencija narudžbi.</p></div>
+          <div class="job"><h4>Tehnička podrška</h4><p class="muted">Instalacija i pomoć korisnicima; obuka osigurana.</p></div>
+          <div class="job"><h4>Menadžer partnera</h4><p class="muted">Upravljanje partner programom i onboarding.</p></div>
+          <div class="job"><h4>Marketing & Growth</h4><p class="muted">Promocija partner programa i praćenje performansi.</p></div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon-strong);margin-bottom:8px">Kako funkcioniše saradnja — 4 koraka</h3>
+        <h3 class="panel-title">Kako funkcioniše saradnja — 4 koraka</h3>
         <div style="display:grid;gap:12px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">1</div>
-            <div><strong>Kontakt i onboarding</strong><div style="color:var(--muted)">Pošaljemo instrukcije i pristup.</div></div></div>
+          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">1</div>
+            <div><strong>Kontakt i onboarding</strong><div class="muted">Pošaljemo instrukcije i pristup.</div></div></div>
 
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">2</div>
-            <div><strong>Nabavka kredita</strong><div style="color:var(--muted)">Kupuješ kredite po <strong>3 €</strong> — odmah dostupni.</div></div></div>
+          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">2</div>
+            <div><strong>Nabavka kredita</strong><div class="muted">Kupuješ kredite po <strong>3 €</strong> — odmah dostupni.</div></div></div>
 
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">3</div>
-            <div><strong>Preprodaja</strong><div style="color:var(--muted)">Prodaješ kredite klijentima po cijeni koju postaviš (9–12€).</div></div></div>
+          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">3</div>
+            <div><strong>Preprodaja</strong><div class="muted">Prodaješ kredite klijentima po cijeni koju postaviš (9–12€).</div></div></div>
 
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">4</div>
-            <div><strong>Isplata & podrška</strong><div style="color:var(--muted)">Pratiš zaradu i dobijaš podršku 0–24.</div></div></div>
+          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">4</div>
+            <div><strong>Isplata & podrška</strong><div class="muted">Pratiš zaradu i dobijaš podršku 0–24.</div></div></div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon-strong)">Zašto saradnici biraju nas?</h3>
+        <h3 class="panel-title">Zašto saradnici biraju nas?</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
           <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">3.000+</div><div class="lbl">Aktivnih kanala</div></div>
           <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">116.000+</div><div class="lbl">Dostupnih na zahtjev</div></div>
@@ -323,49 +356,86 @@
         </div>
       </div>
 
-      <div class="panel" style="margin-top:16px">
-        <h3 style="color:var(--neon-strong)">FAQ</h3>
-        <div style="margin-top:8px">
-          <div style="padding:10px 0;border-top:1px dashed rgba(255,255,255,0.03)"><strong>Pitanje:</strong> Kako se obračunava profit?<div style="color:var(--muted);margin-top:6px">Profit = (prodajna cijena − 3€) × broj prodatih kredita. Godišnji plan = 12 kredita.</div></div>
-          <div style="padding:10px 0;border-top:1px dashed rgba(255,255,255,0.03)"><strong>Pitanje:</strong> Moram li imati firmu?<div style="color:var(--muted);margin-top:6px">Ne, sarađujemo i s fizičkim osobama.</div></div>
+      <!-- Extra sections (Why / Portfolio / Testimonials / Stats) -->
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Why choose us?</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div class="panel" style="padding:14px"><h4>Innovative approach</h4><p class="muted">Pushing boundaries & creating fresh solutions.</p></div>
+          <div class="panel" style="padding:14px"><h4>Professional execution</h4><p class="muted">Precise, high-quality output with full support.</p></div>
+          <div class="panel" style="padding:14px"><h4>Proven results</h4><p class="muted">Helping partners grow and retain customers.</p></div>
         </div>
-      </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Featured projects</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Brand Revamp</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>UI/UX Dashboard</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Campaign Strategy</strong></div></div>
+        </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Šta klijenti kažu</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div class="panel"><p>“Studio 611 transformed our process — fast, reliable and creative.”</p><span class="muted">— Sara M.</span></div>
+          <div class="panel"><p>“Great team, great results. Sales increased after launch.”</p><span class="muted">— Marko P.</span></div>
+          <div class="panel"><p>“Excellent cooperation and support 24/7.”</p><span class="muted">— Lana K.</span></div>
+        </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+          <div style="flex:1;min-width:180px">
+            <h3 class="panel-title">Brojke</h3>
+            <p class="muted">Iskustvo i kredibilitet</p>
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">6+</div><div class="muted">Godina iskustva</div></div>
+            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">120+</div><div class="muted">Projekata</div></div>
+            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">80+</div><div class="muted">Zadovoljnih klijenata</div></div>
+          </div>
+        </div>
+      </section>
+
     </section>
 
     <!-- RIGHT (calculator + trust) -->
     <aside class="panel calc" style="height:max-content">
-      <h3 style="color:var(--neon-strong);margin-top:0">Calculator zarade — paralelno</h3>
-      <p style="color:var(--muted)">Unesi koliko novih korisnika dovedeš mjesečno i izaberi prodajnu cijenu (9–12€).</p>
+      <h3 class="panel-title">Calculator zarade — paralelno</h3>
+      <p class="muted">Unesi koliko novih korisnika dovedeš mjesečno i izaberi prodajnu cijenu (9–12€).</p>
 
       <div style="margin-top:10px">
         <label style="font-size:13px;color:var(--muted)">Novi korisnici / mjesečno</label>
-        <input id="users" type="number" min="0" value="10" class="input">
+        <input id="users" type="number" min="0" value="10" class="input" aria-label="Novi korisnici mjesečno">
       </div>
 
       <div style="margin-top:10px">
         <label style="font-size:13px;color:var(--muted)">Prodajna cijena / kredit: <span id="sellLabel" style="color:var(--neon-strong)">9.00 €</span></label>
-        <input id="sell" type="range" min="9" max="12" step="0.1" value="9" class="range">
+        <input id="sell" type="range" min="9" max="12" step="0.1" value="9" class="range" aria-label="Prodajna cijena po kreditu">
       </div>
 
-      <div style="margin-top:12px" class="result">
-        <div style="display:flex;gap:8px;align-items:center">
-          <div style="flex:1"><div class="lbl">Bruto (mjesečno)</div><div id="revM" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl">Trošak (mjesečno)</div><div id="costM" class="big">0 €</div></div>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <div style="flex:1"><div class="lbl">Profit (mjesečno)</div><div id="profitM" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl">Profit / korisnik</div><div id="ppkM" class="big">0 €</div></div>
+      <div style="margin-top:12px" class="result" aria-live="polite">
+        <div class="row">
+          <div style="flex:1"><div class="lbl muted">Bruto (mjesečno)</div><div id="revM" class="big">0 €</div></div>
+          <div style="flex:1"><div class="lbl muted">Trošak (mjesečno)</div><div id="costM" class="big">0 €</div></div>
         </div>
 
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
-
-        <div style="display:flex;gap:8px;align-items:center">
-          <div style="flex:1"><div class="lbl">Bruto (mjesečno eq.)</div><div id="revY" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl">Trošak (mjesečno eq.)</div><div id="costY" class="big">0 €</div></div>
+        <div class="row" style="margin-top:10px">
+          <div style="flex:1"><div class="lbl muted">Profit (mjesečno)</div><div id="profitM" class="big">0 €</div></div>
+          <div style="flex:1"><div class="lbl muted">Profit / korisnik</div><div id="ppkM" class="big">0 €</div></div>
         </div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <div style="flex:1"><div class="lbl">Profit (mjesečno eq.)</div><div id="profitY" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl">Profit / korisnik (godišnje)</div><div id="ppkY" class="big">0 €</div></div>
+
+        <hr class="sep">
+
+        <div class="row" style="margin-top:10px">
+          <div style="flex:1"><div class="lbl muted">Bruto (godišnje)</div><div id="revY" class="big">0 €</div></div>
+          <div style="flex:1"><div class="lbl muted">Trošak (godišnje)</div><div id="costY" class="big">0 €</div></div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <div style="flex:1"><div class="lbl muted">Profit (godišnje)</div><div id="profitY" class="big">0 €</div></div>
+          <div style="flex:1"><div class="lbl muted">Profit / korisnik (godišnje)</div><div id="ppkY" class="big">0 €</div></div>
         </div>
 
         <div style="margin-top:12px;display:flex;gap:8px;justify-content:space-between">
@@ -386,7 +456,7 @@
 
   </main>
 
-  <div class="footer">
+  <div class="footer" role="contentinfo">
     <div style="font-size:13px">&copy; 2025 YUGO-Family TV</div>
     <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a></div>
   </div>
@@ -399,51 +469,103 @@
 </a>
 
 <script>
-/* ========== Counters ========== */
-const counters = document.querySelectorAll('.counter');
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      counters.forEach(c=>{
-        const target = +c.dataset.target;
-        const duration = 1100;
-        const start = performance.now();
-        function step(now){
-          const t = Math.min((now - start)/duration,1);
-          const val = Math.floor(target * t);
-          c.textContent = (target >= 1000) ? (val.toLocaleString() + (t===1?'+':'')) : (val + (t===1?'+':''));
-          if(t < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-      io.disconnect();
-    }
-  });
-},{threshold:0.25});
-const heroEl = document.querySelector('.hero');
-if(heroEl) io.observe(heroEl);
+/* =========================
+   Javascript: interactivity
+   ========================= */
 
-/* ========== Team image subtle vignette / parallax ========== */
+/* DOM refs */
+const counters = document.querySelectorAll('.counter');
+const heroEl = document.querySelector('.hero');
 const teamImg = document.getElementById('teamImg');
 const neonFrame = document.querySelector('.neon-frame');
-if(teamImg && neonFrame){
-  teamImg.style.filter = 'contrast(1.04) saturate(1.06) brightness(0.99)';
-  // parallax on mouse move (desktop)
-  const frame = document.querySelector('.team-card');
-  frame.addEventListener('mousemove', (ev)=>{
-    const r = frame.getBoundingClientRect();
-    const mx = (ev.clientX - r.left - r.width/2)/r.width;
-    const my = (ev.clientY - r.top - r.height/2)/r.height;
-    teamImg.style.transform = `translate(${mx*8}px,${my*8*-1}px) scale(1.02)`;
-    neonFrame.style.transform = `translate(${mx*6}px,${my*6*-1}px) scale(1.01)`;
+const hambBtn = document.getElementById('hambBtn');
+const mainMenu = document.getElementById('mainMenu');
+const themeBtn = document.getElementById('themeBtn');
+
+/* ===== THEME toggle (light/dark) ===== */
+(function(){
+  const root = document.documentElement;
+  const saved = localStorage.getItem('yf-theme');
+  if(saved) root.setAttribute('data-theme', saved);
+  themeBtn && themeBtn.addEventListener('click', ()=>{
+    const current = root.getAttribute('data-theme');
+    const next = current === 'light' ? '' : 'light';
+    if(next) root.setAttribute('data-theme', next); else root.removeAttribute('data-theme');
+    localStorage.setItem('yf-theme', next);
   });
-  frame.addEventListener('mouseleave', ()=>{
-    teamImg.style.transform = '';
-    neonFrame.style.transform = '';
-  });
+})();
+
+/* ===== MENU (hamburger) ===== */
+function outsideClick(e){
+  if(!mainMenu.contains(e.target) && !hambBtn.contains(e.target)){
+    mainMenu.classList.remove('show');
+    hambBtn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+}
+function toggleMenu(){
+  mainMenu.classList.toggle('show');
+  hambBtn.classList.toggle('active');
+  if(mainMenu.classList.contains('show')){
+    setTimeout(()=>document.addEventListener('click', outsideClick), 50);
+  } else {
+    document.removeEventListener('click', outsideClick);
+  }
+}
+hambBtn && hambBtn.addEventListener('click', toggleMenu);
+window.addEventListener('resize', ()=>{
+  if(window.innerWidth > 880){
+    mainMenu.classList.remove('show');
+    hambBtn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+});
+
+/* ===== Counters (IntersectionObserver) ===== */
+if(counters.length){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        counters.forEach(c=>{
+          const target = +c.dataset.target;
+          const duration = 1100;
+          const start = performance.now();
+          function step(now){
+            const t = Math.min((now-start)/duration,1);
+            const val = Math.floor(target * t);
+            c.textContent = (target >= 1000) ? (val.toLocaleString() + (t===1?'+':'')) : (val + (t===1?'+':''));
+            if(t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+        io.disconnect();
+      }
+    });
+  },{threshold:0.25});
+  heroEl && io.observe(heroEl);
 }
 
-/* ========== Calculator logic ========== */
+/* ===== Team image parallax ===== */
+if(teamImg && neonFrame){
+  // subtle initial filter
+  teamImg.style.filter = 'contrast(1.04) saturate(1.06) brightness(0.99)';
+  const frame = document.querySelector('.team-card');
+  if(frame){
+    frame.addEventListener('mousemove', (ev)=>{
+      const r = frame.getBoundingClientRect();
+      const mx = (ev.clientX - r.left - r.width/2)/r.width;
+      const my = (ev.clientY - r.top - r.height/2)/r.height;
+      teamImg.style.transform = `translate(${mx*8}px,${-my*8}px) scale(1.02)`;
+      neonFrame.style.transform = `translate(${mx*6}px,${-my*6}px) scale(1.01)`;
+    });
+    frame.addEventListener('mouseleave', ()=>{
+      teamImg.style.transform = '';
+      neonFrame.style.transform = '';
+    });
+  }
+}
+
+/* ===== Calculator logic ===== */
 const usersEl = document.getElementById('users');
 const sellEl = document.getElementById('sell');
 const sellLabel = document.getElementById('sellLabel');
@@ -463,6 +585,7 @@ const BUY = 3.0;
 function fmtMoney(v){ return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
 
 function animateVal(el, from, to, ms=420){
+  if(!el) return;
   const s = Number(String(from).replace(/[^0-9.-]+/g,"")) || 0;
   const e = Number(String(to).replace(/[^0-9.-]+/g,"")) || 0;
   const start = performance.now();
@@ -476,6 +599,7 @@ function animateVal(el, from, to, ms=420){
 }
 
 function recalc(){
+  if(!usersEl || !sellEl) return;
   const users = Math.max(0, Number(usersEl.value) || 0);
   const sell = Number(sellEl.value) || 9.0;
   sellLabel.textContent = Number(sell).toFixed(2) + ' €';
@@ -503,73 +627,80 @@ function recalc(){
   animateVal(ppkY, ppkY.textContent||'0 €', profitPerUserYear);
 }
 
-sellEl.addEventListener('input', recalc);
-usersEl.addEventListener('input', recalc);
+sellEl && sellEl.addEventListener('input', recalc);
+usersEl && usersEl.addEventListener('input', recalc);
 recalc(); // init
 
-/* ========== Join & PDF actions ========== */
-document.getElementById('join').addEventListener('click', ()=>{
-  const users = Number(usersEl.value) || 0;
-  const sell = Number(sellEl.value).toFixed(2);
-  const msg = encodeURIComponent(`Zdravo! Zainteresovan sam za partnerstvo. Planiram dovesti ${users} novih korisnika mjesečno. Planirana cijena po kreditu: ${sell} €.`);
-  window.open('https://wa.me/4915755749502?text=' + msg, '_blank');
+/* ===== Join & PDF actions ===== */
+document.querySelectorAll('#join, #joinTop').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const users = Number(usersEl?.value) || 0;
+    const sell = Number(sellEl?.value).toFixed(2);
+    const msg = encodeURIComponent(`Zdravo! Zainteresovan sam za partnerstvo. Planiram dovesti ${users} novih korisnika mjesečno. Planirana cijena po kreditu: ${sell} €.`);
+    window.open('https://wa.me/4915755749502?text=' + msg, '_blank');
+  });
 });
 
-document.getElementById('pdf').addEventListener('click', ()=>{
-  const users = Number(usersEl.value) || 0;
-  const sell = Number(sellEl.value) || 9;
-  const rev = sell * users;
-  const cost = BUY * users;
-  const profit = rev - cost;
-  const profitY = profit * 12;
-  const html = `<html><head><meta charset="utf-8"><title>Izvještaj</title></head><body style="font-family:Arial;padding:20px">
-    <h2>Izvještaj - Partner program</h2>
-    <p>Novi korisnici mjesečno: ${users}</p>
-    <p>Cijena po kreditu: ${sell.toFixed(2)} €</p>
-    <hr/>
-    <p>Bruto mjesečno: ${fmtMoney(rev)}</p>
-    <p>Trošak mjesečno: ${fmtMoney(cost)}</p>
-    <p>Profit mjesečno: ${fmtMoney(profit)}</p>
-    <p>Profit godišnje: ${fmtMoney(profitY)}</p>
-    <p>Model: 1 kredit = 1 mjesec; 12 kredita = 1 godina; Nabavna cijena: 3.00 €</p>
-  </body></html>`;
-  const w = window.open('', '_blank'); w.document.write(html); w.document.close(); w.print();
+const pdfBtn = document.getElementById('pdf');
+if(pdfBtn){
+  pdfBtn.addEventListener('click', ()=>{
+    const users = Number(usersEl?.value) || 0;
+    const sell = Number(sellEl?.value) || 9;
+    const rev = sell * users;
+    const cost = BUY * users;
+    const profit = rev - cost;
+    const profitY = profit * 12;
+    const html = `<html><head><meta charset="utf-8"><title>Izvještaj</title></head><body style="font-family:Arial;padding:20px">
+      <h2>Izvještaj - Partner program</h2>
+      <p>Novi korisnici mjesečno: ${users}</p>
+      <p>Cijena po kreditu: ${sell.toFixed(2)} €</p>
+      <hr/>
+      <p>Bruto mjesečno: ${fmtMoney(rev)}</p>
+      <p>Trošak mjesečno: ${fmtMoney(cost)}</p>
+      <p>Profit mjesečno: ${fmtMoney(profit)}</p>
+      <p>Profit godišnje: ${fmtMoney(profitY)}</p>
+      <p>Model: 1 kredit = 1 mjesec; 12 kredita = 1 godina; Nabavna cijena: 3.00 €</p>
+    </body></html>`;
+    const w = window.open('', '_blank'); w.document.write(html); w.document.close(); w.print();
+  });
+}
+
+/* ===== Reveal animations simple ===== */
+const revealItems = document.querySelectorAll('.panel, .netflix-title, .team-card, .panel-title, .stat, .job');
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.style.opacity = 1;
+      en.target.style.transform = 'translateY(0)';
+      ro.unobserve(en.target);
+    }
+  });
+},{threshold:0.12});
+revealItems.forEach(it=>{
+  it.style.opacity = 0;
+  it.style.transform = 'translateY(12px)';
+  ro.observe(it);
 });
 
-/* ========== Hamburger toggle (transforms to X) ========== */
-function toggleMenu(){
-  const menu = document.getElementById('mainMenu');
-  const btn = document.getElementById('hambBtn');
-  menu.classList.toggle('show');
-  btn.classList.toggle('active');
-  // close menu if clicked outside (mobile)
-  if(menu.classList.contains('show')){
-    setTimeout(()=>{
-      document.addEventListener('click', outsideClick);
-    }, 50);
-  } else {
-    document.removeEventListener('click', outsideClick);
+/* Accessibility: close mobile menu on focus loss (keyboard) */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    mainMenu.classList.remove('show');
+    hambBtn.classList.remove('active');
   }
-}
-function outsideClick(e){
-  const menu = document.getElementById('mainMenu');
-  const btn = document.getElementById('hambBtn');
-  if(!menu.contains(e.target) && !btn.contains(e.target)){
-    menu.classList.remove('show');
-    btn.classList.remove('active');
-    document.removeEventListener('click', outsideClick);
-  }
-}
+});
 
-/* Accessibility: close mobile menu on resize to desktop */
-window.addEventListener('resize', ()=>{
-  if(window.innerWidth > 880){
-    const menu = document.getElementById('mainMenu');
-    const btn = document.getElementById('hambBtn');
-    menu.classList.remove('show');
-    btn.classList.remove('active');
-    document.removeEventListener('click', outsideClick);
-  }
+/* Prevent accidental print popup from opening blocked in some browsers */
+window.addEventListener('beforeprint', ()=>console.log('Printing...'));
+
+/* small util - ensure mobile menu is accessible */
+Array.from(document.querySelectorAll('#mainMenu a')).forEach(a=>{
+  a.addEventListener('click', ()=> {
+    if(window.innerWidth <= 880){
+      mainMenu.classList.remove('show');
+      hambBtn.classList.remove('active');
+    }
+  });
 });
 </script>
 

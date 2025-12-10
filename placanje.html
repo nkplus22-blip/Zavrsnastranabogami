@@ -1,117 +1,173 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plaćanje - YUGO-Family TV</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f9ff;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #004080;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2em;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plaćanje - YUGO-Family TV</title>
 
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
-    }
+<style>
+/* ===========================================================
+   GLOBAL STYLES — DARK NEON THEME
+   =========================================================== */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #020b16;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
-    }
+/* Neon blue main color */
+:root {
+  --neon: #00c8ff;
+  --glow: 0 0 15px #00c8ff, 0 0 30px #00c8ff;
+}
 
-    .payment-options {
-      max-width: 800px;
-      margin: 40px auto 20px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .option {
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 1.3em;
-      font-weight: bold;
-      font-family: "Trebuchet MS", sans-serif;
-      color: #004080;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-    }
-    .option:hover {
-      background: #004080;
-      color: #fff;
-      transform: translateY(-5px);
-    }
-    .guarantee {
-      text-align: center;
-      font-size: 1.1em;
-      margin: 20px auto;
-      max-width: 700px;
-      color: #333;
-      padding: 15px;
-      background: #e6f0ff;
-      border-left: 5px solid #004080;
-      border-radius: 8px;
-    }
-    .secure {
-      text-align: center;
-      margin: 10px 0 40px 0;
-      font-weight: bold;
-      color: #004080;
-      font-size: 1.2em;
-    }
-    footer {
-      background: #004080;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
-    footer a {
-      color: #ffcc00;
-      text-decoration: none;
-    }
-  </style>
+/* ===========================================================
+   PRELOADER
+   =========================================================== */
+#preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #020b16;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 5px solid rgba(255,255,255,0.1);
+  border-top: 5px solid var(--neon);
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  animation: spin 1s linear infinite;
+  box-shadow: var(--glow);
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ===========================================================
+   PARTICLE BACKGROUND
+   =========================================================== */
+#particles {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  opacity: 0.4;
+}
+
+/* ===========================================================
+   NAVIGATION — GLASSMORPHISM
+   =========================================================== */
+header {
+  width: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px #00c8ff44;
+  position: sticky;
+  top: 0;
+  z-index: 88;
+  padding: 20px 0;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 18px;
+  margin: 4px;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--neon);
+  text-shadow: var(--glow);
+}
+
+/* MOBILE NAV */
+.menu-toggle {
+  display:none;
+  font-size: 28px;
+  background:none;
+  border: none;
+  color: var(--neon);
+  cursor:pointer;
+}
+
+@media(max-width: 800px){
+  nav { display:none; flex-direction:column; text-align:center; }
+  nav.show { display:flex; }
+  .menu-toggle { display:block; margin:auto; }
+}
+
+/* ===========================================================
+   HERO SECTION — Animated Title
+   =========================================================== */
+.hero {
+  text-align:center;
+  padding: 90px 20px 40px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: var(--glow);
+  animation: fadeDown 1.2s ease;
+}
+
+.hero p {
+  color:#bcdcff;
+  font-size:1.2rem;
+  margin-top:10px;
+  animation: fadeUp 1.5s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity:0; transform: translateY(-20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Načini plaćanja</h1>
-    <p>Odaberite metodu plaćanja i kontaktirajte nas direktno putem WhatsApp-a</p>
-  </header>
 
-  <!-- Hamburger dugme -->
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader"></div>
+</div>
+
+<!-- PARTICLE BACKGROUND -->
+<canvas id="particles"></canvas>
+
+<!-- HEADER + NAV -->
+<header>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
   <nav id="mainMenu">
     <a href="index.html">Početna</a>
     <a href="cijene.html">Cijene i akcije</a>
@@ -122,30 +178,726 @@
     <a href="kontakt.html">Kontakt</a>
     <a href="placanje.html">Plaćanje</a>
   </nav>
+</header>
 
-  <section class="payment-options">
-    <a href="https://wa.me/4915755749502" class="option">💳 PayPal</a>
-    <a href="https://wa.me/4915755749502" class="option">💸 Skrill</a>
-    <a href="https://wa.me/4915755749502" class="option">🏦 IBAN</a>
-    <a href="https://wa.me/4915755749502" class="option">🌍 Western Union</a>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <h1>Plaćanje – Sigurno, Brzo i Jednostavno</h1>
+  <p>Odaberite način plaćanja i izvršite narudžbu za manje od 30 sekundi.</p>
+</section>
+  <!-- ===========================================================
+     CURRENCY SWITCHER
+     =========================================================== -->
+<style>
+.currency-box {
+  text-align:center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
 
-  <div class="guarantee">
-    <p>✅ Za sve što ste platili, u slučaju bilo kakvog nezadovoljstva imate pravo na povrat Vašeg novca u cijelosti.</p>
-  </div>
+.currency-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--neon);
+  color: var(--neon);
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: 0.3s;
+  font-weight:600;
+}
 
-  <div class="secure">
-    🔒 Sigurno plaćanje
-  </div>
+.currency-btn.active {
+  background: var(--neon);
+  color:#000;
+  box-shadow: var(--glow);
+}
 
-  <footer>
-    <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
-  </footer>
+.currency-btn:hover {
+  transform: scale(1.05);
+}
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
+/* =============================================
+   PAYMENT CARDS — GLASS + 3D EFFECT
+   ============================================= */
+.payment-grid {
+  display: grid;
+  max-width: 1050px;
+  margin: 40px auto;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+.payment-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(18px);
+  padding: 30px 25px;
+  text-align: center;
+  border-radius: 16px;
+  transition: 0.25s;
+  cursor:pointer;
+  box-shadow: 0 0 20px #00c8ff22;
+}
+
+.payment-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 0 30px #00c8ff55;
+}
+
+/* ICONS */
+.payment-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: var(--glow);
+}
+</style>
+
+<!-- CURRENCY SWITCHER -->
+<div class="currency-box">
+  <button class="currency-btn active" onclick="setCurrency('EUR')">EUR (€)</button>
+  <button class="currency-btn" onclick="setCurrency('USD')">USD ($)</button>
+</div>
+
+<!-- PAYMENT OPTIONS -->
+<div class="payment-grid">
+
+  <a href="https://wa.me/4915755749502" class="payment-card">
+    <div class="payment-icon">💳</div>
+    <h3>PayPal</h3>
+    <p class="price" data-eur="20" data-usd="22">20 €</p>
+  </a>
+
+  <a href="https://wa.me/4915755749502" class="payment-card">
+    <div class="payment-icon">💸</div>
+    <h3>Skrill</h3>
+    <p class="price" data-eur="20" data-usd="22">20 €</p>
+  </a>
+
+  <a href="https://wa.me/4915755749502" class="payment-card">
+    <div class="payment-icon">🏦</div>
+    <h3>IBAN (Bank Transfer)</h3>
+    <p class="price" data-eur="18" data-usd="19.5">18 €</p>
+  </a>
+
+  <a href="https://wa.me/4915755749502" class="payment-card">
+    <div class="payment-icon">🌍</div>
+    <h3>Western Union</h3>
+    <p class="price" data-eur="22" data-usd="24">22 €</p>
+  </a>
+
+</div>
+
+<!-- Currency Switcher JS -->
+<script>
+let currentCurrency = "EUR";
+
+function setCurrency(curr) {
+  currentCurrency = curr;
+
+  // Buttons active state
+  document.querySelectorAll(".currency-btn").forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+
+  // Change prices
+  document.querySelectorAll(".price").forEach(price => {
+    if(curr === "EUR"){
+      price.innerText = price.dataset.eur + " €";
+    } else {
+      price.innerText = price.dataset.usd + " $";
     }
-  </script>
+  });
+}
+</script>
+<!-- ===========================================================
+     TRUST BADGES + SECURE STRIP
+     =========================================================== -->
+
+<style>
+.secure-strip {
+  text-align:center;
+  padding:18px;
+  background: linear-gradient(90deg, #00d2ff33, #3a7bd533);
+  border-top:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  color:#dff6ff;
+  font-size:1.2rem;
+  letter-spacing:0.5px;
+  margin-top:40px;
+  font-weight:600;
+  text-shadow:var(--glow);
+}
+
+.trust-badges {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:25px;
+  margin:35px auto;
+  max-width:820px;
+}
+
+.trust-badges img {
+  height:60px;
+  filter:drop-shadow(0 0 12px #00c8ff55);
+  transition:0.25s;
+}
+.trust-badges img:hover {
+  transform:scale(1.08);
+}
+
+/* ===========================================================
+     ORDER FORM (WhatsApp Auto Send)
+     =========================================================== */
+.order-box {
+  max-width:700px;
+  margin:50px auto;
+  padding:25px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border-radius:16px;
+  box-shadow:0 0 30px #00c8ff22;
+}
+
+.order-box h2 {
+  text-align:center;
+  color:#dff6ff;
+  margin-top:0;
+  text-shadow:var(--glow);
+}
+
+.order-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  margin-top:20px;
+}
+
+.order-grid input, 
+.order-grid select {
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  font-size:1rem;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.12);
+  transition:0.25s;
+}
+
+.order-grid input:focus,
+.order-grid select:focus {
+  background:rgba(255,255,255,0.14);
+  box-shadow:0 0 10px #00c8ff77;
+}
+
+.order-submit {
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  background:var(--neon);
+  font-weight:800;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.25s;
+  color:#000;
+  font-size:1.1rem;
+}
+.order-submit:hover {
+  transform:scale(1.04);
+  box-shadow: 0 0 25px var(--neon);
+}
+</style>
+
+<!-- Secure Strip -->
+<div class="secure-strip">
+  🔒 100% Sigurno plaćanje • Brza aktivacija • 24/7 podrška
+</div>
+
+<!-- Trust Badges -->
+<div class="trust-badges">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Verified-badge.png" alt="Verified">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Shield_icon_2019.svg" alt="Secure">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Trustpilot_logo.png" alt="Trustpilot">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/SSL_certificate.svg" alt="SSL">
+</div>
+
+<!-- Order Form -->
+<div class="order-box">
+  <h2>⚡ Brza narudžba – odaberi paket</h2>
+
+  <div class="order-grid">
+    
+    <input id="name" type="text" placeholder="Vaše ime i prezime">
+
+    <select id="package">
+      <option value="1 mjesec">1 mjesec</option>
+      <option value="3 mjeseca">3 mjeseca</option>
+      <option value="6 mjeseci">6 mjeseci</option>
+      <option value="12 mjeseci">12 mjeseci</option>
+    </select>
+
+    <select id="payment">
+      <option value="PayPal">PayPal</option>
+      <option value="Skrill">Skrill</option>
+      <option value="IBAN">IBAN</option>
+      <option value="Western Union">Western Union</option>
+    </select>
+
+    <input id="email" type="email" placeholder="Vaš email">
+
+    <button class="order-submit" onclick="sendOrder()">Pošalji narudžbu</button>
+  </div>
+
+</div>
+
+<script>
+function sendOrder(){
+  let name = document.getElementById('name').value.trim();
+  let pkg = document.getElementById('package').value;
+  let pay = document.getElementById('payment').value;
+  let email = document.getElementById('email').value.trim();
+
+  if(name === "" || email === ""){
+    alert("Molimo unesite ime i email.");
+    return;
+  }
+
+  let msg = 
+    "🔥 NOVA NARUDŽBA 🔥%0A" +
+    "Ime: " + name + "%0A" +
+    "Email: " + email + "%0A" +
+    "Paket: " + pkg + "%0A" +
+    "Plaćanje: " + pay + "%0A";
+
+  window.open("https://wa.me/4915755749502?text=" + msg, "_blank");
+}
+</script>
+<!-- ===========================================================
+     DIO 4/5 — TIMELINE, FAQ (expand) i GUARANTEE CERTIFICATE
+     =========================================================== -->
+<style>
+/* ---------- TIMELINE ---------- */
+.timeline {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 10px 18px 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+@media(max-width:900px){
+  .timeline { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:560px){
+  .timeline { grid-template-columns: 1fr; }
+}
+
+.step {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s;
+}
+
+.step.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.step .num {
+  width:50px;height:50px;border-radius:12px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;background:linear-gradient(90deg,var(--neon),#4ac6ff);color:#00181f;box-shadow:0 8px 30px rgba(0,200,255,0.08)
+}
+
+.step h4{margin:6px 0 6px;font-size:16px;color:#e9fbff}
+.step p{color:rgba(200,230,255,0.7);font-size:13px;line-height:1.4}
+
+/* small connecting line for desktop */
+.timeline-line {
+  position: relative;
+  max-width:1100px;
+  height: 12px;
+  margin: 18px auto 0;
+  display:block;
+}
+.timeline-line:before{
+  content:'';
+  position:absolute;left:6%;right:6%;top:50%;height:2px;background:linear-gradient(90deg, rgba(0,200,255,0.06), rgba(0,200,255,0.12));
+  transform:translateY(-50%);
+  border-radius:4px;
+}
+
+/* ---------- FAQ ---------- */
+.faq-wrap {
+  max-width: 1100px;
+  margin: 36px auto;
+  padding: 10px 18px 40px;
+}
+.faq-item {
+  background: rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.faq-q {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  color:var(--neon);
+  font-weight:700;
+}
+.faq-a {
+  margin-top:8px;
+  color: rgba(200,230,255,0.75);
+  display:none;
+  line-height:1.45;
+}
+
+/* ---------- GUARANTEE CERTIFICATE (modal) ---------- */
+.cert-button {
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--accent),var(--neon));
+  color:#00181f;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 36px rgba(0,0,0,0.45);
+  border:none;
+}
+
+.modal-backdrop {
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:99999;
+}
+.modal {
+  width: calc(100% - 48px);
+  max-width:820px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 30px 90px rgba(0,0,0,0.8);
+}
+.cert-header { display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px }
+.cert-title { font-weight:800;color:var(--neon) }
+.cert-body { color: rgba(200,230,255,0.8); margin-top:10px; line-height:1.5 }
+.cert-actions { margin-top:16px; display:flex; gap:12px; justify-content:flex-end; }
+
+/* print styles for certificate */
+@media print {
+  body * { visibility: hidden; }
+  .modal, .modal * { visibility: visible; }
+  .modal { position: absolute; left: 0; top: 0; width: 100%; }
+}
+</style>
+
+<!-- TIMELINE HTML -->
+<section aria-labelledby="timelineTitle" class="timeline-section">
+  <div class="timeline-line" aria-hidden="true"></div>
+
+  <div class="timeline" role="list">
+    <div class="step" role="listitem">
+      <div class="num">1</div>
+      <h4>Odaberi paket</h4>
+      <p>Izaberi paket koji ti odgovara: 1, 3, 6 ili 12 mjeseci. Preporučujemo godišnji paket za najbolji odnos cijene.</p>
+    </div>
+
+    <div class="step" role="listitem">
+      <div class="num">2</div>
+      <h4>Izaberi način plaćanja</h4>
+      <p>PayPal, Skrill, IBAN ili Western Union — sve opcije prikazane su s jasnim instrukcijama.</p>
+    </div>
+
+    <div class="step" role="listitem">
+      <div class="num">3</div>
+      <h4>Pošalji potvrdu</h4>
+      <p>Pošaljite screenshot ili MTCN broj na WhatsApp +49 1575 5749502 ili email. Aktivacija počinje odmah po verifikaciji.</p>
+    </div>
+
+    <div class="step" role="listitem">
+      <div class="num">4</div>
+      <h4>Uživaj u gledanju</h4>
+      <p>Aktivacija je obično brza (15–60 minuta). Nakon aktivacije dobijate pristup svim paketnim sadržajima.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-wrap" aria-labelledby="faqTitle">
+  <h3 id="faqTitle" style="text-align:center;color:var(--neon);margin-bottom:12px">Najčešća pitanja (FAQ)</h3>
+
+  <div class="faq-item" data-id="q1">
+    <div class="faq-q" onclick="toggleFaqItem(event)"><span>Koliko dugo traje aktivacija?</span><span aria-hidden="true">+</span></div>
+    <div class="faq-a">Aktivacija obično traje 15–60 minuta nakon prijema potvrde. Ako je uplata izvršena tokom noći ili vikenda, može potrajati malo duže zbog provjere.</div>
+  </div>
+
+  <div class="faq-item" data-id="q2">
+    <div class="faq-q" onclick="toggleFaqItem(event)"><span>Koji dokaz trebam poslati?</span><span aria-hidden="true">+</span></div>
+    <div class="faq-a">Pošaljite screenshot transakcije, MTCN kod (Western Union) ili broj transakcije i ime pošiljaoca. To ubrzava verifikaciju.</div>
+  </div>
+
+  <div class="faq-item" data-id="q3">
+    <div class="faq-q" onclick="toggleFaqItem(event)"><span>Šta ako imam problem s pristupom nakon aktivacije?</span><span aria-hidden="true">+</span></div>
+    <div class="faq-a">Kontaktirajte podršku preko WhatsApp-a i odmah ćemo provjeriti vaš nalog i riješiti problem u najkraćem mogućem roku.</div>
+  </div>
+</section>
+
+<!-- GUARANTEE CERTIFICATE (modal trigger) -->
+<section style="max-width:1100px;margin:20px auto;padding:0 18px;text-align:center">
+  <button class="cert-button" onclick="openCertificate()">Preuzmi/Prikazi Garanciju (Certifikat)</button>
+</section>
+
+<!-- MODAL -->
+<div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+  <div class="modal" role="document" aria-labelledby="certTitle">
+    <div class="cert-header">
+      <div>
+        <div id="certTitle" class="cert-title">YUGO-Family TV — 100% Garancija</div>
+        <div class="small" style="color:var(--muted)">Validno: Odmah po aktivaciji • Povrat u roku 30 dana</div>
+      </div>
+      <div style="text-align:right">
+        <button onclick="printCertificate()" class="cert-button" title="Ispisi / Spremi kao PDF">Print / PDF</button>
+        <button onclick="closeCertificate()" style="margin-left:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--neon);padding:8px 10px;border-radius:8px">Zatvori</button>
+      </div>
+    </div>
+
+    <div class="cert-body">
+      <p>Ovim putem YUGO-Family TV potvrđuje da svi paketi kupljeni preko naše web stranice dolaze sa 100% garancijom povrata novca u slučaju tehničkih problema koji ne možemo riješiti u razumnom roku.</p>
+      <p><strong>Reference:</strong> Partner program • Stabilna infrastruktura • Brza podrška</p>
+      <p style="margin-top:8px;color:var(--neon);font-weight:700">Ako niste zadovoljni, kontaktirajte nas i dobit ćete pun povrat.</p>
+
+      <div class="cert-actions">
+        <button onclick="printCertificate()" class="cert-button">Ispis / Spremi PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* TIMELINE reveal with IntersectionObserver */
+(function timelineReveal(){
+  const steps = document.querySelectorAll('.step');
+  if(!steps.length) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold: 0.18});
+  steps.forEach(s=> io.observe(s));
+})();
+
+/* FAQ toggle */
+function toggleFaqItem(e){
+  const item = e.currentTarget.closest('.faq-item');
+  if(!item) return;
+  const body = item.querySelector('.faq-a');
+  const sign = item.querySelector('.faq-q span:last-child');
+  if(body.style.display === 'block'){
+    body.style.display = 'none';
+    if(sign) sign.textContent = '+';
+  } else {
+    body.style.display = 'block';
+    if(sign) sign.textContent = '−';
+  }
+}
+
+/* Certificate modal */
+function openCertificate(){
+  const modal = document.getElementById('modalBackdrop');
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden','false');
+}
+function closeCertificate(){
+  const modal = document.getElementById('modalBackdrop');
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden','true');
+}
+function printCertificate(){
+  // open print dialog limited to modal via CSS @media print
+  window.print();
+}
+</script>
+<!-- ===========================================================
+     DIO 5/5 — FINAL POLISH, PERFORMANCE, ACCESSIBILITY & FOOTER
+     (ZALIJEPITI POSLIJE DIJELA 4)
+     =========================================================== -->
+
+<style>
+/* small final tweaks */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: -999px;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+  background: #001822;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 1000000;
+}
+.footer-mini {
+  max-width:1100px;margin:28px auto 60px;padding:12px 18px;text-align:center;color:rgba(200,230,255,0.6);
+  font-size:13px;
+}
+.small-muted { color: rgba(200,230,255,0.5); font-size:13px; }
+
+/* subtle focus ring for keyboard users */
+:focus { outline: none; }
+.user-is-tabbing :focus { outline: 3px solid rgba(0,200,255,0.18); border-radius:6px; }
+
+/* tiny responsive spacing fix */
+@media(max-width:480px){ .order-box, .payment-grid, .panel { padding-left:12px; padding-right:12px } }
+</style>
+
+<!-- SKIP LINK for screen readers / keyboard users -->
+<a href="#main-content" class="skip-link">Preskoči na sadržaj</a>
+
+<!-- SMALL FOOTER (final) -->
+<footer class="footer-mini" role="contentinfo">
+  <div style="font-weight:800;color:var(--neon)">YUGO-Family TV</div>
+  <div class="small-muted" style="margin-top:6px">Support: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> • WhatsApp: <a href="https://wa.me/4915755749502" target="_blank" rel="noopener">+49 1575 5749502</a></div>
+  <div style="margin-top:8px" class="small-muted">Sva prava zadržana • © 2025</div>
+</footer>
+
+<!-- FLOATING CONTACT (redundant if already included earlier; safe to include) -->
+<div style="position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:99999">
+  <a href="https://wa.me/4915755749502" target="_blank" rel="noopener" aria-label="Kontakt WhatsApp" style="width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--wa);box-shadow:0 12px 36px rgba(0,0,0,0.5);text-decoration:none;color:#fff">
+    <svg viewBox="0 0 32 32" width="22" height="22" fill="#fff" aria-hidden="true"><path d="M16.0,3C9.4,3,4,8.4,4,15c0,2.6,0.8,5,2.2,7L4,29l7.3-2.2C13,27.8,14.5,28,16,28c6.6,0,12-5.4,12-12S22.6,3,16.0,3z M23.2,21.3c-0.3,0.9-1.7,1.7-2.3,1.8c-0.6,0.1-1.3,0.3-4.3-0.9c-3.6-1.5-5.9-5.1-6.1-5.3c-0.2-0.3-1.5-2-1.5-3.8s1-2.7,1.4-3.1c0.3-0.3,0.8-0.4,1-0.4s0.5,0,0.7,0c0.2,0,0.5-0.1,0.7,0.5c0.3,0.6,1,2.2,1.1,2.3c0.1,0.2,0.1,0.4,0,0.7c-0.5,1-1,1.3-0.7,1.7c0.7,1.2,1.4,2,2.5,2.7c1.8,1.1,2.2,0.9,2.6,0.8c0.7-0.4,1.2-0.9,1.9-2c0.2-0.3,0.5-0.4,0.7-0.3c0.3,0,1.7,0.8,2,1c0.3,0.2,0.5,0.3,0.6,0.5C23.5,19.6,23.5,20.4,23.2,21.3z"/></svg>
+  </a>
+  <a href="mailto:nkplus22@gmail.com" aria-label="Pošalji email" style="width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--gmail);box-shadow:0 12px 36px rgba(0,0,0,0.5);text-decoration:none;color:#fff">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" aria-hidden="true"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg>
+  </a>
+</div>
+
+<!-- NOSCRIPT fallback -->
+<noscript>
+  <div style="background:#001022;color:#fff;padding:12px;text-align:center">Ovaj sajt radi puno bolje sa omogućenim JavaScript-om. Molimo omogućite JS za najbolji doživljaj.</div>
+</noscript>
+
+<!-- PERFORMANCE: defer / async note & small runtime fixes -->
+<script>
+/* Safety: ensure menu toggle works if not already defined */
+function toggleMenu(){
+  const nav = document.getElementById('mainMenu');
+  if(!nav) return;
+  nav.classList.toggle('show');
+}
+
+/* Robust currency switcher (fixes potential event.target issue from earlier parts) */
+(function currencyInit(){
+  // static rate already used in parts (1 USD = 0.92 EUR). We will only toggle display values here.
+  const btns = document.querySelectorAll('.currency-btn');
+  function setCurrency(curr){
+    // update active classes
+    btns.forEach(b=> b.classList.toggle('active', b.textContent.includes(curr)));
+    // update any .price elements
+    document.querySelectorAll('.price').forEach(p=>{
+      // data attributes on price elements are strings; convert carefully
+      const eur = parseFloat(p.getAttribute('data-eur') || p.dataset.eur || 0);
+      const usd = parseFloat(p.getAttribute('data-usd') || p.dataset.usd || 0);
+      if(curr === 'EUR'){
+        p.innerText = (Number.isFinite(eur) ? eur : 0) + ' €';
+      } else {
+        // if usd isn't defined, keep eur -> convert with static rate 0.92 (EUR->USD)
+        if(Number.isFinite(usd) && usd > 0){
+          p.innerText = usd + ' $';
+        } else {
+          // fallback convert
+          const fallbackUsd = (eur / 0.92).toFixed(2);
+          p.innerText = fallbackUsd + ' $';
+        }
+      }
+    });
+    // notify any summary/price blocks if exist (like #unitPrice/#totalPrice)
+    if(document.getElementById('unitPrice')){
+      const unitEUR = 3.00;
+      if(curr === 'EUR'){
+        document.getElementById('unitPrice').textContent = unitEUR.toFixed(2) + ' €';
+        // recalc total if qty exists
+        const qtyEl = document.getElementById('qty');
+        if(qtyEl) document.getElementById('totalPrice').textContent = (unitEUR * Math.max(1, Number(qtyEl.value)||1)).toFixed(2) + ' €';
+      } else {
+        const unitUSD = (unitEUR / 0.92).toFixed(2);
+        document.getElementById('unitPrice').textContent = '$' + unitUSD;
+        const qtyEl = document.getElementById('qty');
+        if(qtyEl) document.getElementById('totalPrice').textContent = '$' + ((unitEUR * Math.max(1, Number(qtyEl.value)||1)) / 0.92).toFixed(2);
+      }
+    }
+    // update hidden currency select if present
+    const select = document.getElementById('currency');
+    if(select) select.value = curr;
+  }
+
+  // attach events
+  btns.forEach(b=>{
+    b.addEventListener('click', (ev)=>{
+      const isEUR = b.textContent.includes('EUR') || b.textContent.includes('€');
+      setCurrency(isEUR ? 'EUR' : 'USD');
+    });
+  });
+
+  // initial set (ensure consistent)
+  setTimeout(()=> {
+    // prefer select if exists
+    const select = document.getElementById('currency');
+    if(select) setCurrency(select.value || 'EUR');
+    else setCurrency('EUR');
+  }, 80);
+})();
+
+/* Tiny image preloader for logos used in page to avoid layout shift */
+(function preloadAssets(){
+  const assets = ['logoyf.PNG','yfteam.png'];
+  assets.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
+})();
+
+/* Accessibility: announce dynamic updates to screen readers (live region) */
+(function setupLiveRegion(){
+  const live = document.createElement('div');
+  live.setAttribute('aria-live','polite');
+  live.setAttribute('aria-atomic','true');
+  live.style.position = 'absolute';
+  live.style.left = '-9999px';
+  document.body.appendChild(live);
+  window.__yugoLive = live;
+})();
+
+/* tiny helpers for progressive enhancement */
+document.addEventListener('DOMContentLoaded', ()=> {
+  // focus management for overlay nav links
+  const overlay = document.getElementById('overlayNav');
+  if(overlay){
+    overlay.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=> {
+        // close overlay after click on mobile
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden','true');
+      });
+    });
+  }
+});
+
+/* Performance note (for you): scripts here are lightweight.
+   If you later add analytics, load them with `async` or `defer` and consider a consent banner. */
+</script>
+
 </body>
 </html>

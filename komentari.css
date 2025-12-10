@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #080010;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.light {
+  background: #f2f6ff;
+  color: #222;
+}
+
+/* HEADER */
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #111;
+  position: relative;
+  border-bottom: 2px solid #6900ff;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.nav {
+  display: none;
+  flex-direction: column;
+  background: #130020;
+  padding: 10px;
+}
+
+.nav.show-menu {
+  display: flex;
+}
+
+.nav a {
+  color: #fff;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background: #6900ff;
+}
+
+/* FORM */
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  padding-top: 25px;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 2px solid #6900ff;
+  background: #0f001b;
+  color: #fff;
+}
+
+.form-box textarea {
+  height: 120px;
+}
+
+.btn-glow {
+  width: 100%;
+  padding: 12px;
+  background: #6900ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px #6900ff;
+}
+
+.warning {
+  display: none;
+  color: #ff5555;
+  margin-top: 8px;
+}
+
+/* COMMENTS */
+.comments-box {
+  margin-top: 30px;
+}
+
+.comment-card {
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #12001e;
+  border-left: 4px solid #6900ff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #4b02aa;
+  animation: fadeIn 0.4s ease;
+}
+
+.comment-card strong {
+  color: #b56aff;
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* AVATAR */
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* TRUSTED */
+.trusted-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #6900ff;
+  margin: 5px;
+  border-radius: 8px;
+  background: #140026;
+  box-shadow: 0 0 12px #6900ff;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 50px;
+  background: #090014;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}

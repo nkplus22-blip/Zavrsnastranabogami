@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kontakt – YUGO-Family TV</title>
-  <link rel="stylesheet" href="kontakt.css" />
+  <link rel="stylesheet" href="kontakt.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="logo">YF</div>
-        <div class="brand-text">
-          <div class="sitename">YUGO-Family TV</div>
-          <div class="subtitle" data-i18n="subtitle">Partner program — futuristički neon</div>
-        </div>
-      </div>
 
-      <!-- hamburger top-right -->
-      <button id="hambBtn" class="hamburger" aria-label="Otvori meni">
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <div class="logo">YF</div>
+      <div class="brand-text">
+        <h1>YUGO-Family TV</h1>
+        <div class="tag">Partner program — futuristički neon</div>
+      </div>
+    </div>
+
+    <!-- controls on the right -->
+    <div class="header-controls">
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme" title="Dan/Noc">🌗</button>
+      <button id="editPartnersBtn" class="ghost-btn" title="Uredi partnere">Uredi partnere</button>
+
+      <button id="hambBtn" class="hamburger" aria-label="Otvori meni" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <!-- top controls row -->
-    <div class="controls">
-      <div class="online">🔵 <span id="onlineCount">0</span> online</div>
-
-      <div class="right-controls">
-        <select id="langSelect" aria-label="Izaberi jezik">
-          <option value="bs">Bosanski</option>
-          <option value="en">English</option>
-          <option value="de">Deutsch</option>
-        </select>
-
-        <button id="themeBtn" class="theme-btn" aria-label="Promijeni temu">🌗</button>
-      </div>
-    </div>
   </header>
 
-  <!-- main menu (same behaviour as other pages) -->
-  <nav id="mainMenu" class="main-menu" aria-label="Glavna navigacija">
+  <!-- NAV (hidden on mobile, toggled by hamburger) -->
+  <nav id="mainMenu" class="main-nav" aria-label="Glavna navigacija">
     <a href="index.html">Početna</a>
     <a href="cijene.html">Cijene</a>
     <a href="komentari.html">Komentari</a>
     <a href="onama.html">O nama</a>
     <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 30</a>
     <a href="kontakt.html" aria-current="page">Kontakt</a>
   </nav>
 
-  <main class="main">
-    <section class="hero">
-      <h1 data-i18n="heroTitle">Uvijek tu za vas</h1>
-      <p class="lead" data-i18n="heroLead">Kontaktirajte nas putem e-maila, WhatsApp-a ili popunite formu — šaljemo odmah poruku.</p>
-    </section>
-
-    <section class="cards">
-      <article class="card">
-        <h3>📧 Email podrška</h3>
-        <p data-i18n="emailText">Pišite nam bilo kada:</p>
-        <p><a class="link" href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
-      </article>
-
-      <article class="card">
-        <h3>💬 WhatsApp podrška</h3>
-        <p data-i18n="waText">Odgovor obično u roku od par minuta</p>
-        <p><a class="link" href="https://wa.me/4915755749502" target="_blank">+49 157 55749502</a></p>
-      </article>
-
-      <article class="card">
-        <h3>⏱ Radno vrijeme</h3>
-        <p data-i18n="workText">Podrška dostupna 24/7</p>
-        <p data-i18n="fastResponse">Brz odgovor u svako doba</p>
-      </article>
-    </section>
-
-    <!-- contact form -> opens WhatsApp with filled message on submit -->
-    <section class="form-section">
-      <div class="form-wrap">
-        <h2 data-i18n="formTitle">Pošaljite poruku</h2>
-
-        <form id="contactForm" autocomplete="off">
-          <input id="name" name="name" type="text" placeholder="Vaše ime" required />
-          <input id="email" name="email" type="email" placeholder="Vaš email (opcionalno)" />
-          <textarea id="message" name="message" rows="6" placeholder="Vaša poruka" required></textarea>
-
-          <div class="form-actions">
-            <button id="sendBtn" type="submit" class="btn primary" data-i18n="sendBtn">Pošalji na WhatsApp</button>
-            <div class="extra-actions">
-              <a class="btn ghost" href="mailto:nkplus22@gmail.com" data-i18n="sendEmail">Pošalji mail</a>
-              <a class="btn ghost" href="https://wa.me/4915755749502" target="_blank" data-i18n="openWhats">Otvori WhatsApp</a>
-            </div>
-          </div>
-        </form>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h2>Uvijek tu za vas</h2>
+      <p>Kontaktirajte nas preko WhatsApp-a ili emaila — odgovaramo brzo. Ispunite formu i klikom na <strong>Pošalji</strong> otvara se WhatsApp sa porukom.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://wa.me/4915755749502" target="_blank" rel="noopener">Pošalji poruku</a>
+        <a class="btn btn-ghost" href="mailto:nkplus22@gmail.com">Pošalji email</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- trusted partners (8 generičih / placeholder logos to avoid trademark issues) -->
-    <section class="trusted" aria-label="Trusted partners">
-      <h2 data-i18n="trustedTitle">Trusted & Partners</h2>
-      <div class="trusted-grid">
-        <!-- 8 placeholders -->
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#0f172a"/><text x="50" y="25" text-anchor="middle" fill="#9b7dff" font-size="12">Partner A</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#061028"/><text x="50" y="25" text-anchor="middle" fill="#4ad1ff" font-size="12">Partner B</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#051233"/><text x="50" y="25" text-anchor="middle" fill="#ffd36a" font-size="12">Partner C</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#0b0b2b"/><text x="50" y="25" text-anchor="middle" fill="#7fffd4" font-size="12">Partner D</text></svg></div>
+  <!-- CONTACT CARDS -->
+  <section class="cards" aria-label="Kontakt informacije">
+    <article class="card">
+      <div class="card-icon">📧</div>
+      <h3>Email podrška</h3>
+      <p><a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
+    </article>
 
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#081225"/><text x="50" y="25" text-anchor="middle" fill="#ff9fb5" font-size="12">Partner E</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#071026"/><text x="50" y="25" text-anchor="middle" fill="#c4ff9f" font-size="12">Partner F</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#061028"/><text x="50" y="25" text-anchor="middle" fill="#ffd36a" font-size="12">Partner G</text></svg></div>
-        <div class="partner"> <svg viewBox="0 0 100 40" class="p-logo"><rect width="100" height="40" rx="6" fill="#0c1230"/><text x="50" y="25" text-anchor="middle" fill="#86b7ff" font-size="12">Partner H</text></svg></div>
+    <article class="card">
+      <div class="card-icon">💬</div>
+      <h3>WhatsApp podrška</h3>
+      <p><a href="https://wa.me/4915755749502" target="_blank" rel="noopener">+49 157 55749502</a></p>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">⏱</div>
+      <h3>Radno vrijeme</h3>
+      <p>Podrška dostupna 24/7 — brz odgovor</p>
+    </article>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-wrap" aria-label="Kontakt forma">
+    <div class="form-box">
+      <h3>Pošaljite poruku (otvara WhatsApp)</h3>
+      <form id="contactForm">
+        <div class="row">
+          <input id="fullName" name="fullName" type="text" placeholder="Vaše ime" required>
+          <input id="phone" name="phone" type="tel" placeholder="Broj telefona (opcionalno)">
+        </div>
+        <input id="email" name="email" type="email" placeholder="Vaš email (opcionalno)">
+        <textarea id="message" name="message" placeholder="Vaša poruka" rows="6" required></textarea>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Pošalji na WhatsApp</button>
+          <button type="button" id="clearForm" class="btn btn-ghost">Očisti</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- TRUSTED PARTNERS -->
+  <section class="trusted" aria-label="Trusted partners">
+    <div class="trusted-inner">
+      <h3>Provjereni partneri</h3>
+      <p class="muted">Lista provjerenih server-a i saradnika (možete zamijeniti imena ako želite).</p>
+
+      <div id="partnersGrid" class="partners-grid">
+        <!-- partners inserted by JS -->
       </div>
-      <div class="trusted-note" data-i18n="trustedNote">Prikazani partneri su prikazani kao reference. Prava partnerstva su iskazana samo uz dogovor.</div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
+      <div class="trusted-note">
+        <span class="verified-pill"><span class="pulse"></span> Verified</span>
+        <span class="muted">— Dostupno i provjereno</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIXED CONTACT SHORTCUTS -->
+  <div class="fixed-actions">
+    <a class="shortcut email" href="mailto:nkplus22@gmail.com" title="Email">📧</a>
+    <a class="shortcut wa" href="https://wa.me/4915755749502" title="WhatsApp" target="_blank" rel="noopener">💬</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
     <div>&copy; 2025 YUGO-Family TV</div>
-    <div class="footer-links">Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502">WhatsApp</a></div>
+    <div class="muted">Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> | WhatsApp: <a href="https://wa.me/4915755749502">+49 157 55749502</a></div>
   </footer>
 
   <script src="kontakt.js"></script>

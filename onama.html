@@ -1,289 +1,266 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>O nama - YUGO-Family TV</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg1:#061028;
---bg2:#071f3a;
---accent:#2bd1ff;
---accent2:#4a6bff;
---text:#e6f7ff;
---muted:rgba(230,235,245,.7);
+  --bg-1:#061028;
+  --bg-2:#071f3a;
+  --accent-1:#2ab0ff;
+  --accent-2:#4a6bff;
+  --neon:#6ce0ff;
+  --neon-strong:#2bd1ff;
+  --muted: rgba(230,235,245,0.7);
+  --glass: rgba(255,255,255,0.06);
+  --radius:14px;
+  --glass-blur:12px;
+  --text:#e6f7ff;
+  --max-w:1200px;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --transition: 0.28s ease;
 }
-
+html[data-theme="light"]{
+  --bg-1:#f6f9fb;
+  --bg-2:#eef6ff;
+  --text:#071028;
+  --muted: rgba(20,30,40,0.6);
+  --neon-strong:#0a9;
+  --card-bg: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
+}
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
 body{
-font-family:Inter,Arial,sans-serif;
-background:linear-gradient(180deg,var(--bg1),var(--bg2));
-color:var(--text);
-overflow-x:hidden;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  transition: background .36s, color .36s;
 }
-
-/* HEADER */
+.wrap{max-width:var(--max-w);margin:28px auto;padding:0 20px;position:relative;z-index:3}
 .top{
-position:sticky;
-top:12px;
-margin:12px;
-padding:12px;
-border-radius:14px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:sticky;top:12px;z-index:1002;padding:10px;border-radius:12px;
+  background: var(--card-bg);
+  border:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
 }
 .brand{display:flex;gap:12px;align-items:center}
-.logo{
-width:54px;height:54px;
-border-radius:12px;
-background:linear-gradient(135deg,var(--accent2),var(--accent));
-display:flex;align-items:center;justify-content:center;
-font-weight:800;color:#001;
-}
-
-/* DESKTOP NAV */
-.nav{display:flex;gap:10px}
-.nav a{
-color:var(--muted);
-text-decoration:none;
-padding:8px 12px;
-border-radius:10px;
-}
-.nav a:hover{color:var(--accent)}
-
-/* HAMBURGER */
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;font-size:20px}
+.brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
+.sub{font-size:12px;color:var(--muted)}
+.controls{display:flex;gap:8px;align-items:center;position:relative}
+.lang-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
+.theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
+/* Hamburger menu */
+.menu{display:none;flex-direction:column;position:absolute;top:60px;right:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(8px);border-radius:12px;padding:14px;z-index:1005}
+.menu a{padding:10px 12px;text-decoration:none;color:var(--text);border-radius:10px}
+.menu a:hover{background:rgba(255,255,255,0.02);color:var(--neon-strong)}
 .hamburger{
-display:none;
-width:44px;height:36px;
-background:none;border:none;
-cursor:pointer;
-position:relative;
-z-index:2001;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  width:36px;
+  height:28px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  z-index:1006;
 }
 .hamburger span{
-position:absolute;
-left:6px;
-width:32px;height:4px;
-background:var(--accent);
-border-radius:6px;
-transition:.4s;
+  display:block;
+  height:4px;
+  background:var(--neon-strong);
+  border-radius:2px;
+  transition:0.3s;
 }
-.hamburger span:nth-child(1){top:6px}
-.hamburger span:nth-child(2){top:16px}
-.hamburger span:nth-child(3){top:26px}
-.hamburger.active span:nth-child(1){top:16px;transform:rotate(45deg)}
-.hamburger.active span:nth-child(2){opacity:0}
-.hamburger.active span:nth-child(3){top:16px;transform:rotate(-45deg)}
-
-/* FULLSCREEN MENU */
-#menuOverlay{
-position:fixed;
-inset:0;
-background:rgba(6,16,40,.95);
-backdrop-filter:blur(20px);
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:0;
-pointer-events:none;
-transition:.4s;
-z-index:2000;
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+@media(max-width:880px){
+  .menu{display:flex}
 }
-#menuOverlay.show{
-opacity:1;
-pointer-events:auto;
-}
-.menu a{
-display:block;
-font-family:'Bebas Neue';
-font-size:42px;
-letter-spacing:3px;
-margin:16px 0;
-color:#fff;
-text-decoration:none;
-text-align:center;
-transition:.3s;
-}
-.menu a:hover{
-color:var(--accent);
-transform:scale(1.08);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-.nav{display:none}
-.hamburger{display:block}
-}
-
-/* CONTENT */
-.wrap{max-width:1200px;margin:60px auto;padding:0 20px}
-.hero{text-align:center;margin-top:60px}
-.netflix-title{
-font-family:'Bebas Neue';
-font-size:56px;
-letter-spacing:4px;
-color:#ff2b2b;
-}
-.lead{color:var(--muted);max-width:700px;margin:12px auto}
-
-/* FOOTER */
-.footer{text-align:center;color:var(--muted);margin:40px 0}
 </style>
 </head>
-
 <body>
-
-<header class="top">
-  <div class="brand">
-    <div class="logo">YF</div>
-    <div>
-      <strong>YUGO-Family TV</strong>
-      <div style="font-size:12px;color:#aaa">Partner program</div>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">YF</div>
+      <div>
+        <h1>YUGO-Family TV</h1>
+        <div class="sub">Partner program — futuristički neon</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="hamburger" id="hambBtn"><span></span><span></span><span></span></button>
+      <select id="lang" class="lang-select" aria-label="Izaberite jezik">
+        <option value="bs">Bosanski</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+      </select>
+      <button class="theme-btn" id="themeBtn" title="Tema">🌗</button>
+    </div>
+    <div class="menu" id="mainMenu">
+      <a href="index.html">Početna</a>
+      <a href="onama.html">O nama</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="cjenovnik.html">Cijene</a>
+      <a href="aplikacije.html">Aplikacije</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="webstranica.html">Poruči WEB STRANICU</a>
+      <a href="top15.html">Top 30</a>
     </div>
   </div>
+    <!-- HERO SECTION -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <div class="kicker">O nama</div>
+      <h2>Mi smo YUGO-Family — stvaramo i podržavamo</h2>
+      <p class="lead">Dugogodišnje iskustvo u medijima i distribuciji sadržaja. Povezujemo kreatore, kanale i publiku — nudeći pouzdane servise i partnerske programe.</p>
 
-  <nav class="nav">
-    <a href="index.html">Početna</a>
-    <a href="onama.html">O nama</a>
-    <a href="kako-da-gledas.html">Kako gledati</a>
-    <a href="cjenovnik.html">Cijene</a>
-    <a href="kontakt.html">Kontakt</a>
-  </nav>
+      <div class="stats" role="status" aria-live="polite">
+        <div class="stat"><div class="num counter" data-target="16000" id="cntUsers">0</div><div class="lbl">Aktivnih korisnika</div></div>
+        <div class="stat"><div class="num counter" data-target="117" id="cntPartners">0</div><div class="lbl">Pridruženih partnera</div></div>
+        <div class="stat"><div class="num counter" data-target="9" id="cntYears">0</div><div class="lbl">Godina iskustva</div></div>
+      </div>
 
-  <button id="hambBtn" class="hamburger">
-    <span></span><span></span><span></span>
-  </button>
-</header>
+      <div class="cta-hero" style="margin-top:12px">
+        <button id="joinTop" class="btn btn-primary">Pridruži se sada</button>
+        <button id="learn" class="btn btn-ghost">Saznaj više</button>
+        <button id="openModal" class="btn btn-ghost" style="margin-left:8px">Detalji</button>
+      </div>
+    </div>
 
-<!-- FULLSCREEN MENU -->
-<div id="menuOverlay">
-  <div class="menu">
-    <a href="index.html">Početna</a>
-    <a href="onama.html">O nama</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="cjenovnik.html">Cijene</a>
-    <a href="aplikacije.html">Aplikacije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="placanje.html">Plaćanje</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="webstranica.html">Poruči WEB STRANICU</a>
-    <a href="top15.html">Top 30</a>
-  </div>
-</div>
+    <!-- TEAM CARD -->
+    <aside class="team-card" aria-label="Team card">
+      <div class="team-frame">
+        <div class="neon-frame" aria-hidden="true"></div>
+        <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg" loading="lazy">
+      </div>
 
-<div class="wrap">
-  <section class="hero">
-    <div class="netflix-title">O NAMA</div>
-    <p class="lead">
-      YUGO-Family TV povezuje kreatore, partnere i publiku.
-      Gradimo pouzdane servise, moderan dizajn i dugoročna partnerstva.
-    </p>
+      <div class="title-wrap" aria-hidden="false">
+        <div class="netflix-title" role="heading" aria-level="1">CREATORS OF YUGOFAMILY</div>
+      </div>
+    </aside>
   </section>
 
-  <div class="footer">
-    &copy; <span id="year"></span> YUGO-Family TV
-  </div>
-</div>
+  <!-- MAIN GRID START -->
+  <main class="main" role="main">
+    <!-- LEFT PANEL -->
+    <section>
+      <div class="panel">
+        <h3 class="panel-title">Naša priča</h3>
+        <p class="muted">Počeli smo kao grupa zaljubljenika u medije i tehnologiju. Od 2016. kontinuirano gradimo infrastrukturu i razvijamo partnerstva s ciljem brze aktivacije i podrške klijentima.</p>
+      </div>
 
-<script>
-const hambBtn=document.getElementById('hambBtn');
-const overlay=document.getElementById('menuOverlay');
+      <div class="panel" style="margin-top:16px">
+        <h3 class="panel-title">Vrednosti</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+          <div class="panel"><strong>Pouzdanost</strong><p class="muted">Brza aktivacija i stabilna podrška.</p></div>
+          <div class="panel"><strong>Transparentnost</strong><p class="muted">Jasni uslovi saradnje i isplate.</p></div>
+          <div class="panel"><strong>Inovacija</strong><p class="muted">Uvijek tražimo bolje načine za rast partnera.</p></div>
+        </div>
+      </div>
 
-function closeMenu(){
-hambBtn.classList.remove('active');
-overlay.classList.remove('show');
-document.body.style.overflow='';
-}
+      <section style="margin-top:18px">
+        <h3 class="panel-title">Portfolio / Projekti</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div class="panel" style="padding:0;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
+            <div style="padding:12px"><strong>Brand Revamp</strong></div>
+          </div>
+          <div class="panel" style="padding:0;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
+            <div style="padding:12px"><strong>UI/UX Dashboard</strong></div>
+          </div>
+          <div class="panel" style="padding:0;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
+            <div style="padding:12px"><strong>Campaign Strategy</strong></div>
+          </div>
+        </div>
+      </section>
+            <section style="margin-top:18px">
+        <h3 class="panel-title">Timeline</h3>
+        <div class="panel timeline" style="margin-top:12px">
+          <div class="tl-item"><strong>2016</strong><div class="muted">Početak rada i prva partnerstva.</div></div>
+          <div class="tl-item"><strong>2019</strong><div class="muted">Širenje tima i automatizacija aktivacija.</div></div>
+          <div class="tl-item"><strong>2023</strong><div class="muted">Laniranje partner programa.</div></div>
+        </div>
+      </section>
 
-hambBtn.onclick=()=>{
-hambBtn.classList.toggle('active');
-overlay.classList.toggle('show');
-document.body.style.overflow=overlay.classList.contains('show')?'hidden':'';
-};
+      <section style="margin-top:18px">
+        <h3 class="panel-title">FAQ</h3>
+        <div style="margin-top:8px">
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false"><span>Kako se obračunava profit?</span><span aria-hidden="true">+</span></button>
+            <div class="accordion-panel"><div class="muted">Profit = (prodajna cijena − 3€) × broj prodatih kredita. Godišnji plan = 12 kredita.</div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false"><span>Moram li imati firmu?</span><span aria-hidden="true">+</span></button>
+            <div class="accordion-panel"><div class="muted">Ne, sarađujemo i s fizičkim osobama.</div></div>
+          </div>
+        </div>
+      </section>
+    </section>
 
-overlay.addEventListener('click',e=>{
-if(e.target.tagName==="A"||e.target===overlay) closeMenu();
-});
+    <!-- RIGHT PANEL (Contact + Povjerenje + CTA) -->
+    <aside class="panel calc" style="height:max-content">
+      <h3 class="panel-title">Kontakt</h3>
+      <p class="muted">Pošaljite nam poruku i odgovorićemo u najkraćem roku.</p>
 
-document.addEventListener('keydown',e=>{
-if(e.key==="Escape") closeMenu();
-});
+      <form id="contactForm" style="margin-top:10px">
+        <div style="margin-top:8px">
+          <label class="muted" for="name">Ime</label>
+          <input id="name" name="name" class="input" required>
+        </div>
+        <div style="margin-top:8px">
+          <label class="muted" for="email">Email</label>
+          <input id="email" name="email" type="email" class="input" required>
+        </div>
+        <div style="margin-top:8px">
+          <label class="muted" for="message">Poruka</label>
+          <textarea id="message" name="message" rows="4" class="input" required></textarea>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:space-between">
+          <button type="submit" class="btn btn-primary">Pošalji</button>
+          <button type="button" id="contactWhats" class="btn btn-ghost">WhatsApp</button>
+        </div>
+        <div id="contactMsg" class="muted" style="margin-top:8px;display:none"></div>
+      </form>
 
-document.getElementById('year').textContent=new Date().getFullYear();
-</script>
-
-</body>
-</html>
-
-<!-- Portfolio / Projekti -->
-<section style="margin-top:18px">
-  <h3 class="panel-title">Portfolio / Projekti</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-    <div class="panel" style="padding:0;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="Brand Revamp" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-      <div style="padding:12px"><strong>Brand Revamp</strong></div>
-    </div>
-    <div class="panel" style="padding:0;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="UI/UX Dashboard" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-      <div style="padding:12px"><strong>UI/UX Dashboard</strong></div>
-    </div>
-    <div class="panel" style="padding:0;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="Campaign Strategy" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-      <div style="padding:12px"><strong>Campaign Strategy</strong></div>
-    </div>
-  </div>
-</section>
-
-<!-- Timeline -->
-<section style="margin-top:18px">
-  <h3 class="panel-title">Timeline</h3>
-  <div class="panel timeline" style="margin-top:12px">
-    <div class="tl-item"><strong>2016</strong><div class="muted">Početak rada i prva partnerstva.</div></div>
-    <div class="tl-item"><strong>2019</strong><div class="muted">Širenje tima i automatizacija aktivacija.</div></div>
-    <div class="tl-item"><strong>2023</strong><div class="muted">Laniranje partner programa.</div></div>
-  </div>
-</section>
-<!-- FAQ -->
-<section style="margin-top:18px">
-  <h3 class="panel-title">FAQ</h3>
-  <div style="margin-top:8px">
-    <div class="accordion-item">
-      <button class="accordion-btn" aria-expanded="false">
-        <span>Kako se obračunava profit?</span><span aria-hidden="true">+</span>
-      </button>
-      <div class="accordion-panel"><div class="muted">Profit = (prodajna cijena − 3€) × broj prodatih kredita. Godišnji plan = 12 kredita.</div></div>
-    </div>
-    <div class="accordion-item">
-      <button class="accordion-btn" aria-expanded="false">
-        <span>Moram li imati firmu?</span><span aria-hidden="true">+</span>
-      </button>
-      <div class="accordion-panel"><div class="muted">Ne, sarađujemo i s fizičkim osobama.</div></div>
-    </div>
-  </div>
-</section>
+      <div style="margin-top:16px">
+        <h4 style="margin:8px 0 6px 0;color:var(--neon-strong)">Povjerenje</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">16.000+ korisnika</div>
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">117 partnera</div>
+          <div class="panel" style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">9+ godina</div>
+        </div>
+      </div>
+    </aside>
   </main>
-
-  <!-- Footer -->
+    <!-- FOOTER -->
   <div class="footer">
     <div style="font-size:13px">&copy; <span id="year">2025</span> YUGO-Family TV</div>
     <div style="font-size:13px;color:var(--muted)">
-      Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | 
-      <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a>
+      Email: <a href="mailto:yugofamily.podrska@gmail.com" style="color:var(--neon-strong)">yugofamily.podrska@gmail.com</a> | 
+      <a href="https://wa.me/+4915755749502" style="color:var(--neon-strong)">WhatsApp</a>
     </div>
   </div>
 
-</div> <!-- end .wrap -->
+</div>
 
 <!-- WhatsApp bubble -->
-<a class="wa" href="https://wa.me/4915755749502" target="_blank" aria-label="WhatsApp">
+<a class="wa" href="https://wa.me/+4915755749502" target="_blank" aria-label="WhatsApp">
   <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .001 5.373.001 12c0 2.113.553 4.148 1.6 5.942L0 24l6.378-1.574A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12 0-3.213-1.253-6.209-3.48-8.52zM12 22.2c-1.64 0-3.246-.39-4.69-1.13l-.34-.17-3.79.94.95-3.69-.22-.36A9.2 9.2 0 012.8 12c0-5.08 4.12-9.2 9.2-9.2 2.46 0 4.72.95 6.43 2.69C21.05 8.82 22 10.99 22 13.2 22 18.28 17.28 22.2 12 22.2z'/></svg>" alt="WA">
 </a>
 
@@ -299,71 +276,106 @@ document.getElementById('year').textContent=new Date().getFullYear();
 </div>
 
 <script>
-  // Year update
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* =========================
+   INTERACTIVITY SCRIPT
+   ========================= */
 
-  // Modal
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  document.getElementById('openModal')?.addEventListener('click', () => {
-    modalBackdrop.style.display = 'flex';
-  });
-  document.getElementById('modalClose')?.addEventListener('click', () => {
-    modalBackdrop.style.display = 'none';
-  });
-  modalBackdrop?.addEventListener('click', (e) => {
-    if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
-  });
+/* Helpers */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-  // FAQ accordion
-  document.querySelectorAll('.accordion-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const panel = btn.nextElementSibling;
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-      panel.style.maxHeight = open ? null : panel.scrollHeight + 'px';
-    });
-  });
+/* ---------- Prefs: language & theme ---------- */
+(function initPrefs(){
+  const savedLang = localStorage.getItem('yf-lang') || navigator.language.slice(0,2) || 'bs';
+  const langSelect = $('#lang');
+  if(langSelect) langSelect.value = (['bs','en','de'].includes(savedLang) ? savedLang : 'bs');
+  const savedTheme = localStorage.getItem('yf-theme');
+  if(savedTheme === 'light') document.documentElement.setAttribute('data-theme','light');
+  else if(savedTheme === 'dark') document.documentElement.removeAttribute('data-theme');
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+    document.documentElement.setAttribute('data-theme','light');
+  }
+})();
 
-  // Contact form (client-side)
-  const contactForm = document.getElementById('contactForm');
-  const contactMsg = document.getElementById('contactMsg');
-  contactForm?.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const msg = document.getElementById('message').value.trim();
-    if (!name || !email || !msg) {
-      contactMsg.style.display = 'block';
-      contactMsg.textContent = 'Popunite sva polja.';
-      return;
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      contactMsg.style.display = 'block';
-      contactMsg.textContent = 'Nevažeći email.';
-      return;
-    }
-    contactMsg.style.display = 'block';
-    contactMsg.textContent = 'Slanje...';
-    setTimeout(() => {
-      contactMsg.textContent = 'Poruka poslana! Hvala.';
-      contactForm.reset();
-    }, 900);
-  });
+/* ---------- THEME BUTTON ---------- */
+$('#themeBtn')?.addEventListener('click', ()=>{
+  const root = document.documentElement;
+  if(root.getAttribute('data-theme') === 'light'){
+    root.removeAttribute('data-theme'); localStorage.setItem('yf-theme','dark');
+  } else {
+    root.setAttribute('data-theme','light'); localStorage.setItem('yf-theme','light');
+  }
+});
 
-  document.getElementById('contactWhats')?.addEventListener('click', () => {
-    const text = encodeURIComponent('Zdravo! Zainteresovan sam za saradnju. Molim vas kontaktirajte me.');
-    window.open('https://wa.me/4915755749502?text=' + text, '_blank');
-  });
+/* ---------- LANGUAGE ---------- */
+const translations = {
+  bs: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristički neon', joinTop:'Pridruži se sada', learn:'Saznaj više', details:'Detalji', contactSuccess:'Poruka poslana! Hvala.', contactErr:'Došlo je do greške. Pokušajte kasnije.' },
+  en: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristic neon', joinTop:'Join now', learn:'Learn more', details:'Details', contactSuccess:'Message sent! Thank you.', contactErr:'Something went wrong. Try again later.' },
+  de: { siteTitle:'YUGO-Family TV', siteSub:'Partnerprogramm — futuristisches Neon', joinTop:'Jetzt beitreten', learn:'Mehr erfahren', details:'Details', contactSuccess:'Nachricht gesendet! Danke.', contactErr:'Fehler. Versuche es später nochmal.' }
+};
+function applyTranslations(lang){
+  const dict = translations[lang] || translations.bs;
+  $('#siteTitle').textContent = dict.siteTitle;
+  $('#siteSub').textContent = dict.siteSub;
+  $('#joinTop').textContent = dict.joinTop;
+  $('#learn').textContent = dict.learn;
+  $('#openModal')?.textContent = dict.details;
+  localStorage.setItem('yf-lang', lang);
+}
+$('#lang')?.addEventListener('change', e=> applyTranslations(e.target.value));
+applyTranslations(localStorage.getItem('yf-lang') || (navigator.language.slice(0,2) || 'bs') );
 
-  // Accessibility: ESC to close modals
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelector('#mainMenu')?.classList.remove('show');
-      document.getElementById('hambBtn')?.classList.remove('active');
-      modalBackdrop && (modalBackdrop.style.display = 'none');
-    }
-  });
+/* ---------- HAMBURGER ---------- */
+const hambBtn = $('.hamburger');
+const menu = $('.menu');
+function toggleMenu(){
+  menu.classList.toggle('show');
+  hambBtn.classList.toggle('active');
+}
+hambBtn?.addEventListener('click', toggleMenu);
+
+/* ---------- SCROLL PROGRESS ---------- */
+const progress = $('#scrollProgress');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop || document.body.scrollTop);
+  const height = (h.scrollHeight - h.clientHeight);
+  const pct = (height>0) ? (scrolled / height * 100) : 0;
+  progress.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
+
+/* ---------- Contact form ---------- */
+$('#contactForm')?.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = $('#name').value.trim();
+  const email = $('#email').value.trim();
+  const msg = $('#message').value.trim();
+  if(!name || !email || !msg){ $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Popunite sva polja.'; return; }
+  if(!/^\S+@\S+\.\S+$/.test(email)){ $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Nevažeći email.'; return; }
+  $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Slanje...';
+  setTimeout(()=>{ $('#contactMsg').textContent='Poruka poslana! Hvala.'; $('#contactForm').reset(); }, 900);
+});
+$('#contactWhats')?.addEventListener('click', ()=>{
+  const text = encodeURIComponent('Zdravo! Zainteresovan sam za saradnju. Molim vas kontaktirajte me.');
+  window.open('https://wa.me/+4915755749502?text=' + text, '_blank');
+});
+
+/* ---------- Modal ---------- */
+const modalBackdrop = $('#modalBackdrop');
+$('#openModal')?.addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; });
+$('#modalClose')?.addEventListener('click', ()=>{ modalBackdrop.style.display='none'; });
+modalBackdrop?.addEventListener('click', e=>{ if(e.target===modalBackdrop) modalBackdrop.style.display='none'; });
+
+/* ---------- Year ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- ESC key ---------- */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    menu.classList.remove('show'); hambBtn.classList.remove('active');
+    modalBackdrop && (modalBackdrop.style.display='none');
+  }
+});
 </script>
-
-</body>
-</html>

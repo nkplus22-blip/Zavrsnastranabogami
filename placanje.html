@@ -173,20 +173,16 @@ nav a:hover {
 <!-- HEADER + NAV -->
 <header>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav id="overlayNav" class="overlay" aria-hidden="true">
-      <div class="closebtn" onclick="closeNav()">×</div>
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU </a>
-      <a href="top15.html">Top 30</a>
-    </nav>
+  <nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cijene.html">Cijene i akcije</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="onama.html">O nama</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="top15.html">Top 15</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -584,7 +580,7 @@ function sendOrder(){
   padding:10px 14px;
   border-radius:10px;
   background:linear-gradient(90deg,var(--accent),var(--neon));
-  color:#ffffff;
+  color:#00181f;
   font-weight:800;
   cursor:pointer;
   box-shadow:0 12px 36px rgba(0,0,0,0.45);

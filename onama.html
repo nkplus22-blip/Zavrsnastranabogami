@@ -9,6 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
+/* ===========================
+   VARIABLES & RESET
+   =========================== */
 :root{
   --bg-1:#061028;
   --bg-2:#071f3a;
@@ -33,6 +36,8 @@ html[data-theme="light"]{
   --neon-strong:#0a9;
   --card-bg: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
 }
+
+/* Reset */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
@@ -44,7 +49,13 @@ body{
   overflow-x:hidden;
   transition: background .36s, color .36s;
 }
+
+/* Page container */
 .wrap{max-width:var(--max-w);margin:28px auto;padding:0 20px;position:relative;z-index:3}
+
+/* ===========================
+   Sticky header / nav (same behavior as "Postani dio tima")
+   =========================== */
 .top{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:sticky;top:12px;z-index:1002;padding:10px;border-radius:12px;
   background: var(--card-bg);
@@ -55,73 +66,218 @@ body{
 .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;font-size:20px}
 .brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
 .sub{font-size:12px;color:var(--muted)}
+
 .controls{display:flex;gap:8px;align-items:center;position:relative}
+
+/* Desktop nav */
+.nav{display:flex;gap:10px;align-items:center}
+.nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px}
+.nav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
+
+/* Language selector + theme button */
 .lang-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
 .theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
-/* Hamburger menu */
-.menu{display:none;flex-direction:column;position:absolute;top:60px;right:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(8px);border-radius:12px;padding:14px;z-index:1005}
-.menu a{padding:10px 12px;text-decoration:none;color:var(--text);border-radius:10px}
-.menu a:hover{background:rgba(255,255,255,0.02);color:var(--neon-strong)}
+
+/* Hamburger (IDENTICAL) */
 .hamburger{
-  display:flex;
-  flex-direction:column;
-  justify-content:space-around;
-  width:36px;
-  height:28px;
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  z-index:1006;
+  display:none;
+  width:44px;height:36px;position:relative;background:transparent;border:none;cursor:pointer;z-index:1005;
 }
 .hamburger span{
-  display:block;
-  height:4px;
-  background:var(--neon-strong);
-  border-radius:2px;
-  transition:0.3s;
+  position:absolute;left:6px;width:32px;height:4px;background:var(--neon-strong);border-radius:6px;
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .28s, top .36s;
+  box-shadow:0 0 10px rgba(108,224,255,0.35);
 }
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+.hamburger span:nth-child(1){ top: 6px; }
+.hamburger span:nth-child(2){ top: 16px; }
+.hamburger span:nth-child(3){ top: 26px; }
+.hamburger.active span:nth-child(1){ transform: rotate(45deg); top: 16px; }
+.hamburger.active span:nth-child(2){ opacity: 0; transform: scaleX(0.2); }
+.hamburger.active span:nth-child(3){ transform: rotate(-45deg); top: 16px; }
+
+/* Mobile menu (slide-down) - IDENTICAL style & position as previous page */
+#mainMenu{ display:flex; gap:10px; align-items:center; }
 @media(max-width:880px){
-  .menu{display:flex}
+  .nav{display:none}
+  .hamburger{display:block}
+  #mainMenu{
+    display:none; position:absolute; right:12px; top:72px; width:calc(100% - 36px);
+    max-width:360px; padding:14px; border-radius:14px; z-index:1004;
+    background: linear-gradient(180deg, rgba(2,8,20,0.95), rgba(6,18,36,0.92));
+    border: 1px solid rgba(108,224,255,0.08); backdrop-filter: blur(8px);
+    box-shadow:0 18px 60px rgba(2,6,18,0.6);
+    transform-origin: top right; animation: slideDown .28s ease;
+  }
+  #mainMenu.show{display:block}
+  @keyframes slideDown{from{opacity:0; transform:translateY(-8px) scale(.995)} to{opacity:1; transform:translateY(0) scale(1)}}
+  #mainMenu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);text-decoration:none}
+  #mainMenu a:hover{background:rgba(255,255,255,0.02); color:var(--neon-strong)}
 }
+
+/* ===========================
+   HERO
+   =========================== */
+.hero{
+  border-radius:18px;padding:26px;
+  background: var(--card-bg);
+  border:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 20px 60px rgba(2,6,18,0.45);
+  position:relative; overflow:hidden;
+  display:grid;grid-template-columns:1fr minmax(260px,420px);gap:28px;align-items:center;
+}
+.hero::after{
+  content:"";position:absolute;inset:-20% -10% -10% -10%;
+  background:
+    radial-gradient(800px 200px at 15% 20%, rgba(42,176,255,0.06), transparent 12%),
+    radial-gradient(600px 200px at 85% 70%, rgba(74,107,255,0.06), transparent 10%),
+    linear-gradient(90deg, rgba(42,176,255,0.03), rgba(74,107,255,0.02));
+  z-index:0;pointer-events:none;animation: slowShift 12s linear infinite;
+}
+@keyframes slowShift {0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+
+.hero-left{position:relative;z-index:2;padding-right:12px}
+.kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.12), rgba(74,107,255,0.06));color:var(--neon);font-weight:700;margin-bottom:12px}
+.hero-left h2{margin:0;font-size:30px;line-height:1.05;color:var(--text);text-shadow:0 8px 30px rgba(2,8,20,0.55)}
+.lead{color:var(--muted);margin-top:8px;max-width:680px}
+
+/* Stats in hero */
+.stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.stat{background:transparent;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:140px}
+.stat .num{font-weight:800;color:var(--neon-strong);font-size:20px}
+.stat .lbl{font-size:13px;color:var(--muted)}
+
+/* Team card */
+.team-card{z-index:3; position:relative; display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px; padding:12px; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 18px 60px rgba(2,8,30,0.45); overflow: visible;}
+.team-frame{position:relative; width:100%; display:flex;align-items:center;justify-content:center;}
+.neon-frame{position:absolute; inset:6px; border-radius:12px; pointer-events:none; background: linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.06)); filter: blur(18px); opacity:0.95; z-index:0; transform: translateZ(0); transition: transform 0.6s ease;}
+.team-img{width:94%; border-radius:12px; display:block; object-fit:cover; filter:contrast(1.03) saturate(1.06) brightness(0.98); box-shadow: 0 20px 60px rgba(10,30,60,0.4); position:relative; z-index:1; transition: transform 0.9s cubic-bezier(.2,.9,.2,1), filter 0.6s}
+.team-card:hover .neon-frame{ transform: scale(1.03) rotate(-0.6deg) }
+.team-card:hover .team-img{ transform: translateY(-6px) scale(1.02) }
+
+/* netflix-like title */
+.title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;z-index:4}
+.netflix-title{font-family:'Bebas Neue', sans-serif;font-size:56px;letter-spacing:4px;color:#ff2b2b;text-transform:uppercase;text-align:center;line-height:1;position:relative;text-shadow:0 6px 18px rgba(0,0,0,0.55),0 0 28px rgba(255,43,43,0.14),0 0 56px rgba(42,176,255,0.06);transform:translateZ(0)}
+.netflix-title::after{content:"";position:absolute;inset:-6px;-webkit-mask-image:linear-gradient(90deg,transparent,black,transparent);opacity:0.5;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));mix-blend-mode:screen;animation:flicker 3.2s infinite}
+@keyframes flicker{0%{opacity:0.3;transform:translateX(-10px)}10%{opacity:1;transform:translateX(0)}30%{opacity:0.4;transform:translateX(8px)}60%{opacity:0.9;transform:translateX(-4px)}100%{opacity:0.6;transform:translateX(0)}}
+
+/* ===========================
+   MAIN GRID & PANELS
+   =========================== */
+.main{display:grid;grid-template-columns:1fr 380px;gap:28px;margin-top:26px}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.main{grid-template-columns:1fr}}
+.panel{background:var(--card-bg);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,18,0.45)}
+.panel-title{margin:0 0 8px 0;color:var(--neon-strong);font-size:18px}
+.muted{color:var(--muted)}
+
+.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.job{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.02);transition:transform var(--transition)}
+.job:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,18,0.45)}
+
+/* calculator */
+.input, .select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.range{width:100%}
+.result{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);margin-top:10px}
+.big{font-weight:800;color:var(--neon-strong);font-size:18px}
+
+/* CTA / Footer */
+.cta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
+.btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.btn-primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#001}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+.footer{margin-top:30px;text-align:center;color:var(--muted);padding:24px}
+
+/* WhatsApp bubble */
+.wa{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1ebea5);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,20,0.6);z-index:999}
+.wa img{width:28px;height:28px}
+
+/* responsive tweaks */
+@media(max-width:880px){
+  .nav{display:none}
+  .hamburger{display:block}
+  .title-wrap { margin-top: 10px;}
+  .netflix-title{font-size:36px}
+  .team-img{width:100%}
+  .main{grid-template-columns:1fr}
+}
+@media(max-width:480px){.netflix-title{font-size:30px}}
+
+/* PARTCLS canvas */
+#particles{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:0.9}
+
+/* scroll progress */
+#scrollProgress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));z-index:2000;border-radius:0 0 4px 4px}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:2002}
+.modal{background:var(--card-bg);padding:20px;border-radius:12px;max-width:720px;width:100%;border:1px solid rgba(255,255,255,0.04)}
+
+/* FAQ */
+.accordion-item{border-top:1px dashed rgba(255,255,255,0.04);padding:10px 0}
+.accordion-btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:none;color:var(--text);padding:8px 0;cursor:pointer}
+.accordion-panel{max-height:0;overflow:hidden;transition:max-height .28s ease;color:var(--muted)}
+
+/* timeline */
+.timeline{position:relative;padding-left:18px}
+.timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));opacity:0.12}
+.tl-item{position:relative;margin-bottom:18px;padding-left:18px}
+.tl-item::before{content:"";position:absolute;left:-2px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--neon-strong);box-shadow:0 0 12px rgba(43,209,255,0.15)}
+
+/* small utilities */
+.hidden{display:none!important}
+.animation {opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
 </style>
 </head>
 <body>
+
+<!-- PARTICLES CANVAS -->
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<!-- SCROLL PROGRESS -->
+<div id="scrollProgress" aria-hidden="true"></div>
+
 <div class="wrap">
-  <div class="top">
+
+  <!-- header / nav -->
+  <div class="top" role="banner" aria-label="Glavna navigacija">
     <div class="brand">
       <div class="logo" aria-hidden="true">YF</div>
       <div>
-        <h1>YUGO-Family TV</h1>
-        <div class="sub">Partner program — futuristički neon</div>
+        <h1 id="siteTitle">YUGO-Family TV</h1>
+        <div class="sub" id="siteSub">Partner program — futuristički neon</div>
       </div>
     </div>
+
     <div class="controls">
-      <button class="hamburger" id="hambBtn"><span></span><span></span><span></span></button>
+      <!-- Hamburger -->
+      <button class="hamburger" id="hambBtn" aria-label="Otvori meni" type="button">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Main nav -->
+      <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="cjenovnik.html">Cijene</a>
+        <a href="komentari.html">Komentari</a>
+        <a href="onama.html" aria-current="page">O nama</a>
+        <a href="tim.html">Postani dio tima</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+
+      <!-- Language selector -->
       <select id="lang" class="lang-select" aria-label="Izaberite jezik">
         <option value="bs">Bosanski</option>
         <option value="en">English</option>
         <option value="de">Deutsch</option>
       </select>
+
+      <!-- Theme toggle -->
       <button class="theme-btn" id="themeBtn" title="Tema">🌗</button>
     </div>
-    <div class="menu" id="mainMenu">
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU</a>
-      <a href="top15.html">Top 30</a>
-    </div>
   </div>
-    <!-- HERO SECTION -->
+
+  <!-- HERO -->
   <section class="hero" aria-label="Hero">
     <div class="hero-left">
       <div class="kicker">O nama</div>
@@ -141,10 +297,11 @@ body{
       </div>
     </div>
 
-    <!-- TEAM CARD -->
+    <!-- Team card -->
     <aside class="team-card" aria-label="Team card">
       <div class="team-frame">
         <div class="neon-frame" aria-hidden="true"></div>
+        <!-- zamijeni put ako želiš -->
         <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg" loading="lazy">
       </div>
 
@@ -154,9 +311,10 @@ body{
     </aside>
   </section>
 
-  <!-- MAIN GRID START -->
+  <!-- MAIN GRID -->
   <main class="main" role="main">
-    <!-- LEFT PANEL -->
+
+    <!-- LEFT -->
     <section>
       <div class="panel">
         <h3 class="panel-title">Naša priča</h3>
@@ -175,21 +333,13 @@ body{
       <section style="margin-top:18px">
         <h3 class="panel-title">Portfolio / Projekti</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-          <div class="panel" style="padding:0;overflow:hidden">
-            <img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-            <div style="padding:12px"><strong>Brand Revamp</strong></div>
-          </div>
-          <div class="panel" style="padding:0;overflow:hidden">
-            <img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-            <div style="padding:12px"><strong>UI/UX Dashboard</strong></div>
-          </div>
-          <div class="panel" style="padding:0;overflow:hidden">
-            <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy">
-            <div style="padding:12px"><strong>Campaign Strategy</strong></div>
-          </div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Brand Revamp</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>UI/UX Dashboard</strong></div></div>
+          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Campaign Strategy</strong></div></div>
         </div>
       </section>
-            <section style="margin-top:18px">
+
+      <section style="margin-top:18px">
         <h3 class="panel-title">Timeline</h3>
         <div class="panel timeline" style="margin-top:12px">
           <div class="tl-item"><strong>2016</strong><div class="muted">Početak rada i prva partnerstva.</div></div>
@@ -211,9 +361,10 @@ body{
           </div>
         </div>
       </section>
+
     </section>
 
-    <!-- RIGHT PANEL (Contact + Povjerenje + CTA) -->
+    <!-- RIGHT (contact + trust + calc) -->
     <aside class="panel calc" style="height:max-content">
       <h3 class="panel-title">Kontakt</h3>
       <p class="muted">Pošaljite nam poruku i odgovorićemo u najkraćem roku.</p>
@@ -247,20 +398,18 @@ body{
         </div>
       </div>
     </aside>
+
   </main>
-    <!-- FOOTER -->
+
   <div class="footer">
     <div style="font-size:13px">&copy; <span id="year">2025</span> YUGO-Family TV</div>
-    <div style="font-size:13px;color:var(--muted)">
-      Email: <a href="mailto:yugofamily.podrska@gmail.com" style="color:var(--neon-strong)">yugofamily.podrska@gmail.com</a> | 
-      <a href="https://wa.me/+4915755749502" style="color:var(--neon-strong)">WhatsApp</a>
-    </div>
+    <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a></div>
   </div>
 
 </div>
 
 <!-- WhatsApp bubble -->
-<a class="wa" href="https://wa.me/+4915755749502" target="_blank" aria-label="WhatsApp">
+<a class="wa" href="https://wa.me/4915755749502" target="_blank" aria-label="WhatsApp">
   <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .001 5.373.001 12c0 2.113.553 4.148 1.6 5.942L0 24l6.378-1.574A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12 0-3.213-1.253-6.209-3.48-8.52zM12 22.2c-1.64 0-3.246-.39-4.69-1.13l-.34-.17-3.79.94.95-3.69-.22-.36A9.2 9.2 0 012.8 12c0-5.08 4.12-9.2 9.2-9.2 2.46 0 4.72.95 6.43 2.69C21.05 8.82 22 10.99 22 13.2 22 18.28 17.28 22.2 12 22.2z'/></svg>" alt="WA">
 </a>
 
@@ -286,19 +435,25 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
 
 /* ---------- Prefs: language & theme ---------- */
 (function initPrefs(){
+  // language
   const savedLang = localStorage.getItem('yf-lang') || navigator.language.slice(0,2) || 'bs';
   const langSelect = $('#lang');
   if(langSelect) langSelect.value = (['bs','en','de'].includes(savedLang) ? savedLang : 'bs');
+  // theme
   const savedTheme = localStorage.getItem('yf-theme');
   if(savedTheme === 'light') document.documentElement.setAttribute('data-theme','light');
   else if(savedTheme === 'dark') document.documentElement.removeAttribute('data-theme');
-  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
-    document.documentElement.setAttribute('data-theme','light');
+  else {
+    // auto detect
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+      document.documentElement.setAttribute('data-theme','light');
+    }
   }
 })();
 
 /* ---------- THEME BUTTON ---------- */
-$('#themeBtn')?.addEventListener('click', ()=>{
+const themeBtn = $('#themeBtn');
+themeBtn && themeBtn.addEventListener('click', ()=>{
   const root = document.documentElement;
   if(root.getAttribute('data-theme') === 'light'){
     root.removeAttribute('data-theme'); localStorage.setItem('yf-theme','dark');
@@ -307,7 +462,7 @@ $('#themeBtn')?.addEventListener('click', ()=>{
   }
 });
 
-/* ---------- LANGUAGE ---------- */
+/* ---------- LANGUAGE - simple translate object (can be expanded) ---------- */
 const translations = {
   bs: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristički neon', joinTop:'Pridruži se sada', learn:'Saznaj više', details:'Detalji', contactSuccess:'Poruka poslana! Hvala.', contactErr:'Došlo je do greške. Pokušajte kasnije.' },
   en: { siteTitle:'YUGO-Family TV', siteSub:'Partner program — futuristic neon', joinTop:'Join now', learn:'Learn more', details:'Details', contactSuccess:'Message sent! Thank you.', contactErr:'Something went wrong. Try again later.' },
@@ -319,20 +474,34 @@ function applyTranslations(lang){
   $('#siteSub').textContent = dict.siteSub;
   $('#joinTop').textContent = dict.joinTop;
   $('#learn').textContent = dict.learn;
-  $('#openModal')?.textContent = dict.details;
+  $('#openModal') && ($('#openModal').textContent = dict.details);
   localStorage.setItem('yf-lang', lang);
 }
-$('#lang')?.addEventListener('change', e=> applyTranslations(e.target.value));
+$('#lang') && $('#lang').addEventListener('change', (e)=> applyTranslations(e.target.value));
 applyTranslations(localStorage.getItem('yf-lang') || (navigator.language.slice(0,2) || 'bs') );
 
-/* ---------- HAMBURGER ---------- */
-const hambBtn = $('.hamburger');
-const menu = $('.menu');
+/* ---------- HAMBURGER (slide-down identical behavior) ---------- */
+const hambBtn = $('#hambBtn');
+const menu = $('#mainMenu');
+function outsideClick(e){
+  if(!menu.contains(e.target) && !hambBtn.contains(e.target)){
+    menu.classList.remove('show');
+    hambBtn.classList.remove('active');
+    document.removeEventListener('click', outsideClick);
+  }
+}
 function toggleMenu(){
   menu.classList.toggle('show');
   hambBtn.classList.toggle('active');
+  if(menu.classList.contains('show')){
+    setTimeout(()=>document.addEventListener('click', outsideClick),50);
+  } else {
+    document.removeEventListener('click', outsideClick);
+  }
 }
-hambBtn?.addEventListener('click', toggleMenu);
+hambBtn && hambBtn.addEventListener('click', toggleMenu);
+window.addEventListener('resize', ()=>{ if(window.innerWidth > 880){ menu.classList.remove('show'); hambBtn.classList.remove('active'); document.removeEventListener('click', outsideClick); } });
+$$('#mainMenu a').forEach(a=> a.addEventListener('click', ()=> { if(window.innerWidth <= 880){ menu.classList.remove('show'); hambBtn.classList.remove('active'); } }));
 
 /* ---------- SCROLL PROGRESS ---------- */
 const progress = $('#scrollProgress');
@@ -346,36 +515,167 @@ function updateProgress(){
 window.addEventListener('scroll', updateProgress);
 updateProgress();
 
-/* ---------- Contact form ---------- */
-$('#contactForm')?.addEventListener('submit', e=>{
+/* ---------- PARTICLES (lightweight) ---------- */
+(function particles(){
+  const canvas = document.getElementById('particles');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = window.innerWidth;
+  let H = canvas.height = window.innerHeight;
+  const particles = [];
+  const N = Math.max(80, Math.floor(W*H/90000));
+  for(let i=0;i<N;i++){
+    particles.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*1.8+0.6,
+      vx: (Math.random()-0.5)*0.3,
+      vy: (Math.random()-0.5)*0.3
+    });
+  }
+  window.addEventListener('resize', ()=>{ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < -10) p.x = W+10; if(p.x > W+10) p.x = -10;
+      if(p.y < -10) p.y = H+10; if(p.y > H+10) p.y = -10;
+      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+      g.addColorStop(0, 'rgba(43,209,255,0.16)');
+      g.addColorStop(0.2,'rgba(43,209,255,0.06)');
+      g.addColorStop(1,'rgba(43,209,255,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------- REVEAL (IntersectionObserver) ---------- */
+(function reveal(){
+  const items = document.querySelectorAll('.panel, .job, .team-card, .netflix-title, .panel-title');
+  const ro = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'translateY(0)';
+        ro.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12});
+  items.forEach(i=>{ i.style.opacity = 0; i.style.transform = 'translateY(12px)'; ro.observe(i); });
+})();
+
+/* ---------- COUNTERS + FAKE LIVE ---------- */
+(function counters(){
+  const counters = document.querySelectorAll('.counter');
+  const heroEl = document.querySelector('.hero');
+  if(!heroEl) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        counters.forEach(c=>{
+          const target = +c.dataset.target;
+          animateCounter(c, target, 1100);
+        });
+        io.disconnect();
+        // start fake live loop
+        fakeLive();
+      }
+    });
+  },{threshold:0.25});
+  io.observe(heroEl);
+
+  function animateCounter(el,to,duration=1000){
+    const start = performance.now();
+    const from = Number(String(el.textContent).replace(/[^0-9]+/g,'') || 0);
+    function step(now){
+      const t = Math.min((now-start)/duration,1);
+      const v = Math.floor(from + (to-from)*t);
+      el.textContent = (to>=1000) ? (v.toLocaleString() + (t===1?'+':'')) : (v + (t===1?'+':'')) ;
+      if(t<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function fakeLive(){
+    const usersEl = $('#cntUsers'), partnersEl = $('#cntPartners');
+    if(!usersEl || !partnersEl) return;
+    let u = parseInt(usersEl.dataset.target), p = parseInt(partnersEl.dataset.target);
+    setInterval(()=>{
+      const du = Math.floor(Math.random()*60 - 6); // -6..53
+      const dp = Math.floor(Math.random()*3); // 0..2
+      u = Math.max(1200, u + du);
+      p = Math.max(50, p + dp);
+      animateCounter(usersEl, u);
+      animateCounter(partnersEl, p);
+    }, 4000 + Math.random()*6000);
+  }
+})();
+
+/* ---------- Team image parallax (desktop) ---------- */
+(function teamParallax(){
+  const img = $('#teamImg'), neon = document.querySelector('.neon-frame'), frame = document.querySelector('.team-card');
+  if(!img || !neon || !frame) return;
+  frame.addEventListener('mousemove', (ev)=>{
+    const r = frame.getBoundingClientRect();
+    const mx = (ev.clientX - r.left - r.width/2)/r.width;
+    const my = (ev.clientY - r.top - r.height/2)/r.height;
+    img.style.transform = `translate(${mx*8}px,${-my*8}px) scale(1.02)`;
+    neon.style.transform = `translate(${mx*6}px,${-my*6}px) scale(1.01)`;
+  });
+  frame.addEventListener('mouseleave', ()=>{ img.style.transform=''; neon.style.transform=''; });
+})();
+
+/* ---------- Modal ---------- */
+const modalBackdrop = $('#modalBackdrop');
+$('#openModal') && $('#openModal').addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; });
+$('#modalClose') && $('#modalClose').addEventListener('click', ()=>{ modalBackdrop.style.display='none'; });
+modalBackdrop && modalBackdrop.addEventListener('click',(e)=>{ if(e.target===modalBackdrop) modalBackdrop.style.display='none'; });
+
+/* ---------- FAQ accordion ---------- */
+$$('.accordion-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const panel = btn.nextElementSibling;
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if(open) panel.style.maxHeight = null; else panel.style.maxHeight = panel.scrollHeight + 'px';
+  });
+});
+
+/* ---------- Contact form (client-side only) ---------- */
+const contactForm = $('#contactForm');
+const contactMsg = $('#contactMsg');
+contactForm && contactForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const name = $('#name').value.trim();
   const email = $('#email').value.trim();
   const msg = $('#message').value.trim();
-  if(!name || !email || !msg){ $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Popunite sva polja.'; return; }
-  if(!/^\S+@\S+\.\S+$/.test(email)){ $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Nevažeći email.'; return; }
-  $('#contactMsg').style.display='block'; $('#contactMsg').textContent='Slanje...';
-  setTimeout(()=>{ $('#contactMsg').textContent='Poruka poslana! Hvala.'; $('#contactForm').reset(); }, 900);
+  if(!name || !email || !msg){ contactMsg.style.display='block'; contactMsg.textContent = 'Popunite sva polja.'; return; }
+  // simple email validation
+  if(!/^\S+@\S+\.\S+$/.test(email)){ contactMsg.style.display='block'; contactMsg.textContent = 'Nevažeći email.'; return; }
+  contactMsg.style.display='block'; contactMsg.textContent = 'Slanje...';
+  // fake send (since no backend) - simulate delay
+  setTimeout(()=>{ contactMsg.textContent = 'Poruka poslana! Hvala.'; contactForm.reset(); }, 900);
 });
-$('#contactWhats')?.addEventListener('click', ()=>{
+$('#contactWhats') && $('#contactWhats').addEventListener('click', ()=>{
   const text = encodeURIComponent('Zdravo! Zainteresovan sam za saradnju. Molim vas kontaktirajte me.');
-  window.open('https://wa.me/+4915755749502?text=' + text, '_blank');
+  window.open('https://wa.me/4915755749502?text=' + text, '_blank');
 });
 
-/* ---------- Modal ---------- */
-const modalBackdrop = $('#modalBackdrop');
-$('#openModal')?.addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; });
-$('#modalClose')?.addEventListener('click', ()=>{ modalBackdrop.style.display='none'; });
-modalBackdrop?.addEventListener('click', e=>{ if(e.target===modalBackdrop) modalBackdrop.style.display='none'; });
-
-/* ---------- Year ---------- */
+/* ---------- Year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- ESC key ---------- */
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){
+/* ---------- Accessibility: ESC to close menus/modals ---------- */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
     menu.classList.remove('show'); hambBtn.classList.remove('active');
     modalBackdrop && (modalBackdrop.style.display='none');
   }
 });
 </script>
+
+</body>
+</html>

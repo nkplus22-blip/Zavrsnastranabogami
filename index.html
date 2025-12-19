@@ -24,7 +24,23 @@
     header{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:22px 12px 8px;position:relative}
     .site-logo{max-width:220px;display:block;margin-bottom:8px;filter:drop-shadow(0 6px 30px rgba(42,176,255,0.12))}
     .tagline{color:var(--muted);font-weight:600;font-size:14px}
+    /* promo djed mraz slika */
+.promo-image{
+  max-width: 240px;   /* OVDJE KONTROLIŠEŠ VELIČINU */
+  width: 100%;
+  height: auto;
+  margin: 10px auto 6px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 28px rgba(0,0,0,0.55));
+}
 
+/* manja na mobitelu */
+@media(max-width:600px){
+  .promo-image{
+    max-width: 200px;
+  }
+}
     /* hamburger */
     .menu-toggle{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--neon);font-size:30px;cursor:pointer;z-index:80}
     .menu-toggle:hover{transform:scale(1.05);transition:transform .12s ease}

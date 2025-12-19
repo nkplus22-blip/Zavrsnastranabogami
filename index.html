@@ -40,6 +40,32 @@
   .promo-image{
     max-width: 200px;
   }
+} 
+    /* klik wrapper */
+.promo-link{
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* pulsiranje (suptilno, profi) */
+@keyframes promoPulse{
+  0%{
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));
+  }
+  50%{
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 22px rgba(42,192,255,0.35));
+  }
+  100%{
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));
+  }
+}
+
+.promo-image{
+  animation: promoPulse 3.5s ease-in-out infinite;
+  background: transparent !important;
 }
     /* hamburger */
     .menu-toggle{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--neon);font-size:30px;cursor:pointer;z-index:80}
@@ -128,7 +154,9 @@
       <!-- put logoyf.png in same folder -->
       <img src="logoyf.PNG" alt="YUGO-Family TV" class="site-logo" loading="eager" onerror="this.style.display='none'">
       <div class="tagline">Vaša porodica, vaša televizija — najbolji IPTV servis</div>
-      <img src="djedmraz.PNG" alt="Pro paket akcija" class="promo-image" loading="eager">
+      <a href="cjenovnik.html" class="promo-link" aria-label="Pogledaj cjenovnik">
+    <img src="djedmraz.PNG" alt="Pro paket 12+12 – 150€" class="promo-image" loading="eager">
+  </a>
       <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
     </header>
 

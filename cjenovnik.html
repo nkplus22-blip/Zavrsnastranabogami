@@ -144,6 +144,38 @@
   </style>
 </head>
 <body>
+  /* =========================
+   DJED MRAZ PROMO
+   ========================= */
+
+.santa-link {
+  display: block;
+  margin-left: 14px;
+  cursor: pointer;
+}
+
+.santa-img {
+  width: 110px;        /* prilagodi po potrebi */
+  max-width: 110px;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(255, 215, 100, 0.35));
+  animation: santaPulse 2.2s infinite;
+}
+
+/* pulsiranje */
+@keyframes santaPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* mobilni prikaz */
+@media (max-width: 768px) {
+  .santa-img {
+    width: 85px;
+    max-width: 85px;
+  }
+}
   <!-- PRELOADER -->
   <div id="preloader" role="status" aria-live="polite">
     <div class="loader-wrap" aria-hidden="true">
@@ -158,12 +190,26 @@
 
   <!-- HEADER -->
   <header>
-    <div class="wrap" id="main-header">
-      <div class="brand" aria-hidden="false">
-        <div class="logo">YUGO-Family TV</div>
-        <div class="tagline">Najbolja IPTV ponuda za cijelu porodicu</div>
-        <img src="djedmraz.PNG" alt="Pro paket akcija" class="promo-image" loading="eager">
-      </div>
+    <div class="brand">
+  <div>
+    <div class="logo">YUGO-Family TV</div>
+    <div class="tagline">Najbolja IPTV ponuda za cijelu porodicu</div>
+  </div>
+
+  <a 
+    href="https://wa.me/4915755749502?text=Zdravo!%20Zanima%20me%20Pro%20paket%2012%2B12%20mjeseci."
+    target="_blank"
+    rel="noopener"
+    class="santa-link"
+    aria-label="Kontaktiraj nas na WhatsApp"
+  >
+    <img 
+      src="djedmraz.png" 
+      alt="Pro paket akcija 12+12 mjeseci"
+      class="santa-img"
+    >
+  </a>
+</div>
 
       <button class="menu-toggle" aria-label="Otvori meni" onclick="toggleNav()">☰</button>
 

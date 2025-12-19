@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top 15 - YUGO-Family TV</title>
+  <title>Top preporuke - YUGO-Family TV</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -114,43 +114,6 @@
       color: #ffcc00;
       text-decoration: none;
     }
-    /* ===== HAMBURGER MENI ===== */
-
-.overlay {
-  display: flex;
-}
-
-@media (max-width:768px) {
-  nav {
-    display: none;
-  }
-
-  .overlay {
-    display: none;
-    flex-direction: column;
-    background: #007bff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .overlay.show {
-    display: flex;
-  }
-
-  .overlay a {
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-  }
-
-  .closebtn {
-    font-size: 35px;
-    text-align: right;
-    padding: 10px 20px;
-    cursor: pointer;
-    color: white;
-  }
-}
   </style>
 </head>
 <body>
@@ -162,20 +125,16 @@
   <!-- Hamburger dugme -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
- <nav id="overlayNav" class="overlay" aria-hidden="true">
-      <div class="closebtn" onclick="closeNav()">×</div>
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU </a>
-      <a href="top15.html">Top 30</a>
-    </nav>
+  <nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cijene.html">Cijene i akcije</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="onama.html">O nama</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="top15.html">Top 15</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+  </nav>
 
   <div class="container">
     <h2>🎬 Najgledaniji filmovi (Top 30)</h2>
@@ -230,15 +189,11 @@
   <footer>
     <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
   </footer>
-<script>
-function toggleMenu() {
-  document.getElementById("overlayNav").classList.toggle("show");
-}
 
-function closeNav() {
-  document.getElementById("overlayNav").classList.remove("show");
-}
- 
+  <script>
+    function toggleMenu() {
+      document.getElementById("mainMenu").classList.toggle("show");
+    }
   </script>
- </body>
+</body>
 </html>

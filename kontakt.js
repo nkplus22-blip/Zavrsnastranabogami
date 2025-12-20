@@ -18,4 +18,15 @@ document.getElementById("waForm").addEventListener("submit", function (e) {
     `💬 Poruka:%0A${poruka}`;
 
   window.open(`https://wa.me/${broj}?text=${tekst}`, "_blank");
+function toggleMenu() {
+  const nav = document.getElementById("overlayNav");
+  nav.classList.add("open");
+  nav.setAttribute("aria-hidden", "false");
+}
+
+function closeNav() {
+  const nav = document.getElementById("overlayNav");
+  nav.classList.remove("open");
+  nav.setAttribute("aria-hidden", "true");
+}
 });

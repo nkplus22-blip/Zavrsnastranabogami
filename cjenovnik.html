@@ -141,39 +141,33 @@
 
     /* smooth scroll */
     html { scroll-behavior: smooth; }
-  </style>
-</head>
-<body>
-  /* =========================
+  
+/* =========================
    DJED MRAZ PROMO
    ========================= */
-
-.santa-link {
-  display: block;
-  margin-left: 14px;
-  cursor: pointer;
+.santa-link{
+  display:block;
+  margin-top:8px;        /* razmak ispod loga */
+  cursor:pointer;
 }
 
-.santa-img {
-  width: 110px;        /* prilagodi po potrebi */
-  max-width: 110px;
-  height: auto;
-  filter: drop-shadow(0 10px 30px rgba(255, 215, 100, 0.35));
-  animation: santaPulse 2.2s infinite;
+.santa-img{
+  width:110px;
+  max-width:110px;
+  height:auto;
+  filter:drop-shadow(0 10px 30px rgba(255,215,100,.35));
+  animation:santaPulse 2.2s infinite;
 }
 
-/* pulsiranje */
-@keyframes santaPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.06); }
-  100% { transform: scale(1); }
+@keyframes santaPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+  100%{transform:scale(1)}
 }
 
-/* mobilni prikaz */
-@media (max-width: 768px) {
-  .santa-img {
-    width: 85px;
-    max-width: 85px;
+@media(max-width:768px){
+  .santa-img{
+    width:85px;
   }
 }
   <!-- PRELOADER -->
@@ -184,6 +178,9 @@
       <div style="margin-top:10px;color:var(--muted);font-size:13px">Učitavanje... hvala na strpljenju</div>
     </div>
   </div>
+    </style>
+</head>
+<body>
 
   <!-- PARTICLES CANVAS -->
   <canvas id="bg-canvas" style="position:fixed;inset:0;z-index:0;opacity:0.35;pointer-events:none"></canvas>
@@ -194,6 +191,19 @@
   <div>
     <div class="logo">YUGO-Family TV</div>
     <div class="tagline">Najbolja IPTV ponuda za cijelu porodicu</div>
+  <a
+  href="https://wa.me/4915755749502?text=Zdravo!%20Zanima%20me%20Pro%20paket%2012%2B12%20mjeseci."
+  target="_blank"
+  rel="noopener"
+  class="santa-link"
+  aria-label="Kontaktiraj nas na WhatsApp"
+>
+  <img
+    src="djedmraz.png"
+    alt="Pro paket akcija 12+12 mjeseci"
+    class="santa-img"
+  >
+</a>
   </div>
 
   <a 
@@ -214,13 +224,17 @@
       <button class="menu-toggle" aria-label="Otvori meni" onclick="toggleNav()">☰</button>
 
       <nav id="mainNav" aria-label="Glavni meni">
-        <a href="index.html">Početna</a>
-        <a href="cjenovnik.html" aria-current="page">Cijene i akcije</a>
-        <a href="komentari.html">Komentari</a>
-        <a href="onama.html">O nama</a>
-        <a href="tim.html">Tim</a>
-        <a href="top15.html">Top 15</a>
-        <a href="kontakt.html">Kontakt</a>
+      <a href="index.html">Početna</a>
+      <a href="onama.html">O nama</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
+      <a href="aplikacije.html">Aplikacije</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="webstranica.html">Poruči WEB STRANICU </a>
+      <a href="top15.html">Top 30</a>
       </nav>
     </div>
   </header>

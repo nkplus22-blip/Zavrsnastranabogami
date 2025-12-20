@@ -1,23 +1,6 @@
-function toggleMenu() {
-  document.getElementById("mainMenu").classList.toggle("show");
-}
-
-// WhatsApp Form
-document.getElementById("waForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  let ime = document.getElementById("ime").value;
-  let email = document.getElementById("email").value;
-  let poruka = document.getElementById("poruka").value;
-
-  let broj = "4915755749502";
-
-  let tekst =
-    `👤 Ime: ${ime}%0A` +
-    `📧 Email: ${email}%0A` +
-    `💬 Poruka:%0A${poruka}`;
-
-  window.open(`https://wa.me/${broj}?text=${tekst}`, "_blank");
+/* ======================
+   HAMBURGER MENU
+   ====================== */
 function toggleMenu() {
   const nav = document.getElementById("overlayNav");
   nav.classList.add("open");
@@ -29,4 +12,30 @@ function closeNav() {
   nav.classList.remove("open");
   nav.setAttribute("aria-hidden", "true");
 }
-});
+
+/* ======================
+   WHATSAPP FORMA
+   ====================== */
+const form = document.getElementById("waForm");
+
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const ime = document.getElementById("ime").value;
+    const email = document.getElementById("email").value;
+    const poruka = document.getElementById("poruka").value;
+
+    const broj = "4915755749502";
+
+    const tekst =
+      `👤 Ime: ${ime}\n` +
+      `📧 Email: ${email}\n` +
+      `💬 Poruka:\n${poruka}`;
+
+    const url =
+      "https://wa.me/" + broj + "?text=" + encodeURIComponent(tekst);
+
+    window.open(url, "_blank");
+  });
+}

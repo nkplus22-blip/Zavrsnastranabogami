@@ -32,8 +32,14 @@
 </header>
 
 <!-- OVERLAY NAV -->
-    <nav id="overlayNav" class="overlay" aria-hidden="true">
-      <div class="closebtn" onclick="closeNav()">×</div>
+<header class="header">
+  <h1>yugofamily.de</h1>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</header>
+
+<div class="overlay" id="overlay">
+  <span class="closebtn" onclick="toggleMenu()">&times;</span>
       <a href="index.html">Početna</a>
       <a href="onama.html">O nama</a>
       <a href="kako-da-gledas.html">Kako da gledaš</a>

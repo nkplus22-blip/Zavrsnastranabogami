@@ -195,6 +195,14 @@ textarea { height: 120px; }
 
 .overlay a:hover{
   background:#6900ff;
+} 
+.closebtn{
+  position:absolute;
+  top:18px;
+  right:18px;
+  font-size:34px;
+  color:#fff;
+  cursor:pointer;
 }
 .menu-toggle{
   display:block;          /* ← OVO je ključno */

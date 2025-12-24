@@ -26,20 +26,6 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
-/* HAMBURGER */
-.menu-toggle {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 32px;
-  cursor: pointer;
-  z-index: 999;
-}
-
 .nav {
   display: none;
   flex-direction: column;

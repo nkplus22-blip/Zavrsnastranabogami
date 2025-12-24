@@ -57,48 +57,45 @@ header h1 {
 }
 
 /* ============ FULLSCREEN MENU ================= */
-.overlay{
-  position:fixed;
-  top:0;
-  right:0;
-  width:280px;          /* širina menija */
-  height:100%;
-  background:#0b0018;
-  display:flex;
-  flex-direction:column;
-  padding-top:80px;
-  transform:translateX(100%);
-  transition:transform .35s ease;
-  z-index:10000;
-  border-left:2px solid #6900ff;
-  box-shadow:-10px 0 30px rgba(105,0,255,0.4);
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  z-index: 1000;
+  background: linear-gradient(180deg, #050622, #120b3d);
+  overflow-x: hidden;
+  transition: 0.4s;
+  padding-top: 80px;
+  box-shadow: inset 0 0 60px #7b00ff;
 }
 
-.overlay.open{
-  transform:translateX(0);
+.overlay a {
+  display: block;
+  padding: 16px;
+  font-size: 1.6em;
+  color: #cfcfff;
+  text-decoration: none;
+  text-align: center;
+  text-shadow: 0 0 10px #7b00ff;
+  transition: 0.3s;
 }
 
-.overlay a{
-  color:#fff;
-  font-size:18px;
-  padding:15px 25px;
-  text-decoration:none;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.overlay a:hover{
-  background:#6900ff;
-}
+.overlay a:hover {
+  color: #ffffff;
+  background: rgba(123,0,255,0.25);
   box-shadow: inset 0 0 20px #7b00ff;
 }
 
-.closebtn{
-  position:absolute;
-  top:18px;
-  right:18px;
-  font-size:34px;
-  color:#fff;
-  cursor:pointer;
+.closebtn {
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  font-size: 45px;
+  color: #ff66ff;
+  cursor: pointer;
+  text-shadow: 0 0 18px #ff66ff;
 }
 
 /* ============ CONTENT ================= */
@@ -178,11 +175,11 @@ footer a {
 
 <header>
   <h1>Kako da gledaš YUGO-Family TV</h1>
- <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <button class="menu-toggle" onclick="openNav()">☰</button>
 </header>
 
-<div class="overlay" id="overlay">
-  <span class="closebtn" onclick="toggleMenu()">&times;</span>
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a href="index.html">Početna</a>
   <a href="#">O nama</a>
   <a href="#">Kako da gledaš</a>

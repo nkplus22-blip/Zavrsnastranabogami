@@ -3,236 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YUGO-Family TV | Kako da gledaš</title>
+<title>YUGO-Family TV</title>
 
 <style>
-/* ============ RESET ============ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ============ BODY & BACKGROUND ============ */
+/* GLOBAL */
 body {
   font-family: Arial, sans-serif;
-  color: #ffffff;
+  background: #080010;
+  color: #fff;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(123,0,255,0.35), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(10,26,255,0.35), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(123,0,255,0.3), transparent 50%),
-    linear-gradient(180deg, #03041a, #080b2e);
-  animation: bgMove 14s infinite alternate;
+  transition: 0.4s;
 }
+.light { background: #f6f6ff; color: #000; }
 
-/* ============ HEADER ================= */
+/* HEADER */
 header {
-  position: relative;
-  background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
-  padding: 22px;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 0 35px #7b00ff;
-  z-index: 1500;
+  background: #111;
+  border-bottom: 2px solid #6900ff;
+  position: relative;
 }
-
-header h1 {
-  font-size: 2em;
-  text-shadow: 0 0 12px #7b00ff, 0 0 30px #0a1aff;
-  animation: neonPulse 3s infinite alternate;
-}
-
-/* ============ HAMBURGER ================= */
 .menu-toggle {
   position: absolute;
-  top: 18px;
-  right: 22px;
-  font-size: 30px;
+  top: 20px; right: 20px;
+  font-size: 28px;
   background: none;
   border: none;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
-  text-shadow: 0 0 15px #7b00ff;
-  z-index: 2000; /* fix da uvijek klikabilan */
+  z-index: 10001;
 }
+.theme-btn, .lang-select {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #6900ff;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-select { left: 110px; }
 
-/* ============ FULLSCREEN MENU ================= */
+/* OVERLAY MENU */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  z-index: 1000;
-  background: linear-gradient(180deg, #050622, #120b3d);
-  overflow-x: hidden;
-  transition: 0.4s;
+  top: 0; right: 0;
+  width: 280px; height: 100%;
+  background: #0b0018;
+  display: flex;
+  flex-direction: column;
   padding-top: 80px;
-  box-shadow: inset 0 0 60px #7b00ff;
+  transform: translateX(100%);
+  transition: transform .35s ease;
+  z-index: 10000;
+  border-left: 2px solid #6900ff;
+  box-shadow: -10px 0 30px rgba(105,0,255,0.4);
 }
-
+.overlay.open { transform: translateX(0); }
 .overlay a {
-  display: block;
-  padding: 16px;
-  font-size: 1.6em;
-  color: #cfcfff;
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 25px;
   text-decoration: none;
-  text-align: center;
-  text-shadow: 0 0 10px #7b00ff;
-  transition: 0.3s;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-
-.overlay a:hover {
-  color: #ffffff;
-  background: rgba(123,0,255,0.25);
-  box-shadow: inset 0 0 20px #7b00ff;
-}
-
+.overlay a:hover { background: #6900ff; }
 .closebtn {
   position: absolute;
-  top: 18px;
-  right: 30px;
-  font-size: 45px;
-  color: #ff66ff;
+  top: 18px; right: 18px;
+  font-size: 34px;
+  color: #fff;
   cursor: pointer;
-  text-shadow: 0 0 18px #ff66ff;
 }
 
-/* ============ CONTENT ================= */
-.content {
-  max-width: 900px;
-  margin: auto;
-  padding: 40px 20px;
-  animation: fadeIn 1.4s ease;
+/* CONTAINER & FORM */
+.container { width: 90%; max-width: 900px; margin: auto; padding-top: 30px; text-align: center; }
+.form-box input, .form-box textarea {
+  width: 100%; padding: 12px; margin-bottom: 12px;
+  background: #12001f; border: 2px solid #6900ff;
+  border-radius: 8px; color: #fff;
+}
+textarea { height: 120px; }
+.btn-glow {
+  width: 100%; padding: 12px;
+  border-radius: 8px; border: none;
+  background: #6900ff; color: #fff; font-size: 18px;
+  box-shadow: 0 0 18px #6900ff;
+  cursor: pointer;
+}
+.btn-glow:hover { box-shadow: 0 0 25px #a870ff; }
+.warning { display: none; color: #ff4444; margin-bottom: 10px; }
+
+/* COMMENTS */
+.comments-box { margin-top: 25px; }
+.comment-card {
+  padding: 15px; background: #170028;
+  border-left: 4px solid #8a2bff;
+  border-radius: 10px; margin-bottom: 12px;
+  box-shadow: 0 0 12px #741cff;
+  animation: fadeIn .4s ease;
+}
+.avatar {
+  width: 45px; height: 45px; border-radius: 50%;
+  margin-right: 10px; vertical-align: middle;
 }
 
-.content p {
-  text-align: center;
-  font-size: 1.1em;
-  line-height: 1.6;
-  margin-bottom: 30px;
+/* TRUSTED */
+.trusted-section { text-align: center; margin-top: 40px; }
+.badge {
+  display: inline-block;
+  padding: 12px 20px; margin: 6px;
+  border: 2px solid #6900ff;
+  border-radius: 8px; background: #140026;
+  box-shadow: 0 0 15px #6900ff;
 }
 
-/* ============ CARDS ================= */
-.device {
-  background: linear-gradient(145deg, rgba(10,15,60,0.95), rgba(13,17,71,0.95));
-  margin-bottom: 25px;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #7b00ff;
-  box-shadow: 0 0 18px #7b00ff;
-  transition: transform 0.35s, box-shadow 0.35s;
-}
+/* FOOTER */
+footer { margin-top: 50px; padding: 20px; background: #0b0013; text-align: center; color: #fff; }
 
-.device:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 28px #7b00ff, 0 0 45px #0a1aff;
-}
-
-.device h2 {
-  margin-bottom: 10px;
-  text-shadow: 0 0 12px #7b00ff;
-  animation: neonPulse 2.6s infinite alternate;
-}
-
-/* ============ FOOTER ================= */
-footer {
-  background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
-  text-align: center;
-  padding: 18px;
-  box-shadow: 0 0 35px #7b00ff;
-}
-
-footer a {
-  color: #ffffff;
-  text-decoration: none;
-  text-shadow: 0 0 12px #ff66ff;
-}
-
-/* ============ ANIMATIONS ================= */
-@keyframes neonPulse {
-  from {
-    text-shadow: 0 0 6px #7b00ff, 0 0 15px #7b00ff;
-  }
-  to {
-    text-shadow: 0 0 18px #0a1aff, 0 0 35px #0a1aff;
-  }
-}
-
-@keyframes bgMove {
-  from { background-position: 0% 0%; }
-  to { background-position: 100% 100%; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ANIMATIONS */
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Kako da gledaš YUGO-Family TV</h1>
-  <button class="menu-toggle" onclick="openNav()">☰</button>
+  <h1>YUGO-Family TV</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <button class="theme-btn" onclick="toggleTheme()">☀️/🌙</button>
+  <select class="lang-select" id="languageSelect" onchange="changeLanguage()">
+    <option value="bs">BS</option>
+    <option value="en">EN</option>
+    <option value="de">DE</option>
+  </select>
+
+  <div id="mainMenu" class="overlay">
+    <span class="closebtn" onclick="toggleMenu()">×</span>
+    <a href="#">Početna</a>
+    <a href="#">O nama</a>
+    <a href="#">Kako da gledaš</a>
+    <a href="#">Cijene</a>
+    <a href="#">Aplikacije</a>
+    <a href="#">Komentari</a>
+    <a href="#">Plaćanje</a>
+    <a href="#">Kontakt</a>
+  </div>
 </header>
 
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="index.html">Početna</a>
-  <a href="#">O nama</a>
-  <a href="#">Kako da gledaš</a>
-  <a href="#">Cijene</a>
-  <a href="#">Aplikacije</a>
-  <a href="#">Komentari</a>
-  <a href="#">Plaćanje</a>
-  <a href="#">Kontakt</a>
-  <a href="#">Postani dio tima</a>
-  <a href="#">Top15</a>
+<div class="container">
+  <h2 data-text="commentsTitle">Komentari naših korisnika</h2>
+
+  <form id="commentForm" class="form-box" onsubmit="addComment(event)">
+    <input type="text" id="name" placeholder="Ime" required>
+    <input type="text" id="location" placeholder="Grad" required>
+    <textarea id="message" placeholder="Tvoj komentar" required></textarea>
+    <div id="spamWarning" class="warning">Sačekaj prije slanja ponovo!</div>
+    <button type="submit" class="btn-glow" data-text="leaveComment">Ostavi komentar</button>
+  </form>
+
+  <div class="comments-box" id="commentsArea"></div>
 </div>
 
-<main class="content">
-  <p>
-    YUGO-Family TV možeš gledati na više različitih uređaja.
-    Izaberi ono što ti najviše odgovara i uživaj u omiljenim kanalima gdje god da se nalaziš.
-  </p>
-
-  <div class="device">
-    <h2>📺 Smart TV</h2>
-    <p>Instalacija aplikacije direktno na Smart TV uređaj.</p>
-  </div>
-
-  <div class="device">
-    <h2>💻 Kompjuter / Laptop</h2>
-    <p>Gledanje putem web pretraživača bez dodatne opreme.</p>
-  </div>
-
-  <div class="device">
-    <h2>📱 Telefon / Tablet</h2>
-    <p>Android i iOS aplikacije za gledanje bilo gdje.</p>
-  </div>
-
-  <div class="device">
-    <h2>▶️ Streaming uređaji</h2>
-    <p>Chromecast, Fire Stick, Nvidia Shield i drugi kompatibilni uređaji.</p>
-  </div>
-</main>
+<section class="trusted-section">
+  <h3>Vjeruju nam više od <span id="onlineCount">10,000</span> korisnika!</h3>
+  <div class="badge">⭐ Stabilan stream</div>
+  <div class="badge">📺 HD kvalitet</div>
+  <div class="badge">⚡ Brza aktivacija</div>
+</section>
 
 <footer>
-  <p>
-    &copy; 2025 YUGO-Family TV |
-    <a href="https://wa.me/4915755749502">WhatsApp</a> |
-    Email: yugofamily.podrska@gmail.com
-  </p>
+  <p>&copy; 2025 YUGO-Family TV | Kontakt: <a href="mailto:yugofamily.podrska@gmail.com">yugofamily.podrska@gmail.com</a></p>
 </footer>
 
 <script>
-function openNav() {
-  document.getElementById("myNav").style.width = "100%";
+/* HAMBURGER */
+function toggleMenu() {
+  document.getElementById("mainMenu").classList.toggle("open");
 }
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
+
+/* DAY/NIGHT */
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+/* ONLINE FAKE BROJAČ */
+function onlineCounter() {
+  let count = Math.floor(10000 + Math.random() * 3450);
+  document.getElementById("onlineCount").innerText = count.toLocaleString("de-DE");
+}
+setInterval(onlineCounter, 5000);
+onlineCounter();
+
+/* MULTI LANGUAGE */
+const translations = {
+  bs: { commentsTitle: "Komentari naših korisnika", leaveComment: "Ostavi komentar" },
+  en: { commentsTitle: "User Reviews", leaveComment: "Leave a Comment" },
+  de: { commentsTitle: "Benutzerkommentare", leaveComment: "Kommentar hinterlassen" }
+};
+function changeLanguage() {
+  let lang = document.getElementById("languageSelect").value;
+  document.querySelectorAll("[data-text]").forEach(el => {
+    let key = el.dataset.text;
+    el.textContent = translations[lang][key];
+  });
+}
+
+/* FAKE KOMENTARI */
+const fakeNames = ["Haris","Amir","Nikola","Filip","Anes","Marko","Armin","Stefan","Alem",
+  "Kenan","Jovan","Luka","Boris","Dino","Eldin","Mario","Petar",
+  "Vanja","Tarik","Mitar","Milan","Nermin","Davor","Emir","Aleksandar"];
+const fakeCities = ["Sarajevo","Zagreb","Beograd","Tuzla","Split","Podgorica","Novi Sad",
+  "Zenica","Mostar","Rijeka","Niš","Skoplje","Kragujevac"];
+const fakeMessages = [
+  "Top usluga, radi brutalno!","Preporučujem svima, odlična slika.",
+  "Brza aktivacija i sve stabilno.","Podrška odlična, sve riješeno odmah.",
+  "Kvalitet slike brutalno dobar.","Nijednog prekida do sada!",
+  "Savršen izbor kanala!","Cijena top, kvalitet još bolji!",
+  "Bolje od kablovske!","Radi i na sporijem internetu!"
+];
+function generateFakeComments() {
+  const used = new Set();
+  for (let i = 0; i < 25; i++) {
+    let idx;
+    do { idx = Math.floor(Math.random() * fakeNames.length); }
+    while (used.has(idx));
+    used.add(idx);
+    let name = fakeNames[idx];
+    let city = fakeCities[Math.floor(Math.random() * fakeCities.length)];
+    let msg = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+    let avatar = `https://api.dicebear.com/7.x/thumbs/svg?seed=${name}`;
+    displayComment(name, city, msg, avatar);
+  }
+}
+
+/* DISPLAY COMMENT */
+function displayComment(name, location, msg, avatar) {
+  const box = document.getElementById("commentsArea");
+  const div = document.createElement("div");
+  div.classList.add("comment-card");
+  div.innerHTML = `<img src="${avatar}" class="avatar"><strong>${name} (${location})</strong><br>${msg}`;
+  box.prepend(div);
+}
+
+/* LOAD */
+window.onload = function () {
+  generateFakeComments();
+  const saved = JSON.parse(localStorage.getItem("comments")) || [];
+  saved.forEach(c => displayComment(c.name, c.location, c.message, c.avatar));
+};
+
+/* SPAM PROTECT + ADD COMMENT */
+let lastSubmit = 0;
+function addComment(e) {
+  e.preventDefault();
+  if (Date.now() - lastSubmit < 4000) {
+    document.getElementById("spamWarning").style.display = "block";
+    return;
+  }
+  document.getElementById("spamWarning").style.display = "none";
+  lastSubmit = Date.now();
+
+  const name = document.getElementById("name").value;
+  const location = document.getElementById("location").value;
+  const message = document.getElementById("message").value;
+  const avatar = `https://api.dicebear.com/7.x/thumbs/svg?seed=${name}`;
+
+  displayComment(name, location, message, avatar);
+
+  const saved = JSON.parse(localStorage.getItem("comments")) || [];
+  saved.unshift({ name, location, message, avatar });
+  localStorage.setItem("comments", JSON.stringify(saved));
+
+  document.getElementById("commentForm").reset();
 }
 </script>
 

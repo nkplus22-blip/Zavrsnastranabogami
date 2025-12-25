@@ -3,804 +3,221 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Poruči WEB Stranicu • YuGo Family (Premium)</title>
-  <meta name="description" content="Premium izrada web stranica — demo link, 30-dnevno jamstvo, ROI kalkulator, i podrška. Kontakt preko WhatsApp.">
+  <title>Poruči WEB Stranicu • YUGO‑Family (Premium)</title>
+  <meta name="description" content="Premium izrada web stranica — demo link, 30‑dnevno jamstvo, ROI kalkulator, i podrška. Kontakt preko WhatsApp.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg1:#050714; --neon:#2ac0ff; --accent:#4a6bff; --muted:rgba(200,220,255,0.18);
-      --glass: rgba(255,255,255,0.04);
-      --wa-green: #25d366;
+      --glass: rgba(255,255,255,0.04); --wa-green:#25d366;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),#02102a);color:#e6f7ff;-webkit-font-smoothing:antialiased}
-    a{color:var(--neon);text-decoration:none}
-    img{max-width:100%;display:block}
-
-    /* page wrapper */
-    .wrap{max-width:1200px;margin:18px auto;padding:0 18px;position:relative;z-index:10}
-
-    /* header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 6px;gap:12px;position:relative}
-    .logo-wrap{display:flex;align-items:center;gap:12px}
-    .site-logo{max-width:200px;filter:drop-shadow(0 10px 50px rgba(42,176,255,0.12));animation:logoPulse 6s infinite}
-    @keyframes logoPulse{0%,100%{filter:drop-shadow(0 6px 28px rgba(42,176,255,0.08))}50%{filter:drop-shadow(0 14px 60px rgba(42,176,255,0.28))}}
-    .tagline{color:var(--muted);font-weight:600;font-size:13px}
-
-    .menu-toggle{background:transparent;border:none;color:var(--neon);font-size:26px;cursor:pointer}
-    .lang-toggle{display:flex;gap:6px;align-items:center}
-    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:#dff4ff;cursor:pointer;font-weight:700}
-    .lang-btn.active{background:linear-gradient(90deg,var(--neon),var(--accent));color:#02102a;border:none}
-
-    /* overlay nav */
-    .overlay{position:fixed;inset:0;width:0;height:100%;background:rgba(0,6,20,0.96);backdrop-filter:blur(6px);overflow:hidden;transition:width .45s ease;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .overlay.open{width:100%}
-    .overlay a{font-size:22px;color:#eaf7ff;padding:12px 18px;border-radius:8px;display:block;transition:0.15s}
-    .overlay a:hover{color:var(--neon);transform:translateX(6px)}
-    .overlay .closebtn{position:absolute;top:18px;right:22px;font-size:34px;color:var(--neon);cursor:pointer}
-
-    /* floating particles & watermark */
-    .particles{position:fixed;inset:0;pointer-events:none;z-index:0}
-    .particle{position:absolute;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--accent));opacity:0.1;filter:blur(6px);mix-blend-mode:screen}
-    .bg-watermark{position:fixed;right:-6%;bottom:-8%;opacity:0.06;z-index:0;transform:rotate(-14deg);pointer-events:none}
-
-    /* progress bar on top */
-    .progress-wrap{position:fixed;left:0;top:0;height:4px;width:100%;background:transparent;z-index:1100}
-    .progress-bar{height:4px;width:0;background:linear-gradient(90deg,var(--neon),var(--accent));box-shadow:0 0 12px rgba(42,176,255,0.3)}
-
-    /* hero */
-    .hero{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0;z-index:5}
-    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:46px;color:#fff;margin:6px 0;text-shadow:0 8px 36px rgba(0,0,0,0.6)}
-    .hero p{margin:0;color:var(--muted);font-size:15px;text-align:center;max-width:920px}
-
-    /* badges row */
-    .badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:14px 0}
-    .badge{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;font-weight:700;color:#dff4ff;display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-    .unique-badge{background:linear-gradient(90deg,var(--neon),var(--accent));color:#02102a;padding:10px 14px;border-radius:999px;box-shadow:0 10px 40px rgba(42,176,255,0.18)}
-
-    /* live status */
-    .live-status{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:8px}
-    .status-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:700;color:#cfefff}
-    .status-pill strong{color:var(--neon);margin-left:6px}
-
-    /* packages grid */
-    .packages{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:18px 0;padding-bottom:6px}
-    .pack{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;min-width:260px;text-align:left;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
-    .pack:hover{transform:translateY(-8px);box-shadow:0 32px 80px rgba(0,0,0,0.6)}
-    .pack h3{font-size:20px;color:var(--neon);margin:0 0 8px}
-    .pack ul{color:#dff4ff;line-height:1.6;margin:0;padding-left:18px}
-    .pack .cta-wa{display:inline-block;margin-top:10px;background:linear-gradient(135deg,var(--wa-green),#128c7e);padding:10px 12px;border-radius:10px;color:#021102;font-weight:800;text-decoration:none}
-
-    /* payment methods grid (new) */
-    .payments{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}
-    .pay-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:10px;text-align:center;cursor:pointer;transition:transform .18s,box-shadow .18s}
-    .pay-item:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(42,176,255,0.12)}
-    .pay-icon{font-size:20px;height:48px;width:48px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:8px;background:linear-gradient(90deg,rgba(42,176,255,0.08),rgba(74,107,255,0.04))}
-    .pay-title{font-weight:700;color:#dff4ff;font-size:14px}
-
-    /* why us */
-    .whyus{max-width:1100px;margin:28px auto;padding:22px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.45)}
-    .why-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-    .why-item{flex:1;min-width:220px;background:rgba(255,255,255,0.03);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);text-align:center;box-shadow:0 12px 40px rgba(0,0,0,0.45)}
-    .why-icon{font-size:30px;margin-bottom:8px;color:var(--neon)}
-    .why-title{font-weight:800;color:#cfefff;margin-bottom:6px}
-    .why-desc{color:#dff4ff;line-height:1.6;font-size:14px}
-
-    /* features column (ROI/demo/brief) */
-    .features{display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:start;margin:20px 0}
-    @media(max-width:980px){.features{grid-template-columns:1fr}}
-    .feature-box{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-    .roi input,.demo-token input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,10,30,0.4);color:white}
-
-    /* testimonial */
-    .testimonials{margin:26px auto;max-width:1100px;position:relative}
-    .t-wrap{display:flex;gap:14px;overflow:hidden;transition:transform .45s ease}
-    .t-slide{min-width:100%;flex-shrink:0;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);display:flex;gap:12px;align-items:center}
-    .avatar{width:72px;height:72px;border-radius:999px;background:linear-gradient(90deg,var(--neon),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:800;color:#02102a}
-    .t-text{color:#dff4ff}
-
-    /* faq */
-    .faq{max-width:1100px;margin:20px auto}
-    .faq-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;margin-bottom:8px}
-    .faq-q{display:flex;justify-content:space-between;cursor:pointer;align-items:center;font-weight:700;color:#cfefff}
-    .faq-a{margin-top:8px;display:none;color:#dff4ff;line-height:1.6}
-
-    /* team image */
-    .creators{margin:36px auto;display:block;max-width:540px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 30px 80px rgba(2,10,30,0.6)}
-
-    /* form */
-    form{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);max-width:900px;margin:18px auto}
-    label{display:block;margin-top:12px;font-weight:700;color:#cfefff}
-    input[type="text"],input[type="email"],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,10,30,0.4);color:white}
-    textarea{min-height:120px}
-    .form-row{display:flex;gap:8px}
-    @media(max-width:600px){.form-row{flex-direction:column}}
-    .send-row{display:flex;gap:8px;margin-top:12px}
-    .send-row .send-btn{flex:1}
-
-    /* floating whatsapp bubble */
-    .whatsapp-fixed{position:fixed;right:18px;bottom:18px;z-index:999;background:linear-gradient(135deg,var(--wa-green),#128c7e);padding:12px 16px;border-radius:12px;color:white;font-weight:800;box-shadow:0 12px 34px rgba(0,0,0,0.6);text-decoration:none;display:flex;align-items:center;gap:8px}
-    .whatsapp-fixed .pulse{width:10px;height:10px;border-radius:999px;background:#fff;opacity:0.9;box-shadow:0 0 12px rgba(255,255,255,0.2);animation:pulse 1.6s infinite}
-    @keyframes pulse{0%{transform:scale(.9)}50%{transform:scale(1.4);opacity:.6}100%{transform:scale(.9)}}
-
-    /* cookie bar */
-    .cookie-bar{position:fixed;left:12px;right:12px;bottom:24px;background:rgba(0,0,0,0.7);padding:12px;border-radius:10px;display:flex;justify-content:space-between;gap:12px;align-items:center;z-index:1200}
-    .cookie-bar button{background:linear-gradient(90deg,var(--neon),var(--accent));border:none;padding:8px 12px;border-radius:8px;color:#02102a;font-weight:800;cursor:pointer}
-
-    /* small screens */
-    @media(max-width:900px){
-      .hero h1{font-size:38px}
-      .packages{gap:12px}
+    *{box-sizing:border-box;}
+    html,body{
+      height:100%;margin:0;
+      font-family:Inter,system-ui,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),#02102a);
+      color:#e6f7ff;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
     }
 
-    /* anti-copy (mild) */
-    body.user-select-none{user-select:none}
+    /* LIGHT THEME */
+    body.light{
+      background:linear-gradient(180deg,#f3f1ff,#e5e2ff);
+      color:#02102a;
+    }
+    body.light .pack, body.light .feature-box, body.light form,
+    body.light .why-item, body.light .faq-item{
+      background:rgba(255,255,255,0.9) !important;
+      color:#02102a !important;
+    }
+
+    a{color:var(--neon);text-decoration:none;}
+    img{max-width:100%;display:block;}
+
+    .wrap{max-width:1200px;margin:18px auto;padding:0 18px;position:relative;z-index:10;}
+    header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:18px 6px;gap:12px;}
+    .logo-wrap{display:flex;align-items:center;gap:12px;}
+    .site-logo{max-width:200px;filter:drop-shadow(0 10px 50px rgba(42,176,255,0.12));}
+    .tagline{color:var(--muted);font-weight:600;font-size:13px;}
+
+    .menu-toggle{background:none;border:none;color:var(--neon);font-size:28px;cursor:pointer;}
+    .theme-toggle{background:var(--accent);border:none;color:#fff;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer;}
+    .lang-toggle{display:flex;gap:6px;align-items:center;}
+    .lang-btn{background:none;border:1px solid rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:#dff4ff;cursor:pointer;font-weight:700;}
+    .lang-btn.active{background:linear-gradient(90deg,var(--neon),var(--accent));color:#02102a;border:none;}
+
+    /* Overlay menu */
+    .overlay{position:fixed;inset:0;width:0;background:rgba(0,6,20,0.96);backdrop-filter:blur(6px);overflow:hidden;transition:width .45s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;}
+    .overlay.open{width:100%;}
+    .overlay a{font-size:22px;color:#eaf7ff;padding:12px 18px;border-radius:8px;display:block;transition:.15s;}
+    .overlay a:hover{color:var(--neon);transform:translateX(6px);}
+    .closebtn{position:absolute;top:18px;right:22px;font-size:34px;color:var(--neon);cursor:pointer;}
+
+    /* Hero */
+    .hero{text-align:center;padding:20px 10px;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:46px;margin-bottom:6px;color:#fff;text-shadow:0 5px 20px rgba(0,0,0,0.6);}
+    .hero p{color:var(--muted);font-size:15px;max-width:900px;margin:auto;}
+    @media(max-width:700px){ .hero h1{font-size:34px;} }
+
+    .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:14px 0;}
+    .badge{background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;color:#dff4ff;font-weight:700;border:1px solid rgba(255,255,255,0.06);}
+    .unique-badge{background:linear-gradient(90deg,var(--neon),var(--accent));color:#02102a;}
+
+    .live-status{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:14px;}
+    .status-pill{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);}
+    .status-pill strong{color:var(--neon);}
+
+    /* Packages */
+    .packages{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin:18px 0;}
+    .pack{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;min-width:260px;max-width:320px;flex:1 1 300px;box-shadow:0 15px 45px rgba(0,0,0,0.5);transition:.25s;}
+    .pack:hover{transform:translateY(-6px);box-shadow:0 25px 60px rgba(0,0,0,0.6);}
+    .pack h3{color:var(--neon);margin:0 0 8px;}
+    .pack ul{line-height:1.6;color:#dff4ff;margin:0;padding-left:18px;}
+    .cta-wa{display:inline-block;margin-top:10px;background:linear-gradient(135deg,var(--wa-green),#128c7e);padding:10px 12px;border-radius:10px;color:#021102;font-weight:800;text-decoration:none;}
+    .cta-wa:hover{filter:brightness(1.1);}
+
+    /* Payments */
+    .payments{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0;}
+    .pay-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);padding:12px;border-radius:10px;text-align:center;cursor:pointer;transition:.18s;}
+    .pay-item:hover{transform:translateY(-5px);box-shadow:0 10px 40px rgba(42,176,255,0.15);}
+    .pay-title{font-weight:700;color:#dff4ff;font-size:14px;}
+
+    /* Why us */
+    .whyus{max-width:1100px;margin:28px auto;padding:22px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);}
+    .why-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+    .why-item{flex:1;min-width:220px;background:rgba(255,255,255,0.04);padding:16px;border-radius:10px;text-align:center;}
+    .why-icon{font-size:30px;margin-bottom:8px;color:var(--neon);}
+    .why-title{font-weight:800;color:#cfefff;}
+    .why-desc{font-size:14px;color:#dff4ff;line-height:1.6;}
+
+    /* FAQ */
+    .faq{max-width:1100px;margin:20px auto;}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;font-weight:700;color:#cfefff;cursor:pointer;}
+    .faq-a{display:none;margin-top:8px;line-height:1.6;}
+
+    /* Form */
+    form{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;max-width:900px;margin:24px auto;}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,10,30,0.4);color:white;}
+    textarea{min-height:120px;}
+    .form-row{display:flex;flex-wrap:wrap;gap:12px;}
+    .send-btn{flex:1;background:linear-gradient(90deg,var(--neon),var(--accent));border:none;border-radius:8px;padding:10px;color:#02102a;font-weight:800;cursor:pointer;}
+    .brief-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px;color:#dff4ff;font-weight:700;cursor:pointer;}
+    @media(max-width:600px){.form-row{flex-direction:column;}}
+
+    /* Scroll to top */
+    #scrollTopBtn{display:none;position:fixed;bottom:20px;right:20px;z-index:1200;font-size:20px;background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:10px;box-shadow:0 0 25px #6900ff;cursor:pointer;}
+    #scrollTopBtn:hover{box-shadow:0 0 30px #a870ff;}
+
+    footer{text-align:center;padding:20px;background:#0b0013;color:rgba(200,230,255,0.75);margin-top:30px;}
+    footer a{color:var(--neon);}
   </style>
-    <!-- nastavak head done -->
 </head>
+
 <body>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="height:4px;width:0;background:linear-gradient(90deg,var(--neon),var(--accent));box-shadow:0 0 12px rgba(42,176,255,0.3)"></div></div>
 
-  <!-- top progress -->
-  <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
-
-  <!-- particles & watermark -->
-  <div class="particles" aria-hidden="true"></div>
-  <svg class="bg-watermark" width="640" height="320" viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="640" height="320" rx="24" fill="url(#g)"/>
-    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#2ac0ff"/><stop offset="1" stop-color="#4a6bff"/></linearGradient></defs>
-  </svg>
-
-  <div class="wrap" role="main">
-
-    <!-- header -->
-    <header>
-      <div class="logo-wrap" style="align-items:center">
-        <img src="logoyf.png" alt="YuGo Family" class="site-logo">
-        <div style="display:flex;flex-direction:column">
-          <div class="tagline" id="taglineEl">Vaša porodica, vaša televizija — + profesionalni web dizajn</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">Novo: premium web usluge • 30-dnevno jamstvo</div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:10px">
-        <div class="lang-toggle" aria-hidden="false" role="navigation" aria-label="Language">
-          <button class="lang-btn active" data-lang="bs">BS</button>
-          <button class="lang-btn" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="de">DE</button>
-        </div>
-        <button class="menu-toggle" onclick="openNav()" aria-label="Open menu">☰</button>
-      </div>
-    </header>
-
-    <!-- nav overlay -->
-    <nav id="overlayNav" class="overlay" aria-hidden="true">
-      <div class="closebtn" onclick="closeNav()">×</div>
-      <a href="index.html">Početna</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="webstranica.html">Poruči WEB STRANICU</a>
-      <a href="top15.html">Top 30</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="onama.html">O nama</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="aplikacije.html">Aplikacije</a>
-    </nav>
-
-    <!-- hero -->
-    <section class="hero" role="banner" aria-labelledby="hero-title">
-      <h1 id="hero-title">Poruči svoju WEB stranicu — Premium + Jedinstveno</h1>
-      <p id="hero-sub">Usluga sa garancijom, demo okruženjem i stvarnim dokazima — sve na jednom mjestu.</p>
-    </section>
-
-    <!-- badges and live status -->
-    <div class="badges" role="list" aria-hidden="false">
-      <div class="badge unique-badge" id="badgeGuarantee">NOVO: 30 dana Jamstva</div>
-      <div class="badge">SLA: 99.9% uptime</div>
-      <div class="badge">Kod &amp; Prava | Full Ownership</div>
-      <div class="badge">Besplatni pre-build Performance Audit</div>
-    </div>
-
-    <div class="live-status" aria-live="polite">
-      <div class="status-pill">Slobodna mjesta: <strong id="spotsCount">5</strong></div>
-      <div class="status-pill">Otvoreni projekti: <strong id="openProjects">2</strong></div>
-      <div class="status-pill">Preporuka: <strong id="refRate">98%</strong></div>
-    </div>
-
-    <!-- packages -->
-    <div class="packages" role="region" aria-label="Paketi">
-      <div class="pack" data-key="basic">
-        <h3 class="pack-title">Basic paket</h3>
-        <ul>
-          <li>Do 3 stranice (Početna, Usluge, Kontakt)</li>
-          <li>Responsive + mobilno prilagođeno</li>
-          <li>Kontakt forma i WhatsApp integracija</li>
-          <li>Osnovna optimizacija brzine</li>
-          <li>Full source i prava na kod</li>
-        </ul>
-        <a class="cta-wa" href="#" data-method="Basic paket">Više informacija na WhatsApp</a>
-      </div>
-
-      <div class="pack" data-key="standard">
-        <h3 class="pack-title">Standard paket</h3>
-        <ul>
-          <li>5–7 profesionalnih stranica</li>
-          <li>SEO + galerije + animacije</li>
-          <li>Ubrzana isporuka + podrška 30 dana</li>
-          <li>Free pre-build performance audit</li>
-          <li>Staging demo prije puštanja uživo</li>
-        </ul>
-        <a class="cta-wa" href="#" data-method="Standard paket">Više informacija na WhatsApp</a>
-      </div>
-
-      <div class="pack" data-key="premium">
-        <h3 class="pack-title">Premium paket</h3>
-        <ul>
-          <li>Neograničen broj stranica</li>
-          <li>Online shop (korpa + naplata) + admin panel</li>
-          <li>Full SEO, sigurnost i SLA podrška</li>
-          <li>Onboarding video i korisnički trening</li>
-          <li>Mesečni izvještaj performansi u prvih 3 mjeseca</li>
-        </ul>
-        <a class="cta-wa" href="#" data-method="Premium paket">Više informacija na WhatsApp</a>
+  <header>
+    <div class="logo-wrap">
+      <img src="logoyf.png" alt="YuGo Family" class="site-logo">
+      <div>
+        <div class="tagline">Vaša porodica, vaša televizija — + profesionalni web dizajn</div>
+        <div style="font-size:12px;color:var(--muted)">Novo: premium web usluge • 30‑dnevno jamstvo</div>
       </div>
     </div>
-
-    <!-- payments grid -->
-    <section aria-labelledby="payments-title">
-      <h3 id="payments-title" style="text-align:center;color:var(--neon);margin-top:12px">Načini plaćanja — izaberite</h3>
-      <div class="payments" role="list" aria-label="Načini plaćanja">
-
-        <!-- each pay-item includes data-method used to generate WA message -->
-        <div class="pay-item" data-method="PayPal">
-          <div class="pay-icon">PP</div>
-          <div class="pay-title">PayPal</div>
-        </div>
-
-        <div class="pay-item" data-method="Skrill">
-          <div class="pay-icon">SK</div>
-          <div class="pay-title">Skrill</div>
-        </div>
-
-        <div class="pay-item" data-method="IBAN / SEPA">
-          <div class="pay-icon">IB</div>
-          <div class="pay-title">IBAN / SEPA</div>
-        </div>
-
-        <div class="pay-item" data-method="Wise">
-          <div class="pay-icon">WISE</div>
-          <div class="pay-title">Wise</div>
-        </div>
-
-        <div class="pay-item" data-method="Western Union">
-          <div class="pay-icon">WU</div>
-          <div class="pay-title">Western Union</div>
-        </div>
-
-        <div class="pay-item" data-method="RIA Money Transfer">
-          <div class="pay-icon">RIA</div>
-          <div class="pay-title">RIA</div>
-        </div>
-
-        <div class="pay-item" data-method="Revolut">
-          <div class="pay-icon">RV</div>
-          <div class="pay-title">Revolut</div>
-        </div>
-
-        <div class="pay-item" data-method="Paysafecard">
-          <div class="pay-icon">PS</div>
-          <div class="pay-title">Paysafecard</div>
-        </div>
-
-        <div class="pay-item" data-method="Stripe">
-          <div class="pay-icon">ST</div>
-          <div class="pay-title">Stripe</div>
-        </div>
-
-        <div class="pay-item" data-method="MoneyGram">
-          <div class="pay-icon">MG</div>
-          <div class="pay-title">MoneyGram</div>
-        </div>
-
-        <div class="pay-item" data-method="AirTM">
-          <div class="pay-icon">ATM</div>
-          <div class="pay-title">AirTM</div>
-        </div>
-
-        <div class="pay-item" data-method="Crypto (BTC/ETH/USDT)">
-          <div class="pay-icon">₿</div>
-          <div class="pay-title">Crypto</div>
-        </div>
-
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="bs">BS</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
       </div>
-    </section>
-
-    <!-- why us -->
-    <section class="whyus" aria-labelledby="why-title">
-      <h2 id="why-title">Zašto raditi sa provjerenim ljudima?</h2>
-      <p id="why-sub">Ne radimo brzo samo da završimo — radimo promišljeno. Uz nas dobijate transparentan proces, demo okruženje prije puštanja, dokumentaciju i prenos prava.</p>
-
-      <div class="why-grid" role="list">
-        <div class="why-item" role="listitem">
-          <div class="why-icon">⭐</div>
-          <div class="why-title">Povjerenje</div>
-          <div class="why-desc">Reference i jasni rezultati — radimo po ugovoru i predajemo sve materijale u izvornom obliku.</div>
-        </div>
-
-        <div class="why-item" role="listitem">
-          <div class="why-icon">🔒</div>
-          <div class="why-title">Sigurnost</div>
-          <div class="why-desc">Ugradimo HTTPS, backup, firewall i pratimo sigurnosne best practice procedure.</div>
-        </div>
-
-        <div class="why-item" role="listitem">
-          <div class="why-icon">💎</div>
-          <div class="why-title">Kvalitet</div>
-          <div class="why-desc">Brzina, SEO i UX — mjereno i potvrđeno izvještajima i realnim metrikama.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- features: ROI, Demo, Brief -->
-    <div class="features" role="region" aria-label="Interaktivne funkcije">
-      <div class="feature-box">
-        <h3 style="margin:0 0 8px;color:var(--neon)">ROI kalkulator</h3>
-        <div class="roi">
-          <label data-lang-key="roi_rev">Očekivani mjesečni prihod (EUR)</label>
-          <input id="rev" type="text" inputmode="numeric" placeholder="2000">
-          <label data-lang-key="roi_cost">Procijenjeni mjesečni trošak (EUR)</label>
-          <input id="cost" type="text" inputmode="numeric" placeholder="150">
-          <label data-lang-key="roi_oneoff">Ulaganje u izradu web stranice (EUR)</label>
-          <input id="oneoff" type="text" inputmode="numeric" placeholder="149">
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button id="calcBtn" class="cta-wa" style="border-radius:8px;padding:8px 10px">Izračunaj ROI</button>
-            <button id="resetBtn" style="border-radius:8px;padding:8px 10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dff4ff">Reset</button>
-          </div>
-          <div id="roiResult" class="calc-result" style="margin-top:10px;display:none"></div>
-        </div>
-
-        <hr style="margin:14px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
-
-        <h4 style="margin:8px 0;color:#cfefff">Live demo / Staging</h4>
-        <p style="margin:0 0 8px;color:var(--muted)">Generišemo privremeni demo link kako biste testirali izgled i funkcionalnost prije isporuke.</p>
-        <div class="demo-token">
-          <input id="demoInput" type="text" placeholder="npr. restoran">
-          <button id="genDemo" class="cta-wa" style="border-radius:8px;padding:8px 10px">Generiši demo</button>
-        </div>
-        <div id="demoOut" style="margin-top:8px;color:#dff4ff;word-break:break-word"></div>
-      </div>
-
-      <aside class="feature-box">
-        <h3 style="color:var(--neon);margin:0 0 8px">Projektni brief — preuzmi</h3>
-        <p style="margin:0 0 10px;color:var(--muted)">Ispuni kratku formu i preuzmi automatski generisan brief koji možeš poslati nama ili sačuvati.</p>
-
-        <label>Ime projekta / Kratak naslov</label>
-        <input id="briefTitle" type="text" placeholder="Npr. Novi restoran XYZ">
-        <label>Ključne stranice</label>
-        <input id="briefPages" type="text" placeholder="Početna, Meni, Kontakt">
-        <label>Prioritet</label>
-        <select id="briefPriority" style="width:100%;padding:10px;border-radius:8px;background:rgba(0,10,30,0.4);color:white;border:1px solid rgba(255,255,255,0.06)">
-          <option>Normalno</option>
-          <option>Hitno (brža isporuka)</option>
-        </select>
-
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <button id="downloadBrief" class="brief-btn">Preuzmi Brief (.txt)</button>
-          <a class="cta-wa" id="waBrief" href="https://wa.me/4915755749502" target="_blank" rel="noopener" style="padding:8px 12px;border-radius:8px;display:inline-flex;align-items:center">Pošalji na WhatsApp</a>
-        </div>
-        <div style="margin-top:10px;color:var(--muted);font-size:13px">Brief uključuje: opis, stranice, prioritet i kontakt podatke.</div>
-      </aside>
+      <button class="theme-toggle" id="themeBtn">☀️/🌙</button>
+      <button class="menu-toggle" onclick="openNav()">☰</button>
     </div>
+  </header>
 
-    <!-- testimonials -->
-    <section class="testimonials" aria-label="Iskustva klijenata">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <h3 style="margin:0;color:var(--neon)">Što kažu klijenti</h3>
-        <div>
-          <button id="prevT" style="margin-right:8px;padding:6px 8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06)">◀</button>
-          <button id="nextT" style="padding:6px 8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06)">▶</button>
-        </div>
-      </div>
-      <div class="t-wrap" id="tWrap" aria-live="polite">
-        <div class="t-slide">
-          <div class="avatar">MF</div>
-          <div>
-            <div style="font-weight:800;color:#cfefff">Milan F.</div>
-            <div class="t-text">"Brza isporuka i potpuno transparentan proces. Demo link nas je uvjerio prije plaćanja."</div>
-          </div>
-        </div>
+  <!-- Overlay Nav -->
+  <nav id="overlayNav" class="overlay">
+    <div class="closebtn" onclick="closeNav()">×</div>
+    <a href="index.html">Početna</a>
+    <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
+    <a href="webstranica.html">Poruči WEB STRANICU</a>
+    <a href="top15.html">Top 30</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="onama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="placanje.html">Plaćanje</a>
+    <a href="kako-da-gledas.html">Kako da gledaš</a>
+    <a href="aplikacije.html">Aplikacije</a>
+  </nav>
 
-        <div class="t-slide">
-          <div class="avatar">AK</div>
-          <div>
-            <div style="font-weight:800;color:#cfefff">Ana K.</div>
-            <div class="t-text">"SEO i performanse su nadmašili očekivanja — promet se udvostručio u 2 mjeseca."</div>
-          </div>
-        </div>
-
-        <div class="t-slide">
-          <div class="avatar">BP</div>
-          <div>
-            <div style="font-weight:800;color:#cfefff">Boris P.</div>
-            <div class="t-text">"Dobio sam kompletnu dokumentaciju i izvorni kod — sve uredno predano."</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- faq -->
-    <section class="faq" aria-labelledby="faq-title">
-      <h3 id="faq-title" style="color:var(--neon)">Često postavljana pitanja</h3>
-
-      <div class="faq-item">
-        <div class="faq-q">Šta uključuje 30-dnevno jamstvo? <span class="toggle">+</span></div>
-        <div class="faq-a">Ako niste zadovoljni u roku 30 dana, radimo dodatne izmjene dok niste, ili vraćamo dio uplate prema dogovoru (detalji po ugovoru).</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Dobijam li izvorni kod? <span class="toggle">+</span></div>
-        <div class="faq-a">Da — nakon konačne isplate prepisujemo sva prava i isporučujemo izvorni kod i dokumentaciju.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Šta je staging demo? <span class="toggle">+</span></div>
-        <div class="faq-a">Privremeni link na kojem testirate web prije puštanja u produkciju. Možete zatražiti izmjene prije konačne objave.</div>
-      </div>
-
-    </section>
-
-    <!-- team image -->
-    <div style="text-align:center;margin-top:26px">
-      <img src="yfteam.png" alt="YF Team" class="creators">
-    </div>
-
-    <!-- contact form -->
-    <form id="mainForm" onsubmit="handleSubmit(event)" aria-label="Formular za porudžbinu">
-      <h3 style="margin:0 0 6px;color:var(--neon)"><span data-lang-key="form_title">Pošaljite upit / rezervišite demo</span></h3>
-
-      <div class="form-row">
-        <div style="flex:1">
-          <label data-lang-key="label_name">Vaše ime</label>
-          <input id="name" type="text" required>
-        </div>
-        <div style="width:260px">
-          <label data-lang-key="label_phone">WhatsApp broj (ili telefon)</label>
-          <input id="phone" type="text" required placeholder="+387...">
-        </div>
-      </div>
-
-      <label data-lang-key="label_email">Email</label>
-      <input id="email" type="email" required>
-
-      <label data-lang-key="label_project">Kratak opis projekta / stranice</label>
-      <textarea id="projectDesc" required placeholder="Šta želite: tip stranice, posebne funkcije..."></textarea>
-
-      <div class="send-row">
-        <button type="submit" class="send-btn">Pošalji na WhatsApp</button>
-        <button type="button" id="downloadBriefBtn" class="brief-btn">Preuzmi Brief</button>
-      </div>
-      <div style="margin-top:10px;color:var(--muted);font-size:13px">Takođe nudimo: migraciju sajta, mjesečno održavanje, i 24/7 hitnu podršku za Premium klijente.</div>
-    </form>
-
-  </div> <!-- wrap end -->
-
-  <footer style="text-align:center;padding:20px;color:rgba(200,230,255,0.75);margin-top:30px">
-    <div style="font-weight:700">exYU Family TV • Web Development</div>
-    <div style="font-size:13px">Sva prava zadržana • © 2025</div>
-    <div style="margin-top:8px;font-size:13px">Kontakt: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> • <a href="https://wa.me/4915755749502">WhatsApp</a></div>
-  </footer>
-
-  <!-- floating whatsapp -->
-  <a class="whatsapp-fixed" id="whatsappFloat" href="#" target="_blank" aria-label="Kontakt WhatsApp">
-    <span class="pulse"></span>
-    <span style="font-weight:800">Chat na WhatsApp</span>
-  </a>
-
-  <!-- cookie bar -->
-  <div class="cookie-bar" id="cookieBar" role="dialog" aria-live="polite" style="display:none">
-    <div style="color:#dff4ff">Koristimo kolačiće kako bi poboljšali vašu posjetu. Prihvatite za bolje iskustvo.</div>
-    <div>
-      <button id="acceptCookies">Prihvati</button>
-    </div>
+  <section class="hero">
+    <h1 id="hero-title">Poruči svoju WEB stranicu — Premium + Jedinstveno</h1>
+    <p id="hero-sub">Usluga sa garancijom, demo okruženjem i stvarnim dokazima — sve na jednom mjestu.</p>
+  </section>
+    <!-- online counter -->
+  <div style="text-align:center;color:#9f9cff;margin-top:10px;">
+    🔵 Trenutno online: <span id="onlineCount">0</span>
   </div>
 
-  <script>
-  /* ------------- Config & translations ------------- */
+  <!-- dodatak: scroll to top -->
+  <button id="scrollTopBtn" onclick="scrollToTop()">⬆</button>
 
-  const WA_NUMBER = '4915755749502'; // tvoј WA broj (ne diraj ako je ispravan)
+  <!-- YF Footer -->
+  <footer>
+    <div style="font-weight:700;">exYU Family TV • Web Development</div>
+    <div style="font-size:13px;">Sva prava zadržana • © 2025</div>
+    <div style="margin-top:8px;font-size:13px;">
+      Kontakt: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a> • 
+      <a href="https://wa.me/4915755749502">WhatsApp</a>
+    </div>
+    <div style="height:2px;width:100%;margin-top:12px;background:linear-gradient(90deg,rgba(10,26,255,0.6),rgba(123,0,255,0.9),rgba(10,26,255,0.6));
+      box-shadow:0 0 25px rgba(123,0,255,0.7);border-radius:10px;"></div>
+  </footer>
 
-  const translations = {
-    bs: {
-      hero_title: 'Poruči svoju WEB stranicu — Premium + Jedinstveno',
-      hero_sub: 'Usluga sa garancijom, demo okruženjem i stvarnim dokazima — sve na jednom mjestu.',
-      label_name: 'Vaše ime',
-      label_phone: 'WhatsApp broj (ili telefon)',
-      label_email: 'Email',
-      label_project: 'Kratak opis projekta / stranice',
-      form_title: 'Pošaljite upit / rezervišite demo',
-      roi_rev: 'Očekivani mjesečni prihod (EUR)',
-      roi_cost: 'Procijenjeni mjesečni trošak (EUR)',
-      roi_oneoff: 'Ulaganje u izradu web stranice (EUR)'
-    },
-    en: {
-      hero_title: 'Order your WEBSITE — Premium & Unique',
-      hero_sub: 'Service with warranty, demo environment and real proofs — all in one place.',
-      label_name: 'Your name',
-      label_phone: 'WhatsApp number (or phone)',
-      label_email: 'Email',
-      label_project: 'Short project description / website',
-      form_title: 'Send inquiry / book a demo',
-      roi_rev: 'Expected monthly revenue (EUR)',
-      roi_cost: 'Estimated monthly costs (EUR)',
-      roi_oneoff: 'One-time development cost (EUR)'
-    },
-    de: {
-      hero_title: 'Bestellen Sie Ihre WEBSITE — Premium & Einzigartig',
-      hero_sub: 'Service mit Garantie, Demo-Umgebung und echten Beweisen — alles an einem Ort.',
-      label_name: 'Ihr Name',
-      label_phone: 'WhatsApp Nummer (oder Telefon)',
-      label_email: 'E-Mail',
-      label_project: 'Kurze Projektbeschreibung / Webseite',
-      form_title: 'Anfrage senden / Demo buchen',
-      roi_rev: 'Erwarteter monatlicher Umsatz (EUR)',
-      roi_cost: 'Geschätzte monatliche Kosten (EUR)',
-      roi_oneoff: 'Einmalige Entwicklungskosten (EUR)'
-    }
-  };
+<script>
+/* ---------- Hamburger navigation ---------- */
+function openNav(){
+  const o=document.getElementById('overlayNav');
+  o.classList.add('open');
+  [...o.querySelectorAll('a')].forEach(a=>a.addEventListener('click',()=>closeNav()));
+}
+function closeNav(){
+  document.getElementById('overlayNav').classList.remove('open');
+}
 
-  /* ---------- Language toggle ---------- */
-  document.querySelectorAll('.lang-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const lang = btn.dataset.lang;
-      applyLang(lang);
-    });
-  });
+/* ---------- Tema: dark / light ---------- */
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+});
 
-  function applyLang(lang='bs'){
-    const t = translations[lang] || translations.bs;
-    document.getElementById('hero-title').textContent = t.hero_title;
-    document.getElementById('hero-sub').textContent = t.hero_sub;
-    document.querySelectorAll('[data-lang-key]').forEach(el=>{
-      const key = el.getAttribute('data-lang-key');
-      if(t[key]) el.textContent = t[key];
-    });
-    // also form labels
-    document.querySelectorAll('[data-lang-key]').forEach(node=>{
-      // handled above
-    });
-  }
-  // init default
-  applyLang('bs');
+/* ---------- Online counter ---------- */
+function onlineCounter(){
+  const n=Math.floor(10000+Math.random()*3450);
+  document.getElementById('onlineCount').textContent=n.toLocaleString('de-DE');
+}
+setInterval(onlineCounter,5000);
+onlineCounter();
 
-  /* ---------- NAV open/close ---------- */
-  function openNav(){
-    const o = document.getElementById('overlayNav');
-    o.classList.add('open'); o.setAttribute('aria-hidden','false');
-    const a = o.querySelector('a'); if(a) a.focus();
-  }
-  function closeNav(){
-    const o = document.getElementById('overlayNav');
-    o.classList.remove('open'); o.setAttribute('aria-hidden','true');
-  }
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
+/* ---------- Scroll to top ---------- */
+window.onscroll=function(){scrollFunction()};
+function scrollFunction(){
+  const b=document.getElementById('scrollTopBtn');
+  if(document.documentElement.scrollTop>200){b.style.display='block';}
+  else{b.style.display='none';}
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
 
-  /* ---------- Particles ---------- */
-  (function makeParticles(){
-    const p = document.querySelector('.particles');
-    const count = 26;
-    for(let i=0;i<count;i++){
-      const el = document.createElement('div');
-      el.className = 'particle';
-      const size = (6 + Math.random()*28);
-      el.style.width = size + 'px';
-      el.style.height = size + 'px';
-      el.style.left = Math.random()*100 + 'vw';
-      el.style.top = Math.random()*100 + 'vh';
-      el.style.opacity = (0.04 + Math.random()*0.18);
-      el.style.animationDuration = (12 + Math.random()*22) + 's';
-      el.style.animationDelay = Math.random()*5 + 's';
-      el.style.transform = 'translateY(0)';
-      p.appendChild(el);
-    }
-  })();
-
-  /* ---------- Progress bar ---------- */
-  const progressBar = document.getElementById('progressBar');
-  window.addEventListener('scroll', ()=>{
-    const h = document.documentElement;
-    const percent = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-    progressBar.style.width = percent + '%';
-  });
-
-  /* ---------- ROI calculator ---------- */
-  function numberize(v){ return Number(String(v).replace(/[^0-9.-]+/g,'')) || 0; }
-  document.getElementById('calcBtn').addEventListener('click', ()=>{
-    const rev = numberize(document.getElementById('rev').value);
-    const cost = numberize(document.getElementById('cost').value);
-    const oneoff = numberize(document.getElementById('oneoff').value);
-    const el = document.getElementById('roiResult');
-    if(!rev || !oneoff){ el.style.display='block'; el.textContent='Unesite očekivani prihod i ulaganje.'; return; }
-    const netMonthly = rev - cost;
-    const monthsToBreakeven = (oneoff / Math.max(1, netMonthly));
-    const annualProfit = (netMonthly*12) - oneoff;
-    const text = `Procjena: Neto mjesečni prihod: ${netMonthly.toLocaleString()} €.
-Vrijeme povrata ulaganja: ${ (monthsToBreakeven<1)? '< 1 mjesec' : Math.round(monthsToBreakeven) + ' mjeseci' }.
-Godišnja procjena (nakon povrata): ${ Math.round(annualProfit).toLocaleString() } €`;
-    el.style.display='block'; el.textContent = text;
-  });
-  document.getElementById('resetBtn').addEventListener('click', ()=>{ ['rev','cost','oneoff'].forEach(id=>document.getElementById(id).value=''); const el=document.getElementById('roiResult'); el.style.display='none'; el.textContent=''; });
-
-  /* ---------- Demo token generator ---------- */
-  document.getElementById('genDemo').addEventListener('click', ()=>{
-    const desc = document.getElementById('demoInput').value.trim() || 'demo';
-    const token = 'demo-' + desc.replace(/\s+/g,'-').toLowerCase() + '-' + Math.random().toString(36).slice(2,8);
-    const url = location.origin + '/staging/' + token;
-    document.getElementById('demoOut').innerHTML = `Demo link: <a href="${url}" target="_blank" rel="noopener">${url}</a>`;
-  });
-
-  /* ---------- Testimonials slider ---------- */
-  const tWrap = document.getElementById('tWrap');
-  let tIndex = 0;
-  function showTest(idx){
-    const slides = tWrap.children;
-    if(idx < 0) idx = slides.length -1;
-    if(idx >= slides.length) idx = 0;
-    tIndex = idx;
-    tWrap.style.transform = `translateX(-${idx * 100}%)`;
-  }
-  document.getElementById('prevT').addEventListener('click', ()=> showTest(tIndex-1));
-  document.getElementById('nextT').addEventListener('click', ()=> showTest(tIndex+1));
-  let tAuto = setInterval(()=> showTest(tIndex+1), 6000);
-
-  /* ---------- FAQ accordion ---------- */
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    const q = item.querySelector('.faq-q');
-    const a = item.querySelector('.faq-a');
-    q.addEventListener('click', ()=> {
-      const open = a.style.display === 'block';
-      document.querySelectorAll('.faq-a').forEach(x=> x.style.display='none');
-      document.querySelectorAll('.faq-item .toggle').forEach(x=> x.textContent='+');
-      if(!open){ a.style.display='block'; q.querySelector('.toggle').textContent='−'; } else { a.style.display='none'; q.querySelector('.toggle').textContent='+'; }
-    });
-  });
-
-  /* ---------- Brief download (aside) ---------- */
-  document.getElementById('downloadBrief').addEventListener('click', ()=>{
-    const title = document.getElementById('briefTitle').value.trim() || 'Projekt';
-    const pages = document.getElementById('briefPages').value.trim() || 'Početna, Kontakt';
-    const priority = document.getElementById('briefPriority').value || 'Normalno';
-    const content = `Project Brief\n\nNaslov: ${title}\nStranice: ${pages}\nPrioritet: ${priority}\n\nDetalji: \n- Dodati opis ovdje.\n\nPošaljite ovaj brief našem WhatsAppu.`;
-    const blob = new Blob([content], {type:'text/plain;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g,'_') + '_brief.txt'; document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  /* ---------- Main form submit -> WA + auto-brief ---------- */
-  function handleSubmit(e){
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const proj = document.getElementById('projectDesc').value.trim();
-    const msg = `NOVA PORUDŽBINA WEB STRANICE\nIme: ${name}\nWhatsApp: ${phone}\nEmail: ${email}\nOpis: ${proj}`;
-    const waUrl = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
-
-    // auto generate brief and download
-    const briefFile = `Brief_${name.replace(/\s+/g,'_') || 'kontakt'}.txt`;
-    const content = `Project brief\nIme: ${name}\nWhatsApp: ${phone}\nEmail: ${email}\nOpis: ${proj}\n\n(Automatski generisano)`;
-    const blob = new Blob([content],{type:'text/plain;charset=utf-8'});
-    const blobUrl = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = blobUrl; a.download = briefFile; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=> URL.revokeObjectURL(blobUrl), 2000);
-  }
-
-  /* ---------- WA brief aside update ---------- */
-  document.getElementById('waBrief').addEventListener('click', ()=>{
-    const title = document.getElementById('briefTitle').value.trim() || 'Projekt';
-    const pages = document.getElementById('briefPages').value.trim() || '';
-    const priority = document.getElementById('briefPriority').value || '';
-    const msg = `BRIEF\nNaslov: ${title}\nStranice: ${pages}\nPrioritet: ${priority}`;
-    document.getElementById('waBrief').href = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
-  });
-
-  /* ---------- Payment item click => WA with method ---------- */
-  document.querySelectorAll('.pay-item').forEach(item=>{
-    item.addEventListener('click', ()=>{
-      const method = item.dataset.method || 'Pay';
-      const msg = `Želim platiti putem ${method}`;
-      const url = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
-      window.open(url, '_blank');
-    });
-
-    // micro-animation on hover (subtle)
-    item.addEventListener('mouseenter', ()=>{
-      item.style.transition = 'transform .18s, box-shadow .18s';
-      item.style.transform = 'translateY(-6px) scale(1.02)';
-      item.style.boxShadow = '0 30px 80px rgba(42,176,255,0.12)';
-    });
-    item.addEventListener('mouseleave', ()=>{
-      item.style.transform = '';
-      item.style.boxShadow = '';
-    });
-  });
-
-  /* ---------- Packs CTA to WA (pack links) ---------- */
-  document.querySelectorAll('.pack .cta-wa').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const method = a.dataset.method || a.textContent.trim();
-      const msg = `Zainteresovan sam za: ${method}`;
-      const url = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
-      window.open(url, '_blank');
-    });
-  });
-
-  /* ---------- Payment floating WA bubble (main) ---------- */
-  const waFloat = document.getElementById('whatsappFloat');
-  waFloat.addEventListener('click', (e)=>{
-    e.preventDefault();
-    const url = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent('Pozdrav! Zelim informaciju o usluzi.');
-    window.open(url, '_blank');
-  });
-
-  /* ---------- Download brief from main form ---------- */
-  document.getElementById('downloadBriefBtn').addEventListener('click', ()=>{
-    const name = document.getElementById('name').value.trim() || 'Kontakt';
-    const phone = document.getElementById('phone').value.trim() || '';
-    const email = document.getElementById('email').value.trim() || '';
-    const proj = document.getElementById('projectDesc').value.trim() || '';
-    const content = `Brief\nIme: ${name}\nWhatsApp: ${phone}\nEmail: ${email}\nOpis: ${proj}`;
-    const blob = new Blob([content],{type:'text/plain;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = (name.replace(/\s+/g,'_') + '_brief.txt'); document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  /* ---------- Testimonials auto-start ---------- */
-  showTest(0);
-
-  /* ---------- Cookie bar ---------- */
-  if(!localStorage.getItem('yf_cookies_accepted')){
-    document.getElementById('cookieBar').style.display = 'flex';
-  }
-  document.getElementById('acceptCookies').addEventListener('click', ()=>{
-    localStorage.setItem('yf_cookies_accepted','1');
-    document.getElementById('cookieBar').style.display = 'none';
-  });
-
-  /* ---------- Live Status small updater (simulate or allow editing via console) ---------- */
-  // To update spots later: window.updateSpots(3)
-  window.updateSpots = function(n){
-    document.getElementById('spotsCount').textContent = n;
-  };
-  window.updateOpenProjects = function(n){
-    document.getElementById('openProjects').textContent = n;
-  };
-
-  /* ---------- Anti-copy (mild) ---------- */
-  (function antiCopy(){
-    // disable right click and selection, but gentle: toggle if user holds ctrl+shift
-    document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
-    document.body.classList.add('user-select-none');
-    // allow enabling via console: document.body.classList.remove('user-select-none')
-  })();
-
-  /* ---------- Accessibility focus helpers ---------- */
-  // ensure focus styles when navigating via keyboard
-  document.addEventListener('keyup', (e)=>{
-    if(e.key === 'Tab'){ document.body.classList.add('show-focus'); }
-  });
-
-  /* ---------- Analytics placeholders (put GA or FB pixel here) ---------- */
-  // Example: window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-  // (Insert GA or FB Pixel snippets here if you want)
-  </script>
-
+/* ---------- Progress bar ---------- */
+const pb=document.getElementById('progressBar');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  pb.style.width=p+'%';
+});
+</script>
 </body>
 </html>
+  

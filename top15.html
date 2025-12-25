@@ -1,199 +1,292 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top preporuke - YUGO-Family TV</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #003366;
-      position: relative;
-      min-height: 100vh;
-      /* Višeslojna pozadina */
-      background: 
-        linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('film11.jpg') no-repeat top center,
-        linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('film22.jpg') no-repeat center center,
-        linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('film33.jpg') no-repeat bottom center;
-      background-size: cover, cover, cover;
-      background-attachment: fixed, fixed, fixed; /* slike prate scroll */
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top preporuke – YUGO-Family TV</title>
 
-    header {
-      background: rgba(0,51,102,0.7);
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    h1, h2 {
-      margin: 10px 0;
-    }
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
 
-    /* Navigacija */
-    nav { 
-      background:#007bff; 
-      display:flex; 
-      justify-content:center; 
-      flex-wrap:wrap; 
-      position: relative;
-      z-index: 2;
-    }
-    nav a { 
-      color:#fff; 
-      text-decoration:none; 
-      padding:12px 18px; 
-      display:block; 
-    }
-    nav a:hover { 
-      background:#e6f0ff; 
-      color:#0056a6; 
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#03041a,#0a0030);
+  color: #fff;
+  min-height: 100vh;
+  transition: .4s;
+  background-attachment: fixed;
+}
+.light {
+  background: linear-gradient(180deg,#f2eeff,#dcd6ff);
+  color:#000;
+}
 
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
-      position: relative;
-      z-index: 2;
-    }
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
-    }
+header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
+  box-shadow: 0 0 35px #7b00ff;
+  position: relative;
+}
+header h1 {
+  font-size: 2em;
+  text-shadow: 0 0 10px #7b00ff, 0 0 25px #0a1aff;
+  animation: neonPulse 3s infinite alternate;
+}
+header p {
+  font-size: 1.1em;
+  color: #e0e0ff;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
-      background: rgba(255,255,255,0.7); /* providan bijeli sloj za bolju čitljivost */
-      border-radius: 12px;
-      position: relative;
-      z-index: 2;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    .card {
-      background: rgba(255,255,255,0.8); /* providno da se vidi pozadina */
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.03);
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.1em;
-      color: #003366;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: rgba(0,51,102,0.8);
-      color: #fff;
-      margin-top: 30px;
-      position: relative;
-      z-index: 2;
-    }
-    footer a {
-      color: #ffcc00;
-      text-decoration: none;
-    }
-  </style>
+.menu-toggle {
+  position: absolute;
+  top: 18px; right: 20px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 0 15px #7b00ff;
+  z-index: 2000;
+}
+.theme-btn {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  background: #6900ff;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* OVERLAY MENU */
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: #0b0018;
+  overflow-x: hidden;
+  transition: 0.4s;
+  z-index: 1000;
+  text-align: center;
+  padding-top: 80px;
+  box-shadow: -10px 0 30px rgba(105,0,255,0.5);
+  border-left: 2px solid #6900ff;
+}
+.overlay.open {width:100%;}
+.overlay a {
+  display: block;
+  padding: 14px;
+  color: #fff;
+  font-size: 1.3em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition:.3s;
+}
+.overlay a:hover {
+  background:#6900ff;
+}
+.closebtn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
+.container {
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+  animation: fadeIn 1s ease;
+}
+.container h2 {
+  color:#fff;
+  text-shadow:0 0 10px #7b00ff;
+  margin-bottom:20px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+.card {
+  background: linear-gradient(145deg, rgba(13,17,71,0.95), rgba(18,2,40,0.95));
+  padding:15px;
+  border-radius:10px;
+  border:1px solid #7b00ff;
+  box-shadow: 0 0 12px #6900ff;
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 25px #a870ff;
+}
+.card h3 {
+  color:#fff;
+  font-size:1.1em;
+}
+.light .card {background: rgba(255,255,255,0.9); color: #000; box-shadow:0 0 10px #b69cff;}
+.light .card h3 {color:#000;}
+
+footer {
+  text-align:center;
+  padding:20px;
+  background:#0b0013;
+  color:#fff;
+  box-shadow: 0 0 25px #7b00ff;
+  margin-top:40px;
+}
+footer a {
+  color:#a870ff;
+  text-decoration:none;
+}
+footer a:hover {text-decoration:underline;}
+
+/* ScrollTop */
+#scrollTopBtn {
+  display:none;
+  position:fixed;
+  bottom:20px;
+  right:25px;
+  z-index:99;
+  font-size:20px;
+  background:#6900ff;
+  color:white;
+  border:none;
+  cursor:pointer;
+  padding:12px 16px;
+  border-radius:8px;
+  box-shadow:0 0 15px #6900ff;
+}
+#scrollTopBtn:hover {box-shadow:0 0 25px #a870ff;}
+
+.online-box {
+  font-size:16px;
+  text-align:center;
+  margin:10px;
+  color:#9f9cff;
+}
+
+/* Animacije */
+@keyframes neonPulse {
+  from {text-shadow: 0 0 6px #7b00ff,0 0 15px #7b00ff;}
+  to {text-shadow: 0 0 18px #0a1aff,0 0 35px #0a1aff;}
+}
+@keyframes fadeIn {from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Top gledanih filmova i serija</h1>
-    <p>Najpopularniji sadržaji na YUGO-Family TV</p>
-  </header>
-
-  <!-- Hamburger dugme -->
+<header>
+  <h1>Top gledanih filmova i serija</h1>
+  <p>Najpopularniji sadržaji na YUGO-Family TV</p>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <button class="theme-btn" onclick="toggleTheme()">☀️/🌙</button>
+</header>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cijene.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 15</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
-  </nav>
+<div id="overlay" class="overlay">
+  <span class="closebtn" onclick="toggleMenu()">&times;</span>
+  <a href="index.html">Početna</a>
+  <a href="onama.html">O nama</a>
+  <a href="kako-da-gledas.html">Kako da gledaš</a>
+  <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
+  <a href="aplikacije.html">Aplikacije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="placanje.html">Plaćanje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="webstranica.html">Poruči WEB STRANICU</a>
+  <a href="top15.html">Top 30</a>
+</div>
 
-  <div class="container">
-    <h2>🎬 Najgledaniji filmovi (Top 30)</h2>
-    <div class="grid">
-      <div class="card"><h3>1. The ALTO KNIGHTS</h3></div>
-      <div class="card"><h3>2. Don't touch</h3></div>
-      <div class="card"><h3>3. Sinners</h3></div>
-      <div class="card"><h3>4. The Godfather</h3></div>
-      <div class="card"><h3>5. The Dark Knight</h3></div>
-      <div class="card"><h3>6. Fight Club</h3></div>
-      <div class="card"><h3>7. Forrest Gump</h3></div>
-      <div class="card"><h3>8. Schindler’s List</h3></div>
-      <div class="card"><h3>9. Titanic</h3></div>
-      <div class="card"><h3>10. Braveheart</h3></div>
-      <div class="card"><h3>11. The Shawshank Redemption</h3></div>
-      <div class="card"><h3>12. Matrix</h3></div>
-      <div class="card"><h3>13. Goodfellas</h3></div>
-      <div class="card"><h3>14. Se7en</h3></div>
-      <div class="card"><h3>15. Interstellar</h3></div>
-      <div class="card"><h3>16. Saving Private Ryan</h3></div>
-      <div class="card"><h3>17. Django Unchained</h3></div>
-      <div class="card"><h3>18. Avengers: Endgame</h3></div>
-      <div class="card"><h3>19. Avatar</h3></div>
-      <div class="card"><h3>20. Joker</h3></div>
-      <div class="card"><h3>21. Parasite</h3></div>
-      <div class="card"><h3>22. The Pianist</h3></div>
-      <div class="card"><h3>23. The Silence of the Lambs</h3></div>
-      <div class="card"><h3>24. Rocky</h3></div>
-      <div class="card"><h3>25. Casablanca</h3></div>
-      <div class="card"><h3>26. Back to the Future</h3></div>
-      <div class="card"><h3>27. The Departed</h3></div>
-      <div class="card"><h3>28. Whiplash</h3></div>
-      <div class="card"><h3>29. The Wolf of Wall Street</h3></div>
-      <div class="card"><h3>30. Black Panther</h3></div>
-    </div>
+<div class="online-box">🔵 Trenutno online: <span id="onlineCount">0</span></div>
 
-    <h2>📺 Najgledanije serije (Top 10)</h2>
-    <div class="grid">
-      <div class="card"><h3>1. Game of Thrones</h3></div>
-      <div class="card"><h3>2. Breaking Bad</h3></div>
-      <div class="card"><h3>3. The Sopranos</h3></div>
-      <div class="card"><h3>4. Stranger Things</h3></div>
-      <div class="card"><h3>5. The Crown</h3></div>
-      <div class="card"><h3>6. Friends</h3></div>
-      <div class="card"><h3>7. The Office</h3></div>
-      <div class="card"><h3>8. Chernobyl</h3></div>
-      <div class="card"><h3>9. Vikings</h3></div>
-      <div class="card"><h3>10. Money Heist</h3></div>
-    </div>
+<div class="container">
+  <h2>🎬 Najgledaniji filmovi (Top 30)</h2>
+  <div class="grid" id="filmGrid">
+    <!-- film kartice -->
+    <div class="card"><h3>1. The ALTO KNIGHTS</h3></div>
+    <div class="card"><h3>2. Don't Touch</h3></div>
+    <div class="card"><h3>3. Sinners</h3></div>
+    <div class="card"><h3>4. The Godfather</h3></div>
+    <div class="card"><h3>5. The Dark Knight</h3></div>
+    <div class="card"><h3>6. Fight Club</h3></div>
+    <div class="card"><h3>7. Forrest Gump</h3></div>
+    <div class="card"><h3>8. Schindler’s List</h3></div>
+    <div class="card"><h3>9. Titanic</h3></div>
+    <div class="card"><h3>10. Braveheart</h3></div>
+    <div class="card"><h3>11. The Shawshank Redemption</h3></div>
+    <div class="card"><h3>12. Matrix</h3></div>
+    <div class="card"><h3>13. Goodfellas</h3></div>
+    <div class="card"><h3>14. Se7en</h3></div>
+    <div class="card"><h3>15. Interstellar</h3></div>
+    <div class="card"><h3>16. Saving Private Ryan</h3></div>
+    <div class="card"><h3>17. Django Unchained</h3></div>
+    <div class="card"><h3>18. Avengers: Endgame</h3></div>
+    <div class="card"><h3>19. Avatar</h3></div>
+    <div class="card"><h3>20. Joker</h3></div>
+    <div class="card"><h3>21. Parasite</h3></div>
+    <div class="card"><h3>22. The Pianist</h3></div>
+    <div class="card"><h3>23. The Silence of the Lambs</h3></div>
+    <div class="card"><h3>24. Rocky</h3></div>
+    <div class="card"><h3>25. Casablanca</h3></div>
+    <div class="card"><h3>26. Back to the Future</h3></div>
+    <div class="card"><h3>27. The Departed</h3></div>
+    <div class="card"><h3>28. Whiplash</h3></div>
+    <div class="card"><h3>29. The Wolf of Wall Street</h3></div>
+    <div class="card"><h3>30. Black Panther</h3></div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
-  </footer>
+  <h2 style="margin-top:40px;">📺 Najgledanije serije (Top 10)</h2>
+  <div class="grid">
+    <div class="card"><h3>1. Game of Thrones</h3></div>
+    <div class="card"><h3>2. Breaking Bad</h3></div>
+    <div class="card"><h3>3. The Sopranos</h3></div>
+    <div class="card"><h3>4. Stranger Things</h3></div>
+    <div class="card"><h3>5. The Crown</h3></div>
+    <div class="card"><h3>6. Friends</h3></div>
+    <div class="card"><h3>7. The Office</h3></div>
+    <div class="card"><h3>8. Chernobyl</h3></div>
+    <div class="card"><h3>9. Vikings</h3></div>
+    <div class="card"><h3>10. Money Heist</h3></div>
+  </div>
+</div>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
-    }
-  </script>
+<footer>
+  <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Nazad na početnu</a></p>
+</footer>
+
+<!-- Scroll dugme -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Na vrh">⬆</button>
+
+<script>
+function toggleMenu(){ document.getElementById("overlay").classList.toggle("open"); }
+function toggleTheme(){ document.body.classList.toggle("light"); }
+
+/* Online Counter */
+function onlineCounter(){ 
+  let c=Math.floor(10000+Math.random()*3450); 
+  document.getElementById("onlineCount").innerText=c.toLocaleString("de-DE"); 
+}
+setInterval(onlineCounter,5000);
+onlineCounter();
+
+/* Scroll to top */
+window.onscroll=function(){scrollFunction();}
+function scrollFunction(){
+  const btn=document.getElementById("scrollTopBtn");
+  if(document.documentElement.scrollTop>200){btn.style.display="block";}else{btn.style.display="none";}
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+</script>
 </body>
 </html>

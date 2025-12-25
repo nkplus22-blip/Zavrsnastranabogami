@@ -3,82 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komentari – YUGO-Family TV</title>
-  <link rel="stylesheet" href="komentari.css">
+  <title>Komentari – YUGOFAMILY TV</title>
+
+  <style>
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #080010;
+    color: #fff;
+    transition: 0.4s;
+  }
+  .light { background: #f6f6ff; color: #000; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 25px #7b00ff;
+  }
+  .header h1 {
+    font-size: 1.8em;
+    text-shadow: 0 0 10px #7b00ff, 0 0 30px #0a1aff;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-shadow: 0 0 10px #a870ff;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    background: #6900ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .lang-box {
+    margin-top: 10px;
+  }
+
+  /* OVERLAY MENU */
+  .overlay {
+    position: fixed;
+    top: 0; right: 0;
+    width: 0;
+    height: 100%;
+    background: #0b0018;
+    overflow-x: hidden;
+    transition: 0.4s;
+    z-index: 1000;
+    text-align: center;
+    padding-top: 80px;
+    box-shadow: -10px 0 30px rgba(105,0,255,0.5);
+    border-left: 2px solid #6900ff;
+  }
+  .overlay.open { width: 100%; }
+  .overlay a {
+    display: block;
+    padding: 14px;
+    color: #fff;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .overlay a:hover { background: #6900ff; }
+  .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* CONTAINER & FORM */
+  .container { width: 90%; max-width: 900px; margin: auto; padding: 30px 0; }
+  form input, form textarea {
+    width: 100%; padding: 10px;
+    margin-bottom: 10px;
+    background: #12001f;
+    border: 2px solid #6900ff;
+    border-radius: 8px;
+    color: #fff;
+  }
+  textarea { height: 120px; }
+  .btn-glow {
+    background: #6900ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 18px #6900ff;
+  }
+  .btn-glow:hover { box-shadow: 0 0 25px #a870ff; }
+  .warning { display: none; color: #ff4444; font-weight: bold; margin-top: 5px; }
+
+  /* COMMENTS */
+  .comments-box { margin-top: 20px; }
+  .comment-card {
+    background: #170028;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-left: 4px solid #8a2bff;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #741cff;
+    animation: fadeIn .5s ease;
+  }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  /* TRUSTED */
+  .trusted-section { margin-top: 40px; text-align: center; }
+  .badge {
+    display: inline-block;
+    margin: 6px; padding: 10px 18px;
+    border: 2px solid #6900ff;
+    border-radius: 8px;
+    background: #140026;
+    box-shadow: 0 0 15px #6900ff;
+  }
+
+  /* FOOTER */
+  .footer { padding: 20px; background: #0b0013; text-align: center; }
+
+  /* SCROLL TOP BUTTON */
+  #scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    z-index: 99;
+    font-size: 20px;
+    background: #6900ff;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #6900ff;
+  }
+  #scrollTopBtn:hover { box-shadow: 0 0 25px #a870ff; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
 </head>
 
 <body>
 
 <header class="header">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <h1 data-text="commentsTitle">Komentari naših korisnika</h1>
 
-  <div class="header-top">
-    <div class="online-box">
-      🔵 Online: <span id="onlineCount">0</span>
-    </div>
-
-    <div class="lang-box">
-      <select id="languageSelect" onchange="changeLanguage()">
-        <option value="bs">🇧🇦 Bosanski</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="de">🇩🇪 Deutsch</option>
-      </select>
-    </div>
-
-    <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
+  <div class="lang-box">
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="bs">🇧🇦 Bosanski</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="de">🇩🇪 Deutsch</option>
+    </select>
   </div>
 
-  <h1 data-text="commentsTitle">Komentari naših korisnika</h1>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
 </header>
 
-<!-- OVERLAY NAV -->
-<header class="header">
-  <h1>yugofamily.de</h1>
-
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-</header>
-
+<!-- OVERLAY MENU -->
 <div class="overlay" id="overlay">
   <span class="closebtn" onclick="toggleMenu()">&times;</span>
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU </a>
-      <a href="top15.html">Top 30</a>
-    </nav>
+  <a href="index.html">Početna</a>
+  <a href="onama.html">O nama</a>
+  <a href="kako-da-gledas.html">Kako da gledaš</a>
+  <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
+  <a href="aplikacije.html">Aplikacije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="placanje.html">Plaćanje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="webstranica.html">Poruči WEB STRANICU</a>
+  <a href="top15.html">Top 30</a>
+</div>
 
 <section class="container">
+  <div style="text-align:center;margin-bottom:10px;">🔵 Online: <span id="onlineCount">0</span></div>
+
   <h2 data-text="leaveComment">Ostavi komentar</h2>
-
-  <form id="commentForm" onsubmit="addComment(event)" class="form-box">
-
+  <form id="commentForm" onsubmit="addComment(event)">
     <input type="text" id="name" placeholder="Vaše ime" required>
     <input type="text" id="location" placeholder="Odakle dolazite" required>
     <textarea id="message" placeholder="Vaš komentar" required></textarea>
-
     <button type="submit" class="btn-glow">Pošalji</button>
-
-    <div id="spamWarning" class="warning">Sačekajte još malo prije slanja...</div>
+    <div id="spamWarning" class="warning">Sačekajte prije slanja ponovo...</div>
   </form>
 
-  <h2 data-text="userComments">Komentari korisnika</h2>
-
+  <h2 data-text="userComments" style="margin-top:20px;">Komentari korisnika</h2>
   <div id="commentsArea" class="comments-box"></div>
 
   <div class="trusted-section">
     <h3>🔥 Trusted & Verified</h3>
-    <div class="trusted-logos">
-      <div class="badge">✔ Verifikovan servis</div>
-      <div class="badge">⭐ 4.9/5 Rejting</div>
-      <div class="badge">🔒 Sigurno plaćanje</div>
-      <div class="badge">⚡ Instant aktivacija</div>
-    </div>
+    <div class="badge">✔ Verifikovan servis</div>
+    <div class="badge">⭐ 4.9/5 Rejting</div>
+    <div class="badge">🔒 Sigurno plaćanje</div>
+    <div class="badge">⚡ Instant aktivacija</div>
   </div>
 </section>
 
@@ -86,6 +227,115 @@
   <p>&copy; 2025 YUGO-Family TV | <a href="index.html">Početna</a></p>
 </footer>
 
-<script src="komentari.js"></script>
+<!-- Dugme za povratak na vrh -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Na vrh">⬆</button>
+
+<script>
+/* HAMBURGER MENI */
+function toggleMenu() {
+  document.getElementById("overlay").classList.toggle("open");
+}
+
+/* TEMA */
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+/* ONLINE COUNTER */
+function onlineCounter() {
+  let count = Math.floor(10000 + Math.random() * 3450);
+  document.getElementById("onlineCount").innerText = count.toLocaleString("de-DE");
+}
+setInterval(onlineCounter, 5000);
+onlineCounter();
+
+/* MULTI LANGUAGE */
+const translations = {
+  bs: {
+    commentsTitle: "Komentari naših korisnika",
+    leaveComment: "Ostavi komentar",
+    userComments: "Komentari korisnika"
+  },
+  en: {
+    commentsTitle: "User Reviews",
+    leaveComment: "Leave a Comment",
+    userComments: "User Comments"
+  },
+  de: {
+    commentsTitle: "Benutzerkommentare",
+    leaveComment: "Kommentar hinterlassen",
+    userComments: "Kommentare"
+  }
+};
+function changeLanguage() {
+  let lang = document.getElementById("languageSelect").value;
+  document.querySelectorAll("[data-text]").forEach(el => {
+    let key = el.dataset.text;
+    el.textContent = translations[lang][key];
+  });
+}
+
+/* FAKE KOMENTARI */
+const fakeNames=["Haris","Amir","Nikola","Filip","Anes","Marko","Armin","Stefan","Alem","Kenan","Jovan","Luka","Boris","Dino","Eldin","Mario","Petar","Vanja","Tarik","Mitar","Milan","Nermin","Davor","Emir","Aleksandar"];
+const fakeCities=["Sarajevo","Zagreb","Beograd","Tuzla","Split","Podgorica","Novi Sad","Zenica","Mostar","Rijeka","Niš","Skoplje","Kragujevac"];
+const fakeMessages=["Top usluga, radi brutalno!","Preporučujem svima, odlična slika.","Brza aktivacija i sve stabilno.","Podrška odlična, sve riješeno odmah.","Kvalitet slike brutalno dobar.","Nijednog prekida do sada!","Savršen izbor kanala!","Cijena top, kvalitet još bolji!","Bolje od kablovske!","Radi i na sporijem internetu!"];
+
+function displayComment(name, location, msg, avatar) {
+  const box=document.getElementById("commentsArea");
+  const div=document.createElement("div");
+  div.classList.add("comment-card");
+  div.innerHTML=`<img src="${avatar}" class="avatar"><strong>${name} (${location})</strong><br>${msg}`;
+  box.prepend(div);
+}
+function generateFakeComments() {
+  const used=new Set();
+  for(let i=0;i<20;i++){
+    let idx; do{ idx=Math.floor(Math.random()*fakeNames.length);} while(used.has(idx));
+    used.add(idx);
+    let name=fakeNames[idx];
+    let city=fakeCities[Math.floor(Math.random()*fakeCities.length)];
+    let msg=fakeMessages[Math.floor(Math.random()*fakeMessages.length)];
+    let avatar=`https://api.dicebear.com/7.x/thumbs/svg?seed=${name}`;
+    displayComment(name,city,msg,avatar);
+  }
+}
+
+/* LOCALSTORAGE + SPAM PROTECT */
+let lastSubmit=0;
+function addComment(e){
+  e.preventDefault();
+  if(Date.now()-lastSubmit<4000){
+    document.getElementById("spamWarning").style.display="block";
+    return;
+  }
+  document.getElementById("spamWarning").style.display="none";
+  lastSubmit=Date.now();
+  const name=document.getElementById("name").value;
+  const location=document.getElementById("location").value;
+  const message=document.getElementById("message").value;
+  const avatar=`https://api.dicebear.com/7.x/thumbs/svg?seed=${name}`;
+  displayComment(name,location,message,avatar);
+  const saved=JSON.parse(localStorage.getItem("comments"))||[];
+  saved.unshift({name,location,message,avatar});
+  localStorage.setItem("comments",JSON.stringify(saved));
+  document.getElementById("commentForm").reset();
+}
+
+/* ONLOAD */
+window.onload=function(){
+  generateFakeComments();
+  const saved=JSON.parse(localStorage.getItem("comments"))||[];
+  saved.forEach(c=>displayComment(c.name,c.location,c.message,c.avatar));
+};
+
+/* SCROLL TO TOP */
+window.onscroll=function(){ scrollFunction(); };
+function scrollFunction(){
+  const btn=document.getElementById("scrollTopBtn");
+  if(document.documentElement.scrollTop>200){ btn.style.display="block"; }
+  else { btn.style.display="none"; }
+}
+function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
+</script>
 </body>
 </html>

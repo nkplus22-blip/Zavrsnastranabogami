@@ -117,8 +117,79 @@ footer{
   text-align:center;
   background:rgba(0,0,0,.75);
 }
+  /* HAMBURGER */
+.menu-toggle{
+  position:absolute;
+  top:18px;
+  right:18px;
+  font-size:32px;
+  background:none;
+  border:none;
+  color:var(--neon);
+  cursor:pointer;
+  z-index:120;
+}
+
+/* OVERLAY MENU */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,6,20,0.96);
+  backdrop-filter:blur(8px);
+  width:0;
+  overflow:hidden;
+  transition:width .45s ease;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.overlay.open{width:100%}
+
+.overlay a{
+  color:#e6f7ff;
+  font-size:22px;
+  padding:12px 20px;
+  text-align:center;
+  transition:.2s;
+}
+
+.overlay a:hover{
+  color:var(--neon);
+  transform:translateX(6px);
+}
+
+.closebtn{
+  position:absolute;
+  top:18px;
+  right:22px;
+  font-size:36px;
+  color:var(--neon);
+  cursor:pointer;
+}
+
 </style>
 </head>
+<script>
+function openNav(){
+  const nav=document.getElementById("overlayNav");
+  nav.classList.add("open");
+  nav.setAttribute("aria-hidden","false");
+}
+
+function closeNav(){
+  const nav=document.getElementById("overlayNav");
+  nav.classList.remove("open");
+  nav.setAttribute("aria-hidden","true");
+}
+
+/* ESC zatvara meni */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closeNav();
+});
+</script>
 
 <body>
 <div class="wrap">
@@ -126,6 +197,8 @@ footer{
 <header>
   <img src="logoyf.png" class="site-logo">
   <div class="tagline">Vaša porodica • Vaša televizija</div>
+  
+  <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
 
   <img src="djedmraz.png" class="promo-image">
 
@@ -138,6 +211,23 @@ footer{
     <div id="ipCountry" style="margin-top:6px;font-weight:700"></div>
   </div>
 </header>
+  
+  <!-- OVERLAY NAV -->
+<nav id="overlayNav" class="overlay" aria-hidden="true">
+  <div class="closebtn" onclick="closeNav()">×</div>
+  <a href="index.html">Početna</a>
+  <a href="onama.html">O nama</a>
+  <a href="kako-da-gledas.html">Kako da gledaš</a>
+  <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
+  <a href="aplikacije.html">Aplikacije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="placanje.html">Plaćanje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="webstranica.html">Poruči WEB STRANICU</a>
+  <a href="top15.html">Top 30</a>
+</nav>
+
 
 <!-- DRŽAVE -->
 <div class="section-title">Države koje nudimo u našim paketima</div>

@@ -1,49 +1,39 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>YuGo Family TV</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YuGo Family TV – Premium IPTV</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg1:#050714;
+  --bg:#050714;
   --neon:#2ac0ff;
   --accent:#4a6bff;
-  --glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
+  --glass:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
 }
 *{box-sizing:border-box}
-html,body{
+body{
   margin:0;
   font-family:Inter,system-ui,Arial;
-  background:linear-gradient(180deg,var(--bg1),#020b22);
+  background:radial-gradient(circle at top,#0b1a3a,var(--bg));
   color:#e6f7ff;
 }
 .wrap{max-width:1200px;margin:auto;padding:0 18px}
 
 /* HEADER */
-header{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:22px 12px 10px;
-  position:relative;
-}
+header{text-align:center;padding:26px 12px}
 .site-logo{max-width:200px}
-.tagline{
-  font-size:14px;
-  color:rgba(200,220,255,0.6);
-  font-weight:600;
-}
+.tagline{font-size:14px;color:rgba(200,220,255,.65);font-weight:600}
 
-/* DJED */
+/* PROMO */
 .promo-image{
-  max-width:230px;
-  margin:14px auto;
-  animation:pulse 3.8s ease-in-out infinite;
+  max-width:240px;
+  margin:16px auto;
+  animation:pulse 3.6s ease-in-out infinite;
 }
 @keyframes pulse{
   0%{transform:scale(1)}
@@ -53,114 +43,79 @@ header{
 
 /* WOW BOX */
 .wow-box{
-  max-width:560px;
-  margin:8px auto 20px;
-  padding:20px;
-  border-radius:18px;
-  background:linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));
-  backdrop-filter:blur(10px);
+  max-width:620px;
+  margin:10px auto 28px;
+  padding:22px;
+  border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.02));
+  backdrop-filter:blur(12px);
   border:1px solid var(--border);
-  box-shadow:0 0 60px rgba(42,192,255,0.25);
+  box-shadow:0 0 80px rgba(42,192,255,.35);
   text-align:center;
-  position:relative;
 }
-.wow-badge{
-  position:absolute;
-  top:-12px;
-  left:50%;
-  transform:translateX(-50%);
+.badge{
   background:linear-gradient(90deg,#2ac0ff,#4a6bff);
-  color:#00131f;
-  padding:6px 14px;
-  font-size:12px;
-  font-weight:800;
+  color:#00121e;
+  padding:6px 16px;
   border-radius:20px;
-  letter-spacing:0.6px;
-}
-.wow-title{
-  font-size:18px;
-  font-weight:800;
-  margin-top:10px;
+  font-weight:900;
+  font-size:12px;
 }
 .coverage{
-  font-size:26px;
+  font-size:30px;
   font-weight:900;
   color:var(--neon);
-  margin:6px 0 14px;
-  text-shadow:0 0 22px rgba(42,192,255,0.6);
+  margin:10px 0;
 }
 .wow-box input{
   width:100%;
   padding:14px;
-  border-radius:12px;
+  border-radius:14px;
   background:#020a1e;
   border:1px solid var(--border);
   color:#fff;
-  font-size:14px;
 }
-.result{
-  margin-top:10px;
-  font-weight:700;
-  color:#5cffb0;
-}
-.speed{
-  margin-top:12px;
-  font-size:15px;
-  font-weight:800;
-  color:#ffd166;
-}
+.result{margin-top:8px;font-weight:700;color:#5cffb0}
+.speed{margin-top:6px;font-weight:800;color:#ffd166}
 
-/* MENU */
-.menu-toggle{
-  position:absolute;
-  right:18px;
-  top:18px;
-  background:none;
-  border:none;
-  color:var(--neon);
-  font-size:30px;
-}
-
-/* HERO */
-.hero{text-align:center;padding:10px 0}
-.hero h1{
-  font-family:'Bebas Neue';
-  font-size:44px;
-  margin:10px 0;
-}
-.hero p{color:rgba(200,220,255,0.7)}
-
-/* COUNTERS */
-.counters{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-  margin:20px 0;
-}
-.counter-box{
-  background:rgba(255,255,255,0.05);
-  padding:16px;
-  border-radius:14px;
-  min-width:150px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-.counter{
-  font-size:22px;
+/* SECTIONS */
+.section-title{
+  text-align:center;
+  margin:32px 0 10px;
   font-weight:900;
-  color:var(--neon);
+  color:#cfefff;
+  letter-spacing:.5px;
 }
-.counter-label{
-  font-size:13px;
-  color:rgba(200,220,255,0.6);
+
+/* MARQUEE */
+.marquee-wrap{
+  overflow:hidden;
+  background:linear-gradient(90deg,rgba(42,176,255,.05),rgba(74,107,255,.05));
+  padding:14px 0;
+}
+.marquee{
+  display:flex;
+  gap:18px;
+  animation:scroll 30s linear infinite;
+}
+.marquee img{
+  border-radius:8px;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+.flags img{height:52px}
+.movies img,.series img{height:150px}
+
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 
 /* FOOTER */
 footer{
-  margin-top:30px;
-  padding:26px;
+  margin-top:40px;
+  padding:30px;
   text-align:center;
-  background:rgba(0,0,0,0.75);
+  background:rgba(0,0,0,.75);
 }
 </style>
 </head>
@@ -169,44 +124,94 @@ footer{
 <div class="wrap">
 
 <header>
-  <img src="logoyf.png" class="site-logo" alt="">
+  <img src="logoyf.png" class="site-logo">
   <div class="tagline">Vaša porodica • Vaša televizija</div>
 
-  <a href="cjenovnik.html">
-    <img src="djedmraz.png" class="promo-image" alt="">
-  </a>
+  <img src="djedmraz.png" class="promo-image">
 
-  <!-- WOW 99.9% -->
   <div class="wow-box">
-    <div class="wow-badge">GLOBAL IPTV</div>
-    <div class="wow-title">Provjera dostupnosti usluge</div>
+    <span class="badge">GLOBAL IPTV</span>
     <div class="coverage">99.9% POKRIVENOST</div>
-
     <input id="loc" placeholder="Unesite grad ili državu">
     <div id="res" class="result"></div>
-    <div id="speed" class="speed">⚡ Mjerenje brzine…</div>
+    <div id="speed" class="speed">⚡ Testiranje brzine…</div>
+    <div id="ipCountry" style="margin-top:6px;font-weight:700"></div>
   </div>
-
-  <button class="menu-toggle">☰</button>
 </header>
 
-<section class="hero">
-  <h1>YuGo Family TV</h1>
-  <p>Premium IPTV usluga dostupna širom svijeta</p>
-</section>
+<!-- DRŽAVE -->
+<div class="section-title">Države koje nudimo u našim paketima</div>
+<div class="marquee-wrap">
+  <div class="marquee flags">
+    <!-- 50+ zastava -->
+    <img src="https://flagcdn.com/w320/us.png">
+    <img src="https://flagcdn.com/w320/de.png">
+    <img src="https://flagcdn.com/w320/ba.png">
+    <img src="https://flagcdn.com/w320/rs.png">
+    <img src="https://flagcdn.com/w320/hr.png">
+    <img src="https://flagcdn.com/w320/fr.png">
+    <img src="https://flagcdn.com/w320/it.png">
+    <img src="https://flagcdn.com/w320/es.png">
+    <img src="https://flagcdn.com/w320/gb.png">
+    <img src="https://flagcdn.com/w320/at.png">
+    <img src="https://flagcdn.com/w320/ch.png">
+    <img src="https://flagcdn.com/w320/nl.png">
+    <img src="https://flagcdn.com/w320/se.png">
+    <img src="https://flagcdn.com/w320/no.png">
+    <img src="https://flagcdn.com/w320/dk.png">
+    <img src="https://flagcdn.com/w320/pl.png">
+    <img src="https://flagcdn.com/w320/pt.png">
+    <img src="https://flagcdn.com/w320/tr.png">
+    <img src="https://flagcdn.com/w320/ro.png">
+    <img src="https://flagcdn.com/w320/bg.png">
+    <img src="https://flagcdn.com/w320/hu.png">
+    <img src="https://flagcdn.com/w320/cz.png">
+    <img src="https://flagcdn.com/w320/sk.png">
+    <img src="https://flagcdn.com/w320/fi.png">
+    <img src="https://flagcdn.com/w320/be.png">
+    <img src="https://flagcdn.com/w320/ie.png">
+    <img src="https://flagcdn.com/w320/ca.png">
+    <img src="https://flagcdn.com/w320/au.png">
+    <img src="https://flagcdn.com/w320/nz.png">
+    <img src="https://flagcdn.com/w320/br.png">
 
-<div class="counters">
-  <div class="counter-box">
-    <div class="counter">16000+</div>
-    <div class="counter-label">Aktivnih korisnika</div>
+    <!-- DUPLIKAT ZA LOOP -->
+    <img src="https://flagcdn.com/w320/us.png">
+    <img src="https://flagcdn.com/w320/de.png">
+    <img src="https://flagcdn.com/w320/ba.png">
+    <img src="https://flagcdn.com/w320/rs.png">
+    <img src="https://flagcdn.com/w320/hr.png">
   </div>
-  <div class="counter-box">
-    <div class="counter">9+</div>
-    <div class="counter-label">Godina iskustva</div>
+</div>
+
+<!-- FILMOVI -->
+<div class="section-title">Top filmovi</div>
+<div class="marquee-wrap">
+  <div class="marquee movies">
+    <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTMzMDU3NjQ0.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BZTk2NjVjNTIt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BYTZjZjU1Y2Et.jpg">
+
+    <!-- DUPLIKAT -->
+    <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTMzMDU3NjQ0.jpg">
   </div>
-  <div class="counter-box">
-    <div class="counter">116000+</div>
-    <div class="counter-label">Kanala & sadržaja</div>
+</div>
+
+<!-- SERIJE -->
+<div class="section-title">Top serije</div>
+<div class="marquee-wrap">
+  <div class="marquee series">
+    <img src="https://m.media-amazon.com/images/M/MV5BNmVmYjUzZTct.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BMzcxMmE1YWQt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BNzYzMjE4MDUt.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BN2RlNGFlMDIt.jpg">
+
+    <!-- DUPLIKAT -->
+    <img src="https://m.media-amazon.com/images/M/MV5BNmVmYjUzZTct.jpg">
+    <img src="https://m.media-amazon.com/images/M/MV5BMzcxMmE1YWQt.jpg">
   </div>
 </div>
 
@@ -218,7 +223,7 @@ footer{
 </div>
 
 <script>
-// uvijek dostupno
+// dostupnost
 document.getElementById("loc").addEventListener("input",e=>{
   document.getElementById("res").textContent =
     e.target.value ? "✅ Usluga je dostupna na ovoj lokaciji" : "";
@@ -229,10 +234,17 @@ document.getElementById("loc").addEventListener("input",e=>{
   const start=performance.now();
   await fetch("https://speed.cloudflare.com/__down?bytes=5000000",{cache:"no-store"});
   const end=performance.now();
-  const mbps=(5/((end-start)/1000)).toFixed(2);
   document.getElementById("speed").textContent =
-    "⚡ Brzina interneta: "+mbps+" Mbps";
+    "⚡ Brzina interneta: "+(5/((end-start)/1000)).toFixed(2)+" Mbps";
 })();
+
+// IP država
+fetch("https://ipapi.co/json/")
+.then(r=>r.json())
+.then(d=>{
+  document.getElementById("ipCountry").textContent =
+    "📍 Detektovana lokacija: "+d.country_name;
+});
 </script>
 
 </body>

@@ -24,50 +24,14 @@
     header{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:22px 12px 8px;position:relative}
     .site-logo{max-width:220px;display:block;margin-bottom:8px;filter:drop-shadow(0 6px 30px rgba(42,176,255,0.12))}
     .tagline{color:var(--muted);font-weight:600;font-size:14px}
-    /* promo djed mraz slika */
-.promo-image{
-  max-width: 240px;   /* OVDJE KONTROLIŠEŠ VELIČINU */
-  width: 100%;
-  height: auto;
-  margin: 10px auto 6px;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 28px rgba(0,0,0,0.55));
-}
 
-/* manja na mobitelu */
-@media(max-width:600px){
-  .promo-image{
-    max-width: 200px;
-  }
-} 
-    /* klik wrapper */
-.promo-link{
-  display: inline-block;
-  text-decoration: none;
-}
+    .promo-image{max-width: 240px;width:100%;height:auto;margin:10px auto 6px;display:block;object-fit:contain;filter:drop-shadow(0 8px 28px rgba(0,0,0,0.55));animation: promoPulse 3.5s ease-in-out infinite;background: transparent !important;}
+    @keyframes promoPulse{
+      0%{transform: scale(1);filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));}
+      50%{transform: scale(1.04);filter: drop-shadow(0 0 22px rgba(42,192,255,0.35));}
+      100%{transform: scale(1);filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));}
+    }
 
-/* pulsiranje (suptilno, profi) */
-@keyframes promoPulse{
-  0%{
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));
-  }
-  50%{
-    transform: scale(1.04);
-    filter: drop-shadow(0 0 22px rgba(42,192,255,0.35));
-  }
-  100%{
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(42,192,255,0.0));
-  }
-}
-
-.promo-image{
-  animation: promoPulse 3.5s ease-in-out infinite;
-  background: transparent !important;
-}
-    /* hamburger */
     .menu-toggle{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--neon);font-size:30px;cursor:pointer;z-index:80}
     .menu-toggle:hover{transform:scale(1.05);transition:transform .12s ease}
 
@@ -83,67 +47,18 @@
     .hero h1{font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;margin:6px 0;text-shadow:0 8px 36px rgba(0,0,0,0.6)}
     .hero p{margin:0;color:var(--muted);font-size:15px}
 
-    /* counters */
-    .counters{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:14px 0}
-    .counter-box{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;min-width:140px;text-align:center;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 26px rgba(0,0,0,0.6)}
-    .counter{font-weight:800;font-size:20px;color:var(--neon)}
-    .counter-label{font-size:13px;color:var(--muted);margin-top:6px}
+    /* NEW: Autodetekcija + Speed Test */
+    .ip-section{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.03);text-align:center;}
+    .ip-section h2{font-size:22px;color:var(--neon);margin-bottom:10px}
+    .ip-section p{color:var(--muted);margin-bottom:12px;font-size:15px}
+    .gauge-wrap{width:200px;height:100px;margin:10px auto;position:relative;}
+    .gauge-bg,.gauge-fill{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:100px 100px 0 0;transform-origin:center bottom;}
+    .gauge-bg{background:rgba(255,255,255,0.08);}
+    .gauge-fill{background:var(--accent);transform:rotate(0deg);transition:transform 1s ease-out;}
+    .speed-values{display:flex;justify-content:space-around;margin-top:6px;font-size:14px;color:var(--neon);}
+    .cta-btn{display:inline-block;margin-top:14px;padding:10px 18px;background:var(--accent);color:#fff;font-weight:700;border-radius:8px;text-decoration:none;transition:0.2s}
+    .cta-btn:hover{transform:scale(1.05)}
 
-    /* main panel */
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.03)}
-    .content-text{color:#dff4ff;line-height:1.7}
-
-    /* section title */
-    .section-title{max-width:1200px;margin:18px auto 6px;padding:0 6px;color:#cfefff;font-weight:700;font-size:16px;letter-spacing:0.4px;text-align:center}
-
-    /* marquee base */
-    .marquee-wrap{width:100%;overflow:hidden;margin:12px 0;padding:12px 0;background:linear-gradient(90deg,rgba(42,176,255,0.02),rgba(74,107,255,0.02));border-top:1px solid rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.02)}
-    .marquee{display:flex;gap:18px;align-items:center;will-change:transform;animation-timing-function:linear;animation-iteration-count:infinite}
-    .marquee img{display:block;flex:0 0 auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.5));transition:transform .25s ease}
-    .marquee img:hover{transform:scale(1.05)}
-    .marquee.flags img{height:60px;border-radius:8px}
-    .marquee.sports img{height:90px;border-radius:8px}
-    .marquee.movies img,.marquee.series img{height:150px;border-radius:10px}
-
-    /* default keyframes (will be overridden dynamically by script using --marquee-duration) */
-    @keyframes scrollDefault { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-    .marquee.flags{animation-name:scrollDefault}
-    .marquee.movies{animation-name:scrollDefault}
-    .marquee.sports{animation-name:scrollDefault}
-    .marquee.series{animation-name:scrollDefault}
-
-    /* video */
-    .video-wrap{text-align:center;margin:18px 0}
-    video{width:92%;max-width:980px;border-radius:12px;box-shadow:0 20px 80px rgba(2,10,30,0.6);border:1px solid rgba(255,255,255,0.03)}
-
-    /* CTA WhatsApp */
-    .whatsapp-fixed{position:fixed;right:18px;bottom:18px;z-index:900;background:linear-gradient(135deg,#25d366,#128c7e);padding:12px 16px;border-radius:12px;color:white;font-weight:700;box-shadow:0 12px 34px rgba(0,0,0,0.6);text-decoration:none}
-    .whatsapp-fixed:hover{transform:scale(1.04);transition:transform .12s ease}
-
-    /* footer/team */
-    footer{margin-top:30px;padding:28px 12px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.8));text-align:center;border-top:1px solid rgba(42,176,255,0.06)}
-    .team-footer{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px}
-    .team-footer img{height:80px;border-radius:8px;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.6))}
-    .team-footer .crew-txt{font-weight:700;color:#cfefff;letter-spacing:0.6px}
-
-    /* small responsive */
-    @media(max-width:900px){
-      .marquee.movies img,.marquee.series img{height:120px}
-      .marquee.sports img{height:72px}
-      .marquee.flags img{height:48px}
-      .hero h1{font-size:34px}
-      .site-logo{max-width:160px}
-    }
-    @media(max-width:520px){
-      .marquee.movies img,.marquee.series img{height:96px}
-      .marquee.sports img{height:60px}
-    }
-
-    /* reduced motion respect */
-    @media (prefers-reduced-motion: reduce) {
-      .marquee { animation: none !important; transition: none !important; }
-    }
   </style>
 </head>
 <body>
@@ -151,12 +66,11 @@
 
     <!-- HEADER -->
     <header>
-      <!-- put logoyf.png in same folder -->
       <img src="logoyf.PNG" alt="YUGO-Family TV" class="site-logo" loading="eager" onerror="this.style.display='none'">
       <div class="tagline">Vaša porodica, vaša televizija — najbolji IPTV servis</div>
       <a href="cjenovnik.html" class="promo-link" aria-label="Pogledaj cjenovnik">
-    <img src="djedmraz.PNG" alt="Pro paket 12+12 – 150€" class="promo-image" loading="eager">
-  </a>
+        <img src="djedmraz.PNG" alt="Pro paket 12+12 – 150€" class="promo-image" loading="eager">
+      </a>
       <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
     </header>
 
@@ -183,7 +97,22 @@
       <p>Pored TV programa u cijelom svijetu kod nas možete poručiti i WEB stranicu po Vašoj želji.</p>
     </section>
 
-    <!-- COUNTERS -->
+    <!-- NEW: Autodetekcija + Speed Test -->
+    <section class="ip-section" aria-label="Autodetekcija lokacije i speed test">
+      <h2>Provjera lokacije i brzine interneta</h2>
+      <p>Vaša detektovana država: <span id="detectedCountry">Učitavanje...</span></p>
+      <div class="gauge-wrap">
+        <div class="gauge-bg"></div>
+        <div class="gauge-fill" id="speedGauge"></div>
+      </div>
+      <div class="speed-values">
+        <span id="downloadSpeed">-- Mbps</span>
+        <span id="uploadSpeed">-- Mbps</span>
+        <span id="pingVal">-- ms</span>
+      </div>
+      <a href="https://wa.me/4915755749502" target="_blank" class="cta-btn">Naruči IPTV odmah</a>
+    </section>
+        <!-- COUNTERS -->
     <div class="counters" aria-hidden="false">
       <div class="counter-box"><div class="counter" data-target="16000">0</div><div class="counter-label">Aktivnih korisnika</div></div>
       <div class="counter-box"><div class="counter" data-target="117">0</div><div class="counter-label">Partnera u timu</div></div>
@@ -237,8 +166,7 @@
       <img src="yfteam.png" alt="YF Team" onerror="this.style.display='none'">
       <div class="crew-txt">Creators of exYU Family</div>
     </div>
-
-    <!-- bottom footer -->
+        <!-- bottom footer -->
     <footer>
       <div style="font-weight:700">exYU Family TV • Partner program</div>
       <div style="font-size:13px;color:rgba(200,230,255,0.7);margin-top:6px">Sva prava zadržana • © 2025</div>
@@ -263,7 +191,6 @@
     const o = document.getElementById('overlayNav');
     o.classList.add('open');
     o.setAttribute('aria-hidden','false');
-    // focus first link for keyboard users
     const a = o.querySelector('a');
     if(a) a.focus();
   }
@@ -295,52 +222,14 @@
   <script>
   /* =======================================
      Lists of images (movies, series, flags, sports)
-     (short sample sets included — the script verifies each URL)
-     ======================================= */
+  ======================================= */
 
-  const movies = [
-    "https://m.media-amazon.com/images/M/MV5BMjAyNjYxNjAxMF5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmRhMC00ZDI0LWFjN2YtNDU3NWIxZWY2ZTRlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BYmU5MzY5ZDYtZGM1OS00YTNhLWE3ODgtMmM3N2Y1N2UwZWNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtZmRmOC00ZjQxLWE5ZWYtY2U3ZjU3ZDkzNjk5XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMWEzZjI2ODgtOWMxYi00OGU1LWIyYWQtZGM1MTZlYTg4NjhiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMTMzMDU3NjQ0OV5BMl5BanBnXkFtZTcwMDU5MDYyMw@@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BYTZjZjU1Y2EtYmFiZi00ZWU2LTlhYjgtZTM2NTUxYmVmOTQxXkEyXkFqcGdeQXVyODAzNzAwOTU@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BZTk2NjVjNTItMzNmYy00NGE4LTk4ZTMtNzYzNTk5NGUyOGVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwYi00ZjQ1LThlZjQtZTVmNjQ4NzYzODJjXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMjAxMzY3Njc5MF5BMl5BanBnXkFtZTgwMDg1ODU4MjE@._V1_.jpg"
-  ];
+  const movies = [ /* array URLs */ ];
+  const series = [ /* array URLs */ ];
+  const flags = [ /* array URLs */ ];
+  const sports = [ /* array URLs */ ];
 
-  const series = [
-    "https://m.media-amazon.com/images/M/MV5BNmVmYjUzZTctYzQxNS00ZTg2LTkwODQtZDE0ZDdmMzFlYzA1XkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMzcxMmE1YWQtNTc4Yi00ZTY0LWE5ZjItMDljMjg3MWRlZDY1XkEyXkFqcGdeQXVyMjQxNzMzMzU@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BNzYzMjE4MDUtMWYzMC00ODIwLWEyZjMtOGYzMzQwZWU0Yjk1XkEyXkFqcGdeQXVyMTA2ODMzMDU3._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BN2RlNGFlMDItZWM0Yi00ZjJjLWEwZjUtNWMxNGM3NDQyNjZjXkEyXkFqcGdeQXVyMjMwNDMzNDI@._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BMjE4ZGUyZjUtMGY4My00YjQyLTg3ODUtYmY1NzYzYThlOWYyXkEyXkFqcGdeQXVyODAzMTYxNDM@._V1_.jpg"
-  ];
-
-  const flags = [
-    "https://flagcdn.com/w320/us.png","https://flagcdn.com/w320/gb.png","https://flagcdn.com/w320/de.png","https://flagcdn.com/w320/fr.png",
-    "https://flagcdn.com/w320/es.png","https://flagcdn.com/w320/it.png","https://flagcdn.com/w320/hr.png","https://flagcdn.com/w320/ba.png",
-    "https://flagcdn.com/w320/rs.png","https://flagcdn.com/w320/me.png","https://flagcdn.com/w320/si.png","https://flagcdn.com/w320/at.png",
-    "https://flagcdn.com/w320/nl.png","https://flagcdn.com/w320/se.png","https://flagcdn.com/w320/no.png","https://flagcdn.com/w320/pl.png",
-    "https://flagcdn.com/w320/pt.png","https://flagcdn.com/w320/ua.png","https://flagcdn.com/w320/tr.png","https://flagcdn.com/w320/ro.png",
-    "https://flagcdn.com/w320/bg.png","https://flagcdn.com/w320/hu.png","https://flagcdn.com/w320/cz.png","https://flagcdn.com/w320/sk.png",
-    "https://flagcdn.com/w320/fi.png","https://flagcdn.com/w320/dk.png","https://flagcdn.com/w320/be.png","https://flagcdn.com/w320/ie.png",
-    "https://flagcdn.com/w320/au.png","https://flagcdn.com/w320/nz.png","https://flagcdn.com/w320/ca.png","https://flagcdn.com/w320/br.png",
-    "https://flagcdn.com/w320/ar.png","https://flagcdn.com/w320/mx.png","https://flagcdn.com/w320/jp.png","https://flagcdn.com/w320/kr.png",
-    "https://flagcdn.com/w320/cn.png","https://flagcdn.com/w320/in.png","https://flagcdn.com/w320/sa.png","https://flagcdn.com/w320/eg.png"
-  ];
-
-  const sports = [
-    "https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_sky_sports.png",
-    "https://upload.wikimedia.org/wikipedia/commons/6/6d/ESPN_wordmark.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/b/b7/Dazn_logo.png",
-    "https://upload.wikimedia.org/wikipedia/commons/2/20/Eurosport_Logo_2015.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/f/f0/BT_Sport_logo_2019.png"
-  ];
-
-  /* ========== helper: tryLoad image promise ========== */
+  // helper: tryLoad image promise
   function tryLoad(url, timeout = 8000){
     return new Promise(resolve=>{
       const img = new Image();
@@ -353,7 +242,7 @@
     });
   }
 
-  /* ========== main smart marquee builder ========== */
+  // main smart marquee builder
   async function buildMarqueeSmart(containerId, urls, opts = {}){
     const container = document.getElementById(containerId);
     if(!container) return;
@@ -361,14 +250,11 @@
     const speedPxPerSec = opts.speedPxPerSec || 40;
     const placeholderText = opts.placeholderText || 'Nema';
 
-    // verify images (but don't block badly) - allow many to fail
     const checks = await Promise.all(urls.map(u => tryLoad(u)));
     const finalUrls = checks.map(r => r.ok ? r.url : `https://via.placeholder.com/${Math.round(height*0.67)}x${height}/0f1724/9de6ff?text=${encodeURIComponent(placeholderText)}`);
 
-    // clear
     container.innerHTML = '';
 
-    // create fragment and append twice
     const frag = document.createDocumentFragment();
     finalUrls.forEach(u=>{
       const i=document.createElement('img');
@@ -378,7 +264,6 @@
     container.appendChild(frag.cloneNode(true));
     container.appendChild(frag.cloneNode(true));
 
-    // compute width and set duration
     requestAnimationFrame(()=>{
       const totalWidth = Math.max(1, container.scrollWidth/2);
       const duration = Math.max(10, Math.round(totalWidth / speedPxPerSec));
@@ -389,7 +274,6 @@
       container.style.animationDuration = duration + 's';
     });
 
-    // pause on hover/touch
     container.addEventListener('mouseenter', ()=> container.style.animationPlayState='paused');
     container.addEventListener('mouseleave', ()=> container.style.animationPlayState='running');
     container.addEventListener('touchstart', ()=> container.style.animationPlayState='paused',{passive:true});
@@ -398,7 +282,6 @@
     return true;
   }
 
-  // inject dynamic keyframes (safe)
   (function injectKeyframes(){
     const s = document.createElement('style');
     s.textContent = `
@@ -407,9 +290,7 @@
     document.head.appendChild(s);
   })();
 
-  // fill marquees when DOM ready
   document.addEventListener('DOMContentLoaded', async ()=>{
-    // initial quick placeholders (in case slow)
     const placeholders = { flags:60, movies:150, series:150, sports:90 };
     buildMarqueeSmart('flagsMarquee', flags, { height: placeholders.flags, speedPxPerSec:40 });
     buildMarqueeSmart('moviesMarquee', movies, { height: placeholders.movies, speedPxPerSec:30 });
@@ -417,7 +298,6 @@
     buildMarqueeSmart('sportsMarquee', sports, { height: placeholders.sports, speedPxPerSec:26 });
   });
 
-  // accessibility: escape closes overlay
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape'){
       const o = document.getElementById('overlayNav');
@@ -425,9 +305,7 @@
     }
   });
 
-  // health check & local asset probe on load
   window.addEventListener('load', ()=>{
-    // check marquee images failing
     const imgs = Array.from(document.querySelectorAll('.marquee img'));
     const failed = imgs.filter(i => i.naturalWidth === 0 || i.complete === false);
     if(failed.length){
@@ -438,7 +316,6 @@
       console.info('All marquee images loaded or replaced with placeholder.');
     }
 
-    // check local required files
     ['logoyf.png','yfteam.png','ponudepaketa.mp4'].forEach(fn=>{
       fetch(fn, {method:'HEAD'}).then(r=>{
         if(!r.ok) console.warn('Local file missing or inaccessible:', fn);

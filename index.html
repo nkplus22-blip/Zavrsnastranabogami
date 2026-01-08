@@ -3,9 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YuGo Family TV – Premium IPTV</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>YuGo Family TV – Premium Global IPTV</title>
+
+<meta name="description" content="YuGo Family TV – premium global IPTV servis. HD/4K/8K kvalitet, stabilni serveri, legalan pristup i 24/7 podrška.">
+<meta name="keywords" content="Premium IPTV, YuGo Family TV, IPTV Europe, IPTV Germany, Balkan IPTV">
+<meta name="author" content="YuGo Family TV">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -15,6 +20,7 @@
   --glass:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
 }
+
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -22,37 +28,90 @@ body{
   background:radial-gradient(circle at top,#0b1a3a,var(--bg));
   color:#e6f7ff;
 }
+
 .wrap{max-width:1200px;margin:auto;padding:0 18px}
 
 /* HEADER */
-header{text-align:center;padding:26px 12px}
+header{
+  text-align:center;
+  padding:26px 12px 10px;
+  position:relative;
+}
+
 .site-logo{max-width:200px}
 .tagline{font-size:14px;color:rgba(200,220,255,.65);font-weight:600}
 
-/* PROMO */
-.promo-image{
-  max-width:240px;
-  margin:16px auto;
-  animation:pulse 3.6s ease-in-out infinite;
+/* LANGUAGE */
+.lang{
+  position:absolute;
+  top:20px;
+  left:20px;
+  display:flex;
+  gap:10px;
+  font-size:13px;
 }
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.06)}
-  100%{transform:scale(1)}
+.lang span{
+  cursor:pointer;
+  opacity:.6;
+}
+.lang span.active{opacity:1;color:var(--neon)}
+
+/* MENU */
+.menu-toggle{
+  position:absolute;
+  top:18px;
+  right:18px;
+  font-size:32px;
+  background:none;
+  border:none;
+  color:var(--neon);
+  cursor:pointer;
 }
 
-/* WOW BOX */
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,6,20,0.97);
+  backdrop-filter:blur(10px);
+  width:0;
+  overflow:hidden;
+  transition:width .4s ease;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.overlay.open{width:100%}
+.overlay a{
+  color:#e6f7ff;
+  font-size:22px;
+  padding:12px;
+  text-decoration:none;
+}
+.overlay a:hover{color:var(--neon)}
+.closebtn{
+  position:absolute;
+  top:18px;
+  right:22px;
+  font-size:36px;
+  cursor:pointer;
+}
+
+/* HERO */
 .wow-box{
-  max-width:620px;
-  margin:10px auto 28px;
-  padding:22px;
+  max-width:720px;
+  margin:24px auto 34px;
+  padding:30px;
   border-radius:22px;
-  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.02));
-  backdrop-filter:blur(12px);
+  background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
+  backdrop-filter:blur(14px);
   border:1px solid var(--border);
-  box-shadow:0 0 80px rgba(42,192,255,.35);
+  box-shadow:0 0 100px rgba(42,192,255,.4);
   text-align:center;
 }
+
 .badge{
   background:linear-gradient(90deg,#2ac0ff,#4a6bff);
   color:#00121e;
@@ -61,12 +120,14 @@ header{text-align:center;padding:26px 12px}
   font-weight:900;
   font-size:12px;
 }
+
 .coverage{
-  font-size:30px;
+  font-size:32px;
   font-weight:900;
   color:var(--neon);
-  margin:10px 0;
+  margin:14px 0;
 }
+
 .wow-box input{
   width:100%;
   padding:14px;
@@ -75,16 +136,33 @@ header{text-align:center;padding:26px 12px}
   border:1px solid var(--border);
   color:#fff;
 }
+
 .result{margin-top:8px;font-weight:700;color:#5cffb0}
 .speed{margin-top:6px;font-weight:800;color:#ffd166}
 
-/* SECTIONS */
+/* TRUST */
+.trust{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  margin-top:20px;
+}
+.trust div{
+  background:var(--glass);
+  padding:10px 18px;
+  border-radius:22px;
+  font-weight:700;
+  font-size:14px;
+  border:1px solid var(--border);
+}
+
+/* SECTION */
 .section-title{
   text-align:center;
-  margin:32px 0 10px;
+  margin:42px 0 14px;
   font-weight:900;
   color:#cfefff;
-  letter-spacing:.5px;
 }
 
 /* MARQUEE */
@@ -110,118 +188,94 @@ header{text-align:center;padding:26px 12px}
   to{transform:translateX(-50%)}
 }
 
+/* COMPLIANCE */
+.compliance{
+  margin-top:50px;
+  padding:26px;
+  background:rgba(0,0,0,.6);
+  border:1px solid var(--border);
+  border-radius:18px;
+  font-size:13px;
+  line-height:1.6;
+  color:#cbdcff;
+}
+
 /* FOOTER */
 footer{
-  margin-top:40px;
-  padding:30px;
+  margin-top:50px;
+  padding:35px 20px;
   text-align:center;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.8);
 }
-  /* HAMBURGER */
-.menu-toggle{
-  position:absolute;
-  top:18px;
-  right:18px;
-  font-size:32px;
-  background:none;
-  border:none;
-  color:var(--neon);
-  cursor:pointer;
-  z-index:120;
-}
+footer a{color:var(--neon);text-decoration:none}
 
-/* OVERLAY MENU */
-.overlay{
+/* FLOAT */
+.float{
   position:fixed;
-  inset:0;
-  background:rgba(0,6,20,0.96);
-  backdrop-filter:blur(8px);
-  width:0;
-  overflow:hidden;
-  transition:width .45s ease;
-  z-index:999;
+  bottom:20px;
+  right:20px;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  gap:12px;
+  z-index:999;
 }
-
-.overlay.open{width:100%}
-
-.overlay a{
-  color:#e6f7ff;
-  font-size:22px;
-  padding:12px 20px;
-  text-align:center;
-  transition:.2s;
+.float a{
+  padding:14px 18px;
+  border-radius:50px;
+  font-weight:700;
+  color:#fff;
+  text-decoration:none;
 }
-
-.overlay a:hover{
-  color:var(--neon);
-  transform:translateX(6px);
-}
-
-.closebtn{
-  position:absolute;
-  top:18px;
-  right:22px;
-  font-size:36px;
-  color:var(--neon);
-  cursor:pointer;
-}
-
+.whatsapp{background:#25D366}
+.email{background:#4a6bff}
 </style>
-</head>
+
 <script>
-function openNav(){
-  const nav=document.getElementById("overlayNav");
-  nav.classList.add("open");
-  nav.setAttribute("aria-hidden","false");
-}
-
-function closeNav(){
-  const nav=document.getElementById("overlayNav");
-  nav.classList.remove("open");
-  nav.setAttribute("aria-hidden","true");
-}
-
-/* ESC zatvara meni */
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") closeNav();
-});
+function openNav(){overlayNav.classList.add("open")}
+function closeNav(){overlayNav.classList.remove("open")}
 </script>
+</head>
 
 <body>
 <div class="wrap">
 
 <header>
-  <img src="logoyf.png" class="site-logo">
-  <div class="tagline">Vaša porodica • Vaša televizija</div>
-  
-  <button class="menu-toggle" onclick="openNav()" aria-label="Otvori meni">☰</button>
+  <div class="lang">
+    <span class="active">BS</span>
+    <span>EN</span>
+    <span>DE</span>
+  </div>
 
-  <img src="djedmraz.png" class="promo-image">
+  <img src="logoyf.png" class="site-logo" alt="YuGo Family TV">
+  <div class="tagline">Vaša porodica • Vaša televizija</div>
+
+  <button class="menu-toggle" onclick="openNav()">☰</button>
 
   <div class="wow-box">
-  <span class="badge">GLOBAL IPTV</span>
+    <span class="badge">GLOBAL PREMIUM IPTV</span>
 
-  <p class="service-desc">
-    Premium IPTV servis sa hiljadama TV kanala, filmova i serija iz cijelog svijeta.
-    Stabilna konekcija, HD/4K/8K kvalitet i podrška 24/7 – gdje god da se nalazite.
-  </p>
+    <p>
+      Premium IPTV servis za međunarodno tržište.  
+      Stabilna infrastruktura, HD / 4K / 8K kvalitet i 24/7 podrška.
+    </p>
 
-  <div class="coverage">99.9% POKRIVENOST</div>
+    <div class="coverage">99.9% GLOBALNA POKRIVENOST</div>
 
-  <input id="loc" placeholder="Unesite grad iz kojeg želite gledati iptv">
-  <div id="res" class="result"></div>
-  <div id="speed" class="speed">⚡ Testiranje brzine…</div>
-  <div id="ipCountry" style="margin-top:6px;font-weight:700"></div>
-</div>
+    <input id="loc" placeholder="Unesite grad iz kojeg gledate IPTV">
+    <div id="res" class="result"></div>
+    <div id="speed" class="speed">⚡ Testiranje brzine…</div>
+    <div id="ipCountry" style="margin-top:6px;font-weight:700"></div>
 
+    <div class="trust">
+      <div>✔ No content hosted</div>
+      <div>✔ EU-friendly</div>
+      <div>✔ Private servers</div>
+      <div>✔ 24/7 Support</div>
+    </div>
+  </div>
 </header>
-  
-  <!-- OVERLAY NAV -->
-<nav id="overlayNav" class="overlay" aria-hidden="true">
+
+<nav id="overlayNav" class="overlay">
   <div class="closebtn" onclick="closeNav()">×</div>
   <a href="index.html">Početna</a>
   <a href="onama.html">O nama</a>
@@ -233,187 +287,44 @@ document.addEventListener("keydown",e=>{
   <a href="kontakt.html">Kontakt</a>
   <a href="tim.html">Postani dio tima</a>
   <a href="webstranica.html">Poruči WEB-PAGE</a>
-  <a href="top15.html">Top 30 YugoFamily</a>
+  <a href="top15.html">Top 30 YuGoFamily</a>
 </nav>
 
-
-<!-- DRŽAVE -->
-<div class="section-title">Države koje nudimo u našim paketima</div>
-<div class="marquee-wrap">
-  <div class="marquee flags">
-    <!-- 50+ zastava -->
-    <img src="https://flagcdn.com/w320/us.png">
-    <img src="https://flagcdn.com/w320/de.png">
-    <img src="https://flagcdn.com/w320/ba.png">
-    <img src="https://flagcdn.com/w320/rs.png">
-    <img src="https://flagcdn.com/w320/hr.png">
-    <img src="https://flagcdn.com/w320/fr.png">
-    <img src="https://flagcdn.com/w320/it.png">
-    <img src="https://flagcdn.com/w320/es.png">
-    <img src="https://flagcdn.com/w320/gb.png">
-    <img src="https://flagcdn.com/w320/at.png">
-    <img src="https://flagcdn.com/w320/ch.png">
-    <img src="https://flagcdn.com/w320/nl.png">
-    <img src="https://flagcdn.com/w320/se.png">
-    <img src="https://flagcdn.com/w320/no.png">
-    <img src="https://flagcdn.com/w320/dk.png">
-    <img src="https://flagcdn.com/w320/pl.png">
-    <img src="https://flagcdn.com/w320/pt.png">
-    <img src="https://flagcdn.com/w320/tr.png">
-    <img src="https://flagcdn.com/w320/ro.png">
-    <img src="https://flagcdn.com/w320/bg.png">
-    <img src="https://flagcdn.com/w320/hu.png">
-    <img src="https://flagcdn.com/w320/cz.png">
-    <img src="https://flagcdn.com/w320/sk.png">
-    <img src="https://flagcdn.com/w320/fi.png">
-    <img src="https://flagcdn.com/w320/be.png">
-    <img src="https://flagcdn.com/w320/ie.png">
-    <img src="https://flagcdn.com/w320/ca.png">
-    <img src="https://flagcdn.com/w320/au.png">
-    <img src="https://flagcdn.com/w320/nz.png">
-    <img src="https://flagcdn.com/w320/br.png">
-
-    <!-- DUPLIKAT ZA LOOP -->
-    <img src="https://flagcdn.com/w320/us.png">
-    <img src="https://flagcdn.com/w320/de.png">
-    <img src="https://flagcdn.com/w320/ba.png">
-    <img src="https://flagcdn.com/w320/rs.png">
-    <img src="https://flagcdn.com/w320/hr.png">
-  </div>
+<div class="section-title">Compliance & Legal Notice</div>
+<div class="compliance">
+  YuGo Family TV does not host, upload or store any media content.  
+  The service provides access to privately managed streaming infrastructure.  
+  Availability of content depends on regional regulations.  
+  Users are responsible for compliance with local laws.
 </div>
-
-<!-- FILMOVI -->
-<div class="section-title">Top filmovi</div>
-<div class="marquee-wrap">
-  <div class="marquee movies">
-
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23050a1a'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='32' font-family='Arial' text-anchor='middle'>1917</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23040f2a'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='28' font-family='Arial' text-anchor='middle'>INTERSTELLAR</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23081224'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='26' font-family='Arial' text-anchor='middle'>THE DARK KNIGHT</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23031220'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='28' font-family='Arial' text-anchor='middle'>INCEPTION</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23020b1a'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='26' font-family='Arial' text-anchor='middle'>ENDGAME</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-
-    <!-- DUPLIKAT ZA LOOP -->
-    <img src="data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-      <rect width='100%' height='100%' fill='%23050a1a'/>
-      <text x='50%' y='45%' fill='%232ac0ff' font-size='32' font-family='Arial' text-anchor='middle'>1917</text>
-      <text x='50%' y='55%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>MOVIE</text>
-    </svg>">
-    
-  </div>
-
-
-
-<!-- SERIJE -->
-<div class="section-title">Top serije</div>
-<div class="marquee series">
-
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23040f2a'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='30' font-family='Arial' text-anchor='middle'>BREAKING BAD</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23061224'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='26' font-family='Arial' text-anchor='middle'>GAME OF THRONES</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23050b1e'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='26' font-family='Arial' text-anchor='middle'>STRANGER THINGS</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23021420'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='28' font-family='Arial' text-anchor='middle'>MONEY HEIST</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23030c1a'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='28' font-family='Arial' text-anchor='middle'>THE WITCHER</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-  <!-- DUPLIKAT ZA LOOP -->
-  <img src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='300' height='450'>
-    <rect width='100%' height='100%' fill='%23040f2a'/>
-    <text x='50%' y='44%' fill='%232ac0ff' font-size='30' font-family='Arial' text-anchor='middle'>BREAKING BAD</text>
-    <text x='50%' y='56%' fill='%23ffffff' font-size='16' font-family='Arial' text-anchor='middle'>SERIES</text>
-  </svg>">
-
-</div>
-
 
 <footer>
-  © 2025 YuGo Family TV<br>
+  © 2026 YuGo Family TV<br>
   <a href="https://wa.me/4915755749502">WhatsApp podrška</a>
 </footer>
+
+<div class="float">
+  <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp</a>
+  <a class="email" href="mailto:support@yugofamily.tv">✉ Email</a>
+</div>
 
 </div>
 
 <script>
-// dostupnost
-document.getElementById("loc").addEventListener("input",e=>{
-  document.getElementById("res").textContent =
-    e.target.value ? "✅ Usluga je dostupna na ovoj lokaciji" : "";
+loc.addEventListener("input",e=>{
+  res.textContent=e.target.value?"✅ Usluga dostupna na ovoj lokaciji":"";
 });
 
-// speed test
 (async()=>{
-  const start=performance.now();
+  const s=performance.now();
   await fetch("https://speed.cloudflare.com/__down?bytes=5000000",{cache:"no-store"});
-  const end=performance.now();
-  document.getElementById("speed").textContent =
-    "⚡ Brzina interneta: "+(5/((end-start)/1000)).toFixed(2)+" Mbps";
+  const e=performance.now();
+  speed.textContent="⚡ Brzina: "+(5/((e-s)/1000)).toFixed(2)+" Mbps";
 })();
 
-// IP država
 fetch("https://ipapi.co/json/")
 .then(r=>r.json())
-.then(d=>{
-  document.getElementById("ipCountry").textContent =
-    "📍 Detektovana lokacija: "+d.country_name;
-});
+.then(d=>ipCountry.textContent="📍 Detektovana lokacija: "+d.country_name);
 </script>
 
 </body>

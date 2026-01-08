@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ – Česta pitanja | YuGo Family TV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,Arial;
+  background:#050714;
+  color:#e6f7ff;
+}
+.wrap{max-width:900px;margin:auto;padding:40px 18px}
+h1{color:#2ac0ff;text-align:center;margin-bottom:30px}
+.faq{
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+  background:rgba(255,255,255,.05);
+}
+.faq h3{cursor:pointer;color:#2ac0ff}
+.faq p{display:none;font-size:14px;line-height:1.6}
+footer{text-align:center;margin-top:40px;color:#aaa}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<h1>Česta pitanja (FAQ)</h1>
+
+<div class="faq"><h3>Da li IPTV radi u Njemačkoj i EU?</h3><p>Da. YuGo Family TV radi u Njemačkoj, Austriji, Švicarskoj i cijeloj EU uz stabilnu internet konekciju.</p></div>
+
+<div class="faq"><h3>Na koliko uređaja mogu gledati?</h3><p>Jedna pretplata je namijenjena za jedan uređaj. Business paketi omogućavaju više uređaja.</p></div>
+
+<div class="faq"><h3>Da li je potreban ugovor?</h3><p>Ne. Nema ugovora ni obaveza. Pretplata se produžava po želji.</p></div>
+
+<div class="faq"><h3>Koja brzina interneta je potrebna?</h3><p>Minimalno 10 Mbps za HD, 25 Mbps za 4K kvalitet.</p></div>
+
+<div class="faq"><h3>Da li nudite tehničku podršku?</h3><p>Da. Podrška je dostupna 24/7 putem WhatsAppa i emaila.</p></div>
+
+<footer>© 2025 YuGo Family TV</footer>
+</div>
+
+<script>
+document.querySelectorAll(".faq h3").forEach(q=>{
+  q.onclick=()=>q.nextElementSibling.style.display=
+  q.nextElementSibling.style.display==="block"?"none":"block";
+});
+</script>
+</body>
+</html>

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>YuGo Family TV – Premium IPTV</title>
+<title>YuGo Family TV – Premium Global IPTV</title>
 
-<meta name="description" content="YuGo Family TV – premium global IPTV servis sa podrškom 24/7.">
+<meta name="description" content="YuGo Family TV – premium global IPTV servis. Privatna infrastruktura, 24/7 podrška.">
 <meta name="author" content="YuGo Family TV">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -34,65 +34,31 @@ header{text-align:center;padding:26px 12px;position:relative}
 .tagline{font-size:14px;color:rgba(200,220,255,.65);font-weight:600}
 
 /* LANG */
-.lang{
-  position:absolute;
-  top:18px;
-  left:18px;
-  display:flex;
-  gap:10px;
-  font-size:13px;
-}
+.lang{position:absolute;top:18px;left:18px;display:flex;gap:10px;font-size:13px}
 .lang span{cursor:pointer;opacity:.6}
 .lang span.active{opacity:1;color:var(--neon)}
 
 /* MENU */
-.menu-toggle{
-  position:absolute;
-  top:18px;
-  right:18px;
-  font-size:32px;
-  background:none;
-  border:none;
-  color:var(--neon);
-  cursor:pointer;
-}
+.menu-toggle{position:absolute;top:18px;right:18px;font-size:32px;background:none;border:none;color:var(--neon);cursor:pointer}
 
 /* OVERLAY */
 .overlay{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:rgba(0,6,20,.97);
   backdrop-filter:blur(10px);
-  width:0;
-  overflow:hidden;
-  transition:.4s;
-  z-index:999;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  width:0;overflow:hidden;
+  transition:.4s;z-index:999;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center
 }
 .overlay.open{width:100%}
-.overlay a{
-  color:#e6f7ff;
-  font-size:22px;
-  padding:12px;
-  text-decoration:none;
-}
+.overlay a{color:#e6f7ff;font-size:22px;padding:10px;text-decoration:none}
 .overlay a:hover{color:var(--neon)}
-.closebtn{
-  position:absolute;
-  top:18px;
-  right:22px;
-  font-size:36px;
-  cursor:pointer;
-}
+.closebtn{position:absolute;top:18px;right:22px;font-size:36px;cursor:pointer}
 
 /* HERO */
 .wow-box{
-  max-width:740px;
-  margin:24px auto 34px;
-  padding:30px;
+  max-width:760px;margin:24px auto 34px;padding:30px;
   border-radius:22px;
   background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
   backdrop-filter:blur(14px);
@@ -101,85 +67,78 @@ header{text-align:center;padding:26px 12px;position:relative}
 }
 .badge{
   background:linear-gradient(90deg,#2ac0ff,#4a6bff);
-  color:#00121e;
-  padding:6px 16px;
-  border-radius:20px;
-  font-weight:900;
-  font-size:12px;
+  color:#00121e;padding:6px 16px;border-radius:20px;
+  font-weight:900;font-size:12px
 }
-.coverage{
-  font-size:32px;
-  font-weight:900;
-  color:var(--neon);
-  margin:14px 0;
-}
+.coverage{font-size:32px;font-weight:900;color:var(--neon);margin:14px 0}
 .wow-box input{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  background:#020a1e;
-  border:1px solid var(--border);
-  color:#fff;
+  width:100%;padding:14px;border-radius:14px;
+  background:#020a1e;border:1px solid var(--border);color:#fff
 }
 .result{margin-top:8px;font-weight:700;color:#5cffb0}
 .speed{margin-top:6px;font-weight:800;color:#ffd166}
 
 /* TRUST */
-.trust{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:14px;
-  margin-top:18px;
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:18px}
+.trust div{background:var(--glass);padding:10px 18px;border-radius:22px;border:1px solid var(--border);font-size:14px}
+
+/* CTA GRID */
+.cta-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;margin:60px 0
 }
-.trust div{
+.cta-card{
   background:var(--glass);
-  padding:10px 18px;
-  border-radius:22px;
   border:1px solid var(--border);
-  font-size:14px;
+  border-radius:20px;
+  padding:26px;text-align:center
+}
+.cta-card h3{color:var(--neon)}
+.cta-card a{
+  display:inline-block;margin-top:14px;
+  padding:12px 22px;border-radius:30px;
+  background:linear-gradient(90deg,var(--neon),var(--accent));
+  color:#00121e;font-weight:900;text-decoration:none
 }
 
 /* COMPLIANCE */
 .compliance{
-  margin:50px auto 0;
-  padding:26px;
-  max-width:900px;
-  background:rgba(0,0,0,.6);
-  border-radius:18px;
-  border:1px solid var(--border);
-  font-size:13px;
-  line-height:1.6;
+  margin:60px auto 0;max-width:900px;
+  padding:26px;background:rgba(0,0,0,.6);
+  border-radius:18px;border:1px solid var(--border);
+  font-size:13px;line-height:1.6
 }
 
 /* FOOTER */
-footer{
-  margin-top:50px;
-  padding:35px 20px;
-  text-align:center;
-  background:rgba(0,0,0,.8);
-}
+footer{margin-top:50px;padding:35px 20px;text-align:center;background:rgba(0,0,0,.8)}
 footer a{color:var(--neon);text-decoration:none}
 
 /* FLOAT */
 .float{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:999;
+  position:fixed;bottom:20px;right:20px;
+  display:flex;flex-direction:column;gap:12px;z-index:999
 }
 .float a{
-  padding:14px 18px;
-  border-radius:50px;
-  font-weight:700;
-  color:#fff;
-  text-decoration:none;
+  padding:14px 18px;border-radius:50px;
+  font-weight:700;color:#fff;text-decoration:none
 }
 .whatsapp{background:#25D366}
 .email{background:#4a6bff}
+
+/* COOKIE */
+.cookie{
+  position:fixed;bottom:20px;left:20px;
+  max-width:320px;
+  background:#020a1e;border:1px solid var(--border);
+  border-radius:16px;padding:18px;font-size:13px;z-index:999
+}
+.cookie button{
+  margin-top:10px;padding:8px 14px;
+  border:none;border-radius:20px;cursor:pointer
+}
+.accept{background:var(--neon)}
+.reject{background:#444;color:#fff}
 </style>
 </head>
 
@@ -188,56 +147,88 @@ footer a{color:var(--neon);text-decoration:none}
 
 <header>
   <div class="lang">
-    <span class="active" onclick="setLang('bs')">BS</span>
-    <span onclick="setLang('en')">EN</span>
-    <span onclick="setLang('de')">DE</span>
+    <span class="active">BS</span>
+    <span>EN</span>
+    <span>DE</span>
   </div>
 
   <img src="logoyf.png" class="site-logo">
-  <div class="tagline" data-i18n="tagline"></div>
+  <div class="tagline">Vaša porodica • Vaša televizija</div>
 
   <button class="menu-toggle" onclick="openNav()">☰</button>
 
   <div class="wow-box">
-    <span class="badge" data-i18n="badge"></span>
-
-    <p data-i18n="desc"></p>
-
-    <div class="coverage" data-i18n="coverage"></div>
-
-    <input id="loc" data-i18n-ph="city">
-    <div id="res" class="result"></div>
-    <div id="speed" class="speed">⚡ Testiranje brzine…</div>
-
+    <span class="badge">GLOBAL PREMIUM IPTV</span>
+    <p>Premium IPTV servis sa privatnom infrastrukturom i podrškom 24/7.</p>
+    <div class="coverage">99.9% GLOBALNA POKRIVENOST</div>
+    <input placeholder="Unesite grad iz kojeg gledate IPTV">
     <div class="trust">
-      <div data-i18n="trust1"></div>
-      <div data-i18n="trust2"></div>
-      <div data-i18n="trust3"></div>
-      <div data-i18n="trust4"></div>
+      <div>✔ EU-friendly</div>
+      <div>✔ No content hosted</div>
+      <div>✔ Private servers</div>
+      <div>✔ 24/7 Support</div>
     </div>
   </div>
 </header>
 
 <nav id="overlayNav" class="overlay">
   <div class="closebtn" onclick="closeNav()">×</div>
-  <a href="#" data-i18n="m1"></a>
-  <a href="#" data-i18n="m2"></a>
-  <a href="#" data-i18n="m3"></a>
-  <a href="#" data-i18n="m4"></a>
-  <a href="#" data-i18n="m5"></a>
-  <a href="#" data-i18n="m6"></a>
+  <a href="index.html">Početna</a>
+  <a href="onama.html">O nama</a>
+  <a href="kako-da-gledas.html">Kako da gledaš</a>
+  <a href="cjenovnik.html">Cijene i paketi</a>
+  <a href="order.html">Narudžba / Checkout</a>
+  <a href="business-iptv.html">Business / Hotel IPTV</a>
+  <a href="aplikacije.html">Aplikacije</a>
+  <a href="komentari.html">Komentari</a>
+  <a href="placanje.html">Plaćanje</a>
+  <a href="status.html">Status sistema</a>
+  <a href="tim.html">Postani dio tima</a>
+  <a href="webstranica.html">Poruči WEB-PAGE</a>
+  <a href="faq.html">FAQ</a>
+  <a href="legal.html">Legal & Compliance</a>
+  <a href="kontakt.html">Kontakt / Podrška</a>
 </nav>
 
-<div class="compliance" data-i18n="compliance"></div>
+<section class="cta-grid">
+  <div class="cta-card">
+    <h3>🏨 Business / Hotel IPTV</h3>
+    <p>Profesionalno IPTV rješenje za hotele i firme.</p>
+    <a href="business-iptv.html">Saznaj više</a>
+  </div>
+  <div class="cta-card">
+    <h3>🛒 Narudžba IPTV</h3>
+    <p>Sigurna i brza narudžba bez obaveza.</p>
+    <a href="order.html">Naruči sada</a>
+  </div>
+  <div class="cta-card">
+    <h3>🎬 Demo za hotele</h3>
+    <p>Demo prezentacija za poslovne klijente.</p>
+    <a href="https://wa.me/4915755749502">Zatraži demo</a>
+  </div>
+</section>
+
+<div class="compliance">
+  YuGo Family TV ne hostuje niti distribuira sadržaj.
+  Servis omogućava pristup privatnoj IPTV infrastrukturi.
+  Korisnici su odgovorni za poštivanje lokalnih zakona.
+</div>
 
 <footer>
-  © 2025 YuGo Family TV<br>
-  <a href="https://wa.me/4915755749502">WhatsApp</a>
+  © 2025 YuGo Family TV |
+  <a href="legal.html">Legal</a>
 </footer>
 
 <div class="float">
   <a class="whatsapp" href="https://wa.me/4915755749502">WhatsApp</a>
   <a class="email" href="mailto:support@yugofamily.tv">Email</a>
+</div>
+
+<div class="cookie" id="cookie">
+  Ova stranica koristi kolačiće za analitiku.
+  <br>
+  <button class="accept" onclick="acceptCookies()">Prihvati</button>
+  <button class="reject" onclick="rejectCookies()">Odbij</button>
 </div>
 
 </div>
@@ -246,56 +237,16 @@ footer a{color:var(--neon);text-decoration:none}
 function openNav(){overlayNav.classList.add("open")}
 function closeNav(){overlayNav.classList.remove("open")}
 
-const t={
-bs:{
-tagline:"Vaša porodica • Vaša televizija",
-badge:"GLOBAL PREMIUM IPTV",
-desc:"Premium IPTV servis sa stabilnom infrastrukturom, HD/4K/8K kvalitetom i podrškom 24/7.",
-coverage:"99.9% GLOBALNA POKRIVENOST",
-city:"Unesite grad iz kojeg gledate IPTV",
-trust1:"✔ Bez hostovanog sadržaja",
-trust2:"✔ EU-friendly servis",
-trust3:"✔ Privatni serveri",
-trust4:"✔ 24/7 podrška",
-m1:"Početna",m2:"O nama",m3:"Kako da gledaš",m4:"Cijene",m5:"Kontakt",m6:"Aplikacije",
-compliance:"YuGo Family TV ne hostuje, ne pohranjuje niti distribuira sadržaj. Servis omogućava pristup privatnoj streaming infrastrukturi. Dostupnost zavisi od lokalnih zakona."
-},
-en:{
-tagline:"Your family • Your television",
-badge:"GLOBAL PREMIUM IPTV",
-desc:"Premium IPTV service with stable infrastructure, HD/4K/8K quality and 24/7 support.",
-coverage:"99.9% GLOBAL COVERAGE",
-city:"Enter your city",
-trust1:"✔ No hosted content",
-trust2:"✔ EU compliant",
-trust3:"✔ Private servers",
-trust4:"✔ 24/7 support",
-m1:"Home",m2:"About",m3:"How it works",m4:"Pricing",m5:"Contact",m6:"Apps",
-compliance:"YuGo Family TV does not host or store any content. The service provides access to private streaming infrastructure. Availability depends on local regulations."
-},
-de:{
-tagline:"Ihre Familie • Ihr Fernsehen",
-badge:"GLOBAL PREMIUM IPTV",
-desc:"Premium IPTV-Service mit stabiler Infrastruktur, HD/4K/8K Qualität und 24/7 Support.",
-coverage:"99.9% GLOBALE ABDECKUNG",
-city:"Stadt eingeben",
-trust1:"✔ Keine Inhalte gehostet",
-trust2:"✔ EU-konform",
-trust3:"✔ Private Server",
-trust4:"✔ 24/7 Support",
-m1:"Startseite",m2:"Über uns",m3:"So funktioniert es",m4:"Preise",m5:"Kontakt",m6:"Apps",
-compliance:"YuGo Family TV hostet oder speichert keine Inhalte. Der Dienst bietet Zugang zu privater Streaming-Infrastruktur. Verfügbarkeit abhängig von lokalen Gesetzen."
+function acceptCookies(){
+  localStorage.setItem("cookies","yes");
+  document.getElementById("cookie").style.display="none";
+  // ANALYTICS PLACEHOLDER
 }
-};
-
-function setLang(l){
-document.querySelectorAll("[data-i18n]").forEach(e=>e.innerHTML=t[l][e.dataset.i18n]);
-document.querySelectorAll("[data-i18n-ph]").forEach(e=>e.placeholder=t[l][e.dataset.i18nPh]);
-document.querySelectorAll(".lang span").forEach(s=>s.classList.remove("active"));
-event.target.classList.add("active");
+function rejectCookies(){
+  localStorage.setItem("cookies","no");
+  document.getElementById("cookie").style.display="none";
 }
-
-setLang("bs");
+if(localStorage.getItem("cookies")) document.getElementById("cookie").style.display="none";
 </script>
 
 </body>

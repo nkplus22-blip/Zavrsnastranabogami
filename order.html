@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Narudžba IPTV | YuGo Family TV</title>
+
+<meta name="description" content="Narudžba premium IPTV servisa – privatni i business paketi.">
+<meta name="author" content="YuGo Family TV">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050714;
+  --neon:#2ac0ff;
+  --accent:#4a6bff;
+  --glass:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  background:radial-gradient(circle at top,#0b1a3a,var(--bg));
+  color:#e6f7ff;
+}
+
+.wrap{max-width:900px;margin:auto;padding:0 18px}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:30px 12px;
+}
+h1{color:var(--neon);font-size:34px;margin-bottom:8px}
+.subtitle{color:#cbdcff}
+
+/* FORM */
+.form-box{
+  background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
+  backdrop-filter:blur(14px);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 0 80px rgba(42,192,255,.35);
+}
+
+.section{
+  margin-bottom:28px;
+}
+.section h3{
+  color:var(--neon);
+  margin-bottom:12px;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+}
+select,input{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  background:#020a1e;
+  border:1px solid var(--border);
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.radio-group{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.radio-group label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+}
+
+/* SUMMARY */
+.summary{
+  background:rgba(0,0,0,.5);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+}
+.summary p{margin:6px 0;font-size:14px}
+
+/* CTA */
+.cta{
+  margin-top:30px;
+  text-align:center;
+}
+.cta button{
+  background:linear-gradient(90deg,var(--neon),var(--accent));
+  padding:16px 36px;
+  border-radius:50px;
+  color:#00121e;
+  font-weight:900;
+  font-size:16px;
+  border:none;
+  cursor:pointer;
+}
+
+/* NOTE */
+.note{
+  margin-top:20px;
+  font-size:13px;
+  color:#cbdcff;
+  line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+  margin-top:40px;
+  padding:30px 20px;
+  text-align:center;
+  background:rgba(0,0,0,.8);
+}
+footer a{color:var(--neon);text-decoration:none}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Narudžba IPTV</h1>
+  <div class="subtitle">
+    Sigurna narudžba – privatni i business korisnici
+  </div>
+</header>
+
+<div class="form-box">
+<form onsubmit="sendOrder(event)">
+
+  <!-- USER TYPE -->
+  <div class="section">
+    <h3>1️⃣ Tip korisnika</h3>
+    <div class="radio-group">
+      <label><input type="radio" name="type" value="Privatni" checked> Privatni korisnik</label>
+      <label><input type="radio" name="type" value="Business"> Business / Hotel</label>
+    </div>
+  </div>
+
+  <!-- PACKAGE -->
+  <div class="section">
+    <h3>2️⃣ Odabir paketa</h3>
+    <label>Trajanje pretplate</label>
+    <select id="package">
+      <option>1 mjesec</option>
+      <option>3 mjeseca</option>
+      <option>6 mjeseci</option>
+      <option>12 mjeseci</option>
+    </select>
+  </div>
+
+  <!-- DEVICE -->
+  <div class="section">
+    <h3>3️⃣ Uređaj</h3>
+    <select id="device">
+      <option>Smart TV (Samsung / LG)</option>
+      <option>Android TV / Box</option>
+      <option>MAG uređaj</option>
+      <option>PC / Laptop</option>
+      <option>Mobilni uređaj</option>
+    </select>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section">
+    <h3>4️⃣ Kontakt podaci</h3>
+    <input id="name" placeholder="Ime i prezime" required>
+    <input id="email" placeholder="Email adresa" required>
+    <input id="country" placeholder="Država">
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section summary">
+    <h3>📋 Sažetak narudžbe</h3>
+    <p><strong>Servis:</strong> YuGo Family TV IPTV</p>
+    <p id="sType"></p>
+    <p id="sPackage"></p>
+    <p id="sDevice"></p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <button type="submit">Pošalji zahtjev</button>
+  </div>
+
+  <div class="note">
+    Nakon slanja zahtjeva, naš tim će vas kontaktirati putem emaila ili WhatsAppa
+    sa detaljima aktivacije i plaćanja.
+  </div>
+
+</form>
+</div>
+
+<footer>
+  © 2025 YuGo Family TV<br>
+  <a href="index.html">Nazad na početnu</a>
+</footer>
+
+</div>
+
+<script>
+const typeRadios=document.querySelectorAll("input[name='type']");
+const pack=document.getElementById("package");
+const dev=document.getElementById("device");
+
+function updateSummary(){
+  const type=document.querySelector("input[name='type']:checked").value;
+  sType.innerHTML="<strong>Tip:</strong> "+type;
+  sPackage.innerHTML="<strong>Paket:</strong> "+pack.value;
+  sDevice.innerHTML="<strong>Uređaj:</strong> "+dev.value;
+}
+typeRadios.forEach(r=>r.addEventListener("change",updateSummary));
+pack.addEventListener("change",updateSummary);
+dev.addEventListener("change",updateSummary);
+updateSummary();
+
+function sendOrder(e){
+  e.preventDefault();
+  const msg=
+`📺 NOVA IPTV NARUDŽBA
+👤 Ime: ${name.value}
+📧 Email: ${email.value}
+🌍 Država: ${country.value}
+📦 Paket: ${pack.value}
+🖥️ Uređaj: ${dev.value}
+🏷️ Tip: ${document.querySelector("input[name='type']:checked").value}`;
+  window.open("https://wa.me/4915755749502?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>

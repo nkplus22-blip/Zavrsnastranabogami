@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>YuGo Family TV – Premium Global IPTV</title>
+<title>YuGo Family TV – Premium IPTV</title>
 
-<meta name="description" content="YuGo Family TV – premium global IPTV servis. HD/4K/8K kvalitet, stabilni serveri, legalan pristup i 24/7 podrška.">
-<meta name="keywords" content="Premium IPTV, YuGo Family TV, IPTV Europe, IPTV Germany, Balkan IPTV">
+<meta name="description" content="YuGo Family TV – premium global IPTV servis sa podrškom 24/7.">
 <meta name="author" content="YuGo Family TV">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -20,7 +19,6 @@
   --glass:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
 }
-
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -28,32 +26,23 @@ body{
   background:radial-gradient(circle at top,#0b1a3a,var(--bg));
   color:#e6f7ff;
 }
-
 .wrap{max-width:1200px;margin:auto;padding:0 18px}
 
 /* HEADER */
-header{
-  text-align:center;
-  padding:26px 12px 10px;
-  position:relative;
-}
-
+header{text-align:center;padding:26px 12px;position:relative}
 .site-logo{max-width:200px}
 .tagline{font-size:14px;color:rgba(200,220,255,.65);font-weight:600}
 
-/* LANGUAGE */
+/* LANG */
 .lang{
   position:absolute;
-  top:20px;
-  left:20px;
+  top:18px;
+  left:18px;
   display:flex;
   gap:10px;
   font-size:13px;
 }
-.lang span{
-  cursor:pointer;
-  opacity:.6;
-}
+.lang span{cursor:pointer;opacity:.6}
 .lang span.active{opacity:1;color:var(--neon)}
 
 /* MENU */
@@ -72,11 +61,11 @@ header{
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,6,20,0.97);
+  background:rgba(0,6,20,.97);
   backdrop-filter:blur(10px);
   width:0;
   overflow:hidden;
-  transition:width .4s ease;
+  transition:.4s;
   z-index:999;
   display:flex;
   flex-direction:column;
@@ -101,7 +90,7 @@ header{
 
 /* HERO */
 .wow-box{
-  max-width:720px;
+  max-width:740px;
   margin:24px auto 34px;
   padding:30px;
   border-radius:22px;
@@ -109,9 +98,7 @@ header{
   backdrop-filter:blur(14px);
   border:1px solid var(--border);
   box-shadow:0 0 100px rgba(42,192,255,.4);
-  text-align:center;
 }
-
 .badge{
   background:linear-gradient(90deg,#2ac0ff,#4a6bff);
   color:#00121e;
@@ -120,14 +107,12 @@ header{
   font-weight:900;
   font-size:12px;
 }
-
 .coverage{
   font-size:32px;
   font-weight:900;
   color:var(--neon);
   margin:14px 0;
 }
-
 .wow-box input{
   width:100%;
   padding:14px;
@@ -136,7 +121,6 @@ header{
   border:1px solid var(--border);
   color:#fff;
 }
-
 .result{margin-top:8px;font-weight:700;color:#5cffb0}
 .speed{margin-top:6px;font-weight:800;color:#ffd166}
 
@@ -145,59 +129,27 @@ header{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:16px;
-  margin-top:20px;
+  gap:14px;
+  margin-top:18px;
 }
 .trust div{
   background:var(--glass);
   padding:10px 18px;
   border-radius:22px;
-  font-weight:700;
-  font-size:14px;
   border:1px solid var(--border);
-}
-
-/* SECTION */
-.section-title{
-  text-align:center;
-  margin:42px 0 14px;
-  font-weight:900;
-  color:#cfefff;
-}
-
-/* MARQUEE */
-.marquee-wrap{
-  overflow:hidden;
-  background:linear-gradient(90deg,rgba(42,176,255,.05),rgba(74,107,255,.05));
-  padding:14px 0;
-}
-.marquee{
-  display:flex;
-  gap:18px;
-  animation:scroll 30s linear infinite;
-}
-.marquee img{
-  border-radius:8px;
-  box-shadow:0 10px 30px rgba(0,0,0,.6);
-}
-.flags img{height:52px}
-.movies img,.series img{height:150px}
-
-@keyframes scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
+  font-size:14px;
 }
 
 /* COMPLIANCE */
 .compliance{
-  margin-top:50px;
+  margin:50px auto 0;
   padding:26px;
+  max-width:900px;
   background:rgba(0,0,0,.6);
-  border:1px solid var(--border);
   border-radius:18px;
+  border:1px solid var(--border);
   font-size:13px;
   line-height:1.6;
-  color:#cbdcff;
 }
 
 /* FOOTER */
@@ -229,11 +181,6 @@ footer a{color:var(--neon);text-decoration:none}
 .whatsapp{background:#25D366}
 .email{background:#4a6bff}
 </style>
-
-<script>
-function openNav(){overlayNav.classList.add("open")}
-function closeNav(){overlayNav.classList.remove("open")}
-</script>
 </head>
 
 <body>
@@ -241,90 +188,114 @@ function closeNav(){overlayNav.classList.remove("open")}
 
 <header>
   <div class="lang">
-    <span class="active">BS</span>
-    <span>EN</span>
-    <span>DE</span>
+    <span class="active" onclick="setLang('bs')">BS</span>
+    <span onclick="setLang('en')">EN</span>
+    <span onclick="setLang('de')">DE</span>
   </div>
 
-  <img src="logoyf.png" class="site-logo" alt="YuGo Family TV">
-  <div class="tagline">Vaša porodica • Vaša televizija</div>
+  <img src="logoyf.png" class="site-logo">
+  <div class="tagline" data-i18n="tagline"></div>
 
   <button class="menu-toggle" onclick="openNav()">☰</button>
 
   <div class="wow-box">
-    <span class="badge">GLOBAL PREMIUM IPTV</span>
+    <span class="badge" data-i18n="badge"></span>
 
-    <p>
-      Premium IPTV servis za međunarodno tržište.  
-      Stabilna infrastruktura, HD / 4K / 8K kvalitet i 24/7 podrška.
-    </p>
+    <p data-i18n="desc"></p>
 
-    <div class="coverage">99.9% GLOBALNA POKRIVENOST</div>
+    <div class="coverage" data-i18n="coverage"></div>
 
-    <input id="loc" placeholder="Unesite grad iz kojeg gledate IPTV">
+    <input id="loc" data-i18n-ph="city">
     <div id="res" class="result"></div>
     <div id="speed" class="speed">⚡ Testiranje brzine…</div>
-    <div id="ipCountry" style="margin-top:6px;font-weight:700"></div>
 
     <div class="trust">
-      <div>✔ No content hosted</div>
-      <div>✔ EU-friendly</div>
-      <div>✔ Private servers</div>
-      <div>✔ 24/7 Support</div>
+      <div data-i18n="trust1"></div>
+      <div data-i18n="trust2"></div>
+      <div data-i18n="trust3"></div>
+      <div data-i18n="trust4"></div>
     </div>
   </div>
 </header>
 
 <nav id="overlayNav" class="overlay">
   <div class="closebtn" onclick="closeNav()">×</div>
-  <a href="index.html">Početna</a>
-  <a href="onama.html">O nama</a>
-  <a href="kako-da-gledas.html">Kako da gledaš</a>
-  <a href="cjenovnik.html">Cijene i akcije</a>
-  <a href="aplikacije.html">Aplikacije</a>
-  <a href="komentari.html">Komentari</a>
-  <a href="placanje.html">Plaćanje</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a href="tim.html">Postani dio tima</a>
-  <a href="webstranica.html">Poruči WEB-PAGE</a>
-  <a href="top15.html">Top 30 YuGoFamily</a>
+  <a href="#" data-i18n="m1"></a>
+  <a href="#" data-i18n="m2"></a>
+  <a href="#" data-i18n="m3"></a>
+  <a href="#" data-i18n="m4"></a>
+  <a href="#" data-i18n="m5"></a>
+  <a href="#" data-i18n="m6"></a>
 </nav>
 
-<div class="section-title">Compliance & Legal Notice</div>
-<div class="compliance">
-  YuGo Family TV does not host, upload or store any media content.  
-  The service provides access to privately managed streaming infrastructure.  
-  Availability of content depends on regional regulations.  
-  Users are responsible for compliance with local laws.
-</div>
+<div class="compliance" data-i18n="compliance"></div>
 
 <footer>
-  © 2026 YuGo Family TV<br>
-  <a href="https://wa.me/4915755749502">WhatsApp podrška</a>
+  © 2025 YuGo Family TV<br>
+  <a href="https://wa.me/4915755749502">WhatsApp</a>
 </footer>
 
 <div class="float">
-  <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp</a>
-  <a class="email" href="mailto:support@yugofamily.tv">✉ Email</a>
+  <a class="whatsapp" href="https://wa.me/4915755749502">WhatsApp</a>
+  <a class="email" href="mailto:support@yugofamily.tv">Email</a>
 </div>
 
 </div>
 
 <script>
-loc.addEventListener("input",e=>{
-  res.textContent=e.target.value?"✅ Usluga dostupna na ovoj lokaciji":"";
-});
+function openNav(){overlayNav.classList.add("open")}
+function closeNav(){overlayNav.classList.remove("open")}
 
-(async()=>{
-  const s=performance.now();
-  await fetch("https://speed.cloudflare.com/__down?bytes=5000000",{cache:"no-store"});
-  const e=performance.now();
-  speed.textContent="⚡ Brzina: "+(5/((e-s)/1000)).toFixed(2)+" Mbps";
-})();
+const t={
+bs:{
+tagline:"Vaša porodica • Vaša televizija",
+badge:"GLOBAL PREMIUM IPTV",
+desc:"Premium IPTV servis sa stabilnom infrastrukturom, HD/4K/8K kvalitetom i podrškom 24/7.",
+coverage:"99.9% GLOBALNA POKRIVENOST",
+city:"Unesite grad iz kojeg gledate IPTV",
+trust1:"✔ Bez hostovanog sadržaja",
+trust2:"✔ EU-friendly servis",
+trust3:"✔ Privatni serveri",
+trust4:"✔ 24/7 podrška",
+m1:"Početna",m2:"O nama",m3:"Kako da gledaš",m4:"Cijene",m5:"Kontakt",m6:"Aplikacije",
+compliance:"YuGo Family TV ne hostuje, ne pohranjuje niti distribuira sadržaj. Servis omogućava pristup privatnoj streaming infrastrukturi. Dostupnost zavisi od lokalnih zakona."
+},
+en:{
+tagline:"Your family • Your television",
+badge:"GLOBAL PREMIUM IPTV",
+desc:"Premium IPTV service with stable infrastructure, HD/4K/8K quality and 24/7 support.",
+coverage:"99.9% GLOBAL COVERAGE",
+city:"Enter your city",
+trust1:"✔ No hosted content",
+trust2:"✔ EU compliant",
+trust3:"✔ Private servers",
+trust4:"✔ 24/7 support",
+m1:"Home",m2:"About",m3:"How it works",m4:"Pricing",m5:"Contact",m6:"Apps",
+compliance:"YuGo Family TV does not host or store any content. The service provides access to private streaming infrastructure. Availability depends on local regulations."
+},
+de:{
+tagline:"Ihre Familie • Ihr Fernsehen",
+badge:"GLOBAL PREMIUM IPTV",
+desc:"Premium IPTV-Service mit stabiler Infrastruktur, HD/4K/8K Qualität und 24/7 Support.",
+coverage:"99.9% GLOBALE ABDECKUNG",
+city:"Stadt eingeben",
+trust1:"✔ Keine Inhalte gehostet",
+trust2:"✔ EU-konform",
+trust3:"✔ Private Server",
+trust4:"✔ 24/7 Support",
+m1:"Startseite",m2:"Über uns",m3:"So funktioniert es",m4:"Preise",m5:"Kontakt",m6:"Apps",
+compliance:"YuGo Family TV hostet oder speichert keine Inhalte. Der Dienst bietet Zugang zu privater Streaming-Infrastruktur. Verfügbarkeit abhängig von lokalen Gesetzen."
+}
+};
 
-fetch("https://ipapi.co/json/")
-.then(r=>r.json())
-.then(d=>ipCountry.textContent="📍 Detektovana lokacija: "+d.country_name);
+function setLang(l){
+document.querySelectorAll("[data-i18n]").forEach(e=>e.innerHTML=t[l][e.dataset.i18n]);
+document.querySelectorAll("[data-i18n-ph]").forEach(e=>e.placeholder=t[l][e.dataset.i18nPh]);
+document.querySelectorAll(".lang span").forEach(s=>s.classList.remove("active"));
+event.target.classList.add("active");
+}
+
+setLang("bs");
 </script>
 
 </body>

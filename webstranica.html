@@ -3,10 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Poruči WEB Stranicu • YUGO-Family</title>
 <meta name="description" content="Premium izrada web stranica sa automatskim kalkulatorom cijene, demo okruženjem i 30-dnevnim jamstvom.">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Premium izrada web stranica – YUGO-Family">
+<meta property="og:description" content="Transparentna cijena, demo prije isporuke, 30 dana garancije.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -14,7 +19,8 @@
 --neon:#2ac0ff;
 --accent:#4a6bff;
 --muted:rgba(200,220,255,.55);
---glass:rgba(255,255,255,.04);
+--glass:rgba(255,255,255,.05);
+--border:rgba(255,255,255,.12);
 --wa:#25d366;
 }
 
@@ -27,122 +33,171 @@ color:#e6f7ff;
 overflow-x:hidden;
 }
 
-a{text-decoration:none;color:var(--neon)}
 .wrap{max-width:1200px;margin:auto;padding:0 18px}
+a{text-decoration:none;color:var(--neon)}
 
-/* HEADER */
+/* ================= HEADER ================= */
 header{
-position:sticky;top:0;z-index:999;
-background:rgba(0,0,0,.6);
-backdrop-filter:blur(8px);
+position:sticky;top:0;z-index:1000;
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
 }
 header .wrap{
 display:flex;align-items:center;justify-content:space-between;
-padding:16px 0;
+padding:14px 0;
 }
 .logo{font-family:'Bebas Neue';font-size:26px;color:var(--neon)}
-.tagline{font-size:13px;color:var(--muted)}
+.tagline{font-size:12px;color:var(--muted)}
 .menu-toggle{font-size:26px;background:none;border:none;color:var(--neon);cursor:pointer}
 
-/* OVERLAY MENU */
+/* ================= OVERLAY MENU ================= */
 .overlay{
-position:fixed;inset:0;background:rgba(2,6,20,.97);
-display:none;flex-direction:column;align-items:center;justify-content:center;
+position:fixed;inset:0;
+background:rgba(2,6,20,.97);
+display:none;flex-direction:column;
+align-items:center;justify-content:center;
 z-index:2000;
 }
 .overlay.open{display:flex}
-.overlay a{color:#fff;font-size:22px;padding:10px 18px;font-weight:700}
-.overlay .close{position:absolute;top:20px;right:22px;font-size:34px;color:var(--neon);cursor:pointer}
+.overlay a{
+color:#fff;font-size:20px;
+padding:10px 18px;font-weight:700;
+}
+.overlay .close{
+position:absolute;top:20px;right:24px;
+font-size:36px;color:var(--neon);cursor:pointer;
+}
 
-/* HERO */
-.hero{text-align:center;padding:60px 18px 40px}
-.hero h1{font-family:'Bebas Neue';font-size:46px;color:#fff}
+/* ================= HERO ================= */
+.hero{text-align:center;padding:70px 18px 40px}
+.hero h1{
+font-family:'Bebas Neue';
+font-size:46px;letter-spacing:1px;
+}
 .hero p{max-width:900px;margin:auto;color:var(--muted)}
 
-/* TRUST */
-.trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-weight:700;color:var(--muted)}
+/* ================= TRUST ================= */
+.trust{
+display:flex;gap:18px;
+justify-content:center;flex-wrap:wrap;
+font-weight:700;color:var(--muted);
+}
 
-/* SECTIONS */
-section{margin-top:60px}
+/* ================= SECTIONS ================= */
+section{margin-top:70px}
 
-/* PRICING CALCULATOR */
+/* ================= CALCULATOR ================= */
 .calculator{
 background:var(--glass);
-border-radius:18px;
-padding:26px;
-border:1px solid rgba(255,255,255,.06);
+border-radius:22px;
+padding:30px;
+border:1px solid var(--border);
 max-width:900px;
 margin:40px auto;
 }
 .calculator h2{color:var(--neon);margin-top:0}
-.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+
+.calc-row{
+display:grid;grid-template-columns:1fr 1fr;
+gap:14px;margin-bottom:14px;
+}
 .calc-row.full{grid-template-columns:1fr}
-select,input{
-width:100%;padding:10px;border-radius:8px;
-border:1px solid rgba(255,255,255,.1);
-background:rgba(0,10,30,.5);color:#fff;
+
+select,input,textarea{
+width:100%;padding:12px;border-radius:12px;
+border:1px solid var(--border);
+background:#020a1e;color:#fff;
 }
+
+.breakdown{
+margin-top:16px;
+font-size:14px;color:var(--muted);
+line-height:1.6;
+}
+
 .calc-total{
-font-size:26px;font-weight:800;color:var(--neon);
-margin-top:14px;
+font-size:28px;font-weight:900;
+color:var(--neon);margin-top:16px;
 }
+
 .calc-btn{
-margin-top:12px;
+margin-top:16px;
 background:linear-gradient(90deg,var(--wa),#128c7e);
-padding:12px 16px;border-radius:12px;
-font-weight:800;color:#021102;
+padding:14px 20px;border-radius:14px;
+font-weight:900;color:#021102;
 display:inline-block;
 }
 
-/* PACKAGES */
+/* ================= PROCESS ================= */
+.process{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+.step{
+background:var(--glass);
+padding:20px;border-radius:16px;
+border:1px solid var(--border);
+}
+
+/* ================= PACKAGES ================= */
 .packages{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:20px;
 }
 .pack{
-background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-padding:22px;border-radius:16px;
-border:1px solid rgba(255,255,255,.06);
-box-shadow:0 20px 60px rgba(0,0,0,.6);
+background:var(--glass);
+padding:22px;border-radius:18px;
+border:1px solid var(--border);
 }
 .pack h3{color:var(--neon)}
-.pack ul{padding-left:18px;line-height:1.6}
 
-/* WHY */
-.why-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+/* ================= GUARANTEE ================= */
+.guarantee{
+max-width:900px;margin:auto;
+background:rgba(0,0,0,.6);
+border:1px solid var(--border);
+padding:26px;border-radius:20px;
+text-align:center;
 }
-.why-item{background:var(--glass);padding:18px;border-radius:14px}
 
-/* FAQ */
+/* ================= CASES ================= */
+.cases{
+max-width:900px;margin:auto;
+background:var(--glass);
+border:1px solid var(--border);
+padding:26px;border-radius:20px;
+}
+
+/* ================= FAQ ================= */
 .faq-item{
 background:var(--glass);
-padding:14px;border-radius:12px;margin-bottom:10px;
-border:1px solid rgba(255,255,255,.05);
+padding:16px;border-radius:14px;
+margin-bottom:10px;border:1px solid var(--border);
 }
 .faq-q{font-weight:700;color:var(--neon);cursor:pointer}
 .faq-a{display:none;color:var(--muted);margin-top:8px}
 
-/* FORM */
+/* ================= FORM ================= */
 form{
 background:var(--glass);
-padding:22px;border-radius:16px;
+padding:26px;border-radius:20px;
 max-width:900px;margin:60px auto;
+border:1px solid var(--border);
 }
 button.send{
 margin-top:12px;width:100%;
 background:linear-gradient(90deg,var(--neon),var(--accent));
-border:none;padding:12px;border-radius:12px;
-font-weight:800;color:#02102a;
+border:none;padding:14px;border-radius:14px;
+font-weight:900;color:#02102a;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer{
 text-align:center;padding:30px 18px;
-border-top:1px solid rgba(255,255,255,.08);
+border-top:1px solid var(--border);
 color:var(--muted);
 }
 
@@ -168,14 +223,23 @@ color:var(--muted);
 <nav class="overlay" id="menu">
 <div class="close" onclick="closeNav()">×</div>
 <a href="index.html">Početna</a>
-<a href="cjenovnik.html">TV Paketi</a>
-<a href="webstranica.html">Web Stranice</a>
+<a href="onama.html">O nama</a>
+<a href="kako-da-gledas.html">Kako da gledaš</a>
+<a href="cjenovnik.html">Cjenovnik</a>
+<a href="order.html">Narudžba</a>
+<a href="business-iptv.html">Business IPTV</a>
+<a href="aplikacije.html">Aplikacije</a>
+<a href="komentari.html">Komentari</a>
+<a href="placanje.html">Plaćanje</a>
+<a href="tim.html">Postani dio tima</a>
+<a href="faq.html">FAQ</a>
+<a href="legal.html">Legal & Compliance</a>
 <a href="kontakt.html">Kontakt</a>
 </nav>
 
 <section class="hero">
 <h1>Poruči WEB stranicu koja se sama isplati</h1>
-<p>Automatski kalkulator cijene • Demo prije isporuke • 30 dana jamstva • Full ownership</p>
+<p>Automatski kalkulator cijene • Demo prije plaćanja • 30 dana garancije • Full ownership</p>
 </section>
 
 <div class="trust wrap">
@@ -185,7 +249,6 @@ color:var(--muted);
 <span>✔ EU klijenti</span>
 </div>
 
-<!-- PRICING CALCULATOR -->
 <section class="calculator">
 <h2>Automatski kalkulator cijene</h2>
 
@@ -215,52 +278,47 @@ color:var(--muted);
 </select>
 </div>
 
+<div class="breakdown">
+• Osnovni paket • Broj stranica • SEO • Rok isporuke
+</div>
+
 <div class="calc-total">
-Ukupna cijena: <span id="total">300</span> €
+Ukupno: <span id="total">300</span> €
 </div>
 
 <a href="#" class="calc-btn" id="sendCalc">Pošalji ponudu na WhatsApp</a>
 </section>
 
-<!-- PACKAGES -->
-<section class="wrap packages">
-<div class="pack">
-<h3>Basic</h3>
-<ul>
-<li>Do 3 stranice</li>
-<li>Responsive dizajn</li>
-<li>Kontakt + WhatsApp</li>
-</ul>
-</div>
-
-<div class="pack">
-<h3>Standard</h3>
-<ul>
-<li>5–7 stranica</li>
-<li>SEO + animacije</li>
-<li>Demo prije objave</li>
-</ul>
-</div>
-
-<div class="pack">
-<h3>Premium</h3>
-<ul>
-<li>Online shop</li>
-<li>Admin panel</li>
-<li>SEO + sigurnost</li>
-</ul>
-</div>
+<section class="wrap process">
+<div class="step">✔ Upit zaprimljen</div>
+<div class="step">✔ Kontakt u 24h</div>
+<div class="step">✔ Demo verzija</div>
+<div class="step">✔ Korekcije</div>
+<div class="step">✔ Isporuka</div>
 </section>
 
-<!-- FAQ -->
+<section class="wrap packages">
+<div class="pack"><h3>Basic</h3><p>Do 3 stranice • Kontakt • WhatsApp</p></div>
+<div class="pack"><h3>Standard</h3><p>5–7 stranica • SEO • Animacije</p></div>
+<div class="pack"><h3>Premium</h3><p>Online shop • Admin • Sigurnost</p></div>
+</section>
+
+<section class="guarantee">
+<h2>🛡 30 dana garancije</h2>
+<p>Ako niste zadovoljni – ne plaćate.</p>
+</section>
+
+<section class="cases">
+<h2 style="color:var(--neon)">Primjeri projekata</h2>
+<p>IPTV landing stranica • Business IPTV platforma • Order & pricing sistem</p>
+</section>
+
 <section class="wrap">
 <h2 style="color:var(--neon)">Česta pitanja</h2>
-
 <div class="faq-item">
 <div class="faq-q">Dobijam li izvorni kod?</div>
 <div class="faq-a">Da, sav kod i prava su vaša.</div>
 </div>
-
 <div class="faq-item">
 <div class="faq-q">Postoji li demo prije objave?</div>
 <div class="faq-a">Da, dobijate staging link.</div>
@@ -270,19 +328,21 @@ Ukupna cijena: <span id="total">300</span> €
 <form onsubmit="sendWA(event)">
 <h3 style="color:var(--neon)">Pošalji upit</h3>
 <input placeholder="Ime" required>
-<input placeholder="WhatsApp / Telefon" required>
+<input placeholder="Telefon / WhatsApp" required>
 <textarea placeholder="Opišite projekat"></textarea>
 <button class="send">Pošalji na WhatsApp</button>
 </form>
 
 <footer>
-© 2026 YUGO-Family • Web Development  
-<br><a href="mailto:yugofamily@support">nkplus22@gmail.com</a>
+© 2026 YUGO-Family • Web Development<br>
+<a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a>
 </footer>
 
 <script>
 function openNav(){menu.classList.add('open')}
 function closeNav(){menu.classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()})
+menu.onclick=e=>{if(e.target===menu)closeNav()}
 
 function calc(){
 const base=+type.value;
@@ -296,13 +356,12 @@ calc();
 
 sendCalc.onclick=e=>{
 e.preventDefault();
-const msg=`Zanima me web stranica. Procijenjena cijena: ${total.textContent} €`;
-window.open(`https://wa.me/4915755749502?text=${encodeURIComponent(msg)}`,'_blank');
+window.open(`https://wa.me/4915755749502?text=${encodeURIComponent('Procijenjena cijena web stranice: '+total.textContent+' €')}`);
 }
 
 function sendWA(e){
 e.preventDefault();
-window.open('https://wa.me/4915755749502','_blank');
+window.open('https://wa.me/4915755749502');
 }
 
 document.querySelectorAll('.faq-q').forEach(q=>{

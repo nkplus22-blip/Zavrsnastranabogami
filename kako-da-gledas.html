@@ -2,171 +2,170 @@
 <html lang="bs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YUGO-Family TV | Kako da gledaš</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kako da gledaš – YUGO-Family TV</title>
+
+<meta name="description" content="Kako da gledaš YUGO-Family TV na Smart TV-u, telefonu, računaru i streaming uređajima. Jednostavna instalacija i gledanje bilo gdje.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Kako da gledaš – YUGO-Family TV">
+<meta property="og:description" content="Gledaj YUGO-Family TV na svim uređajima – Smart TV, telefon, laptop i streaming uređaji.">
+<meta property="og:type" content="website">
 
 <style>
-/* ============ RESET ============ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --bg:#040611;
+  --bg2:#070b1c;
+  --text:#eaf7ff;
+  --muted:rgba(220,240,255,.75);
+  --accent1:#2ab0ff;
+  --accent2:#7b00ff;
+  --radius:18px;
+  --shadow:0 30px 90px rgba(0,0,0,.55);
+  --transition:.35s cubic-bezier(.2,.8,.2,1);
 }
 
-/* ============ BODY & BACKGROUND ============ */
-body {
-  font-family: Arial, sans-serif;
-  color: #ffffff;
-  min-height: 100vh;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
   background:
-    radial-gradient(circle at 20% 20%, rgba(123,0,255,0.35), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(10,26,255,0.35), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(123,0,255,0.3), transparent 50%),
-    linear-gradient(180deg, #03041a, #080b2e);
-  animation: bgMove 14s infinite alternate;
+    radial-gradient(800px 500px at 20% 20%, rgba(123,0,255,.25), transparent 60%),
+    radial-gradient(800px 500px at 80% 30%, rgba(42,176,255,.25), transparent 60%),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
-/* ============ HEADER ================= */
-header {
-  position: relative;
-  background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
-  padding: 22px;
-  text-align: center;
-  box-shadow: 0 0 35px #7b00ff;
-  z-index: 1500;
+/* HEADER */
+header{
+  position:sticky;
+  top:12px;
+  z-index:1000;
+  margin:12px;
+  padding:14px 18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-header h1 {
-  font-size: 2em;
-  text-shadow: 0 0 12px #7b00ff, 0 0 30px #0a1aff;
-  animation: neonPulse 3s infinite alternate;
+header h1{
+  font-size:18px;
+  font-weight:900;
+  color:#6ce0ff;
+  letter-spacing:.5px;
 }
 
-/* ============ HAMBURGER ================= */
-.menu-toggle {
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  font-size: 30px;
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  text-shadow: 0 0 15px #7b00ff;
-  z-index: 2000; /* fix da uvijek klikabilan */
+/* MENU */
+.menu-btn{
+  background:none;
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--text);
+  font-size:22px;
+  padding:8px 12px;
+  border-radius:12px;
+  cursor:pointer;
 }
 
-/* ============ FULLSCREEN MENU ================= */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  z-index: 1000;
-  background: linear-gradient(180deg, #050622, #120b3d);
-  overflow-x: hidden;
-  transition: 0.4s;
-  padding-top: 80px;
-  box-shadow: inset 0 0 60px #7b00ff;
+nav{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,20,.96);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  z-index:2000;
 }
 
-.overlay a {
-  display: block;
-  padding: 16px;
-  font-size: 1.6em;
-  color: #cfcfff;
-  text-decoration: none;
-  text-align: center;
-  text-shadow: 0 0 10px #7b00ff;
-  transition: 0.3s;
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:20px;
+  font-weight:900;
 }
 
-.overlay a:hover {
-  color: #ffffff;
-  background: rgba(123,0,255,0.25);
-  box-shadow: inset 0 0 20px #7b00ff;
+nav.show{display:flex}
+
+/* HERO */
+.hero{
+  max-width:1100px;
+  margin:40px auto 20px;
+  padding:40px 22px;
+  border-radius:32px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:var(--shadow);
+  text-align:center;
 }
 
-.closebtn {
-  position: absolute;
-  top: 18px;
-  right: 30px;
-  font-size: 45px;
-  color: #ff66ff;
-  cursor: pointer;
-  text-shadow: 0 0 18px #ff66ff;
+.hero h2{
+  font-size:clamp(26px,3vw,40px);
+  font-weight:950;
 }
 
-/* ============ CONTENT ================= */
-.content {
-  max-width: 900px;
-  margin: auto;
-  padding: 40px 20px;
-  animation: fadeIn 1.4s ease;
+.hero p{
+  margin-top:12px;
+  color:var(--muted);
+  max-width:760px;
+  margin-inline:auto;
 }
 
-.content p {
-  text-align: center;
-  font-size: 1.1em;
-  line-height: 1.6;
-  margin-bottom: 30px;
+/* DEVICES GRID */
+.devices{
+  max-width:1100px;
+  margin:30px auto;
+  padding:0 18px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
 }
 
-/* ============ CARDS ================= */
-.device {
-  background: linear-gradient(145deg, rgba(10,15,60,0.95), rgba(13,17,71,0.95));
-  margin-bottom: 25px;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #7b00ff;
-  box-shadow: 0 0 18px #7b00ff;
-  transition: transform 0.35s, box-shadow 0.35s;
+.device{
+  padding:26px;
+  border-radius:22px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 18px 60px rgba(0,0,0,.35);
+  transition:transform var(--transition), box-shadow var(--transition);
 }
 
-.device:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 28px #7b00ff, 0 0 45px #0a1aff;
+.device:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 80px rgba(42,176,255,.25);
 }
 
-.device h2 {
-  margin-bottom: 10px;
-  text-shadow: 0 0 12px #7b00ff;
-  animation: neonPulse 2.6s infinite alternate;
+.device h3{
+  font-size:20px;
+  margin-bottom:8px;
 }
 
-/* ============ FOOTER ================= */
-footer {
-  background: linear-gradient(90deg, rgba(10,26,255,0.9), rgba(123,0,255,0.9));
-  text-align: center;
-  padding: 18px;
-  box-shadow: 0 0 35px #7b00ff;
+.device p{
+  color:var(--muted);
+  line-height:1.5;
 }
 
-footer a {
-  color: #ffffff;
-  text-decoration: none;
-  text-shadow: 0 0 12px #ff66ff;
+/* FOOTER */
+footer{
+  margin:40px 18px 18px;
+  padding:22px;
+  border-radius:22px;
+  background:rgba(0,0,0,.35);
+  text-align:center;
+  color:rgba(220,240,255,.65);
 }
 
-/* ============ ANIMATIONS ================= */
-@keyframes neonPulse {
-  from {
-    text-shadow: 0 0 6px #7b00ff, 0 0 15px #7b00ff;
-  }
-  to {
-    text-shadow: 0 0 18px #0a1aff, 0 0 35px #0a1aff;
-  }
-}
-
-@keyframes bgMove {
-  from { background-position: 0% 0%; }
-  to { background-position: 100% 100%; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+footer a{
+  color:#6ce0ff;
+  text-decoration:none;
+  font-weight:900;
 }
 </style>
 </head>
@@ -174,67 +173,56 @@ footer a {
 <body>
 
 <header>
-  <h1>Kako da gledaš YUGO-Family TV</h1>
-  <button class="menu-toggle" onclick="openNav()">☰</button>
+  <h1>YUGO-Family TV</h1>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </header>
 
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+<nav id="menu">
   <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU </a>
-      <a href="top15.html">Top 30</a>
-</div>
+  <a href="onama.html">O nama</a>
+  <a href="kako-da-gledas.html">Kako da gledaš</a>
+  <a href="cjenovnik.html">Cijene</a>
+  <a href="aplikacije.html">Aplikacije</a>
+  <a href="kontakt.html">Kontakt</a>
+</nav>
 
-<main class="content">
-  <p>
-    YUGO-Family TV možeš gledati na više različitih uređaja.
-    Izaberi ono što ti najviše odgovara i uživaj u omiljenim kanalima gdje god da se nalaziš.
-  </p>
+<section class="hero">
+  <h2>Kako da gledaš YUGO-Family TV</h2>
+  <p>Gledaj omiljene kanale na svim uređajima – gdje god da se nalaziš.</p>
+</section>
 
+<section class="devices">
   <div class="device">
-    <h2>📺 Smart TV</h2>
+    <h3>📺 Smart TV</h3>
     <p>Instalacija aplikacije direktno na Smart TV uređaj.</p>
   </div>
-
   <div class="device">
-    <h2>💻 Kompjuter / Laptop</h2>
+    <h3>💻 Kompjuter / Laptop</h3>
     <p>Gledanje putem web pretraživača bez dodatne opreme.</p>
   </div>
-
   <div class="device">
-    <h2>📱 Telefon / Tablet</h2>
+    <h3>📱 Telefon / Tablet</h3>
     <p>Android i iOS aplikacije za gledanje bilo gdje.</p>
   </div>
-
   <div class="device">
-    <h2>▶️ Streaming uređaji</h2>
-    <p>Chromecast, Fire Stick, Nvidia Shield i drugi kompatibilni uređaji.</p>
+    <h3>▶️ Streaming uređaji</h3>
+    <p>Chromecast, Fire Stick, Nvidia Shield i drugi uređaji.</p>
   </div>
-</main>
+</section>
 
 <footer>
-  <p>
-    &copy; 2025 YUGO-Family TV |
-    <a href="https://wa.me/4915755749502">WhatsApp</a> |
-    Email: yugofamily.podrska@gmail.com
-  </p>
+  &copy; 2025 YUGO-Family TV |
+  <a href="https://wa.me/4915755749502">WhatsApp</a> |
+  yugofamily.podrska@gmail.com
 </footer>
 
 <script>
-function openNav() {
-  document.getElementById("myNav").style.width = "100%";
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('show');
 }
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.getElementById('menu').classList.remove('show');
+});
 </script>
 
 </body>

@@ -4,58 +4,149 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Narudžba IPTV | YuGo Family TV</title>
+<title>Narudžba IPTV | YUGO-Family TV</title>
 
-<meta name="description" content="Narudžba premium IPTV servisa – privatni i business paketi.">
-<meta name="author" content="YuGo Family TV">
+<meta name="description" content="Narudžba premium IPTV servisa – privatni i business paketi. Brza aktivacija i 24/7 podrška.">
+<meta name="author" content="YUGO-Family TV">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#050714;
+  --bg2:#020a1e;
   --neon:#2ac0ff;
   --accent:#4a6bff;
   --glass:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.12);
+  --border:rgba(255,255,255,.14);
+  --muted:rgba(220,235,255,.7);
+  --ok:#22c55e;
 }
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Inter,system-ui,Arial;
-  background:radial-gradient(circle at top,#0b1a3a,var(--bg));
+  background:
+    radial-gradient(800px 500px at 20% 10%, rgba(74,107,255,.25), transparent 60%),
+    radial-gradient(800px 500px at 80% 30%, rgba(42,192,255,.25), transparent 60%),
+    linear-gradient(180deg,var(--bg),#020a1e);
   color:#e6f7ff;
 }
 
+/* ================= HEADER ================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+header .wrap{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-weight:900;
+  letter-spacing:.6px;
+  color:var(--neon);
+}
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  background:none;
+  border:none;
+  color:var(--neon);
+  cursor:pointer;
+}
+nav{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+nav a{
+  color:#e6f7ff;
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:10px;
+}
+nav a:hover{
+  background:linear-gradient(90deg,var(--neon),var(--accent));
+  color:#00121e;
+}
+
+@media(max-width:900px){
+  nav{
+    display:none;
+    position:fixed;
+    top:70px;
+    left:12px;
+    right:12px;
+    background:#020916;
+    flex-direction:column;
+    padding:16px;
+    border-radius:18px;
+    border:1px solid var(--border);
+    box-shadow:0 30px 80px rgba(0,0,0,.7);
+  }
+  nav.show{display:flex}
+  .menu-toggle{display:block}
+}
+
+/* ================= MAIN ================= */
 .wrap{max-width:900px;margin:auto;padding:0 18px}
 
-/* HEADER */
-header{
+header + .wrap{margin-top:40px}
+
+/* HERO */
+.hero{
   text-align:center;
-  padding:30px 12px;
+  margin-bottom:30px;
 }
-h1{color:var(--neon);font-size:34px;margin-bottom:8px}
-.subtitle{color:#cbdcff}
+.hero h1{
+  color:var(--neon);
+  font-size:36px;
+  margin-bottom:6px;
+}
+.subtitle{
+  color:var(--muted);
+  font-size:15px;
+}
 
-/* FORM */
+/* PROGRESS */
+.progress{
+  display:flex;
+  justify-content:space-between;
+  margin:30px 0 20px;
+  font-size:13px;
+  color:var(--muted);
+}
+.progress span.active{color:var(--neon);font-weight:800}
+
+/* FORM BOX */
 .form-box{
-  background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
-  backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));
+  backdrop-filter:blur(16px);
   border:1px solid var(--border);
-  border-radius:22px;
+  border-radius:24px;
   padding:30px;
-  box-shadow:0 0 80px rgba(42,192,255,.35);
+  box-shadow:0 0 100px rgba(42,192,255,.35);
 }
 
-.section{
-  margin-bottom:28px;
-}
+.section{margin-bottom:28px}
 .section h3{
   color:var(--neon);
   margin-bottom:12px;
 }
 
+/* INPUTS */
 label{
   display:block;
   font-size:14px;
@@ -63,12 +154,18 @@ label{
 }
 select,input{
   width:100%;
-  padding:12px;
+  padding:14px;
   border-radius:14px;
-  background:#020a1e;
+  background:var(--bg2);
   border:1px solid var(--border);
   color:#fff;
   margin-bottom:14px;
+  font-size:14px;
+}
+input:focus,select:focus{
+  outline:none;
+  border-color:var(--neon);
+  box-shadow:0 0 0 3px rgba(42,192,255,.2);
 }
 
 .radio-group{
@@ -85,12 +182,25 @@ select,input{
 
 /* SUMMARY */
 .summary{
-  background:rgba(0,0,0,.5);
+  background:rgba(0,0,0,.55);
   border:1px solid var(--border);
   border-radius:18px;
   padding:20px;
 }
-.summary p{margin:6px 0;font-size:14px}
+.summary p{
+  margin:6px 0;
+  font-size:14px;
+}
+
+/* TRUST */
+.trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:16px;
+  font-size:13px;
+  color:var(--muted);
+}
 
 /* CTA */
 .cta{
@@ -99,21 +209,26 @@ select,input{
 }
 .cta button{
   background:linear-gradient(90deg,var(--neon),var(--accent));
-  padding:16px 36px;
+  padding:16px 40px;
   border-radius:50px;
   color:#00121e;
   font-weight:900;
   font-size:16px;
   border:none;
   cursor:pointer;
+  box-shadow:0 0 40px rgba(42,192,255,.45);
+}
+.cta button:hover{
+  transform:translateY(-1px);
 }
 
 /* NOTE */
 .note{
-  margin-top:20px;
+  margin-top:18px;
   font-size:13px;
-  color:#cbdcff;
+  color:var(--muted);
   line-height:1.6;
+  text-align:center;
 }
 
 /* FOOTER */
@@ -121,26 +236,50 @@ footer{
   margin-top:40px;
   padding:30px 20px;
   text-align:center;
-  background:rgba(0,0,0,.8);
+  background:rgba(0,0,0,.7);
+  color:var(--muted);
 }
 footer a{color:var(--neon);text-decoration:none}
 </style>
 </head>
 
 <body>
-<div class="wrap">
 
 <header>
-  <h1>Narudžba IPTV</h1>
-  <div class="subtitle">
-    Sigurna narudžba – privatni i business korisnici
+  <div class="wrap">
+    <div class="logo">YUGO-Family TV</div>
+    <nav id="nav">
+      <a href="index.html">Početna</a>
+      <a href="onama.html">O nama</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="cjenovnik.html">Cjenovnik</a>
+      <a href="aplikacije.html">Aplikacije</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <button class="menu-toggle" onclick="nav.classList.toggle('show')">☰</button>
   </div>
 </header>
+
+<div class="wrap">
+
+<section class="hero">
+  <h1>Narudžba IPTV</h1>
+  <div class="subtitle">Sigurna narudžba – privatni i business korisnici</div>
+</section>
+
+<div class="progress">
+  <span class="active">1 Tip</span>
+  <span class="active">2 Paket</span>
+  <span class="active">3 Uređaj</span>
+  <span class="active">4 Kontakt</span>
+  <span class="active">✔ Slanje</span>
+</div>
 
 <div class="form-box">
 <form onsubmit="sendOrder(event)">
 
-  <!-- USER TYPE -->
   <div class="section">
     <h3>1️⃣ Tip korisnika</h3>
     <div class="radio-group">
@@ -149,7 +288,6 @@ footer a{color:var(--neon);text-decoration:none}
     </div>
   </div>
 
-  <!-- PACKAGE -->
   <div class="section">
     <h3>2️⃣ Odabir paketa</h3>
     <label>Trajanje pretplate</label>
@@ -161,7 +299,6 @@ footer a{color:var(--neon);text-decoration:none}
     </select>
   </div>
 
-  <!-- DEVICE -->
   <div class="section">
     <h3>3️⃣ Uređaj</h3>
     <select id="device">
@@ -173,7 +310,6 @@ footer a{color:var(--neon);text-decoration:none}
     </select>
   </div>
 
-  <!-- CONTACT -->
   <div class="section">
     <h3>4️⃣ Kontakt podaci</h3>
     <input id="name" placeholder="Ime i prezime" required>
@@ -181,16 +317,21 @@ footer a{color:var(--neon);text-decoration:none}
     <input id="country" placeholder="Država">
   </div>
 
-  <!-- SUMMARY -->
-  <div class="section summary">
+  <div class="section summary" aria-live="polite">
     <h3>📋 Sažetak narudžbe</h3>
-    <p><strong>Servis:</strong> YuGo Family TV IPTV</p>
+    <p><strong>Servis:</strong> YUGO-Family TV IPTV</p>
     <p id="sType"></p>
     <p id="sPackage"></p>
     <p id="sDevice"></p>
   </div>
 
-  <!-- CTA -->
+  <div class="trust">
+    <span>✔ 16.000+ korisnika</span>
+    <span>✔ EU serveri</span>
+    <span>✔ Aktivacija do 60 min</span>
+    <span>✔ 24/7 podrška</span>
+  </div>
+
   <div class="cta">
     <button type="submit">Pošalji zahtjev</button>
   </div>
@@ -204,7 +345,7 @@ footer a{color:var(--neon);text-decoration:none}
 </div>
 
 <footer>
-  © 2025 YuGo Family TV<br>
+  © 2025 YUGO-Family TV<br>
   <a href="index.html">Nazad na početnu</a>
 </footer>
 
@@ -214,6 +355,9 @@ footer a{color:var(--neon);text-decoration:none}
 const typeRadios=document.querySelectorAll("input[name='type']");
 const pack=document.getElementById("package");
 const dev=document.getElementById("device");
+const sType=document.getElementById("sType");
+const sPackage=document.getElementById("sPackage");
+const sDevice=document.getElementById("sDevice");
 
 function updateSummary(){
   const type=document.querySelector("input[name='type']:checked").value;
@@ -238,6 +382,10 @@ function sendOrder(e){
 🏷️ Tip: ${document.querySelector("input[name='type']:checked").value}`;
   window.open("https://wa.me/4915755749502?text="+encodeURIComponent(msg));
 }
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){nav.classList.remove('show')}
+});
 </script>
 
 </body>

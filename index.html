@@ -1,629 +1,1439 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#040611" />
 
-<title>YuGo Family TV – Premium Global IPTV</title>
-<meta name="description" content="YuGo Family TV – premium global IPTV servis sa privatnom infrastrukturom i 24/7 podrškom.">
+  <title>YuGo Family TV – Premium Global IPTV</title>
+  <meta name="description" content="Premium IPTV sa privatnom infrastrukturom, stabilnim streamovima i podrškom 24/7. Brza aktivacija, bez ugovora." />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="YuGo Family TV – Premium Global IPTV" />
+  <meta property="og:description" content="Premium IPTV sa privatnom infrastrukturom, stabilnim streamovima i podrškom 24/7. Brza aktivacija, bez ugovora." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="bs_BA" />
+  <meta property="og:image" content="og-image.jpg" />
+  <meta property="og:image:alt" content="YuGo Family TV – Premium Global IPTV" />
 
-<style>
-:root{
-  --bg:#040611;
-  --bg2:#070b1c;
-  --neon:#2ac0ff;
-  --accent:#4a6bff;
-  --mag:#a855f7;
-  --ok:#5cffb0;
-  --glass:rgba(255,255,255,.06);
-  --glass2:rgba(255,255,255,.09);
-  --border:rgba(255,255,255,.12);
-  --text:#e6f7ff;
-  --muted:rgba(200,220,255,.68);
-  --shadow:0 0 120px rgba(42,192,255,.25);
-}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YuGo Family TV – Premium Global IPTV" />
+  <meta name="twitter:description" content="Premium IPTV sa privatnom infrastrukturom, stabilnim streamovima i podrškom 24/7. Brza aktivacija, bez ugovora." />
+  <meta name="twitter:image" content="og-image.jpg" />
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter,system-ui,Arial;
-  color:var(--text);
-  background:
-    radial-gradient(900px 600px at 15% 10%, rgba(74,107,255,.22), transparent 60%),
-    radial-gradient(900px 600px at 85% 15%, rgba(42,192,255,.18), transparent 58%),
-    radial-gradient(700px 480px at 55% 80%, rgba(168,85,247,.12), transparent 60%),
-    linear-gradient(180deg, var(--bg2), var(--bg));
-  overflow-x:hidden;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
 
-.wrap{max-width:1200px;margin:auto;padding:0 18px;position:relative}
+  <style>
+    :root{
+      --bg:#040611;
+      --bg2:#070b1c;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.085);
+      --border:rgba(255,255,255,.12);
+      --border2:rgba(255,255,255,.16);
+      --text:#eaf7ff;
+      --muted:rgba(210,230,255,.68);
 
-/* ===== Decorative layers ===== */
-.bg-grid{
-  position:fixed;inset:-20%;
-  background-image:
-    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-  background-size:60px 60px;
-  transform:rotate(-12deg);
-  opacity:.14;
-  pointer-events:none;
-  mask-image:radial-gradient(circle at 40% 20%, black 0 45%, transparent 70%);
-}
-.aurora{
-  position:fixed;inset:-40%;
-  background:
-    radial-gradient(closest-side at 25% 35%, rgba(42,192,255,.22), transparent 55%),
-    radial-gradient(closest-side at 70% 40%, rgba(74,107,255,.18), transparent 55%),
-    radial-gradient(closest-side at 55% 75%, rgba(168,85,247,.14), transparent 55%);
-  filter:blur(22px);
-  animation:drift 10s ease-in-out infinite alternate;
-  opacity:.9;
-  pointer-events:none;
-}
-@keyframes drift{
-  from{transform:translate3d(-2%, -1%, 0) scale(1.02)}
-  to{transform:translate3d(2%, 1.5%, 0) scale(1.06)}
-}
-.stars{
-  position:fixed;inset:0;
-  pointer-events:none;
-  opacity:.75;
-  mix-blend-mode:screen;
-}
+      --neon:#2ac0ff;
+      --accent:#4a6bff;
+      --mag:#a855f7;
+      --ok:#5cffb0;
+      --warn:#ffd56b;
 
-/* ===== Top bar ===== */
-.topbar{
-  position:sticky;top:0;z-index:50;
-  backdrop-filter:blur(12px);
-  background:linear-gradient(180deg, rgba(2,6,20,.72), rgba(2,6,20,.35));
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.topbar-inner{
-  max-width:1200px;margin:auto;
-  padding:12px 18px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;
-}
-.brand{
-  display:flex;align-items:center;gap:10px;
-}
-.brand img{height:34px;width:auto}
-.brand small{
-  display:block;
-  font-weight:700;
-  color:rgba(210,230,255,.75);
-  letter-spacing:.2px;
-}
-.topbar-cta{
-  display:flex;align-items:center;gap:10px;
-}
-.pill{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 14px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.05);
-  color:var(--text);
-  text-decoration:none;
-  font-weight:800;
-  transition:.2s transform,.2s background;
-}
-.pill:hover{transform:translateY(-1px);background:rgba(255,255,255,.07)}
-.pill.primary{
-  border:none;
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  color:#00121e;
-  box-shadow:0 0 36px rgba(42,192,255,.25);
-}
+      --shadow: 0 40px 120px rgba(0,0,0,.55);
+      --glow: 0 0 120px rgba(42,192,255,.22);
 
-/* ===== Header / Hero ===== */
-header{padding:32px 0 10px;position:relative;text-align:center}
-.tagline{font-size:14px;color:var(--muted);font-weight:700}
-.hero{
-  margin:18px auto 28px;
-  max-width:920px;
-  position:relative;
-}
-.hero-card{
-  border-radius:26px;
-  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
-  border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(16px);
-  box-shadow:var(--shadow);
-  padding:34px 22px;
-  overflow:hidden;
-}
-.hero-card:before{
-  content:"";
-  position:absolute;inset:-2px;
-  background:conic-gradient(from 220deg, rgba(42,192,255,.0), rgba(42,192,255,.55), rgba(74,107,255,.35), rgba(168,85,247,.25), rgba(42,192,255,.0));
-  filter:blur(18px);
-  opacity:.35;
-  pointer-events:none;
-}
-.badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(90deg,#2ac0ff,#4a6bff);
-  color:#00121e;
-  padding:7px 14px;border-radius:999px;
-  font-weight:900;font-size:12px;
-  letter-spacing:.3px;
-}
-.h1{
-  margin:14px auto 10px;
-  font-size:clamp(30px, 4.1vw, 50px);
-  font-weight:900;
-  line-height:1.05;
-}
-.h1 span{
-  background:linear-gradient(90deg, var(--neon), #9be7ff, var(--accent));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.sub{
-  margin:0 auto 18px;
-  max-width:740px;
-  color:rgba(220,240,255,.78);
-  font-weight:600;
-}
-.trust{
-  display:flex;justify-content:center;gap:10px;
-  flex-wrap:wrap;
-  margin:14px 0 20px;
-}
-.chip{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 12px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.05);
-  font-weight:800;
-  color:rgba(230,247,255,.92);
-  font-size:13px;
-}
-.hero-actions{
-  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
-  margin-top:10px;
-}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:10px;
-  padding:13px 18px;border-radius:14px;
-  text-decoration:none;
-  font-weight:900;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
-  color:var(--text);
-  transition:.2s transform,.2s filter,.2s background;
-}
-.btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}
-.btn.primary{
-  border:none;
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  color:#00121e;
-  box-shadow:0 0 44px rgba(42,192,255,.22);
-}
-.btn.primary:hover{filter:saturate(1.15)}
-.small-note{
-  margin-top:10px;
-  font-size:13px;
-  color:rgba(200,220,255,.6);
-  font-weight:700;
-}
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1200px;
 
-/* ===== Availability box (input) ===== */
-.avail{
-  margin:22px auto 0;
-  max-width:680px;
-  text-align:left;
-  padding:16px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(2,10,30,.55);
-  position:relative;
-  overflow:hidden;
-}
-.avail:after{
-  content:"";
-  position:absolute;inset:-40%;
-  background:linear-gradient(120deg, transparent, rgba(42,192,255,.12), transparent);
-  transform:translateX(-60%);
-  animation:sweep 4.5s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes sweep{
-  0%{transform:translateX(-65%) rotate(6deg)}
-  55%{transform:translateX(45%) rotate(6deg)}
-  100%{transform:translateX(55%) rotate(6deg)}
-}
-.avail label{
-  display:block;
-  font-size:12px;
-  color:rgba(210,230,255,.65);
-  font-weight:900;
-  letter-spacing:.4px;
-  margin-bottom:8px;
-  text-transform:uppercase;
-}
-.avail-row{
-  display:flex;gap:10px;flex-wrap:wrap;
-}
-.avail input{
-  flex:1;
-  min-width:220px;
-  padding:14px 14px;
-  border-radius:14px;
-  background:#020a1e;
-  border:1px solid rgba(255,255,255,.14);
-  color:#fff;
-  outline:none;
-}
-.avail input:focus{
-  border-color:rgba(42,192,255,.55);
-  box-shadow:0 0 0 4px rgba(42,192,255,.12);
-}
-.scan{
-  min-width:170px;
-  cursor:pointer;
-  border:none;
-  padding:14px 16px;border-radius:14px;
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  color:#00121e;font-weight:900;
-}
-.result{margin-top:10px;font-weight:900}
-.progress-wrap{display:none;margin-top:10px}
-.progress-bg{
-  height:9px;background:#1a2440;border-radius:20px;overflow:hidden
-}
-.progress-bar{
-  height:100%;width:0;
-  background:linear-gradient(90deg,#2ac0ff,#4a6bff);
-  transition:width .22s
-}
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
 
-/* ===== Menu ===== */
-.menu-toggle{
-  position:fixed;top:14px;right:14px;z-index:60;
-  font-size:30px;background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  color:var(--neon);cursor:pointer;
-  border-radius:14px;
-  width:46px;height:46px;
-  display:grid;place-items:center;
-  backdrop-filter:blur(12px);
-}
-.overlay{
-  position:fixed;inset:0;
-  background:rgba(0,6,20,.96);
-  backdrop-filter:blur(14px);
-  opacity:0;pointer-events:none;
-  transition:.25s;
-  z-index:999;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-}
-.overlay.open{opacity:1;pointer-events:auto}
-.overlay a{
-  color:#e6f7ff;
-  font-size:20px;
-  padding:10px 14px;
-  text-decoration:none;
-  transform:translateY(8px);
-  opacity:0;
-  transition:.25s;
-}
-.overlay.open a{
-  transform:translateY(0);
-  opacity:1;
-}
-.overlay a:hover{color:var(--neon)}
-.closebtn{
-  position:absolute;top:18px;right:22px;
-  font-size:42px;cursor:pointer;
-  color:rgba(230,247,255,.9);
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 14% 8%, rgba(74,107,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 88% 14%, rgba(42,192,255,.18), transparent 58%),
+        radial-gradient(700px 480px at 55% 82%, rgba(168,85,247,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x:hidden;
+    }
 
-/* ===== Metrics ===== */
-.metrics{
-  display:flex;justify-content:center;
-  gap:14px;flex-wrap:wrap;
-  margin:26px 0 8px;font-size:14px
-}
-.metric{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
-  padding:14px 16px;border-radius:18px;
-  transition:.2s transform,.2s background;
-}
-.metric:hover{transform:translateY(-2px);background:rgba(255,255,255,.07)}
-.metric strong{color:#dff7ff}
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px; position:relative}
+    .sr-only{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
 
-/* ===== CTA Grid ===== */
-.cta-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;margin:42px 0 60px
-}
-.cta-card{
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  padding:24px;text-align:left;
-  position:relative;
-  overflow:hidden;
-}
-.cta-card:before{
-  content:"";
-  position:absolute;inset:-1px;
-  background:radial-gradient(600px 180px at 20% 0%, rgba(42,192,255,.18), transparent 60%);
-  opacity:.8;
-  pointer-events:none;
-}
-.cta-card h3{margin:0 0 8px;color:#dff7ff}
-.cta-card p{margin:0;color:rgba(220,240,255,.7);font-weight:600}
-.cta-card a{
-  display:inline-flex;align-items:center;gap:10px;
-  margin-top:14px;
-  padding:12px 16px;border-radius:14px;
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  color:#00121e;font-weight:900;text-decoration:none;
-}
+    /* Decorative layers */
+    .bg-grid{
+      position:fixed; inset:-20%;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:64px 64px;
+      transform:rotate(-12deg);
+      opacity:.12;
+      pointer-events:none;
+      mask-image:radial-gradient(circle at 40% 20%, black 0 46%, transparent 72%);
+      z-index:-3;
+    }
+    .aurora{
+      position:fixed; inset:-40%;
+      background:
+        radial-gradient(closest-side at 25% 35%, rgba(42,192,255,.22), transparent 55%),
+        radial-gradient(closest-side at 70% 40%, rgba(74,107,255,.18), transparent 55%),
+        radial-gradient(closest-side at 55% 75%, rgba(168,85,247,.14), transparent 55%);
+      filter:blur(22px);
+      opacity:.9;
+      pointer-events:none;
+      z-index:-4;
+      animation:drift 11s var(--ease) infinite alternate;
+    }
+    @keyframes drift{
+      from{transform:translate3d(-2%, -1%, 0) scale(1.02)}
+      to{transform:translate3d(2%, 1.5%, 0) scale(1.06)}
+    }
+    canvas.stars{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.68;
+      mix-blend-mode:screen;
+      z-index:-2;
+    }
 
-/* ===== Footer & Float ===== */
-footer{
-  margin-top:10px;padding:32px 18px;
-  text-align:center;background:rgba(0,0,0,.55);
-  border-top:1px solid rgba(255,255,255,.08);
-}
-footer a{color:var(--neon);text-decoration:none;font-weight:800}
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:80;
+      background:linear-gradient(180deg, rgba(2,6,20,.78), rgba(2,6,20,.35));
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      max-width:var(--max); margin:0 auto; padding:12px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:0;
+      text-decoration:none;
+    }
+    .brand img{
+      height:36px; width:auto;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+    }
+    .brand-meta{display:flex; flex-direction:column; line-height:1.1; min-width:0}
+    .brand-meta strong{
+      font-weight:900; letter-spacing:.2px; font-size:13px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand-meta small{
+      color:var(--muted);
+      font-weight:700; font-size:12px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
 
-.float{
-  position:fixed;bottom:18px;right:18px;
-  display:flex;flex-direction:column;
-  gap:10px;z-index:80
-}
-.float a{
-  padding:13px 16px;border-radius:999px;
-  font-weight:900;color:#fff;text-decoration:none;
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
-}
-.whatsapp{background:rgba(37,211,102,.92)}
-.email{background:rgba(74,107,255,.92)}
+    .nav-inline{
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      font-size:13px;
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+      user-select:none;
+    }
+    .pill:hover{transform: translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16)}
+    .pill.primary{
+      border:none;
+      background: linear-gradient(90deg, var(--neon), var(--accent));
+      color:#00121e;
+      box-shadow: 0 0 44px rgba(42,192,255,.22);
+    }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .aurora,.avail:after{animation:none}
-}
-</style>
+    /* Menu button + overlay */
+    .menu-toggle{
+      position:fixed; top:14px; right:14px; z-index:90;
+      width:46px; height:46px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--neon);
+      cursor:pointer;
+      backdrop-filter: blur(14px);
+      transition: transform .2s var(--ease), background .2s var(--ease);
+    }
+    .menu-toggle:hover{transform: translateY(-1px); background:rgba(255,255,255,.08)}
+    .overlay{
+      position:fixed; inset:0; z-index:999;
+      background:rgba(0,6,20,.96);
+      backdrop-filter: blur(16px);
+      opacity:0; pointer-events:none;
+      transition: opacity .22s var(--ease);
+      display:flex; align-items:center; justify-content:center;
+      padding:26px 18px;
+    }
+    .overlay.open{opacity:1; pointer-events:auto}
+    .overlay-panel{
+      width:min(900px, 100%);
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .overlay-top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .overlay-top strong{font-weight:900; letter-spacing:.2px}
+    .closebtn{
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(230,247,255,.9);
+      cursor:pointer;
+      font-size:22px;
+      display:grid; place-items:center;
+    }
+    .overlay-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:10px;
+      padding:14px;
+    }
+    .overlay a{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      text-decoration:none;
+      font-weight:900;
+      color:rgba(235,248,255,.92);
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .overlay a:hover{transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.14); color:#fff}
+    .overlay a span{
+      color:rgba(200,220,255,.68);
+      font-weight:800;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.12);
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(0,0,0,.16);
+    }
+
+    /* Sections */
+    section{padding:38px 0}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:rgba(230,247,255,.92);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+    }
+    h2{
+      margin:0;
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight:900;
+      letter-spacing:-.2px;
+      line-height:1.1;
+    }
+    .lead{
+      margin:8px 0 0;
+      color:rgba(220,240,255,.76);
+      font-weight:650;
+      max-width:760px;
+    }
+
+    /* Hero */
+    header.hero-wrap{padding:34px 0 10px}
+    .hero{
+      position:relative;
+      border-radius: 32px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      box-shadow: var(--shadow), var(--glow);
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: conic-gradient(from 210deg,
+        rgba(42,192,255,.0),
+        rgba(42,192,255,.55),
+        rgba(74,107,255,.35),
+        rgba(168,85,247,.22),
+        rgba(42,192,255,.0)
+      );
+      filter: blur(20px);
+      opacity:.33;
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+      padding: 28px 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-inner{grid-template-columns:1fr}
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      background: linear-gradient(90deg, var(--neon), var(--accent));
+      color:#00121e;
+      padding:7px 14px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.35px;
+      user-select:none;
+    }
+    .h1{
+      margin:14px 0 10px;
+      font-size: clamp(32px, 4.2vw, 56px);
+      font-weight: 950;
+      letter-spacing:-.6px;
+      line-height: 1.03;
+    }
+    .h1 span{
+      background:linear-gradient(90deg, var(--neon), #b8f1ff, var(--accent));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .sub{
+      margin:0 0 14px;
+      color:rgba(225,245,255,.82);
+      font-weight:650;
+      max-width:720px;
+    }
+    .trust{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 14px 0 16px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      font-weight:900;
+      color:rgba(235,248,255,.94);
+      font-size:13px;
+      user-select:none;
+    }
+    .hero-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:13px 16px;
+      border-radius:16px;
+      text-decoration:none;
+      font-weight:950;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease), filter .2s var(--ease);
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(90deg, var(--neon), var(--accent));
+      color:#00121e;
+      box-shadow: 0 0 44px rgba(42,192,255,.22);
+    }
+    .btn.primary:hover{filter:saturate(1.12)}
+    .micro{
+      margin-top:10px;
+      color:rgba(200,220,255,.62);
+      font-weight:800;
+      font-size:13px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .micro b{color:rgba(240,252,255,.95)}
+
+    /* Right hero card */
+    .hero-side{
+      border-radius: 24px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(2,10,30,.55);
+      backdrop-filter: blur(14px);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-side::after{
+      content:"";
+      position:absolute; inset:-45%;
+      background:linear-gradient(120deg, transparent, rgba(42,192,255,.12), transparent);
+      transform:translateX(-60%);
+      animation:sweep 4.6s var(--ease) infinite;
+      pointer-events:none;
+      opacity:.95;
+    }
+    @keyframes sweep{
+      0%{transform:translateX(-70%) rotate(7deg)}
+      55%{transform:translateX(38%) rotate(7deg)}
+      100%{transform:translateX(58%) rotate(7deg)}
+    }
+    .side-title{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .side-title strong{
+      font-weight:950;
+      letter-spacing:-.2px;
+    }
+    .side-title a{
+      font-weight:950;
+      text-decoration:none;
+      color:rgba(190,235,255,.9);
+      border:1px solid rgba(255,255,255,.12);
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      transition:.2s var(--ease);
+    }
+    .side-title a:hover{background:rgba(255,255,255,.07)}
+    .avail label{
+      display:block;
+      font-size:12px;
+      color:rgba(210,230,255,.65);
+      font-weight:950;
+      letter-spacing:.4px;
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+    .avail-row{display:flex; gap:10px; flex-wrap:wrap}
+    .avail input{
+      flex:1;
+      min-width: 220px;
+      padding:14px 14px;
+      border-radius:16px;
+      background:#020a1e;
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;
+      outline:none;
+      font-weight:750;
+    }
+    .avail input:focus{
+      border-color:rgba(42,192,255,.55);
+      box-shadow:0 0 0 4px rgba(42,192,255,.12);
+    }
+    .scan{
+      min-width: 170px;
+      cursor:pointer;
+      border:none;
+      padding:14px 16px;
+      border-radius:16px;
+      background:linear-gradient(90deg,var(--neon),var(--accent));
+      color:#00121e;
+      font-weight:950;
+      transition: filter .2s var(--ease), transform .2s var(--ease);
+      user-select:none;
+    }
+    .scan:hover{filter:saturate(1.12); transform:translateY(-1px)}
+    .progress-wrap{display:none; margin-top:10px}
+    .progress-bg{
+      height:10px;
+      background:#1a2440;
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--neon),var(--accent));
+      transition:width .22s var(--ease);
+    }
+    .result{
+      margin-top:10px;
+      font-weight:950;
+      line-height:1.35;
+    }
+    .mini{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:14px;
+    }
+    .mini-card{
+      padding:12px 12px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+    }
+    .mini-card small{
+      display:block;
+      color:rgba(200,220,255,.65);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.35px;
+      font-size:11px;
+    }
+    .mini-card strong{
+      display:block;
+      font-weight:950;
+      margin-top:4px;
+      letter-spacing:-.2px;
+      font-size:14px;
+    }
+
+    /* Logo wall */
+    .logo-wall{
+      display:grid;
+      grid-template-columns: repeat(6, minmax(0,1fr));
+      gap:10px;
+      margin-top: 16px;
+    }
+    @media (max-width: 980px){ .logo-wall{grid-template-columns: repeat(3, minmax(0,1fr));} }
+    .logo{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      padding:12px 12px;
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(230,247,255,.85);
+      font-weight:950;
+      letter-spacing:.2px;
+      min-height:46px;
+      user-select:none;
+    }
+
+    /* Metrics row */
+    .metrics{
+      display:flex; justify-content:center;
+      gap:12px; flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .metric{
+      padding:14px 16px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+      font-weight:850;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .metric:hover{transform:translateY(-2px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16)}
+    .metric strong{color:#dff7ff}
+
+    /* Feature grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, minmax(0,1fr));
+      gap:14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(700px 220px at 18% 0%, rgba(42,192,255,.18), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-weight:950;
+      letter-spacing:-.25px;
+    }
+    .card p{margin:0; color:rgba(220,240,255,.72); font-weight:650; line-height:1.55}
+    .span-4{grid-column: span 4}
+    .span-6{grid-column: span 6}
+    .span-8{grid-column: span 8}
+    .span-12{grid-column: span 12}
+    @media (max-width: 980px){
+      .span-4,.span-6,.span-8{grid-column: span 12}
+    }
+
+    .checklist{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+    .check{
+      display:flex; align-items:flex-start; gap:10px;
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      font-weight:750;
+      color:rgba(235,248,255,.92);
+    }
+    .check i{font-style:normal; color:var(--ok); font-weight:950}
+    .check span{color:rgba(220,240,255,.75); font-weight:650}
+
+    /* Steps */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 900px){ .steps{grid-template-columns:1fr} }
+    .step{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .step b{
+      display:inline-flex;
+      width:34px; height:34px;
+      border-radius:14px;
+      align-items:center; justify-content:center;
+      background: linear-gradient(90deg, var(--neon), var(--accent));
+      color:#00121e;
+      font-weight:950;
+      margin-bottom:10px;
+      user-select:none;
+    }
+    .step h3{margin:0 0 8px; font-weight:950}
+    .step p{margin:0; color:rgba(220,240,255,.72); font-weight:650; line-height:1.55}
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 980px){ .pricing{grid-template-columns:1fr} }
+    .price{
+      padding:18px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    }
+    .price.featured{
+      border-color: rgba(42,192,255,.28);
+      box-shadow: 0 0 120px rgba(42,192,255,.18), 0 24px 70px rgba(0,0,0,.28);
+    }
+    .price .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:950;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:rgba(235,248,255,.92);
+    }
+    .price h3{margin:12px 0 6px; font-weight:950; letter-spacing:-.2px}
+    .price .note{margin:0; color:rgba(220,240,255,.7); font-weight:650}
+    .price ul{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .price li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      font-weight:750;
+      color:rgba(235,248,255,.92);
+    }
+    .price li i{font-style:normal; color:var(--ok); font-weight:950}
+    .price .cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+
+    /* Testimonials */
+    .testimonials{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 980px){ .testimonials{grid-template-columns:1fr} }
+    .quote{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .quote p{margin:0; color:rgba(225,245,255,.84); font-weight:650; line-height:1.6}
+    .quote .who{
+      margin-top:12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      color:rgba(200,220,255,.7);
+      font-weight:850;
+      font-size:13px;
+    }
+    .stars5{
+      color: rgba(255, 231, 140, .95);
+      font-weight:950;
+      letter-spacing:.8px;
+      user-select:none;
+    }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 980px){ .faq{grid-template-columns:1fr} }
+    details{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:14px 14px;
+      transition: background .2s var(--ease), border-color .2s var(--ease);
+    }
+    details[open]{background: rgba(255,255,255,.06); border-color:rgba(255,255,255,.16)}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:950;
+      letter-spacing:-.15px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary .plus{
+      width:34px;height:34px;border-radius:14px;
+      display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:rgba(230,247,255,.9);
+      font-weight:950;
+      flex:0 0 auto;
+    }
+    details p{
+      margin:10px 0 0;
+      color:rgba(220,240,255,.74);
+      font-weight:650;
+      line-height:1.55;
+    }
+
+    /* Bottom CTA */
+    .final-cta{
+      border-radius: 32px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      box-shadow: var(--shadow), var(--glow);
+      overflow:hidden;
+      padding: 20px;
+      position:relative;
+    }
+    .final-cta::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(800px 260px at 20% 0%, rgba(42,192,255,.24), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .final-cta-inner{
+      position:relative;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+    }
+    .final-cta h2{margin:0}
+    .final-cta p{margin:8px 0 0; color:rgba(220,240,255,.76); font-weight:650; max-width:720px}
+    .final-cta .right{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Footer */
+    footer{
+      padding:34px 0 24px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.32);
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:18px; flex-wrap:wrap;
+    }
+    .foot small{color:rgba(200,220,255,.62); font-weight:750; display:block; margin-top:8px}
+    .foot-links{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .foot-links a{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      font-weight:900;
+      color:rgba(235,248,255,.92);
+    }
+    .foot-links a:hover{background:rgba(255,255,255,.07)}
+    .copy{
+      margin-top:18px;
+      color:rgba(200,220,255,.6);
+      font-weight:750;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* Floating actions */
+    .float{
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index:90;
+    }
+    .float a, .float button{
+      padding:13px 16px;
+      border-radius:999px;
+      font-weight:950;
+      color:#fff;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+      transition: transform .2s var(--ease), filter .2s var(--ease), background .2s var(--ease);
+      cursor:pointer;
+    }
+    .float a:hover, .float button:hover{transform:translateY(-1px); filter:saturate(1.08)}
+    .float button{background: rgba(255,255,255,.08); color: rgba(235,248,255,.95)}
+    .whatsapp{background:rgba(37,211,102,.92)}
+    .email{background:rgba(74,107,255,.92)}
+
+    /* Reveal animations */
+    .reveal{opacity:0; transform:translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease)}
+    .reveal.in{opacity:1; transform:none}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .aurora{animation:none}
+      .hero-side::after{animation:none}
+      .reveal{transition:none}
+      .btn,.pill,.metric,.card,.overlay a,.float a,.float button{transition:none}
+    }
+  </style>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Da li je servis dostupan globalno?","acceptedAnswer":{"@type":"Answer","text":"Da — servis je namijenjen globalnom korištenju. Stabilnost zavisi od internet veze i uređaja, a podrška pomaže oko optimizacije."}},
+      {"@type":"Question","name":"Da li ima ugovor ili obavezna obnova?","acceptedAnswer":{"@type":"Answer","text":"Ne — narudžba je bez ugovora. Sami birate period i produženje."}},
+      {"@type":"Question","name":"Koje aplikacije i uređaje podržavate?","acceptedAnswer":{"@type":"Answer","text":"Podržane su popularne IPTV aplikacije i uređaji (Smart TV, Android, Android TV/box, Fire TV, mobilni uređaji). Pogledajte detalje na stranici Aplikacije."}},
+      {"@type":"Question","name":"Šta mi treba od interneta?","acceptedAnswer":{"@type":"Answer","text":"Preporuka je stabilna veza (npr. 25+ Mbps za Full HD i 50+ Mbps za 4K) te po mogućnosti 5GHz Wi-Fi ili Ethernet."}}
+    ]
+  }
+  </script>
 </head>
 
 <body>
-<div class="bg-grid"></div>
-<canvas class="stars" id="stars"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
 
-<!-- Sticky Topbar -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <img src="logoyf.png" alt="YuGo Family TV">
-      <div>
-        <small>Vaša porodica • Vaša televizija</small>
-      </div>
-    </div>
-    <div class="topbar-cta">
-      <a class="pill" href="status.html">📡 Status</a>
-      <a class="pill primary" href="order.html">🛒 Naruči</a>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="YuGo Family TV">
+        <img src="logoyf.png" alt="YuGo Family TV logo" loading="eager" />
+        <div class="brand-meta">
+          <strong>YuGo Family TV</strong>
+          <small>Vaša porodica • Vaša televizija</small>
+        </div>
+      </a>
+
+      <nav class="nav-inline" aria-label="Brza navigacija">
+        <a class="pill" href="status.html">📡 Status</a>
+        <a class="pill" href="aplikacije.html">📱 Aplikacije</a>
+        <a class="pill" href="business-iptv.html">🏨 Business</a>
+        <a class="pill primary" href="order.html">🛒 Naruči</a>
+      </nav>
     </div>
   </div>
-</div>
 
-<button class="menu-toggle" onclick="openNav()" aria-label="Meni">☰</button>
+  <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
 
-<div class="wrap">
-  <header>
-    <div class="hero">
-      <div class="hero-card">
-        <span class="badge">GLOBAL PREMIUM IPTV</span>
+  <!-- Overlay Menu -->
+  <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Meni">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <strong>Navigacija</strong>
+        <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
+      </div>
+      <div class="overlay-grid">
+        <a href="index.html">Početna <span>Home</span></a>
+        <a href="onama.html">O nama <span>About</span></a>
+        <a href="kako-da-gledas.html">Kako da gledaš <span>Guide</span></a>
+        <a href="cjenovnik.html">Cijene i paketi <span>Pricing</span></a>
+        <a href="order.html">Narudžba / Checkout <span>Order</span></a>
+        <a href="business-iptv.html">Business / Hotel IPTV <span>B2B</span></a>
+        <a href="aplikacije.html">Aplikacije <span>Apps</span></a>
+        <a href="komentari.html">Komentari <span>Reviews</span></a>
+        <a href="placanje.html">Plaćanje <span>Pay</span></a>
+        <a href="status.html">Status sistema <span>Status</span></a>
+        <a href="tim.html">Postani dio tima <span>Team</span></a>
+        <a href="webstranica.html">Poruči WEB-PAGE <span>Web</span></a>
+        <a href="faq.html">FAQ <span>Help</span></a>
+        <a href="legal.html">Legal & Compliance <span>Legal</span></a>
+        <a href="kontakt.html">Kontakt / Podrška <span>Support</span></a>
+      </div>
+    </div>
+  </div>
 
-        <div class="h1">
-          Gledaj <span>svijet</span> bez prekida.
-        </div>
+  <main class="wrap">
+    <!-- HERO -->
+    <header class="hero-wrap">
+      <div class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="badge">GLOBAL PREMIUM IPTV</div>
+            <h1 class="h1">Gledaj <span>svijet</span> bez prekida.</h1>
+            <p class="sub">
+              Premium IPTV sa privatnom infrastrukturom, stabilnim streamovima i podrškom 24/7.
+              Brza aktivacija • bez ugovora • optimizovano za vrhunsku stabilnost.
+            </p>
 
-        <p class="sub">
-          Premium IPTV sa privatnom infrastrukturom, stabilnim streamovima i podrškom 24/7.
-          Brza aktivacija • bez ugovora.
-        </p>
+            <div class="trust" aria-label="Prednosti">
+              <div class="chip">🛡️ Privatna infrastruktura</div>
+              <div class="chip">⚡ Brza aktivacija</div>
+              <div class="chip">🧑‍💻 Podrška 24/7</div>
+              <div class="chip">🌍 Globalna dostupnost</div>
+            </div>
 
-        <div class="trust">
-          <div class="chip">🛡️ Privatna infrastruktura</div>
-          <div class="chip">⚡ Brza aktivacija</div>
-          <div class="chip">🧑‍💻 Podrška 24/7</div>
-          <div class="chip">🌍 Globalna dostupnost</div>
-        </div>
+            <div class="hero-actions">
+              <a class="btn primary" href="order.html">Pokreni narudžbu →</a>
+              <a class="btn" href="#paketi">Pogledaj pakete</a>
+              <a class="btn" href="kako-da-gledas.html">Kako da gledaš</a>
+            </div>
 
-        <div class="hero-actions">
-          <a class="btn primary" href="order.html">Pokreni narudžbu →</a>
-          <a class="btn" href="kako-da-gledas.html">Kako da gledaš</a>
-        </div>
+            <div class="micro">
+              <span><b>99.9%</b> uptime</span><span>•</span>
+              <span><b>Nizak delay</b> i brza promjena kanala</span><span>•</span>
+              <span><b>Privatni routing</b> za stabilnost</span>
+            </div>
 
-        <div class="small-note">99.9% uptime • Optimizovano za EU/US mreže</div>
-
-        <!-- Availability -->
-        <div class="avail">
-          <label>Provjeri dostupnost u regiji</label>
-          <div class="avail-row">
-            <input id="loc" placeholder="Unesite grad (npr. Sarajevo, Berlin, Malmö)">
-            <button class="scan" id="scanBtn" type="button">Provjeri</button>
-          </div>
-
-          <div class="progress-wrap" id="progressWrap">
-            <div class="progress-bg">
-              <div class="progress-bar" id="progressBar"></div>
+            <div class="reveal" style="margin-top:18px">
+              <div class="kicker">Šta najviše gledate</div>
+              <div class="logo-wall" aria-label="Kategorije">
+                <div class="logo">Sport</div>
+                <div class="logo">Film</div>
+                <div class="logo">Serije</div>
+                <div class="logo">Vijesti</div>
+                <div class="logo">Dječiji</div>
+                <div class="logo">Dokumentarni</div>
+              </div>
             </div>
           </div>
 
-          <div id="res" class="result"></div>
+          <aside class="hero-side" aria-label="Brza provjera">
+            <div class="side-title">
+              <strong>Provjera dostupnosti</strong>
+              <a href="status.html" title="Provjeri status sistema">Status</a>
+            </div>
+
+            <div class="avail">
+              <label for="loc">Unesite grad iz kojeg gledate</label>
+              <div class="avail-row">
+                <input id="loc" autocomplete="address-level2" placeholder="npr. Sarajevo, Berlin, Malmö" />
+                <button class="scan" id="scanBtn" type="button">Provjeri</button>
+              </div>
+
+              <div class="progress-wrap" id="progressWrap" aria-hidden="true">
+                <div class="progress-bg">
+                  <div class="progress-bar" id="progressBar"></div>
+                </div>
+              </div>
+
+              <div id="res" class="result" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="mini" aria-label="Uživo metrike">
+              <div class="mini-card"><small>Aktivni korisnici</small><strong id="users">—</strong></div>
+              <div class="mini-card"><small>Aktivni streamovi</small><strong id="streams">—</strong></div>
+              <div class="mini-card"><small>Prosječno kašnjenje</small><strong id="lat">0.70s</strong></div>
+              <div class="mini-card"><small>Podrška</small><strong>24/7</strong></div>
+            </div>
+
+            <div class="metrics" style="justify-content:flex-start; margin-top:14px">
+              <a class="pill primary" href="order.html">🛒 Naruči</a>
+              <a class="pill" href="https://wa.me/4915755749502">💬 WhatsApp</a>
+              <a class="pill" href="mailto:support@yugofamily.tv">✉️ Email</a>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-  </header>
 
-  <!-- LIVE METRICS -->
-  <div class="metrics">
-    <div class="metric">🌍 Aktivnih korisnika: <strong id="users"></strong></div>
-    <div class="metric">📡 Aktivnih streamova: <strong id="streams"></strong></div>
-    <div class="metric">⚡ Prosječno kašnjenje: <strong id="lat">0.7s</strong></div>
-  </div>
+      <div class="metrics reveal" aria-label="Metrike uživo">
+        <div class="metric">🌍 Aktivnih korisnika: <strong id="users2">—</strong></div>
+        <div class="metric">📡 Aktivnih streamova: <strong id="streams2">—</strong></div>
+        <div class="metric">⚡ Prosječno kašnjenje: <strong id="lat2">—</strong></div>
+      </div>
+    </header>
 
-  <nav id="overlayNav" class="overlay" aria-label="Navigacija">
-    <div class="closebtn" onclick="closeNav()" aria-label="Zatvori">×</div>
+    <!-- FEATURES -->
+    <section id="prednosti" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Premium iskustvo</div>
+          <h2>Zašto YuGo Family TV radi bolje u praksi</h2>
+          <p class="lead">Fokus na stabilnost, brzinu i podršku — da korisnik “samo gleda”, bez nerviranja.</p>
+        </div>
+        <a class="pill primary" href="order.html">Startuj odmah</a>
+      </div>
 
-    <a href="index.html">Početna</a>
-    <a href="onama.html">O nama</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="cjenovnik.html">Cijene i paketi</a>
-    <a href="order.html">Narudžba / Checkout</a>
-    <a href="business-iptv.html">Business / Hotel IPTV</a>
-    <a href="aplikacije.html">Aplikacije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="placanje.html">Plaćanje</a>
-    <a href="status.html">Status sistema</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="webstranica.html">Poruči WEB-PAGE</a>
-    <a href="faq.html">FAQ</a>
-    <a href="legal.html">Legal & Compliance</a>
-    <a href="kontakt.html">Kontakt / Podrška</a>
-  </nav>
+      <div class="grid">
+        <div class="card span-6">
+          <h3>⚡ Stabilan streaming + brza promjena</h3>
+          <p>Optimizovano za realne kućne mreže (Wi-Fi 5GHz / Ethernet) i različite uređaje.</p>
+          <div class="checklist">
+            <div class="check"><i>✓</i><div><b>Nizak delay</b><br><span>brže prebacivanje i stabilniji stream</span></div></div>
+            <div class="check"><i>✓</i><div><b>Smart buffering</b><br><span>manje “seckanja” na slabijim vezama</span></div></div>
+          </div>
+        </div>
 
-  <section class="cta-grid">
-    <div class="cta-card">
-      <h3>🏨 Business / Hotel IPTV</h3>
-      <p>Profesionalna IPTV rješenja za hotele i firme.</p>
-      <a href="business-iptv.html">Saznaj više →</a>
-    </div>
-    <div class="cta-card">
-      <h3>🛒 Narudžba IPTV</h3>
-      <p>Sigurna narudžba bez ugovora, brza aktivacija.</p>
-      <a href="order.html">Naruči sada →</a>
-    </div>
-    <div class="cta-card">
-      <h3>🎬 Demo za hotele</h3>
-      <p>Posebna demo prezentacija i ponuda.</p>
-      <a href="https://wa.me/4915755749502">Zatraži demo →</a>
-    </div>
-  </section>
+        <div class="card span-6">
+          <h3>🛡️ Privatna infrastruktura</h3>
+          <p>Privatna ruta i kontrolisani serveri daju veću pouzdanost u odnosu na “random” resell.</p>
+          <div class="checklist">
+            <div class="check"><i>✓</i><div><b>Kontrolisan kvalitet</b><br><span>standardizovan profil za stabilnost</span></div></div>
+            <div class="check"><i>✓</i><div><b>Monitoring</b><br><span>brza reakcija ako nešto “padne”</span></div></div>
+          </div>
+        </div>
 
+        <div class="card span-4">
+          <h3>🧑‍💻 Podrška 24/7</h3>
+          <p>Brzo rješavanje problema i pomoć oko instalacije / optimizacije.</p>
+        </div>
+        <div class="card span-4">
+          <h3>📱 Široka kompatibilnost</h3>
+          <p>Smart TV, Android, Android TV/box, Fire TV, mobilni uređaji i popularne IPTV aplikacije.</p>
+        </div>
+        <div class="card span-4">
+          <h3>🔒 Bez ugovora</h3>
+          <p>Birate period i produženje — transparentno i jednostavno.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section id="kako" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Kako početi</div>
+          <h2>3 koraka do gledanja</h2>
+          <p class="lead">Najbrži put od narudžbe do aktivacije, bez komplikacija.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>1</b>
+          <h3>Naruči paket</h3>
+          <p>Odaberi period i ispuni narudžbu. Bez ugovora.</p>
+        </div>
+        <div class="step">
+          <b>2</b>
+          <h3>Aktivacija</h3>
+          <p>Dobijaš upute i sve podatke. Pomažemo ako treba.</p>
+        </div>
+        <div class="step">
+          <b>3</b>
+          <h3>Gledaj</h3>
+          <p>Pokreni aplikaciju i uživaj. Stabilno i brzo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="paketi" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Paketi</div>
+          <h2>Odaberi najbolji paket za sebe</h2>
+          <p class="lead">Ovdje su premium “template” paketi — ti samo zamijeni cijene/tekst po potrebi.</p>
+        </div>
+        <a class="pill" href="cjenovnik.html">Kompletan cjenovnik</a>
+      </div>
+
+      <div class="pricing">
+        <div class="price">
+          <div class="tag">Starter</div>
+          <h3>1 mjesec</h3>
+          <p class="note">Najbolje za test i probu kvaliteta.</p>
+          <ul>
+            <li><i>✓</i> Brza aktivacija</li>
+            <li><i>✓</i> Podrška 24/7</li>
+            <li><i>✓</i> Stabilan streaming</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="order.html">Naruči</a>
+            <a class="btn" href="placanje.html">Plaćanje</a>
+          </div>
+        </div>
+
+        <div class="price featured">
+          <div class="tag">Najpopularnije</div>
+          <h3>3 mjeseca</h3>
+          <p class="note">Najbolji balans cijene i trajanja.</p>
+          <ul>
+            <li><i>✓</i> Premium stabilnost</li>
+            <li><i>✓</i> Optimizacija profila</li>
+            <li><i>✓</i> Prioritetna podrška</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="order.html">Naruči</a>
+            <a class="btn" href="kako-da-gledas.html">Upute</a>
+          </div>
+        </div>
+
+        <div class="price">
+          <div class="tag">Max</div>
+          <h3>12 mjeseci</h3>
+          <p class="note">Za one koji žele mir i dugoročno.</p>
+          <ul>
+            <li><i>✓</i> Najbolja vrijednost</li>
+            <li><i>✓</i> Stabilno cijelu godinu</li>
+            <li><i>✓</i> 24/7 podrška</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="order.html">Naruči</a>
+            <a class="btn" href="business-iptv.html">Business</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Iskustva</div>
+          <h2>Komentari koji se najčešće ponavljaju</h2>
+          <p class="lead">Ovo su “safe” generičke izjave — zamijeni sa realnim komentarima kada želiš.</p>
+        </div>
+        <a class="pill" href="komentari.html">Sve recenzije</a>
+      </div>
+
+      <div class="testimonials">
+        <div class="quote">
+          <p>“Najveća razlika je stabilnost. Prebacivanje kanala brzo, nema nerviranja.”</p>
+          <div class="who"><span>EU korisnik</span><span class="stars5">★★★★★</span></div>
+        </div>
+        <div class="quote">
+          <p>“Podrška odgovara odmah i stvarno pomognu oko podešavanja aplikacije.”</p>
+          <div class="who"><span>DE korisnik</span><span class="stars5">★★★★★</span></div>
+        </div>
+        <div class="quote">
+          <p>“Kvalitet slike top, radi super na TV-u i na telefonu. Preporuka.”</p>
+          <div class="who"><span>BA korisnik</span><span class="stars5">★★★★★</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">FAQ</div>
+          <h2>Najčešća pitanja</h2>
+          <p class="lead">Ako nešto nije jasno — piši na WhatsApp ili Email, podrška je 24/7.</p>
+        </div>
+
+              <a class="pill primary" href="https://wa.me/4915755749502">💬 Piši na WhatsApp</a>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Da li je IPTV dostupan u mojoj zemlji? <span class="plus">+</span></summary>
+          <p>Da — servis je namijenjen globalnom korištenju. Ako imaš slabiji internet, podrška može preporučiti najbolja podešavanja (buffer, player, uređaj).</p>
+        </details>
+
+        <details>
+          <summary>Koja brzina interneta mi treba? <span class="plus">+</span></summary>
+          <p>Preporuka: 25+ Mbps za Full HD i 50+ Mbps za 4K. Za najbolju stabilnost koristi Ethernet ili 5GHz Wi-Fi.</p>
+        </details>
+
+        <details>
+          <summary>Na kojim uređajima radi? <span class="plus">+</span></summary>
+          <p>Smart TV, Android, Android TV/box, Fire TV, mobilni uređaji i popularne IPTV aplikacije. Detalje imaš na stranici <a href="aplikacije.html" class="pill" style="padding:8px 10px; font-size:12px;">📱 Aplikacije</a>.</p>
+        </details>
+
+        <details>
+          <summary>Koliko traje aktivacija nakon narudžbe? <span class="plus">+</span></summary>
+          <p>U većini slučajeva aktivacija ide brzo nakon potvrde narudžbe. Ako zapne, podrška 24/7 završava podešavanje s tobom.</p>
+        </details>
+
+        <details>
+          <summary>Da li imam ugovor ili automatsku obnovu? <span class="plus">+</span></summary>
+          <p>Nema ugovora — ti biraš period i produženje. Sve je transparentno i po tvojoj kontroli.</p>
+        </details>
+
+        <details>
+          <summary>Šta ako imam buffering ili “seckanje”? <span class="plus">+</span></summary>
+          <p>Najčešće je do Wi-Fi signala ili podešavanja playera. Piši podršci — optimizujemo profil, buffer i preporučimo najbolju aplikaciju za tvoj uređaj.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="reveal">
+      <div class="final-cta">
+        <div class="final-cta-inner">
+          <div>
+            <div class="kicker">Spreman/na?</div>
+            <h2>Pokreni narudžbu i gledaj danas</h2>
+            <p>Premium IPTV iskustvo sa podrškom 24/7. Brza aktivacija, bez ugovora — stabilnost na prvom mjestu.</p>
+          </div>
+          <div class="right">
+            <a class="btn primary" href="order.html">🛒 Naruči sada</a>
+            <a class="btn" href="kako-da-gledas.html">📘 Kako da gledaš</a>
+            <a class="btn" href="kontakt.html">🧑‍💻 Kontakt</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    © 2025 YuGo Family TV | <a href="legal.html">Legal</a>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <strong style="font-weight:950;">YuGo Family TV</strong>
+          <small>Premium IPTV sa privatnom infrastrukturom i podrškom 24/7.</small>
+        </div>
+
+        <div class="foot-links" aria-label="Linkovi">
+          <a href="legal.html">Legal</a>
+          <a href="faq.html">FAQ</a>
+          <a href="status.html">Status</a>
+          <a href="kontakt.html">Podrška</a>
+        </div>
+      </div>
+
+      <div class="copy">
+        © 2025 YuGo Family TV • Sva prava zadržana.<br />
+        WhatsApp podrška: <a href="https://wa.me/4915755749502">+49 157 557 495 02</a> • Email: <a href="mailto:support@yugofamily.tv">support@yugofamily.tv</a>
+      </div>
+    </div>
   </footer>
 
-  <div class="float">
-    <a class="whatsapp" href="https://wa.me/4915755749502">WhatsApp</a>
-    <a class="email" href="mailto:support@yugofamily.tv">Email</a>
+  <!-- FLOATING ACTIONS -->
+  <div class="float" aria-label="Brzi kontakti">
+    <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp</a>
+    <a class="email" href="mailto:support@yugofamily.tv">✉️ Email</a>
+    <button type="button" id="toTopBtn" aria-label="Na vrh">⬆️ Na vrh</button>
   </div>
-</div>
 
-<script>
-/* MENU */
-const overlayNav = document.getElementById("overlayNav");
-function openNav(){ overlayNav.classList.add("open"); }
-function closeNav(){ overlayNav.classList.remove("open"); }
-overlayNav.addEventListener("click",(e)=>{ if(e.target===overlayNav) closeNav(); });
+  <script>
+    /* ===== Overlay menu (open/close + ESC) ===== */
+    const overlayNav = document.getElementById("overlayNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeNavBtn = document.getElementById("closeNavBtn");
 
-/* AVAILABILITY CHECK */
-const locInput = document.getElementById("loc");
-const res = document.getElementById("res");
-const pw = document.getElementById("progressWrap");
-const pb = document.getElementById("progressBar");
-const scanBtn = document.getElementById("scanBtn");
-
-function scan(){
-  const v = (locInput.value || "").trim();
-  res.textContent = "";
-  res.style.color = "rgba(230,247,255,.9)";
-  pw.style.display = "block";
-  pb.style.width = "0%";
-
-  let p = 0;
-  const loader = setInterval(()=>{
-    p += 10 + Math.random()*18;
-    if(p>=100){
-      p=100; clearInterval(loader);
-      setTimeout(()=>{
-        pw.style.display="none";
-        const ok = v.length > 1 ? true : true;
-        const messages = [
-          "✅ IPTV je dostupan u vašoj regiji. Preporuka: 50+ Mbps za 4K.",
-          "✅ Dostupno! Optimizovano za stabilan stream i brzu promjenu kanala.",
-          "✅ Sve spremno — možete aktivirati paket odmah."
-        ];
-        const caution = [
-          "⚠️ Dostupno, ali preporučujemo Ethernet/Wi-Fi 5GHz radi stabilnosti.",
-          "⚠️ Dostupno. Ako imate buffering, javite se — optimizujemo profil.",
-        ];
-        const pick = Math.random() < 0.75 ? messages : caution;
-        res.textContent = pick[Math.floor(Math.random()*pick.length)];
-        res.style.color = (pick===messages) ? "#5cffb0" : "#ffd56b";
-      }, 260);
+    function openNav(){
+      overlayNav.classList.add("open");
+      closeNavBtn.focus();
     }
-    pb.style.width = p + "%";
-  }, 140);
-}
+    function closeNav(){
+      overlayNav.classList.remove("open");
+      menuBtn.focus();
+    }
 
-scanBtn.addEventListener("click", scan);
-locInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter") scan(); });
+    menuBtn.addEventListener("click", openNav);
+    closeNavBtn.addEventListener("click", closeNav);
 
-/* LIVE METRICS */
-function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-const users=document.getElementById("users");
-const streams=document.getElementById("streams");
-const lat=document.getElementById("lat");
+    overlayNav.addEventListener("click", (e) => {
+      if(e.target === overlayNav) closeNav();
+    });
 
-function updateMetrics(){
-  const u=rand(11220, 14980);
-  users.textContent=u.toLocaleString("de-DE");
-  streams.textContent=Math.floor(u*(Math.random()*0.75+1.35)).toLocaleString("de-DE");
-  lat.textContent=(0.45 + Math.random()*0.45).toFixed(2) + "s";
-}
-updateMetrics();
-setInterval(updateMetrics,3200);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && overlayNav.classList.contains("open")) closeNav();
+    });
 
-/* Stars canvas (subtle) */
-const c = document.getElementById("stars");
-const ctx = c.getContext("2d");
-let W,H,stars=[];
-function resize(){
-  W=c.width=window.innerWidth;
-  H=c.height=window.innerHeight;
-  stars = Array.from({length: Math.min(140, Math.floor((W*H)/18000))}, ()=>({
-    x:Math.random()*W,
-    y:Math.random()*H,
-    r:Math.random()*1.2 + 0.2,
-    a:Math.random()*0.5 + 0.2,
-    s:Math.random()*0.35 + 0.05
-  }));
-}
-window.addEventListener("resize", resize);
-resize();
+    /* ===== Availability check ===== */
+    const locInput = document.getElementById("loc");
+    const res = document.getElementById("res");
+    const pw = document.getElementById("progressWrap");
+    const pb = document.getElementById("progressBar");
+    const scanBtn = document.getElementById("scanBtn");
 
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  for(const st of stars){
-    st.y += st.s;
-    if(st.y>H){ st.y=-10; st.x=Math.random()*W; }
-    ctx.globalAlpha = st.a;
-    ctx.beginPath();
-    ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
-    ctx.fillStyle = "#a8eaff";
-    ctx.fill();
-  }
-  requestAnimationFrame(draw);
-}
-draw();
-</script>
+    function scan(){
+      const v = (locInput.value || "").trim();
+      res.textContent = "";
+      res.style.color = "rgba(230,247,255,.9)";
+      pw.style.display = "block";
+      pb.style.width = "0%";
+
+      let p = 0;
+      const loader = setInterval(() => {
+        p += 10 + Math.random() * 18;
+        if (p >= 100) {
+          p = 100;
+          clearInterval(loader);
+
+          setTimeout(() => {
+            pw.style.display = "none";
+
+            const good = [
+              "✅ IPTV je dostupan u vašoj regiji. Preporuka: 50+ Mbps za 4K.",
+              "✅ Dostupno! Optimizovano za stabilan stream i brzu promjenu kanala.",
+              "✅ Sve spremno — možete aktivirati paket odmah."
+            ];
+            const caution = [
+              "⚠️ Dostupno, ali preporučujemo Ethernet / 5GHz Wi-Fi radi stabilnosti.",
+              "⚠️ Dostupno. Ako ima buffering, javite se — optimizujemo profil."
+            ];
+
+            const pick = (Math.random() < 0.78) ? good : caution;
+            res.textContent = (v ? "" : "ℹ️ ") + pick[Math.floor(Math.random() * pick.length)];
+            res.style.color = (pick === good) ? "#5cffb0" : "#ffd56b";
+          }, 260);
+        }
+        pb.style.width = p + "%";
+      }, 140);
+    }
+
+    scanBtn.addEventListener("click", scan);
+    locInput.addEventListener("keydown", (e) => { if (e.key === "Enter") scan(); });
+
+    /* ===== Live metrics ===== */
+    function rand(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    const users = document.getElementById("users");
+    const streams = document.getElementById("streams");
+    const lat = document.getElementById("lat");
+
+    const users2 = document.getElementById("users2");
+    const streams2 = document.getElementById("streams2");
+    const lat2 = document.getElementById("lat2");
+
+    function updateMetrics(){
+      const u = rand(11220, 14980);
+      const s = Math.floor(u * (Math.random() * 0.75 + 1.35));
+      const l = (0.45 + Math.random() * 0.45).toFixed(2) + "s";
+
+      const uFmt = u.toLocaleString("de-DE");
+      const sFmt = s.toLocaleString("de-DE");
+
+      if(users) users.textContent = uFmt;
+      if(streams) streams.textContent = sFmt;
+      if(lat) lat.textContent = l;
+
+      if(users2) users2.textContent = uFmt;
+      if(streams2) streams2.textContent = sFmt;
+      if(lat2) lat2.textContent = l;
+    }
+    updateMetrics();
+    setInterval(updateMetrics, 3200);
+
+    /* ===== Stars canvas (subtle particles) ===== */
+    const c = document.getElementById("stars");
+    const ctx = c.getContext("2d");
+    let W, H, stars = [];
+
+    function resize(){
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
+      const count = Math.min(160, Math.floor((W * H) / 18000));
+      stars = Array.from({length: count}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.2,
+        a: Math.random() * 0.55 + 0.18,
+        s: Math.random() * 0.35 + 0.05
+      }));
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for(const st of stars){
+        st.y += st.s;
+        if(st.y > H){ st.y = -10; st.x = Math.random() * W; }
+        ctx.globalAlpha = st.a;
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#a8eaff";
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    /* ===== Reveal on scroll ===== */
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("in");
+      }
+    }, {threshold: 0.12});
+    revealEls.forEach(el => io.observe(el));
+
+    /* ===== To top ===== */
+    const toTopBtn = document.getElementById("toTopBtn");
+    toTopBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+  </script>
+
 </body>
 </html>
+

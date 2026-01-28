@@ -1,706 +1,193 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Postani dio tima - YUGO-Family TV</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>Postani dio tima | YUGO-Family</title>
+<meta name="description" content="Pridruži se YUGO-Family timu. Profesionalna zajednica, transparentni uslovi i mogućnost rasta.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg-1:#061028;
-    --bg-2:#071f3a;
-    --accent-1:#2ab0ff;
-    --accent-2:#4a6bff;
-    --neon:#6ce0ff;
-    --neon-strong:#2bd1ff;
-    --glass: rgba(255,255,255,0.06);
-    --muted: rgba(230,235,245,0.7);
-    --radius:14px;
-    --glass-blur: 12px;
-    --text: #e6f7ff;
-    --card: rgba(255,255,255,0.03);
-    --max-w:1200px;
-    --transition: 0.28s ease;
-    --safe-mobile-break:880px;
-  }
-  /* Dark/Light helper (optional) */
-  :root[data-theme="light"]{
-    --bg-1:#f6f9fb;
-    --bg-2:#eef6ff;
-    --text:#001;
-    --muted: rgba(20,30,40,0.7);
-    --card: rgba(0,0,0,0.04);
-    --neon-strong:#0a9;
-  }
+:root{
+  --primary:#2563eb;
+  --dark:#020617;
+  --light:#f8fafc;
+  --gray:#64748b;
+  --radius:14px;
+}
 
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background: linear-gradient(180deg,var(--bg-1),var(--bg-2));font-family:Inter,system-ui,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--light);
+  color:#0f172a;
+}
 
-  /* Page container */
-  .wrap{max-width:var(--max-w);margin:28px auto;padding:0 20px;position:relative;z-index:3}
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(2,6,23,.92);
+  backdrop-filter:blur(10px);
+}
 
-  /* Sticky header */
-  .top{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;position:sticky;top:12px;z-index:1002;padding:10px;border-radius:12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(8px);
-  }
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#002;box-shadow:0 10px 40px rgba(42,176,255,0.08);font-size:20px}
-  .brand h1{margin:0;font-size:18px;color:var(--neon);letter-spacing:0.6px}
-  .sub{font-size:12px;color:var(--muted)}
+.header-inner{
+  max-width:1180px;
+  margin:auto;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-  /* Nav */
-  .nav{display:flex;gap:10px;align-items:center}
-  .nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px;display:inline-block}
-  .nav a:hover{color:var(--accent-1);background:rgba(255,255,255,0.02)}
-  .controls{display:flex;gap:8px;align-items:center;position:relative}
+.logo{
+  color:#fff;
+  font-weight:800;
+  font-size:1.2rem;
+  text-decoration:none;
+}
 
-  /* Toggle theme button small */
-  .theme-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
+/* NAV */
+.nav{
+  display:flex;
+  gap:28px;
+}
 
-  /* Hamburger (desktop hidden) */
-  .hamburger {
-    display: none;
-    width: 44px; height: 36px; position: relative; background: transparent; border: none; cursor: pointer; z-index: 1005;
-  }
-  .hamburger span {
-    position: absolute; left: 6px; width: 32px; height: 4px; background: var(--neon-strong); border-radius: 6px;
-    transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .28s, top .36s;
-    box-shadow: 0 0 10px rgba(108,224,255,0.35);
-  }
-  .hamburger span:nth-child(1){ top: 6px; }
-  .hamburger span:nth-child(2){ top: 16px; }
-  .hamburger span:nth-child(3){ top: 26px; }
+.nav a{
+  color:#cbd5f5;
+  text-decoration:none;
+  font-weight:500;
+}
 
-  .hamburger.active span:nth-child(1){ transform: rotate(45deg); top: 16px; }
-  .hamburger.active span:nth-child(2){ opacity: 0; transform: scaleX(0.2); }
-  .hamburger.active span:nth-child(3){ transform: rotate(-45deg); top: 16px; }
+.nav a[aria-current="page"]{
+  color:#fff;
+  font-weight:700;
+}
 
-  /* Hero glass */
-  .hero{
-    border-radius:18px;padding:26px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(var(--glass-blur));
-    box-shadow: 0 20px 60px rgba(2,6,18,0.6);
-    position:relative; overflow:hidden;
-    display:grid;grid-template-columns: 1fr minmax(260px,420px);gap:28px;align-items:center;
-  }
+.nav a:hover{color:#fff}
 
-  /* Animated background lines */
-  .hero::after{
-    content:"";position:absolute;inset:-20% -10% -10% -10%;
-    background:
-      radial-gradient(800px 200px at 15% 20%, rgba(42,176,255,0.06), transparent 12%),
-      radial-gradient(600px 200px at 85% 70%, rgba(74,107,255,0.06), transparent 10%),
-      linear-gradient(90deg, rgba(42,176,255,0.03), rgba(74,107,255,0.02));
-    z-index:0;pointer-events:none;
-    animation: slowShift 12s linear infinite;
-  }
-  @keyframes slowShift {0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
 
-  .hero-left{position:relative;z-index:2;padding-right:12px}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(42,176,255,0.12), rgba(74,107,255,0.06));color:var(--neon);font-weight:700;margin-bottom:12px}
-  .hero-left h2{margin:0;font-size:30px;line-height:1.05;color:var(--text);text-shadow:0 8px 30px rgba(2,8,20,0.55)}
-  .lead{color:var(--muted);margin-top:8px;max-width:680px}
+.hamburger span{
+  display:block;
+  width:26px;
+  height:3px;
+  background:#fff;
+  margin:5px 0;
+  border-radius:3px;
+}
 
-  /* Stats */
-  .stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-  .stat{background:transparent;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:140px}
-  .stat .num{font-weight:800;color:var(--neon-strong);font-size:20px}
-  .stat .lbl{font-size:13px;color:var(--muted)}
+/* MOBILE */
+@media (max-width: 900px){
 
-  /* Team card (with blur glass frame + neon border anim) */
-  .team-card{
-    z-index:3; position:relative;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    border-radius:16px; padding:12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.012));
-    border: 1px solid rgba(255,255,255,0.04);
-    box-shadow: 0 18px 60px rgba(2,8,30,0.6);
-    overflow: visible;
+  .nav{
+    position:absolute;
+    top:72px;
+    left:0;
+    width:100%;
+    background:#020617;
+    flex-direction:column;
+    padding:30px;
+    display:none;
   }
 
-  /* neon animated frame */
-  .team-frame {
-    position:relative; width:100%; display:flex;align-items:center;justify-content:center;
-  }
-  .neon-frame {
-    position:absolute; inset:6px; border-radius:12px; pointer-events:none;
-    background: linear-gradient(90deg, rgba(42,176,255,0.06), rgba(74,107,255,0.06));
-    filter: blur(18px); opacity:0.95; z-index:0; transform: translateZ(0);
-    transition: transform 0.6s ease;
+  .nav.open{
+    display:flex;
   }
 
-  .team-img{
-    width:94%; border-radius:12px; display:block; object-fit:cover;
-    filter:contrast(1.03) saturate(1.06) brightness(0.98);
-    box-shadow: 0 20px 60px rgba(10,30,60,0.6);
-    position:relative; z-index:1;
-    transition: transform 0.9s cubic-bezier(.2,.9,.2,1), filter 0.6s;
+  .hamburger{
+    display:block;
   }
-  .team-card:hover .neon-frame{ transform: scale(1.03) rotate(-0.6deg) }
-  .team-card:hover .team-img{ transform: translateY(-6px) scale(1.02) }
+}
 
-  /* Cinematic / 3D netflix-like title */
-  .title-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;z-index:4}
-  .netflix-title{
-    font-family:'Bebas Neue', sans-serif;font-size:48px;letter-spacing:4px;color:#ff2b2b;
-    text-transform:uppercase;text-align:center;line-height:1;position:relative;
-    text-shadow:
-      0 6px 18px rgba(0,0,0,0.55),
-      0 0 28px rgba(255,43,43,0.14),
-      0 0 56px rgba(42,176,255,0.06);
-    transform:translateZ(0);
-  }
-  .netflix-title::after{
-    content:"";position:absolute;inset:-6px;-webkit-mask-image:linear-gradient(90deg,transparent,black,transparent);opacity:0.5;
-    background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
-    mix-blend-mode:screen;animation: flicker 3.2s infinite;
-  }
-  @keyframes flicker{
-    0%{opacity:0.3;transform:translateX(-10px)}10%{opacity:1;transform:translateX(0)}30%{opacity:0.4;transform:translateX(8px)}60%{opacity:0.9;transform:translateX(-4px)}100%{opacity:0.6;transform:translateX(0)}
-  }
+/* CONTENT */
+main{
+  max-width:900px;
+  margin:auto;
+  padding:100px 20px;
+}
 
-  /* Main grid */
-  .main{display:grid;grid-template-columns:1fr 380px;gap:28px;margin-top:26px}
-  @media(max-width:980px){.hero{grid-template-columns:1fr}.main{grid-template-columns:1fr}}
+h1{
+  font-size:clamp(2.2rem,4vw,3rem);
+  margin-bottom:20px;
+}
 
-  .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,18,0.6)}
-  .panel-title{margin:0 0 8px 0;color:var(--neon-strong);font-size:18px}
-  .muted{color:var(--muted)}
-  .jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .job{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.02);transition:transform var(--transition)}
-  .job:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,18,0.6)}
+p{
+  color:var(--gray);
+  line-height:1.7;
+}
 
-  /* Right column calc */
-  .calc .row{display:flex;gap:10px;align-items:center}
-  .input, .select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
-  .range{width:100%}
-  .result{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);margin-top:10px}
-  .big{font-weight:800;color:var(--neon-strong);font-size:18px}
-
-  /* CTA and footer */
-  .cta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
-  .btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
-  .btn-primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#001}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-
-  .footer{margin-top:30px;text-align:center;color:var(--muted);padding:24px}
-
-  /* WhatsApp bubble */
-  .wa{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1ebea5);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,20,0.6);z-index:999}
-  .wa img{width:28px;height:28px}
-
-  /* Mobile styles (hamburger shows) */
-  @media(max-width:880px){
-    .nav{display:none}
-    .hamburger{display:block}
-    .hero{grid-template-columns:1fr}
-    .title-wrap { margin-top: 10px;}
-    .netflix-title{font-size:36px}
-    .team-img{width:100%}
-    .main{grid-template-columns:1fr}
-  }
-
-  /* Mobile menu (slide-down panel, neon border) */
-  #mainMenu{
-    display:flex; gap:10px; align-items:center;
-  }
-  @media(max-width:880px){
-    #mainMenu{
-      display:none; position: absolute; right: 12px; top: 72px; width: calc(100% - 36px);
-      max-width:360px; padding:14px; border-radius:14px; z-index:1004;
-      background: linear-gradient(180deg, rgba(2,8,20,0.9), rgba(6,18,36,0.85));
-      border: 1px solid rgba(108,224,255,0.08); backdrop-filter: blur(8px);
-      box-shadow: 0 18px 60px rgba(2,6,18,0.6);
-      transform-origin: top right; animation: slideDown .28s ease;
-    }
-    #mainMenu.show{display:block}
-    @keyframes slideDown{from{opacity:0; transform:translateY(-8px) scale(.995)} to{opacity:1; transform:translateY(0) scale(1)}}
-    #mainMenu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);text-decoration:none}
-    #mainMenu a:hover{background:rgba(255,255,255,0.02); color:var(--neon-strong)}
-  }
-
-  /* small responsive tweaks */
-  @media(max-width:480px){
-    .netflix-title{font-size:30px}
-  }
-
-  /* subtle helper */
-  .hidden{display:none!important}
+/* FOOTER */
+footer{
+  background:#020617;
+  color:#cbd5f5;
+  text-align:center;
+  padding:40px 20px;
+  font-size:.9rem;
+}
 </style>
 </head>
+
 <body>
 
-<!-- subtle decorative gradient overlay -->
-<svg style="position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <linearGradient id="g1" x1="0" x2="1">
-      <stop offset="0" stop-color="#2ab0ff"/><stop offset="1" stop-color="#4a6bff"/>
-    </linearGradient>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#g1)" opacity="0.02"/>
-</svg>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">YUGO-Family</a>
 
-<div class="wrap">
+    <!-- MAIN MENU -->
+    <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
+      <a href="index.html">Početna</a>
+      <a href="cjenovnik.html">Cijene</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="onama.html">O nama</a>
+      <a href="tim.html" aria-current="page">Postani dio tima</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
 
-  <!-- header / nav -->
-  <div class="top" role="banner">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">YF</div>
-      <div>
-        <h1>YUGO-Family TV</h1>
-        <div class="sub">Partner program — futuristički neon</div>
-      </div>
-    </div>
-
-    <div class="controls" role="navigation" aria-label="glavna navigacija">
-      <!-- HAMBURGER (C: transform to X) -->
-      <button class="hamburger" id="hambBtn" aria-label="Otvori meni" type="button">
-        <span></span><span></span><span></span>
-      </button>
-
-      <!-- MAIN MENU (desktop visible, mobile replaced by hamburger) -->
-      <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
-        <a href="index.html">Početna</a>
-        <a href="cjenovnik.html">Cijene</a>
-        <a href="komentari.html">Komentari</a>
-        <a href="onama.html">O nama</a>
-        <a href="tim.html" aria-current="page">Postani dio tima</a>
-        <a href="kontakt.html">Kontakt</a>
-      </nav>
-
-      <button class="theme-btn" id="themeBtn" title="Promijeni temu (tamno/svijetlo)">🌗</button>
-    </div>
+    <!-- HAMBURGER -->
+    <button id="menuToggle"
+            class="hamburger"
+            aria-label="Otvori meni"
+            aria-controls="mainMenu"
+            aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Hero">
-    <div class="hero-left">
-      <div class="kicker">Partner program</div>
-      <h2>Započni odmah — prodaj kredite, zaradi stabilno</h2>
-      <p class="lead">1 kredit = 1 mjesec; 12 kredita = 1 godina. Kupuj kredite po <strong>3 €</strong>, prodaj ih po <strong>9–12 €</strong>.</p>
+<main>
+  <h1>Postani dio YUGO-Family tima</h1>
+  <p>
+    Tražimo ozbiljne, odgovorne i motivisane ljude koji žele da rastu zajedno sa nama.
+    Ako voliš profesionalan rad, jasna pravila i dugoročnu saradnju – na pravom si mjestu.
+  </p>
+</main>
 
-      <div class="stats" role="status" aria-live="polite">
-        <div class="stat" aria-hidden="false"><div class="num counter" data-target="16000">0</div><div class="lbl">Aktivnih korisnika</div></div>
-        <div class="stat"><div class="num counter" data-target="117">0</div><div class="lbl">Pridruženih partnera</div></div>
-        <div class="stat"><div class="num counter" data-target="9">0</div><div class="lbl">Godina iskustva</div></div>
-      </div>
-
-      <div class="cta-hero" style="margin-top:12px">
-        <button id="joinTop" class="btn btn-primary">Pridruži se sada</button>
-        <button id="learn" class="btn btn-ghost">Saznaj više</button>
-      </div>
-    </div>
-
-    <!-- Team card with neon blur frame -->
-    <aside class="team-card" aria-label="Team card">
-      <div class="team-frame">
-        <div class="neon-frame" aria-hidden="true"></div>
-        <!-- URADI: stavi yfteam.png u isti folder ili promijeni putanju -->
-        <img src="yfteam.png" alt="YF Team" class="team-img" id="teamImg" loading="lazy">
-      </div>
-
-      <div class="title-wrap" aria-hidden="false">
-        <div class="netflix-title" role="heading" aria-level="1">CREATORS OF YUGOFAMILY</div>
-      </div>
-    </aside>
-  </section>
-
-  <!-- MAIN GRID -->
-  <main class="main" role="main">
-
-    <!-- LEFT -->
-    <section>
-      <div class="panel">
-        <h3 class="panel-title">Otvorene pozicije</h3>
-        <p class="muted">Tražimo saradnike za online prodaju, tehničku podršku i administraciju — fleksibilno radno vrijeme, provizije i bonusi.</p>
-
-        <div class="jobs" style="margin-top:12px">
-          <div class="job"><h4>Prodajni saradnik (remote)</h4><p class="muted">Prodaja kredita, komunikacija s klijentima i evidencija narudžbi.</p></div>
-          <div class="job"><h4>Tehnička podrška</h4><p class="muted">Instalacija i pomoć korisnicima; obuka osigurana.</p></div>
-          <div class="job"><h4>Menadžer partnera</h4><p class="muted">Upravljanje partner programom i onboarding.</p></div>
-          <div class="job"><h4>Marketing & Growth</h4><p class="muted">Promocija partner programa i praćenje performansi.</p></div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-top:16px">
-        <h3 class="panel-title">Kako funkcioniše saradnja — 4 koraka</h3>
-        <div style="display:grid;gap:12px">
-          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">1</div>
-            <div><strong>Kontakt i onboarding</strong><div class="muted">Pošaljemo instrukcije i pristup.</div></div></div>
-
-          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">2</div>
-            <div><strong>Nabavka kredita</strong><div class="muted">Kupuješ kredite po <strong>3 €</strong> — odmah dostupni.</div></div></div>
-
-          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">3</div>
-            <div><strong>Preprodaja</strong><div class="muted">Prodaješ kredite klijentima po cijeni koju postaviš (9–12€).</div></div></div>
-
-          <div class="step" style="display:flex;gap:12px;align-items:flex-start"><div style="min-width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,#e9fbff,#dff6ff);color:var(--accent-1);display:flex;align-items:center;justify-content:center;font-weight:700">4</div>
-            <div><strong>Isplata & podrška</strong><div class="muted">Pratiš zaradu i dobijaš podršku 0–24.</div></div></div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-top:16px">
-        <h3 class="panel-title">Zašto saradnici biraju nas?</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
-          <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">3.000+</div><div class="lbl">Aktivnih kanala</div></div>
-          <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">116.000+</div><div class="lbl">Dostupnih na zahtjev</div></div>
-          <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">Instant</div><div class="lbl">Aktivacija</div></div>
-          <div class="stat" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="num">24/7</div><div class="lbl">Podrška</div></div>
-        </div>
-      </div>
-
-      <!-- Extra sections (Why / Portfolio / Testimonials / Stats) -->
-      <section style="margin-top:18px">
-        <h3 class="panel-title">Why choose us?</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-          <div class="panel" style="padding:14px"><h4>Innovative approach</h4><p class="muted">Pushing boundaries & creating fresh solutions.</p></div>
-          <div class="panel" style="padding:14px"><h4>Professional execution</h4><p class="muted">Precise, high-quality output with full support.</p></div>
-          <div class="panel" style="padding:14px"><h4>Proven results</h4><p class="muted">Helping partners grow and retain customers.</p></div>
-        </div>
-      </section>
-
-      <section style="margin-top:18px">
-        <h3 class="panel-title">Featured projects</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1557683304-673a23048d34?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Brand Revamp</strong></div></div>
-          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>UI/UX Dashboard</strong></div></div>
-          <div class="panel" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=900" alt="" style="width:100%;display:block;object-fit:cover;aspect-ratio:16/9" loading="lazy"><div style="padding:12px"><strong>Campaign Strategy</strong></div></div>
-        </div>
-      </section>
-
-      <section style="margin-top:18px">
-        <h3 class="panel-title">Šta klijenti kažu</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-          <div class="panel"><p>“Studio 611 transformed our process — fast, reliable and creative.”</p><span class="muted">— Sara M.</span></div>
-          <div class="panel"><p>“Great team, great results. Sales increased after launch.”</p><span class="muted">— Marko P.</span></div>
-          <div class="panel"><p>“Excellent cooperation and support 24/7.”</p><span class="muted">— Lana K.</span></div>
-        </div>
-      </section>
-
-      <section style="margin-top:18px">
-        <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
-          <div style="flex:1;min-width:180px">
-            <h3 class="panel-title">Brojke</h3>
-            <p class="muted">Iskustvo i kredibilitet</p>
-          </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap">
-            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">6+</div><div class="muted">Godina iskustva</div></div>
-            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">120+</div><div class="muted">Projekata</div></div>
-            <div style="background:var(--card);padding:14px;border-radius:10px;text-align:center"><div style="font-weight:800;color:var(--neon-strong);font-size:20px">80+</div><div class="muted">Zadovoljnih klijenata</div></div>
-          </div>
-        </div>
-      </section>
-
-    </section>
-
-    <!-- RIGHT (calculator + trust) -->
-    <aside class="panel calc" style="height:max-content">
-      <h3 class="panel-title">Calculator zarade — paralelno</h3>
-      <p class="muted">Unesi koliko novih korisnika dovedeš mjesečno i izaberi prodajnu cijenu (9–12€).</p>
-
-      <div style="margin-top:10px">
-        <label style="font-size:13px;color:var(--muted)">Novi korisnici / mjesečno</label>
-        <input id="users" type="number" min="0" value="10" class="input" aria-label="Novi korisnici mjesečno">
-      </div>
-
-      <div style="margin-top:10px">
-        <label style="font-size:13px;color:var(--muted)">Prodajna cijena / kredit: <span id="sellLabel" style="color:var(--neon-strong)">9.00 €</span></label>
-        <input id="sell" type="range" min="9" max="12" step="0.1" value="9" class="range" aria-label="Prodajna cijena po kreditu">
-      </div>
-
-      <div style="margin-top:12px" class="result" aria-live="polite">
-        <div class="row">
-          <div style="flex:1"><div class="lbl muted">Bruto (mjesečno)</div><div id="revM" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl muted">Trošak (mjesečno)</div><div id="costM" class="big">0 €</div></div>
-        </div>
-
-        <div class="row" style="margin-top:10px">
-          <div style="flex:1"><div class="lbl muted">Profit (mjesečno)</div><div id="profitM" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl muted">Profit / korisnik</div><div id="ppkM" class="big">0 €</div></div>
-        </div>
-
-        <hr class="sep">
-
-        <div class="row" style="margin-top:10px">
-          <div style="flex:1"><div class="lbl muted">Bruto (godišnje)</div><div id="revY" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl muted">Trošak (godišnje)</div><div id="costY" class="big">0 €</div></div>
-        </div>
-
-        <div class="row" style="margin-top:10px">
-          <div style="flex:1"><div class="lbl muted">Profit (godišnje)</div><div id="profitY" class="big">0 €</div></div>
-          <div style="flex:1"><div class="lbl muted">Profit / korisnik (godišnje)</div><div id="ppkY" class="big">0 €</div></div>
-        </div>
-
-        <div style="margin-top:12px;display:flex;gap:8px;justify-content:space-between">
-          <button id="join" class="btn btn-primary">Pridruži se sada</button>
-          <button id="pdf" class="btn btn-ghost">Preuzmi izvještaj</button>
-        </div>
-      </div>
-
-      <div style="margin-top:12px">
-        <h4 style="margin:8px 0 6px 0;color:var(--neon-strong)">Povjerenje</h4>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <div style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">16.000+ korisnika</div>
-          <div style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">117 partnera</div>
-          <div style="padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)">9+ godina</div>
-        </div>
-      </div>
-    </aside>
-
-  </main>
-
-  <div class="footer" role="contentinfo">
-    <div style="font-size:13px">&copy; 2025 YUGO-Family TV</div>
-    <div style="font-size:13px;color:var(--muted)">Email: <a href="mailto:nkplus22@gmail.com" style="color:var(--neon-strong)">nkplus22@gmail.com</a> | <a href="https://wa.me/4915755749502" style="color:var(--neon-strong)">WhatsApp</a></div>
-  </div>
-
-</div>
-
-<!-- WhatsApp bubble -->
-<a class="wa" href="https://wa.me/4915755749502" target="_blank" aria-label="WhatsApp">
-  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .001 5.373.001 12c0 2.113.553 4.148 1.6 5.942L0 24l6.378-1.574A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12 0-3.213-1.253-6.209-3.48-8.52zM12 22.2c-1.64 0-3.246-.39-4.69-1.13l-.34-.17-3.79.94.95-3.69-.22-.36A9.2 9.2 0 012.8 12c0-5.08 4.12-9.2 9.2-9.2 2.46 0 4.72.95 6.43 2.69C21.05 8.82 22 10.99 22 13.2 22 18.28 17.28 22.2 12 22.2z'/></svg>" alt="WA">
-</a>
+<footer>
+  © 2026 YUGO-Family. Sva prava zadržana.
+</footer>
 
 <script>
-/* =========================
-   Javascript: interactivity
-   ========================= */
+const toggle = document.getElementById('menuToggle');
+const menu = document.getElementById('mainMenu');
 
-/* DOM refs */
-const counters = document.querySelectorAll('.counter');
-const heroEl = document.querySelector('.hero');
-const teamImg = document.getElementById('teamImg');
-const neonFrame = document.querySelector('.neon-frame');
-const hambBtn = document.getElementById('hambBtn');
-const mainMenu = document.getElementById('mainMenu');
-const themeBtn = document.getElementById('themeBtn');
-
-/* ===== THEME toggle (light/dark) ===== */
-(function(){
-  const root = document.documentElement;
-  const saved = localStorage.getItem('yf-theme');
-  if(saved) root.setAttribute('data-theme', saved);
-  themeBtn && themeBtn.addEventListener('click', ()=>{
-    const current = root.getAttribute('data-theme');
-    const next = current === 'light' ? '' : 'light';
-    if(next) root.setAttribute('data-theme', next); else root.removeAttribute('data-theme');
-    localStorage.setItem('yf-theme', next);
-  });
-})();
-
-/* ===== MENU (hamburger) ===== */
-function outsideClick(e){
-  if(!mainMenu.contains(e.target) && !hambBtn.contains(e.target)){
-    mainMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-    document.removeEventListener('click', outsideClick);
-  }
-}
-function toggleMenu(){
-  mainMenu.classList.toggle('show');
-  hambBtn.classList.toggle('active');
-  if(mainMenu.classList.contains('show')){
-    setTimeout(()=>document.addEventListener('click', outsideClick), 50);
-  } else {
-    document.removeEventListener('click', outsideClick);
-  }
-}
-hambBtn && hambBtn.addEventListener('click', toggleMenu);
-window.addEventListener('resize', ()=>{
-  if(window.innerWidth > 880){
-    mainMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-    document.removeEventListener('click', outsideClick);
-  }
-});
-
-/* ===== Counters (IntersectionObserver) ===== */
-if(counters.length){
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        counters.forEach(c=>{
-          const target = +c.dataset.target;
-          const duration = 1100;
-          const start = performance.now();
-          function step(now){
-            const t = Math.min((now-start)/duration,1);
-            const val = Math.floor(target * t);
-            c.textContent = (target >= 1000) ? (val.toLocaleString() + (t===1?'+':'')) : (val + (t===1?'+':''));
-            if(t < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        });
-        io.disconnect();
-      }
-    });
-  },{threshold:0.25});
-  heroEl && io.observe(heroEl);
-}
-
-/* ===== Team image parallax ===== */
-if(teamImg && neonFrame){
-  // subtle initial filter
-  teamImg.style.filter = 'contrast(1.04) saturate(1.06) brightness(0.99)';
-  const frame = document.querySelector('.team-card');
-  if(frame){
-    frame.addEventListener('mousemove', (ev)=>{
-      const r = frame.getBoundingClientRect();
-      const mx = (ev.clientX - r.left - r.width/2)/r.width;
-      const my = (ev.clientY - r.top - r.height/2)/r.height;
-      teamImg.style.transform = `translate(${mx*8}px,${-my*8}px) scale(1.02)`;
-      neonFrame.style.transform = `translate(${mx*6}px,${-my*6}px) scale(1.01)`;
-    });
-    frame.addEventListener('mouseleave', ()=>{
-      teamImg.style.transform = '';
-      neonFrame.style.transform = '';
-    });
-  }
-}
-
-/* ===== Calculator logic ===== */
-const usersEl = document.getElementById('users');
-const sellEl = document.getElementById('sell');
-const sellLabel = document.getElementById('sellLabel');
-
-const revM = document.getElementById('revM');
-const costM = document.getElementById('costM');
-const profitM = document.getElementById('profitM');
-const ppkM = document.getElementById('ppkM');
-
-const revY = document.getElementById('revY');
-const costY = document.getElementById('costY');
-const profitY = document.getElementById('profitY');
-const ppkY = document.getElementById('ppkY');
-
-const BUY = 3.0;
-
-function fmtMoney(v){ return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
-
-function animateVal(el, from, to, ms=420){
-  if(!el) return;
-  const s = Number(String(from).replace(/[^0-9.-]+/g,"")) || 0;
-  const e = Number(String(to).replace(/[^0-9.-]+/g,"")) || 0;
-  const start = performance.now();
-  function step(now){
-    const t = Math.min((now - start)/ms,1);
-    const val = s + (e - s) * t;
-    el.textContent = fmtMoney(val);
-    if(t < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function recalc(){
-  if(!usersEl || !sellEl) return;
-  const users = Math.max(0, Number(usersEl.value) || 0);
-  const sell = Number(sellEl.value) || 9.0;
-  sellLabel.textContent = Number(sell).toFixed(2) + ' €';
-
-  // monthly
-  const rev_month = sell * users;
-  const cost_month = BUY * users;
-  const profit_month = rev_month - cost_month;
-  const profitPerCredit = users>0 ? (sell - BUY) : 0;
-
-  // yearly totals (12 credits per user)
-  const rev_year = sell * users * 12;
-  const cost_year = BUY * users * 12;
-  const profit_year = profit_month * 12;
-  const profitPerUserYear = (sell - BUY) * 12;
-
-  animateVal(revM, revM.textContent||'0 €', rev_month);
-  animateVal(costM, costM.textContent||'0 €', cost_month);
-  animateVal(profitM, profitM.textContent||'0 €', profit_month);
-  animateVal(ppkM, ppkM.textContent||'0 €', profitPerCredit);
-
-  animateVal(revY, revY.textContent||'0 €', rev_year);
-  animateVal(costY, costY.textContent||'0 €', cost_year);
-  animateVal(profitY, profitY.textContent||'0 €', profit_year);
-  animateVal(ppkY, ppkY.textContent||'0 €', profitPerUserYear);
-}
-
-sellEl && sellEl.addEventListener('input', recalc);
-usersEl && usersEl.addEventListener('input', recalc);
-recalc(); // init
-
-/* ===== Join & PDF actions ===== */
-document.querySelectorAll('#join, #joinTop').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const users = Number(usersEl?.value) || 0;
-    const sell = Number(sellEl?.value).toFixed(2);
-    const msg = encodeURIComponent(`Zdravo! Zainteresovan sam za partnerstvo. Planiram dovesti ${users} novih korisnika mjesečno. Planirana cijena po kreditu: ${sell} €.`);
-    window.open('https://wa.me/4915755749502?text=' + msg, '_blank');
-  });
-});
-
-const pdfBtn = document.getElementById('pdf');
-if(pdfBtn){
-  pdfBtn.addEventListener('click', ()=>{
-    const users = Number(usersEl?.value) || 0;
-    const sell = Number(sellEl?.value) || 9;
-    const rev = sell * users;
-    const cost = BUY * users;
-    const profit = rev - cost;
-    const profitY = profit * 12;
-    const html = `<html><head><meta charset="utf-8"><title>Izvještaj</title></head><body style="font-family:Arial;padding:20px">
-      <h2>Izvještaj - Partner program</h2>
-      <p>Novi korisnici mjesečno: ${users}</p>
-      <p>Cijena po kreditu: ${sell.toFixed(2)} €</p>
-      <hr/>
-      <p>Bruto mjesečno: ${fmtMoney(rev)}</p>
-      <p>Trošak mjesečno: ${fmtMoney(cost)}</p>
-      <p>Profit mjesečno: ${fmtMoney(profit)}</p>
-      <p>Profit godišnje: ${fmtMoney(profitY)}</p>
-      <p>Model: 1 kredit = 1 mjesec; 12 kredita = 1 godina; Nabavna cijena: 3.00 €</p>
-    </body></html>`;
-    const w = window.open('', '_blank'); w.document.write(html); w.document.close(); w.print();
-  });
-}
-
-/* ===== Reveal animations simple ===== */
-const revealItems = document.querySelectorAll('.panel, .netflix-title, .team-card, .panel-title, .stat, .job');
-const ro = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(en.isIntersecting){
-      en.target.style.opacity = 1;
-      en.target.style.transform = 'translateY(0)';
-      ro.unobserve(en.target);
-    }
-  });
-},{threshold:0.12});
-revealItems.forEach(it=>{
-  it.style.opacity = 0;
-  it.style.transform = 'translateY(12px)';
-  ro.observe(it);
-});
-
-/* Accessibility: close mobile menu on focus loss (keyboard) */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){
-    mainMenu.classList.remove('show');
-    hambBtn.classList.remove('active');
-  }
-});
-
-/* Prevent accidental print popup from opening blocked in some browsers */
-window.addEventListener('beforeprint', ()=>console.log('Printing...'));
-
-/* small util - ensure mobile menu is accessible */
-Array.from(document.querySelectorAll('#mainMenu a')).forEach(a=>{
-  a.addEventListener('click', ()=> {
-    if(window.innerWidth <= 880){
-      mainMenu.classList.remove('show');
-      hambBtn.classList.remove('active');
-    }
-  });
+toggle.addEventListener('click', () => {
+  const opened = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', opened);
 });
 </script>
 

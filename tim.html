@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Postani dio tima | YUGO-Family</title>
-<meta name="description" content="Pridruži se YUGO-Family timu. Profesionalna zajednica, transparentni uslovi i mogućnost rasta.">
+<meta name="description" content="Postani dio YUGO-Family tima. Rad na ozbiljnim projektima, jasni uslovi, profesionalno okruženje i dugoročna saradnja.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,14 +26,15 @@ body{
   font-family:Inter,system-ui,sans-serif;
   background:var(--light);
   color:#0f172a;
+  line-height:1.7;
 }
 
-/* HEADER */
+/* ================= HEADER & NAV ================= */
 header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(2,6,23,.92);
+  background:rgba(2,6,23,.95);
   backdrop-filter:blur(10px);
 }
 
@@ -42,8 +43,8 @@ header{
   margin:auto;
   padding:18px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
 .logo{
@@ -53,7 +54,6 @@ header{
   text-decoration:none;
 }
 
-/* NAV */
 .nav{
   display:flex;
   gap:28px;
@@ -65,14 +65,12 @@ header{
   font-weight:500;
 }
 
+.nav a:hover,
 .nav a[aria-current="page"]{
   color:#fff;
   font-weight:700;
 }
 
-.nav a:hover{color:#fff}
-
-/* HAMBURGER */
 .hamburger{
   display:none;
   background:none;
@@ -89,9 +87,7 @@ header{
   border-radius:3px;
 }
 
-/* MOBILE */
-@media (max-width: 900px){
-
+@media (max-width:900px){
   .nav{
     position:absolute;
     top:72px;
@@ -102,31 +98,83 @@ header{
     padding:30px;
     display:none;
   }
-
-  .nav.open{
-    display:flex;
-  }
-
-  .hamburger{
-    display:block;
-  }
+  .nav.open{display:flex}
+  .hamburger{display:block}
 }
 
-/* CONTENT */
-main{
-  max-width:900px;
+/* ================= SECTIONS ================= */
+.section{
+  max-width:1180px;
   margin:auto;
-  padding:100px 20px;
+  padding:90px 20px;
 }
+
+.section.dark{
+  background:#020617;
+  color:#fff;
+}
+
+.section.dark p{color:#cbd5f5}
 
 h1{
-  font-size:clamp(2.2rem,4vw,3rem);
+  font-size:clamp(2.5rem,4vw,3.4rem);
   margin-bottom:20px;
 }
 
-p{
-  color:var(--gray);
-  line-height:1.7;
+h2{
+  font-size:2.2rem;
+  margin-bottom:20px;
+}
+
+p{color:var(--gray)}
+
+.hero{
+  text-align:center;
+  background:radial-gradient(circle at top,#1e3a8a,#020617);
+  color:#fff;
+}
+
+.hero p{color:#cbd5f5}
+
+.hero .actions{
+  margin-top:35px;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:var(--radius);
+  text-decoration:none;
+  font-weight:600;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-secondary{
+  border:2px solid var(--primary);
+  color:#fff;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:var(--radius);
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.section.dark .card{
+  background:#020617;
+  border:1px solid #1e293b;
 }
 
 /* FOOTER */
@@ -134,7 +182,7 @@ footer{
   background:#020617;
   color:#cbd5f5;
   text-align:center;
-  padding:40px 20px;
+  padding:50px 20px;
   font-size:.9rem;
 }
 </style>
@@ -146,7 +194,6 @@ footer{
   <div class="header-inner">
     <a href="index.html" class="logo">YUGO-Family</a>
 
-    <!-- MAIN MENU -->
     <nav id="mainMenu" class="nav" aria-label="glavna navigacija">
       <a href="index.html">Početna</a>
       <a href="cjenovnik.html">Cijene</a>
@@ -156,26 +203,78 @@ footer{
       <a href="kontakt.html">Kontakt</a>
     </nav>
 
-    <!-- HAMBURGER -->
     <button id="menuToggle"
-            class="hamburger"
-            aria-label="Otvori meni"
-            aria-controls="mainMenu"
-            aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      class="hamburger"
+      aria-label="Otvori meni"
+      aria-controls="mainMenu"
+      aria-expanded="false">
+      <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<!-- HERO -->
+<section class="section hero">
   <h1>Postani dio YUGO-Family tima</h1>
   <p>
-    Tražimo ozbiljne, odgovorne i motivisane ljude koji žele da rastu zajedno sa nama.
-    Ako voliš profesionalan rad, jasna pravila i dugoročnu saradnju – na pravom si mjestu.
+    Gradimo ozbiljne projekte i tražimo ozbiljne ljude.  
+    Ako želiš stabilnost, rast i profesionalan rad — ovdje počinješ.
   </p>
-</main>
+
+  <div class="actions">
+    <a href="#prijava" class="btn btn-primary">Pošalji prijavu</a>
+    <a href="#pozicije" class="btn btn-secondary">Otvorene pozicije</a>
+  </div>
+</section>
+
+<!-- ABOUT TEAM -->
+<section class="section">
+  <h2>Ko smo mi?</h2>
+  <p>
+    YUGO-Family je digitalni tim fokusiran na kvalitet, brzinu i dugoročnu saradnju.
+    Ne tražimo kvantitet, nego ljude koji znaju šta rade i žele da napreduju.
+  </p>
+</section>
+
+<!-- VALUES -->
+<section class="section dark">
+  <h2>Naše vrijednosti</h2>
+  <div class="grid">
+    <div class="card">✅ Profesionalizam bez kompromisa</div>
+    <div class="card">✅ Jasni dogovori i pošten odnos</div>
+    <div class="card">✅ Dugoročna saradnja</div>
+    <div class="card">✅ Fokus na kvalitet, ne brzinu</div>
+  </div>
+</section>
+
+<!-- POSITIONS -->
+<section id="pozicije" class="section">
+  <h2>Otvorene pozicije</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Frontend Developer</h3>
+      <p>HTML, CSS, JS, responsive dizajn.</p>
+    </div>
+    <div class="card">
+      <h3>Backend Developer</h3>
+      <p>Node.js, API, baze podataka.</p>
+    </div>
+    <div class="card">
+      <h3>UI/UX Dizajner</h3>
+      <p>Moderni interfejsi i user experience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section id="prijava" class="section dark">
+  <h2>Kako se prijaviti?</h2>
+  <p>
+    Pošalji kratak opis sebe, iskustvo i linkove na projekte.
+    Ako odgovaraš onome što tražimo — javljamo se brzo.
+  </p>
+  <a href="kontakt.html" class="btn btn-primary">Kontaktiraj nas</a>
+</section>
 
 <footer>
   © 2026 YUGO-Family. Sva prava zadržana.
@@ -186,8 +285,8 @@ const toggle = document.getElementById('menuToggle');
 const menu = document.getElementById('mainMenu');
 
 toggle.addEventListener('click', () => {
-  const opened = menu.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', opened);
+  const open = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open);
 });
 </script>
 

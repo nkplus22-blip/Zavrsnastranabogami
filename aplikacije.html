@@ -1,146 +1,405 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aplikacije za korištenje - YUGO-Family TV</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#03050d" />
+
+  <title>Podržane Aplikacije | YuGo Family TV</title>
+  <meta name="description" content="Pregled svih podržanih IPTV aplikacija za Smart TV, Android, iOS i Mag uređaje. Preuzmite našu zvaničnu aplikaciju za najbolji doživljaj." />
+  <meta name="author" content="YuGo Family TV" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Podržane IPTV Aplikacije | YuGo Family TV" />
+  <meta property="og:description" content="Gledajte YuGo Family TV na bilo kojoj aplikaciji. Pametni televizori, telefoni, tableti - instalacija u par minuta." />
+  <meta property="og:locale" content="bs_BA" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <style>
-    /* Dodatni stil samo za aplikacije */
-    .container { max-width:1100px; margin:40px auto; padding:0 20px; position: relative; z-index:1; }
-    h2 { text-align:center; color:#fff; margin-bottom:20px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
-    .card { background: rgba(0,64,128,0.8); color:#fff; border-radius:10px; padding:20px; text-align:center; transition:.3s; }
-    .card:hover { transform:translateY(-5px); background: rgba(0,64,128,0.95); }
-    .card h3 { margin-top:0; color:#ffcc00; }
-    .highlight { background: rgba(0,64,128,0.9); color:#fff; border-radius:10px; padding:30px 20px; text-align:center; margin:40px 0; }
-    .highlight a.btn { display:inline-block; margin-top:15px; padding:12px 20px; background:#ffcc00; color:#0056a6; text-decoration:none; border-radius:6px; font-weight:bold; }
-    .highlight a.btn:hover { background:#e6b800; }
+    :root {
+      --bg: #03050d;
+      --bg2: #070c24;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel2: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.09);
+      --border2: rgba(255, 255, 255, 0.15);
+      --text: #f1f7fc;
+      --muted: rgba(210, 230, 255, 0.65);
+
+      --neon: #2ac0ff;
+      --accent: #4a6bff;
+      --gold: #ffcc00;
+
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      --radius: 16px;
+      --radius2: 26px;
+      --max: 1240px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(1000px 700px at 10% 20%, rgba(74, 107, 255, 0.12), transparent 60%),
+        radial-gradient(1000px 700px at 90% 80%, rgba(42, 192, 255, 0.1), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    
+    /* Dynamic Tech Canvas Background */
+    canvas#tech-bg { position: fixed; inset: 0; pointer-events: none; opacity: 0.25; z-index: 0; mix-blend-mode: screen; }
+
+    /* Topbar / Navigacija */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3, 5, 13, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 40px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .brand-meta { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 15px; }
+    .brand-meta small { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--text); font-weight: 700; font-size: 13px; transition: all 0.25s var(--ease);
+    }
+    .pill:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--border2); }
+    .pill.primary {
+      border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
+      color: #000c14; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25);
+    }
+
+    .menu-toggle {
+      display: none; width: 44px; height: 44px;
+      place-items: center; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--neon); cursor: pointer; font-size: 20px;
+    }
+    @media (max-width: 820px) { .nav-inline { display: none; } .menu-toggle { display: grid; } }
+
+    /* Full Menu Overlay (15 Strana) */
+    .overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(3, 5, 13, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .overlay-panel {
+      width: min(840px, 100%); max-height: 90vh; overflow-y: auto;
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
+    }
+    .overlay-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .closebtn {
+      width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--panel); color: var(--text); cursor: pointer; display: grid; place-items: center;
+    }
+    .overlay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; padding: 24px; }
+    .overlay a {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border);
+      background: var(--panel); font-weight: 700; font-size: 14px; transition: all 0.2s;
+    }
+    .overlay a:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border2); }
+    .overlay a span { font-size: 11px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; }
+
+    /* Header Sekcije */
+    .page-title {
+      text-align: center; margin: 50px auto 40px; max-width: 700px;
+    }
+    .page-title h1 { font-size: clamp(32px, 5vw, 46px); font-weight: 950; letter-spacing: -1.5px; margin-bottom: 12px; }
+    .page-title h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .page-title p { color: var(--muted); font-size: 16px; font-weight: 500; line-height: 1.5; }
+
+    /* Mreža Aplikacija */
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 50px;
+    }
+    .card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 22px;
+      text-align: center; transition: all 0.25s var(--ease); display: flex; flex-direction: column; justify-content: center; min-height: 100px;
+    }
+    .card:hover {
+      transform: translateY(-3px); background: var(--panel2); border-color: var(--border2);
+      box-shadow: 0 12px 30px rgba(42, 192, 255, 0.08);
+    }
+    .card h3 { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.2px; }
+    .card::before { content: '📲'; font-size: 20px; margin-bottom: 8px; display: block; opacity: 0.8; }
+
+    /* Premium Highlight Baner za Preuzimanje */
+    .highlight {
+      background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(42, 192, 255, 0.05) 100%);
+      border: 1px solid var(--border2); border-radius: var(--radius2); padding: 44px 32px;
+      text-align: center; margin: 60px 0; position: relative; overflow: hidden; box-shadow: var(--shadow);
+    }
+    .highlight::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(42, 192, 255, 0.2), transparent 60%);
+      pointer-events: none;
+    }
+    .highlight h2 { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .highlight h2 span { color: var(--gold); }
+    .highlight p { color: var(--muted); font-size: 15px; font-weight: 500; max-width: 600px; margin: 0 auto 24px; line-height: 1.6; }
+    
+    .highlight .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px;
+      background: linear-gradient(90deg, var(--gold), #ffa200); color: #03050d;
+      text-decoration: none; border-radius: 999px; font-weight: 900; font-size: 15px;
+      box-shadow: 0 4px 25px rgba(255, 204, 0, 0.25); transition: all 0.25s var(--ease);
+    }
+    .highlight .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(255, 204, 0, 0.4); }
+
+    /* Korisnička Napomena */
+    .app-notice {
+      background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; font-size: 13.5px; color: var(--muted); text-align: center; margin-bottom: 60px; line-height: 1.5;
+    }
+    .app-notice strong { color: #fff; }
+
+    /* Footer */
+    footer { padding: 48px 0 32px; border-top: 1px solid var(--border); background: #01030a; font-size: 14px; position: relative; z-index: 1; }
+    .foot-container { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .foot-info strong { font-size: 16px; font-weight: 900; color: #fff; }
+    .foot-info p { color: var(--muted); font-weight: 500; margin-top: 4px; }
+    .foot-info a { color: var(--neon); font-weight: 700; }
+    .foot-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .foot-links a { font-size: 12px; font-weight: 700; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; background: var(--panel); transition: all 0.2s; }
+    .foot-links a:hover { background: var(--panel2); border-color: var(--border2); }
+    .copy { margin-top: 32px; color: rgba(210, 230, 255, 0.4); font-weight: 500; font-size: 12px; }
   </style>
 </head>
+
 <body>
 
-  <!-- Canvas za tech pozadinu -->
-  <canvas id="tech-bg"></canvas>
+  <!-- Tech Animated Canvas -->
+  <canvas id="tech-bg" aria-hidden="true"></canvas>
 
-  <header>
-    <h1>Aplikacije za korištenje</h1>
-    <p>Podržane aplikacije za YUGO-Family TV</p>
-    <button class="menu-toggle" onclick="openNav()">☰</button>
-  </header>
+  <!-- Navigacijska Traka -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="YuGo Family TV">
+        <img src="logoyf.png" alt="YuGo Family TV" onerror="this.style.display='none'" />
+        <div class="brand-meta">
+          <strong>YuGo Family TV</strong>
+          <small>Premium IPTV Platforma</small>
+        </div>
+      </a>
 
-  <!-- Overlay meni -->
-  <div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cijene i akcije TV Programa</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="tim.html">Postani dio tima</a>
-      <a href="webstranica.html">Poruči WEB STRANICU </a>
-      <a href="top15.html">Top 30</a>
+      <nav class="nav-inline" aria-label="Glavna navigacija">
+        <a class="pill" href="cjenovnik.html">💰 Cjenovnik</a>
+        <a class="pill" href="order.html">🛒 Naruči</a>
+        <a class="pill" href="aplikacije.html">📲 Aplikacije</a>
+        <a class="pill primary" href="kontakt.html">📞 Podrška</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
+    </div>
   </div>
 
-  <section class="content">
-    <div class="container">
-      <h2>Podržane aplikacije</h2>
-      <div class="grid">
-        <div class="card"><h3>Smart One IPTV</h3></div>
-        <div class="card"><h3>Smart IPTV</h3></div>
-        <div class="card"><h3>SSIPTV</h3></div>
-        <div class="card"><h3>Net IPTV</h3></div>
-        <div class="card"><h3>GSE Smart IPTV</h3></div>
-        <div class="card"><h3>IPTV Smarters</h3></div>
-        <div class="card"><h3>XCIPTV Player</h3></div>
-        <div class="card"><h3>Perfect Player</h3></div>
-        <div class="card"><h3>Lazy IPTV</h3></div>
-        <div class="card"><h3>IPTV Extreme</h3></div>
-        <div class="card"><h3>OTT Navigator</h3></div>
-        <div class="card"><h3>IPTV Pro</h3></div>
-        <div class="card"><h3>IPTV Core</h3></div>
-        <div class="card"><h3>IPTV+ Player</h3></div>
-        <div class="card"><h3>XCIPTV Pro</h3></div>
-        <div class="card"><h3>iMPlayer</h3></div>
-        <div class="card"><h3>ProgTV</h3></div>
-        <div class="card"><h3>OTTPlayer</h3></div>
+  <!-- Unificirani Meni sa 15 Strana -->
+  <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Glavni meni">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <strong>Navigacija sistema</strong>
+        <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
       </div>
+      <div class="overlay-grid">
+        <a href="index.html">Početna <span>Home</span></a>
+        <a href="onama.html">O nama <span>About</span></a>
+        <a href="kako-da-gledas.html">Kako da gledaš <span>Guide</span></a>
+        <a href="cjenovnik.html">Cijene i paketi <span>Pricing</span></a>
+        <a href="order.html">Narudžba / Checkout <span>Order</span></a>
+        <a href="business-iptv.html">Business / Hotel IPTV <span>B2B</span></a>
+        <a href="aplikacije.html">Aplikacije <span>Apps</span></a>
+        <a href="komentari.html">Komentari <span>Reviews</span></a>
+        <a href="placanje.html">Plaćanje <span>Pay</span></a>
+        <a href="status.html">Status sistema <span>Status</span></a>
+        <a href="tim.html">Postani dio tima <span>Team</span></a>
+        <a href="webstranica.html">Poruči WEB-PAGE <span>Web</span></a>
+        <a href="faq.html">FAQ <span>Help</span></a>
+        <a href="legal.html">Legal & Compliance <span>Legal</span></a>
+        <a href="kontakt.html">Kontakt / Podrška <span>Support</span></a>
+      </div>
+    </div>
+  </div>
 
-      <div class="highlight">
-  <h2>Preuzmite našu aplikaciju</h2>
-  <p>Za lakši pristup YUGO-Family TV-u na vašem Android uređaju.</p>
-  <a class="btn" href="https://www.google.com/amp/s/apkpure.com/geniuses-player-pro/com.geniusesplayerpro.geniusesplayerproiptvbox/amp" target="_blank">
-    Preuzmi aplikaciju
-  </a>
-      </div>
+  <!-- Sadržaj -->
+  <section class="wrap">
+    <div class="page-title">
+      <h1>Podržane <span>Aplikacije</span></h1>
+      <p>Naša lista podržava sve vodeće IPTV playere na tržištu. Izaberite aplikaciju koja najbolje odgovara vašem Smart TV-u, telefonu ili TV Box uređaju.</p>
+    </div>
+
+    <!-- Mreža Aplikacija -->
+    <div class="grid">
+      <div class="card"><h3>Smart One IPTV</h3></div>
+      <div class="card"><h3>Smart IPTV</h3></div>
+      <div class="card"><h3>SSIPTV</h3></div>
+      <div class="card"><h3>Net IPTV</h3></div>
+      <div class="card"><h3>GSE Smart IPTV</h3></div>
+      <div class="card"><h3>IPTV Smarters</h3></div>
+      <div class="card"><h3>XCIPTV Player</h3></div>
+      <div class="card"><h3>Perfect Player</h3></div>
+      <div class="card"><h3>Lazy IPTV</h3></div>
+      <div class="card"><h3>IPTV Extreme</h3></div>
+      <div class="card"><h3>OTT Navigator</h3></div>
+      <div class="card"><h3>IPTV Pro</h3></div>
+      <div class="card"><h3>IPTV Core</h3></div>
+      <div class="card"><h3>IPTV+ Player</h3></div>
+      <div class="card"><h3>XCIPTV Pro</h3></div>
+      <div class="card"><h3>iMPlayer</h3></div>
+      <div class="card"><h3>ProgTV</h3></div>
+      <div class="card"><h3>OTTPlayer</h3></div>
+    </div>
+
+    <!-- Preuzimanje Oficijelne Aplikacije -->
+    <div class="highlight">
+      <h2>Preuzmite našu <span>Zvaničnu Aplikaciju</span></h2>
+      <p>Za maksimalnu stabilnost, automatsko ažuriranje kanala i najjednostavniji pristup YuGo Family TV-u na vašem Android TV, Box ili mobilnom uređaju.</p>
+      <a class="btn" href="https://www.google.com/amp/s/apkpure.com/geniuses-player-pro/com.geniusesplayerpro.geniusesplayerproiptvbox/amp" target="_blank" rel="noopener">
+        📥 Preuzmi APK direktno
+      </a>
+    </div>
+
+    <div class="app-notice">
+      💡 <strong>Trebate pomoć oko podešavanja?</strong> Naša tehnička podrška će vam besplatno asistirati pri instalaciji bilo koje od navedenih aplikacija i unijeti vaš testni ili zakupljeni nalog u roku od par minuta.
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 YUGO-Family TV | Kontakt: 
-      <a href="https://wa.me/4915755749502">WhatsApp</a> | 
-      Email: nkplus22@gmail.com
-    </p>
+    <div class="wrap">
+      <div class="foot-container">
+        <div class="foot-info">
+          <strong>YuGo Family TV</strong>
+          <p>Podrška i prodaja aktivna 24/7 putem <a href="https://wa.me/4915755749502">WhatsApp-a</a></p>
+          <p style="font-size: 13px; opacity:0.7;">Email: nkplus22@gmail.com</p>
+        </div>
+        <div class="foot-links" aria-label="Brzi linkovi">
+          <a href="legal.html">Legal</a>
+          <a href="faq.html">FAQ</a>
+          <a href="status.html">Status sistema</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div class="copy">
+        © <span id="year">2026</span> YuGo Family TV. Sva prava zadržana. Sve navedene aplikacije su vlasništvo njihovih autora.
+      </div>
+    </div>
   </footer>
 
-  <!-- JS -->
+  <!-- JavaScript Kod -->
   <script>
-    function openNav(){ document.getElementById("myNav").style.width="100%"; }
-    function closeNav(){ document.getElementById("myNav").style.width="0%"; }
+    /* ===== Overlay Navigacioni Meni ===== */
+    const overlayNav = document.getElementById("overlayNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeNavBtn = document.getElementById("closeNavBtn");
 
-    // Canvas particles
+    function openNav() { overlayNav.classList.add("open"); closeNavBtn.focus(); }
+    function closeNav() { overlayNav.classList.remove("open"); menuBtn.focus(); }
+
+    menuBtn.addEventListener("click", openNav);
+    closeNavBtn.addEventListener("click", closeNav);
+    overlayNav.addEventListener("click", (e) => { if(e.target === overlayNav) closeNav(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape" && overlayNav.classList.contains("open")) closeNav(); });
+
+    /* ===== Unaprijeđeni Tech Canvas Sa Česticama (Particles & Lines) ===== */
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+    let width, height, particles = [];
 
-    window.addEventListener('resize', () => {
+    function resize() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-    });
-
-    const particleCount = 80;
-    const particles = [];
-    const icons = [];
-    const iconUrls = [
-      'https://cdn-icons-png.flaticon.com/32/1087/1087863.png',
-      'https://cdn-icons-png.flaticon.com/32/4140/4140048.png',
-      'https://cdn-icons-png.flaticon.com/32/715/715676.png'
-    ];
-    const iconImgs = iconUrls.map(src => { const i = new Image(); i.src=src; return i; });
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
     class Particle {
-      constructor(){ this.x=Math.random()*width; this.y=Math.random()*height; this.size=Math.random()*2+1; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; }
-      update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; }
-      draw(){ ctx.fillStyle='rgba(0,150,255,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > width) this.x = 0;
+        if (this.x < 0) this.x = width;
+        if (this.y > height) this.y = 0;
+        if (this.y < 0) this.y = height;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(42, 192, 255, 0.4)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
-    class Icon {
-      constructor(img){ this.img=img; this.x=Math.random()*width; this.y=Math.random()*height; this.size=32+Math.random()*16; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; }
-      update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; }
-      draw(){ ctx.drawImage(this.img,this.x,this.y,this.size,this.size); }
+    // Generiši čestice na osnovu dimenzije ekrana
+    const count = Math.min(60, Math.floor((width * height) / 35000));
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
     }
 
-    for(let i=0;i<particleCount;i++) particles.push(new Particle());
-    for(let i=0;i<20;i++) icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
-
-    function animate(){
-      ctx.clearRect(0,0,width,height);
-      particles.forEach(p=>{p.update();p.draw();});
-      for(let i=0;i<particles.length;i++){
-        for(let j=i+1;j<particles.length;j++){
-          let dx=particles[i].x-particles[j].x;
-          let dy=particles[i].y-particles[j].y;
-          let dist=Math.sqrt(dx*dx+dy*dy);
-          if(dist<100){ ctx.strokeStyle='rgba(0,150,255,0.1)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      
+      // Ažuriraj i crtaj tačke
+      particles.forEach(p => { p.update(); p.draw(); });
+      
+      // Povezuj tačke linijama ako su blizu
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.strokeStyle = `rgba(42, 192, 255, ${0.08 * (1 - dist/110)})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
         }
       }
-      icons.forEach(ic=>{ic.update();ic.draw();});
       requestAnimationFrame(animate);
     }
     animate();
+
+    /* ===== Postavljanje Tekuće Godine ===== */
+    document.getElementById("year").innerText = new Date().getFullYear();
   </script>
 
 </body>

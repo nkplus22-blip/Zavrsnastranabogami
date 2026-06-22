@@ -25,6 +25,7 @@
       --bg2: #070c24;
       --panel: rgba(255, 255, 255, 0.04);
       --panel2: rgba(255, 255, 255, 0.08);
+      --panel-solid: #090e29; /* Čvrsta podloga za sprečavanje providnosti na mobilnim uređajima */
       --border: rgba(255, 255, 255, 0.09);
       --border2: rgba(255, 255, 255, 0.15);
       --text: #f1f7fc;
@@ -141,7 +142,7 @@
     .overlay a span { font-size: 11px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; }
 
     /* Layout Sekcija */
-    .page-title { text-align: center; margin: 50px auto 35px; max-width: 700px; }
+    .page-title { text-align: center; margin: 40px auto 35px; max-width: 700px; }
     .page-title h1 { font-size: clamp(32px, 5vw, 46px); font-weight: 950; letter-spacing: -1.5px; margin-bottom: 12px; }
     .page-title h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .page-title p { color: var(--muted); font-size: 16px; font-weight: 500; }
@@ -149,7 +150,7 @@
     .live-status {
       display: inline-flex; align-items: center; gap: 8px; background: rgba(42, 192, 255, 0.08);
       border: 1px solid rgba(42, 192, 255, 0.15); padding: 6px 14px; border-radius: 999px;
-      font-size: 13px; font-weight: 700; color: var(--neon); margin-bottom: 30px;
+      font-size: 13px; font-weight: 700; color: var(--neon); margin-bottom: 20px;
     }
     .live-status::before {
       content: ''; width: 8px; height: 8px; background: #00ff66; border-radius: 50%;
@@ -161,33 +162,32 @@
     .comments-layout {
       display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; margin-bottom: 60px;
     }
-    @media (max-width: 900px) { .comments-layout { grid-template-columns: 1fr; gap: 50px; } }
 
-    /* Forma za ostavljanje komentara */
+    /* Forma za ostavljanje komentara (Desktop) */
     .form-panel {
-      position: sticky; top: 100px; height: fit-content;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--border); border-radius: var(--radius2); padding: 30px;
+      position: sticky; top: 110px; height: fit-content; z-index: 10;
+      background: var(--panel-solid);
+      border: 1px solid var(--border2); border-radius: var(--radius2); padding: 30px;
       box-shadow: var(--shadow);
     }
     .form-panel h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 20px; }
     
     .input-group { position: relative; margin-bottom: 16px; }
     .input-group input, .input-group textarea {
-      width: 100%; padding: 14px 16px; background: rgba(0, 0, 0, 0.25);
+      width: 100%; padding: 14px 16px; background: rgba(0, 0, 0, 0.4);
       border: 1px solid var(--border); border-radius: 12px; color: #fff;
       font-family: inherit; font-size: 14px; font-weight: 500; outline: none;
       transition: all 0.25s;
     }
     .input-group input:focus, .input-group textarea:focus {
-      border-color: var(--neon); background: rgba(0, 0, 0, 0.4);
+      border-color: var(--neon); background: rgba(0, 0, 0, 0.6);
       box-shadow: 0 0 15px rgba(42, 192, 255, 0.15);
     }
     .input-group textarea { height: 130px; resize: none; }
 
     .btn-glow {
       width: 100%; padding: 14px; background: linear-gradient(90deg, var(--neon), var(--accent));
-      color: #03050d; border: none; border-radius: 12px; font-weight: 800; font-size: 15px;
+      color: #000c14; border: none; border-radius: 12px; font-weight: 800; font-size: 15px;
       cursor: pointer; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25); transition: all 0.25s var(--ease);
     }
     .btn-glow:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(42, 192, 255, 0.4); }
@@ -197,13 +197,13 @@
       color: #ff7575; font-size: 13px; font-weight: 600; padding: 12px; border-radius: 10px; margin-top: 12px; text-align: center;
     }
 
-    /* Lista Komentara */
-    .comments-feed { display: flex; flex-direction: column; gap: 14px; max-height: 80vh; overflow-y: auto; padding-right: 8px; }
+    /* Lista Komentara (Desktop unutrašnji scroll) */
+    .comments-feed { display: flex; flex-direction: column; gap: 14px; max-height: 85vh; overflow-y: auto; padding-right: 8px; }
     .comments-feed::-webkit-scrollbar { width: 4px; }
     .comments-feed::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
 
     .comment-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
       border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
       display: flex; gap: 16px; align-items: flex-start;
       animation: fadeIn .4s var(--ease) both; transition: all 0.2s;
@@ -217,6 +217,13 @@
     .comment-author { font-weight: 700; font-size: 15px; color: #fff; }
     .comment-geo { font-size: 12px; color: var(--neon); background: rgba(42, 192, 255, 0.08); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
     .comment-text { color: var(--muted); font-size: 14px; line-height: 1.5; font-weight: 400; }
+
+    /* ===== FIKS ZA MOBILNE UREĐAJE (Uklanjanje preklapanja sa slike image.png) ===== */
+    @media (max-width: 900px) {
+      .comments-layout { grid-template-columns: 1fr; gap: 32px; }
+      .form-panel { position: static; top: 0; height: auto; padding: 22px; } /* Resetuje sticky ponašanje */
+      .comments-feed { max-height: none; overflow-y: visible; padding-right: 0; } /* Otvara prirodni scroll cijele stranice */
+    }
 
     /* Sekcija sa bedževima */
     .trusted-section {
@@ -411,18 +418,9 @@
 
     /* ===== Multi-Language Riječnik ===== */
     const translations = {
-      bs: {
-        commentsTitle: "Utisci naših korisnika",
-        leaveComment: "Ostavi komentar"
-      },
-      en: {
-        commentsTitle: "Customer Reviews",
-        leaveComment: "Leave a Review"
-      },
-      de: {
-        commentsTitle: "Kundenbewertungen",
-        leaveComment: "Bewertung schreiben"
-      }
+      bs: { commentsTitle: "Utisci naših korisnika", leaveComment: "Ostavi komentar" },
+      en: { commentsTitle: "Customer Reviews", leaveComment: "Leave a Review" },
+      de: { commentsTitle: "Kundenbewertungen", leaveComment: "Bewertung schreiben" }
     };
     function changeLanguage() {
       let lang = document.getElementById("languageSelect").value;
@@ -448,7 +446,6 @@
     ];
 
     function createCommentHTML(name, location, msg) {
-      // Bezbjedno eskapovanje HTML entiteta protiv XSS napada
       const secureName = name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       const secureLocation = location.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       const secureMsg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -472,13 +469,11 @@
       const box = document.getElementById("commentsArea");
       let outputHTML = "";
 
-      // 1. Prvo povuci prave komentare koje je unio korisnik iz LocalStorage
       const saved = JSON.parse(localStorage.getItem("user_comments")) || [];
       saved.forEach(c => {
         outputHTML += createCommentHTML(c.name, c.location, c.message);
       });
 
-      // 2. Generiši pre-renderovane nasumične sistemske komentare
       let usedMessages = new Set();
       let count = 0;
       while(count < 8 && count < fakeMessages.length) {
@@ -492,11 +487,9 @@
           count++;
         }
       }
-
       box.innerHTML = outputHTML;
     }
 
-    /* Anti-Spam i Slanje Forme */
     let lastSubmitTime = 0;
     function addComment(e) {
       e.preventDefault();
@@ -515,12 +508,10 @@
 
       if(!name || !location || !message) return;
 
-      // Spasi u lokalnu memoriju pretraživača
       const saved = JSON.parse(localStorage.getItem("user_comments")) || [];
       saved.unshift({ name, location, message });
       localStorage.setItem("user_comments", JSON.stringify(saved));
 
-      // Odmah osvježi feed bez gubitka podataka
       initComments();
       document.getElementById("commentForm").reset();
     }
@@ -598,7 +589,6 @@
     };
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-    /* Pokretanje sistema pri učitavanju */
     window.onload = function() {
       initComments();
       document.getElementById("year").innerText = new Date().getFullYear();

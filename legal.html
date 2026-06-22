@@ -1,50 +1,82 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Legal & Compliance | YuGo Family TV</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legal & Compliance | YuGo Family TV</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#03050d;
-  --neon:#00c8ff;
-  --muted:#94a3b8;
-  --panel:rgba(255,255,255,0.03);
-  --border:rgba(255,255,255,0.1);
-}
+  <style>
+    :root {
+      --bg: #03050d;
+      --neon: #00c8ff;
+      --muted: #94a3b8;
+      --panel: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.09);
+    }
 
-body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  background:var(--bg);
-  color:#fff;
-  line-height:1.7;
-}
+    body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; line-height: 1.7; }
+    .wrap { max-width: 800px; margin: auto; padding: 60px 20px; }
 
-.wrap{max-width:800px;margin:auto;padding:60px 20px;}
+    /* Navigacija */
+    header { background: rgba(3,5,13,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 20px 0; position: sticky; top: 0; z-index: 1000; }
+    .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 900; font-size: 20px; color: var(--neon); }
+    .menu-toggle { background: var(--panel); border: 1px solid var(--border); color: var(--neon); padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; }
 
-h1{color:var(--neon);font-size:36px;margin-bottom:10px;}
-.subtitle{color:var(--muted);margin-bottom:40px;font-size:16px;}
+    /* Overlay Meni */
+    .overlay { position: fixed; inset: 0; background: rgba(3,5,13,0.98); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .overlay.open { display: flex; }
+    .overlay-panel { width: 100%; max-width: 800px; background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 20px; }
+    .closebtn { color: #fff; font-size: 30px; cursor: pointer; float: right; }
+    .overlay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 30px; }
+    .overlay-grid a { padding: 15px; background: rgba(255,255,255,0.03); text-align: center; border-radius: 10px; color: #fff; text-decoration: none; border: 1px solid var(--border); }
+    .overlay-grid a:hover { background: var(--neon); color: #000; }
 
-.legal-card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  padding:30px;
-  border-radius:20px;
-  margin-bottom:20px;
-}
-
-h2{color:#fff;font-size:18px;margin-top:0;}
-p{color:var(--muted);font-size:14px;margin:10px 0 0 0;}
-
-footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px;}
-</style>
+    /* Sadržaj */
+    h1 { color: var(--neon); font-size: 36px; margin-bottom: 10px; }
+    .subtitle { color: var(--muted); margin-bottom: 40px; font-size: 16px; }
+    .legal-card { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 20px; margin-bottom: 20px; }
+    h2 { color: #fff; font-size: 18px; margin-top: 0; }
+    p { color: var(--muted); font-size: 14px; margin: 10px 0 0 0; }
+    footer { text-align: center; margin-top: 60px; color: var(--muted); font-size: 13px; }
+  </style>
 </head>
 
 <body>
+
+<header>
+  <div class="wrap nav-flex">
+    <div class="logo">YUGO-Family TV</div>
+    <button class="menu-toggle" onclick="document.getElementById('overlayNav').classList.add('open')">☰ MENU</button>
+  </div>
+</header>
+
+<!-- Overlay Meni -->
+<div class="overlay" id="overlayNav">
+  <div class="overlay-panel">
+    <span class="closebtn" onclick="document.getElementById('overlayNav').classList.remove('open')">×</span>
+    <div class="overlay-grid">
+      <a href="index.html">Početna</a>
+      <a href="onama.html">O nama</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="cjenovnik.html">Cjenovnik</a>
+      <a href="order.html">Narudžba</a>
+      <a href="business-iptv.html">Business IPTV</a>
+      <a href="aplikacije.html">Aplikacije</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="status.html">Status sistema</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="webstranica.html">Poruči WEB-PAGE</a>
+      <a href="faq.html">FAQ</a>
+      <a href="legal.html">Legal & Compliance</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
   <h1>Legal & Compliance</h1>
   <div class="subtitle">Informacije o uslovima korištenja i odgovornosti.</div>
@@ -66,5 +98,6 @@ footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px;}
 
   <footer>© 2026 YuGo Family TV • All Rights Reserved</footer>
 </div>
+
 </body>
 </html>

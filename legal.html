@@ -5,42 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Legal & Compliance | YuGo Family TV</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg:#03050d;
+  --neon:#00c8ff;
+  --muted:#94a3b8;
+  --panel:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.1);
+}
+
 body{
   margin:0;
-  font-family:Inter;
-  background:#050714;
-  color:#e6f7ff;
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:#fff;
+  line-height:1.7;
 }
-.wrap{max-width:900px;margin:auto;padding:40px 18px}
-h1{color:#2ac0ff}
-p{font-size:14px;line-height:1.7;color:#cbdcff}
-footer{text-align:center;margin-top:40px;color:#aaa}
+
+.wrap{max-width:800px;margin:auto;padding:60px 20px;}
+
+h1{color:var(--neon);font-size:36px;margin-bottom:10px;}
+.subtitle{color:var(--muted);margin-bottom:40px;font-size:16px;}
+
+.legal-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:30px;
+  border-radius:20px;
+  margin-bottom:20px;
+}
+
+h2{color:#fff;font-size:18px;margin-top:0;}
+p{color:var(--muted);font-size:14px;margin:10px 0 0 0;}
+
+footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px;}
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<h1>Legal & Compliance</h1>
+  <h1>Legal & Compliance</h1>
+  <div class="subtitle">Informacije o uslovima korištenja i odgovornosti.</div>
 
-<p>
-YuGo Family TV ne hostuje, ne pohranjuje i ne distribuira bilo kakav
-audiovizuelni sadržaj. Servis omogućava pristup privatnoj IPTV infrastrukturi.
-</p>
+  <div class="legal-card">
+    <h2>Priroda usluge</h2>
+    <p>YuGo Family TV funkcioniše isključivo kao tehnički servis za streaming infrastrukturu. Napominjemo da ne hostujemo, ne pohranjujemo i ne distribuiramo bilo kakav zaštićeni audiovizuelni sadržaj.</p>
+  </div>
 
-<p>
-Dostupnost kanala i sadržaja zavisi od regionalnih zakona i propisa.
-Korisnici su odgovorni za poštivanje lokalnog zakonodavstva.
-</p>
+  <div class="legal-card">
+    <h2>Regionalna usklađenost</h2>
+    <p>Dostupnost određenih kanala i sadržaja podložna je varijacijama u zavisnosti od regionalnih zakona i propisa. Odgovornost svakog korisnika je da osigura da pristup sadržaju bude u potpunosti u skladu sa zakonima države u kojoj se nalazi.</p>
+  </div>
 
-<p>
-YuGo Family TV djeluje kao tehnički servis za streaming infrastrukturu
-i ne preuzima odgovornost za korištenje od strane krajnjih korisnika.
-</p>
+  <div class="legal-card">
+    <h2>Odgovornost</h2>
+    <p>Kao tehnička platforma, YuGo Family TV ne preuzima pravnu odgovornost za način na koji krajnji korisnici koriste naše servise. Korištenjem naše infrastrukture, potvrđujete da ste upoznati sa uslovima korištenja.</p>
+  </div>
 
-<footer>© 2025 YuGo Family TV</footer>
+  <footer>© 2026 YuGo Family TV • All Rights Reserved</footer>
 </div>
 </body>
 </html>

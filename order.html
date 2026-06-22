@@ -1,392 +1,557 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#03050d" />
 
-<title>Narudžba IPTV | YUGO-Family TV</title>
+  <title>Narudžba IPTV | YuGo Family TV</title>
+  <meta name="description" content="Sigurna i brza narudžba premium IPTV servisa – privatni i business paketi. Aktivacija unutar 60 minuta uz 24/7 tehničku podršku." />
+  <meta name="author" content="YuGo Family TV" />
 
-<meta name="description" content="Narudžba premium IPTV servisa – privatni i business paketi. Brza aktivacija i 24/7 podrška.">
-<meta name="author" content="YUGO-Family TV">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Narudžba IPTV | YuGo Family TV" />
+  <meta property="og:description" content="Izaberite paket, unesite detalje i pokrenite svoju premium IPTV pretplatu za nekoliko minuta." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og-image.jpg" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-<style>
-:root{
-  --bg:#050714;
-  --bg2:#020a1e;
-  --neon:#2ac0ff;
-  --accent:#4a6bff;
-  --glass:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.14);
-  --muted:rgba(220,235,255,.7);
-  --ok:#22c55e;
-}
+  <style>
+    :root {
+      --bg: #03050d;
+      --bg2: #070c24;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel2: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.09);
+      --border2: rgba(255, 255, 255, 0.15);
+      --text: #f1f7fc;
+      --muted: rgba(210, 230, 255, 0.65);
 
-*{box-sizing:border-box}
+      --neon: #2ac0ff;
+      --accent: #4a6bff;
+      --mag: #a855f7;
+      --ok: #22c55e;
 
-body{
-  margin:0;
-  font-family:Inter,system-ui,Arial;
-  background:
-    radial-gradient(800px 500px at 20% 10%, rgba(74,107,255,.25), transparent 60%),
-    radial-gradient(800px 500px at 80% 30%, rgba(42,192,255,.25), transparent 60%),
-    linear-gradient(180deg,var(--bg),#020a1e);
-  color:#e6f7ff;
-}
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      --glow: 0 0 80px rgba(42, 192, 255, 0.15);
+      --radius: 20px;
+      --radius2: 26px;
+      --max: 1240px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-/* ================= HEADER ================= */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-}
-header .wrap{
-  max-width:1200px;
-  margin:auto;
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo{
-  font-weight:900;
-  letter-spacing:.6px;
-  color:var(--neon);
-}
-.menu-toggle{
-  display:none;
-  font-size:24px;
-  background:none;
-  border:none;
-  color:var(--neon);
-  cursor:pointer;
-}
-nav{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-nav a{
-  color:#e6f7ff;
-  text-decoration:none;
-  font-weight:600;
-  padding:8px 12px;
-  border-radius:10px;
-}
-nav a:hover{
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  color:#00121e;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(1000px 700px at 10% 20%, rgba(123, 0, 255, 0.15), transparent 60%),
+        radial-gradient(1000px 700px at 80% 80%, rgba(42, 192, 255, 0.1), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-@media(max-width:900px){
-  nav{
-    display:none;
-    position:fixed;
-    top:70px;
-    left:12px;
-    right:12px;
-    background:#020916;
-    flex-direction:column;
-    padding:16px;
-    border-radius:18px;
-    border:1px solid var(--border);
-    box-shadow:0 30px 80px rgba(0,0,0,.7);
-  }
-  nav.show{display:flex}
-  .menu-toggle{display:block}
-}
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; }
+    
+    /* Pozadinski efekti */
+    .bg-grid {
+      position: fixed; inset: -20%;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: rotate(3deg); opacity: 0.12; pointer-events: none;
+      mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%); z-index: -3;
+    }
+    .aurora {
+      position: fixed; inset: -40%;
+      background:
+        radial-gradient(closest-side at 15% 25%, rgba(74, 107, 255, 0.15), transparent 60%),
+        radial-gradient(closest-side at 85% 75%, rgba(42, 192, 255, 0.12), transparent 60%);
+      filter: blur(60px); opacity: 0.6; pointer-events: none; z-index: -4;
+    }
+    canvas.stars { position: fixed; inset: 0; pointer-events: none; opacity: 0.4; mix-blend-mode: screen; z-index: -2; }
 
-/* ================= MAIN ================= */
-.wrap{max-width:900px;margin:auto;padding:0 18px}
+    /* Topbar / Navigacija */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3, 5, 13, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 40px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .brand-meta { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 15px; }
+    .brand-meta small { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
 
-header + .wrap{margin-top:40px}
+    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--text); font-weight: 700; font-size: 13px; transition: all 0.25s var(--ease);
+    }
+    .pill:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--border2); }
+    .pill.primary {
+      border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
+      color: #000c14; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25);
+    }
 
-/* HERO */
-.hero{
-  text-align:center;
-  margin-bottom:30px;
-}
-.hero h1{
-  color:var(--neon);
-  font-size:36px;
-  margin-bottom:6px;
-}
-.subtitle{
-  color:var(--muted);
-  font-size:15px;
-}
+    .menu-toggle {
+      display: none; width: 44px; height: 44px;
+      place-items: center; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--neon); cursor: pointer; font-size: 20px;
+    }
+    @media (max-width: 820px) { .nav-inline { display: none; } .menu-toggle { display: grid; } }
 
-/* PROGRESS */
-.progress{
-  display:flex;
-  justify-content:space-between;
-  margin:30px 0 20px;
-  font-size:13px;
-  color:var(--muted);
-}
-.progress span.active{color:var(--neon);font-weight:800}
+    /* Overlay Meni */
+    .overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(3, 5, 13, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .overlay-panel {
+      width: min(840px, 100%); max-height: 90vh; overflow-y: auto;
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
+    }
+    .overlay-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .closebtn {
+      width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--panel); color: var(--text); cursor: pointer; display: grid; place-items: center;
+    }
+    .overlay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; padding: 24px; }
+    .overlay a {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border);
+      background: var(--panel); font-weight: 700; font-size: 14px; transition: all 0.2s;
+    }
+    .overlay a:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border2); }
+    .overlay a span { font-size: 11px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; }
 
-/* FORM BOX */
-.form-box{
-  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));
-  backdrop-filter:blur(16px);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:30px;
-  box-shadow:0 0 100px rgba(42,192,255,.35);
-}
+    /* Hero i Sekcije */
+    .main-container { max-width: 820px; margin: 40px auto 0; padding: 0 20px; }
+    .hero-center { text-align: center; margin-bottom: 32px; }
+    h1 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 950; letter-spacing: -1px; margin-bottom: 8px; }
+    h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .subtitle { color: var(--muted); font-size: 16px; font-weight: 500; }
 
-.section{margin-bottom:28px}
-.section h3{
-  color:var(--neon);
-  margin-bottom:12px;
-}
+    /* Progress Tracker Vodič */
+    .flow-steps {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border);
+      padding: 12px 20px; border-radius: 16px; margin-bottom: 32px; gap: 8px;
+    }
+    .flow-node { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+    .flow-node span { width: 20px; height: 20px; border-radius: 50%; background: var(--panel2); font-size: 10px; display: grid; place-items: center; color: #fff; }
+    .flow-node.done { color: var(--neon); }
+    .flow-node.done span { background: rgba(42, 192, 255, 0.2); border: 1px solid rgba(42, 192, 255, 0.4); color: var(--neon); }
 
-/* INPUTS */
-label{
-  display:block;
-  font-size:14px;
-  margin-bottom:6px;
-}
-select,input{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  color:#fff;
-  margin-bottom:14px;
-  font-size:14px;
-}
-input:focus,select:focus{
-  outline:none;
-  border-color:var(--neon);
-  box-shadow:0 0 0 3px rgba(42,192,255,.2);
-}
+    @media(max-width: 580px) {
+      .flow-steps { display: none; }
+    }
 
-.radio-group{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-}
-.radio-group label{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  cursor:pointer;
-}
+    /* Form Container */
+    .form-wrapper {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border2); border-radius: var(--radius2); padding: 40px 32px;
+      box-shadow: var(--shadow); position: relative;
+    }
+    .form-section { margin-bottom: 36px; }
+    .form-section h3 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .form-section h3 var { font-style: normal; color: var(--neon); }
 
-/* SUMMARY */
-.summary{
-  background:rgba(0,0,0,.55);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:20px;
-}
-.summary p{
-  margin:6px 0;
-  font-size:14px;
-}
+    /* Inputi, Select i Radio stilovi */
+    label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    input[type="text"], input[type="email"], select {
+      width: 100%; padding: 16px; border-radius: 14px; background: #040714;
+      border: 1px solid var(--border); color: #fff; font-size: 15px; font-weight: 500;
+      transition: all 0.2s var(--ease); font-family: inherit; margin-bottom: 16px;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--neon); box-shadow: 0 0 0 4px rgba(42, 192, 255, 0.15); background: #060a1f; }
+    
+    .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width: 540px) { .input-grid { grid-template-columns: 1fr; gap: 0; } }
 
-/* TRUST */
-.trust{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:16px;
-  font-size:13px;
-  color:var(--muted);
-}
+    /* Moderni Custom Radio Paneli */
+    .radio-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+    .radio-card {
+      border: 1px solid var(--border); background: rgba(0,0,0,0.2); padding: 18px;
+      border-radius: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer;
+      transition: all 0.2s var(--ease); user-select: none;
+    }
+    .radio-card:hover { border-color: var(--border2); background: var(--panel); }
+    .radio-card input[type="radio"] { width: 18px; height: 18px; accent-color: var(--neon); cursor: pointer; }
+    .radio-card .meta-lbl { display: flex; flex-direction: column; }
+    .radio-card .meta-lbl strong { font-size: 15px; font-weight: 700; color: #fff; }
+    .radio-card .meta-lbl span { font-size: 12px; color: var(--muted); }
+    
+    /* Active stanje za radio panele preko JS-a */
+    .radio-card.selected { border-color: var(--neon); background: rgba(42, 192, 255, 0.05); box-shadow: 0 0 20px rgba(42, 192, 255, 0.05); }
 
-/* CTA */
-.cta{
-  margin-top:30px;
-  text-align:center;
-}
-.cta button{
-  background:linear-gradient(90deg,var(--neon),var(--accent));
-  padding:16px 40px;
-  border-radius:50px;
-  color:#00121e;
-  font-weight:900;
-  font-size:16px;
-  border:none;
-  cursor:pointer;
-  box-shadow:0 0 40px rgba(42,192,255,.45);
-}
-.cta button:hover{
-  transform:translateY(-1px);
-}
+    /* Sažetak Narudžbe (Receipt izgled) */
+    .receipt-box {
+      background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; position: relative;
+    }
+    .receipt-box h3 { border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; font-size: 15px; }
+    .receipt-line { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding: 6px 0; font-weight: 500; }
+    .receipt-line span { color: var(--muted); }
+    .receipt-line strong { color: #fff; font-weight: 700; }
+    .receipt-line .val-highlight { color: var(--neon); font-weight: 800; background: rgba(42,192,255,0.1); padding: 2px 8px; border-radius: 6px; }
 
-/* NOTE */
-.note{
-  margin-top:18px;
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.6;
-  text-align:center;
-}
+    /* Bedževi povjerenja */
+    .trust-bullets { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 24px 0; }
+    .bullet { font-size: 13px; font-weight: 600; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+    .bullet var { font-style: normal; color: var(--ok); }
 
-/* FOOTER */
-footer{
-  margin-top:40px;
-  padding:30px 20px;
-  text-align:center;
-  background:rgba(0,0,0,.7);
-  color:var(--muted);
-}
-footer a{color:var(--neon);text-decoration:none}
-</style>
+    /* Glavno dugme za slanje */
+    .submit-area { text-align: center; margin-top: 10px; }
+    .submit-btn {
+      width: 100%; max-width: 380px; padding: 18px 36px; border-radius: 999px; border: none;
+      background: linear-gradient(90deg, var(--neon), var(--accent)); color: #000c14;
+      font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+      cursor: pointer; transition: all 0.2s var(--ease); box-shadow: 0 4px 30px rgba(42, 192, 255, 0.3);
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 36px rgba(42, 192, 255, 0.5); filter: saturate(1.1); }
+    
+    .disclaimer { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 580px; margin: 18px auto 0; text-align: center; }
+
+    /* Footer */
+    footer { padding: 48px 0 32px; border-top: 1px solid var(--border); background: #01030a; margin-top: 60px; text-align: left; }
+    .foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .foot strong { font-size: 16px; font-weight: 900; }
+    .foot small { color: var(--muted); font-weight: 500; display: block; margin-top: 6px; font-size: 13px; }
+    .foot-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .foot-links a { font-size: 12px; font-weight: 700; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; background: var(--panel); transition: all 0.2s; }
+    .foot-links a:hover { background: var(--panel2); border-color: var(--border2); }
+    .copy { margin-top: 32px; color: rgba(210, 230, 255, 0.4); font-weight: 500; font-size: 12px; }
+  </style>
 </head>
 
 <body>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
 
-<header>
-  <div class="wrap">
-    <div class="logo">YUGO-Family TV</div>
-    <nav id="nav">
-      <a href="index.html">Početna</a>
-      <a href="onama.html">O nama</a>
-      <a href="kako-da-gledas.html">Kako da gledaš</a>
-      <a href="cjenovnik.html">Cjenovnik</a>
-      <a href="aplikacije.html">Aplikacije</a>
-      <a href="komentari.html">Komentari</a>
-      <a href="placanje.html">Plaćanje</a>
-      <a href="kontakt.html">Kontakt</a>
-    </nav>
-    <button class="menu-toggle" onclick="nav.classList.toggle('show')">☰</button>
-  </div>
-</header>
+  <!-- Gornja navigacijska traka -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="YuGo Family TV">
+        <img src="logoyf.png" alt="YuGo Family TV logo" loading="eager" />
+        <div class="brand-meta">
+          <strong>YuGo Family TV</strong>
+          <small>Vaša porodica • Vaša televizija</small>
+        </div>
+      </a>
 
-<div class="wrap">
+      <nav class="nav-inline" aria-label="Brza navigacija">
+        <a class="pill" href="status.html">📡 Status</a>
+        <a class="pill" href="aplikacije.html">📱 Aplikacije</a>
+        <a class="pill" href="business-iptv.html">🏨 Business</a>
+        <a class="pill primary" href="order.html">🛒 Naruči</a>
+      </nav>
 
-<section class="hero">
-  <h1>Narudžba IPTV</h1>
-  <div class="subtitle">Sigurna narudžba – privatni i business korisnici</div>
-</section>
-
-<div class="progress">
-  <span class="active">1 Tip</span>
-  <span class="active">2 Paket</span>
-  <span class="active">3 Uređaj</span>
-  <span class="active">4 Kontakt</span>
-  <span class="active">✔ Slanje</span>
-</div>
-
-<div class="form-box">
-<form onsubmit="sendOrder(event)">
-
-  <div class="section">
-    <h3>1️⃣ Tip korisnika</h3>
-    <div class="radio-group">
-      <label><input type="radio" name="type" value="Privatni" checked> Privatni korisnik</label>
-      <label><input type="radio" name="type" value="Business"> Business / Hotel</label>
+      <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
     </div>
   </div>
 
-  <div class="section">
-    <h3>2️⃣ Odabir paketa</h3>
-    <label>Trajanje pretplate</label>
-    <select id="package">
-      <option>1 mjesec</option>
-      <option>3 mjeseca</option>
-      <option>6 mjeseci</option>
-      <option>12 mjeseci</option>
-    </select>
+  <!-- Mobilni Overlay Meni -->
+  <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Meni">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <strong>Navigacija</strong>
+        <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
+      </div>
+      <div class="overlay-grid">
+        <a href="index.html">Početna <span>Home</span></a>
+        <a href="onama.html">O nama <span>About</span></a>
+        <a href="kako-da-gledas.html">Kako da gledaš <span>Guide</span></a>
+        <a href="cjenovnik.html">Cijene i paketi <span>Pricing</span></a>
+        <a href="order.html">Narudžba / Checkout <span>Order</span></a>
+        <a href="business-iptv.html">Business / Hotel IPTV <span>B2B</span></a>
+        <a href="aplikacije.html">Aplikacije <span>Apps</span></a>
+        <a href="komentari.html">Komentari <span>Reviews</span></a>
+        <a href="placanje.html">Plaćanje <span>Pay</span></a>
+        <a href="status.html">Status sistema <span>Status</span></a>
+        <a href="tim.html">Postani dio tima <span>Team</span></a>
+        <a href="webstranica.html">Poruči WEB-PAGE <span>Web</span></a>
+        <a href="faq.html">FAQ <span>Help</span></a>
+        <a href="legal.html">Legal & Compliance <span>Legal</span></a>
+        <a href="kontakt.html">Kontakt / Podrška <span>Support</span></a>
+      </div>
+    </div>
   </div>
 
-  <div class="section">
-    <h3>3️⃣ Uređaj</h3>
-    <select id="device">
-      <option>Smart TV (Samsung / LG)</option>
-      <option>Android TV / Box</option>
-      <option>MAG uređaj</option>
-      <option>PC / Laptop</option>
-      <option>Mobilni uređaj</option>
-    </select>
-  </div>
+  <main class="main-container">
+    <!-- CENTRALNI HERO NASLOV -->
+    <header class="hero-center">
+      <h1>Sigurna <span>IPTV Narudžba</span></h1>
+      <p class="subtitle">Kreirajte pretplatnički profil prilagođen vašim potrebama</p>
+    </header>
 
-  <div class="section">
-    <h3>4️⃣ Kontakt podaci</h3>
-    <input id="name" placeholder="Ime i prezime" required>
-    <input id="email" placeholder="Email adresa" required>
-    <input id="country" placeholder="Država">
-  </div>
+    <!-- FLOW KORACI -->
+    <div class="flow-steps" aria-hidden="true">
+      <div class="flow-node done"><span>1</span> Tip</div>
+      <div class="flow-node done"><span>2</span> Paket</div>
+      <div class="flow-node done"><span>3</span> Uređaj</div>
+      <div class="flow-node done"><span>4</span> Kontakt</div>
+      <div class="flow-node done"><span>✔</span> Slanje</div>
+    </div>
 
-  <div class="section summary" aria-live="polite">
-    <h3>📋 Sažetak narudžbe</h3>
-    <p><strong>Servis:</strong> YUGO-Family TV IPTV</p>
-    <p id="sType"></p>
-    <p id="sPackage"></p>
-    <p id="sDevice"></p>
-  </div>
+    <!-- GLAVNA FORMA -->
+    <div class="form-wrapper">
+      <form onsubmit="sendOrder(event)">
+        
+        <!-- 1. TIP KORISNIKA -->
+        <div class="form-section">
+          <h3><var>1.</var> Tip korisnika</h3>
+          <div class="radio-container">
+            <label class="radio-card selected" id="lbl-privatni">
+              <input type="radio" name="type" value="Privatni" checked onclick="syncRadioClass()" />
+              <div class="meta-lbl">
+                <strong>Privatni korisnik</strong>
+                <span>Gledanje na ličnim uređajima</span>
+              </div>
+            </label>
+            <label class="radio-card" id="lbl-business">
+              <input type="radio" name="type" value="Business" onclick="syncRadioClass()" />
+              <div class="meta-lbl">
+                <strong>Business / Hotel</strong>
+                <span>Komercijalna i B2B upotreba</span>
+              </div>
+            </label>
+          </div>
+        </div>
 
-  <div class="trust">
-    <span>✔ 16.000+ korisnika</span>
-    <span>✔ EU serveri</span>
-    <span>✔ Aktivacija do 60 min</span>
-    <span>✔ 24/7 podrška</span>
-  </div>
+        <!-- 2. ODABIR PAKETA -->
+        <div class="form-section">
+          <h3><var>2.</var> Odabir paketa</h3>
+          <label for="package">Trajanje pretplatničkog perioda</label>
+          <select id="package">
+            <option value="1 mjesec">1 Mjesec pretplate</option>
+            <option value="3 mjeseca">3 Mjeseca pretplate</option>
+            <option value="6 mjeseci">6 Mjeseci pretplate</option>
+            <option value="12 mjeseci">12 Mjeseci (Maksimalna ušteda)</option>
+          </select>
+        </div>
 
-  <div class="cta">
-    <button type="submit">Pošalji zahtjev</button>
-  </div>
+        <!-- 3. ODABIR UREĐAJA -->
+        <div class="form-section">
+          <h3><var>3.</var> Primarni uređaj</h3>
+          <label for="device">Uređaj na kojem instalirate IPTV uslugu</label>
+          <select id="device">
+            <option value="Smart TV (Samsung / LG)">Smart TV (Samsung Tizen / LG webOS)</option>
+            <option value="Android TV / Box">Android TV / Android Box / Fire Stick</option>
+            <option value="MAG uređaj">MAG namjenski risiver</option>
+            <option value="PC / Laptop">PC / Laptop (Web i Desktop Player)</option>
+            <option value="Mobilni uređaj">Mobilni uređaj (Pametni telefon / Tablet)</option>
+          </select>
+        </div>
 
-  <div class="note">
-    Nakon slanja zahtjeva, naš tim će vas kontaktirati putem emaila ili WhatsAppa
-    sa detaljima aktivacije i plaćanja.
-  </div>
+        <!-- 4. KONTAKT PODACI -->
+        <div class="form-section">
+          <h3><var>4.</var> Kontakt podaci i lokacija</h3>
+          <div class="input-grid">
+            <div>
+              <label for="name">Ime i prezime</label>
+              <input type="text" id="name" placeholder="Npr. Marko Antić" required />
+            </div>
+            <div>
+              <label for="email">Email adresa</label>
+              <input type="email" id="email" placeholder="Npr. marko@gmail.com" required />
+            </div>
+          </div>
+          <label for="country">Država prebivališta</label>
+          <input type="text" id="country" placeholder="Npr. Njemačka, Austrija, BiH..." required />
+        </div>
 
-</form>
-</div>
+        <!-- SAŽETAK I RAČUN -->
+        <div class="form-section receipt-box" aria-live="polite">
+          <h3>📋 Sažetak vašeg digitalnog zahtjeva</h3>
+          <div class="receipt-line">
+            <span>Usluga platforme:</span>
+            <strong>YuGo Family IPTV Premium</strong>
+          </div>
+          <div class="receipt-line">
+            <span>Izabrani profil:</span>
+            <strong id="sType"></strong>
+          </div>
+          <div class="receipt-line">
+            <span>Trajanje paketa:</span>
+            <strong id="sPackage"></strong>
+          </div>
+          <div class="receipt-line">
+            <span>Konfiguracija za hardver:</span>
+            <strong id="sDevice" class="val-highlight"></strong>
+          </div>
+        </div>
 
-<footer>
-  © 2025 YUGO-Family TV<br>
-  <a href="index.html">Nazad na početnu</a>
-</footer>
+        <!-- METRIKE I BULLETI POVJERENJA -->
+        <div class="trust-bullets">
+          <span class="bullet"><var>✔</var> 16.000+ Aktivnih klijenata</span>
+          <span class="bullet"><var>✔</var> High-Speed EU Serveri</span>
+          <span class="bullet"><var>✔</var> Aktivacija unutar 60 min</span>
+          <span class="bullet"><var>✔</var> Tehnička podrška 24/7</span>
+        </div>
 
-</div>
+        <!-- CTA AKCIJA -->
+        <div class="submit-area">
+          <button type="submit" class="submit-btn">🚀 Pošalji zahtjev za aktivaciju</button>
+        </div>
 
-<script>
-const typeRadios=document.querySelectorAll("input[name='type']");
-const pack=document.getElementById("package");
-const dev=document.getElementById("device");
-const sType=document.getElementById("sType");
-const sPackage=document.getElementById("sPackage");
-const sDevice=document.getElementById("sDevice");
+        <p class="disclaimer">
+          Nakon podnošenja zahtjeva, sistem generiše vašu narudžbenicu i naši operateri će vas odmah kontaktirati 
+          putem WhatsApp-a ili emaila radi dostave testnog pristupa i uputstva za uplatu.
+        </p>
+      </form>
+    </div>
+  </main>
 
-function updateSummary(){
-  const type=document.querySelector("input[name='type']:checked").value;
-  sType.innerHTML="<strong>Tip:</strong> "+type;
-  sPackage.innerHTML="<strong>Paket:</strong> "+pack.value;
-  sDevice.innerHTML="<strong>Uređaj:</strong> "+dev.value;
-}
-typeRadios.forEach(r=>r.addEventListener("change",updateSummary));
-pack.addEventListener("change",updateSummary);
-dev.addEventListener("change",updateSummary);
-updateSummary();
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <strong style="font-weight:950;">YuGo Family TV</strong>
+          <small>Premium IPTV sa privatnom infrastrukturom i podrškom 24/7.</small>
+        </div>
+        <div class="foot-links" aria-label="Linkovi">
+          <a href="legal.html">Legal</a>
+          <a href="faq.html">FAQ</a>
+          <a href="status.html">Status</a>
+          <a href="kontakt.html">Podrška</a>
+        </div>
+      </div>
+      <div class="copy">
+        © <span id="year">2026</span> YuGo Family TV • Sva prava zadržana.<br />
+        Glavna tehnička podrška: <a href="https://wa.me/4915755749502" style="color:var(--neon); font-weight:600;">+49 157 557 495 02</a>
+      </div>
+    </div>
+  </footer>
 
-function sendOrder(e){
-  e.preventDefault();
-  const msg=
+  <script>
+    /* ===== Overlay navigacija (Meni otvori/zatvori) ===== */
+    const overlayNav = document.getElementById("overlayNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeNavBtn = document.getElementById("closeNavBtn");
+
+    function openNav(){ overlayNav.classList.add("open"); closeNavBtn.focus(); }
+    function closeNav(){ overlayNav.classList.remove("open"); menuBtn.focus(); }
+
+    menuBtn.addEventListener("click", openNav);
+    closeNavBtn.addEventListener("click", closeNav);
+    overlayNav.addEventListener("click", (e) => { if(e.target === overlayNav) closeNav(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape" && overlayNav.classList.contains("open")) closeNav(); });
+
+    /* ===== Dinamičko ažuriranje sažetka narudžbe i radio klasa ===== */
+    const pack = document.getElementById("package");
+    const dev = document.getElementById("device");
+    const sType = document.getElementById("sType");
+    const sPackage = document.getElementById("sPackage");
+    const sDevice = document.getElementById("sDevice");
+
+    function syncRadioClass() {
+      const activeRadio = document.querySelector("input[name='type']:checked").value;
+      const lblPrivatni = document.getElementById("lbl-privatni");
+      const lblBusiness = document.getElementById("lbl-business");
+
+      if (activeRadio === "Privatni") {
+        lblPrivatni.classList.add("selected");
+        lblBusiness.classList.remove("selected");
+      } else {
+        lblBusiness.classList.add("selected");
+        lblPrivatni.classList.remove("selected");
+      }
+      updateSummary();
+    }
+
+    function updateSummary(){
+      const type = document.querySelector("input[name='type']:checked").value;
+      sType.innerHTML = type + " korisnik";
+      sPackage.innerHTML = pack.value;
+      sDevice.innerHTML = dev.value;
+    }
+
+    pack.addEventListener("change", updateSummary);
+    dev.addEventListener("change", updateSummary);
+    updateSummary();
+
+    /* ===== Obrada forme i slanje na WhatsApp ===== */
+    function sendOrder(e){
+      e.preventDefault();
+      const clientName = document.getElementById("name").value;
+      const clientEmail = document.getElementById("email").value;
+      const clientCountry = document.getElementById("country").value;
+      const selectedType = document.querySelector("input[name='type']:checked").value;
+
+      const msg = 
 `📺 NOVA IPTV NARUDŽBA
-👤 Ime: ${name.value}
-📧 Email: ${email.value}
-🌍 Država: ${country.value}
+👤 Ime: ${clientName}
+📧 Email: ${clientEmail}
+🌍 Država: ${clientCountry}
 📦 Paket: ${pack.value}
 🖥️ Uređaj: ${dev.value}
-🏷️ Tip: ${document.querySelector("input[name='type']:checked").value}`;
-  window.open("https://wa.me/4915755749502?text="+encodeURIComponent(msg));
-}
+🏷️ Tip: ${selectedType}`;
 
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){nav.classList.remove('show')}
-});
-</script>
+      window.open("https://wa.me/4915755749502?text=" + encodeURIComponent(msg));
+    }
 
+    /* ===== Pozadinske zvjezdice (Canvas sistem) ===== */
+    const c = document.getElementById("stars");
+    const ctx = c.getContext("2d");
+    let W, H, stars = [];
+
+    function resize(){
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
+      const count = Math.min(100, Math.floor((W * H) / 26000));
+      stars = Array.from({length: count}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.1 + 0.2,
+        a: Math.random() * 0.4 + 0.15,
+        s: Math.random() * 0.2 + 0.05
+      }));
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for(const st of stars){
+        st.y += st.s;
+        if(st.y > H){ st.y = -10; st.x = Math.random() * W; }
+        ctx.globalAlpha = st.a;
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#2ac0ff";
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    /* ===== Automatska Godina u Footeru ===== */
+    document.getElementById("year").innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>

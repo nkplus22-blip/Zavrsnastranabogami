@@ -4,52 +4,78 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ – Česta pitanja | YuGo Family TV</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg:#03050d;
+  --neon:#00c8ff;
+  --panel:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.1);
+  --muted:#94a3b8;
+}
+
 body{
   margin:0;
-  font-family:Inter,Arial;
-  background:#050714;
-  color:#e6f7ff;
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:#fff;
+  line-height:1.6;
 }
-.wrap{max-width:900px;margin:auto;padding:40px 18px}
-h1{color:#2ac0ff;text-align:center;margin-bottom:30px}
+
+.wrap{max-width:800px;margin:auto;padding:60px 20px;}
+h1{text-align:center;font-size:40px;margin-bottom:40px;letter-spacing:-1px;}
+h1 span{color:var(--neon);}
+
+/* FAQ Kartice */
+.faq-container{display:flex;flex-direction:column;gap:15px;}
 .faq{
-  border:1px solid rgba(255,255,255,.1);
+  background:var(--panel);
+  border:1px solid var(--border);
   border-radius:16px;
-  padding:20px;
-  margin-bottom:16px;
-  background:rgba(255,255,255,.05);
+  padding:20px 25px;
+  cursor:pointer;
+  transition:all 0.3s ease;
 }
-.faq h3{cursor:pointer;color:#2ac0ff}
-.faq p{display:none;font-size:14px;line-height:1.6}
-footer{text-align:center;margin-top:40px;color:#aaa}
+.faq:hover{border-color:var(--neon);background:rgba(0,200,255,0.03);}
+.faq h3{margin:0;font-size:16px;display:flex;justify-content:space-between;align-items:center;}
+.faq p{display:none;color:var(--muted);margin:15px 0 0 0;font-size:14px;border-top:1px solid var(--border);padding-top:15px;}
+
+/* Aktivno stanje */
+.faq.active p{display:block;}
+.faq.active h3::after{content:'−';}
+.faq h3::after{content:'+';color:var(--neon);font-size:20px;}
+
+footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px;}
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<h1>Česta pitanja (FAQ)</h1>
+  <h1>Česta <span>pitanja</span></h1>
 
-<div class="faq"><h3>Da li IPTV radi u Njemačkoj i EU?</h3><p>Da. YuGo Family TV radi u Njemačkoj, Austriji, Švicarskoj i cijeloj EU uz stabilnu internet konekciju.</p></div>
+  <div class="faq-container">
+    <div class="faq"><h3>Da li IPTV radi u Njemačkoj i EU?</h3><p>Da. YuGo Family TV je potpuno optimizovan za rad u Njemačkoj, Austriji, Švicarskoj i cijeloj EU. Sve što vam je potrebno je stabilna internet konekcija.</p></div>
 
-<div class="faq"><h3>Na koliko uređaja mogu gledati?</h3><p>Jedna pretplata je namijenjena za jedan uređaj. Business paketi omogućavaju više uređaja.</p></div>
+    <div class="faq"><h3>Na koliko uređaja mogu gledati?</h3><p>Standardna pretplata je namijenjena za jedan uređaj istovremeno. Za potrebe više uređaja ili poslovne prostore, nudimo posebne Business pakete.</p></div>
 
-<div class="faq"><h3>Da li je potreban ugovor?</h3><p>Ne. Nema ugovora ni obaveza. Pretplata se produžava po želji.</p></div>
+    <div class="faq"><h3>Da li je potreban ugovor?</h3><p>Apsolutno ne. Naš model poslovanja se bazira na povjerenju – nema ugovora ni dugoročnih obaveza. Pretplatu produžavate isključivo po vašoj želji.</p></div>
 
-<div class="faq"><h3>Koja brzina interneta je potrebna?</h3><p>Minimalno 10 Mbps za HD, 25 Mbps za 4K kvalitet.</p></div>
+    <div class="faq"><h3>Koja brzina interneta je potrebna?</h3><p>Za besprijekoran HD doživljaj preporučujemo minimalno 10 Mbps, dok je za 4K sadržaje potrebno obezbijediti stabilnih 25 Mbps.</p></div>
 
-<div class="faq"><h3>Da li nudite tehničku podršku?</h3><p>Da. Podrška je dostupna 24/7 putem WhatsAppa i emaila.</p></div>
+    <div class="faq"><h3>Da li nudite tehničku podršku?</h3><p>Da, uvijek smo tu za vas. Tehnička podrška je dostupna 24/7 putem WhatsAppa i emaila kako biste bezbrižno uživali u našem programu.</p></div>
+  </div>
 
-<footer>© 2025 YuGo Family TV</footer>
+  <footer>© 2026 YuGo Family TV • Premium IPTV Servis</footer>
 </div>
 
 <script>
-document.querySelectorAll(".faq h3").forEach(q=>{
-  q.onclick=()=>q.nextElementSibling.style.display=
-  q.nextElementSibling.style.display==="block"?"none":"block";
+document.querySelectorAll(".faq").forEach(faq => {
+  faq.addEventListener("click", () => {
+    // Zatvori ostale prije otvaranja novog (opciono, za ljepši UX)
+    document.querySelectorAll(".faq").forEach(f => { if(f !== faq) f.classList.remove('active'); });
+    faq.classList.toggle("active");
+  });
 });
 </script>
 </body>

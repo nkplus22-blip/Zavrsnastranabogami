@@ -1,440 +1,532 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bs">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Kako da gledaš – YUGO-Family TV</title>
-
-<meta name="description" content="Kako da gledaš YUGO-Family TV na Smart TV-u, telefonu, računaru i streaming uređajima.">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
---bg:#040611;
---bg2:#070b1c;
---text:#eaf7ff;
---muted:rgba(220,240,255,.75);
---accent1:#2ab0ff;
---accent2:#7b00ff;
---radius:20px;
---shadow:0 30px 90px rgba(0,0,0,.55);
---transition:.35s cubic-bezier(.2,.8,.2,1);
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Inter,sans-serif;
-color:var(--text);
-background:
-radial-gradient(900px 500px at 20% 20%, rgba(123,0,255,.25), transparent 60%),
-radial-gradient(900px 500px at 80% 30%, rgba(42,176,255,.25), transparent 60%),
-linear-gradient(180deg,var(--bg2),var(--bg));
-min-height:100vh;
-overflow-x:hidden;
-}
-
-/* HEADER */
-
-header{
-
-position:sticky;
-top:14px;
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding:14px 20px;
-
-margin:14px;
-
-border-radius:24px;
-
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.14);
-
-backdrop-filter:blur(14px);
-
-box-shadow:var(--shadow);
-
-z-index:1000;
-
-}
-
-header h1{
-font-size:18px;
-font-weight:900;
-color:#6ce0ff;
-}
-
-/* HAMBURGER */
-
-.hamburger{
-width:44px;
-height:40px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(255,255,255,.05);
-cursor:pointer;
-position:relative;
-}
-
-.hamburger span{
-position:absolute;
-left:10px;
-width:24px;
-height:3px;
-background:white;
-border-radius:5px;
-transition:.3s;
-}
-
-.hamburger span:nth-child(1){top:12px}
-.hamburger span:nth-child(2){top:18px}
-.hamburger span:nth-child(3){top:24px}
-
-/* MENU */
-
-#mainMenu{
-
-display:none;
-
-position:fixed;
-inset:0;
-
-background:rgba(2,6,20,.96);
-
-flex-direction:column;
-align-items:center;
-justify-content:center;
-
-gap:16px;
-
-z-index:2000;
-
-}
-
-#mainMenu a{
-
-color:white;
-font-size:22px;
-font-weight:900;
-text-decoration:none;
-
-}
-
-#mainMenu.show{
-display:flex;
-}
-
-/* HERO */
-
-.hero{
-
-max-width:1100px;
-margin:40px auto;
-
-padding:50px 22px;
-
-border-radius:30px;
-
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.14);
-
-box-shadow:var(--shadow);
-
-text-align:center;
-
-}
-
-.hero h2{
-
-font-size:clamp(28px,3vw,42px);
-font-weight:900;
-
-}
-
-.hero p{
-
-margin-top:14px;
-color:var(--muted);
-max-width:760px;
-margin-inline:auto;
-
-}
-
-/* DEVICES */
-
-.devices{
-
-max-width:1100px;
-margin:30px auto;
-
-padding:0 20px;
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-gap:18px;
-
-}
-
-.device{
-
-padding:26px;
-
-border-radius:22px;
-
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.12);
-
-transition:transform var(--transition);
-
-}
-
-.device:hover{
-
-transform:translateY(-6px);
-
-}
-
-.device h3{
-
-margin-bottom:10px;
-
-}
-
-.device p{
-
-color:var(--muted);
-
-}
-  /* INSTALL STEPS */
-
-.steps{
-
-max-width:1000px;
-margin:40px auto;
-
-padding:30px;
-
-border-radius:24px;
-
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.12);
-
-}
-
-.step{
-
-margin-bottom:14px;
-
-padding:16px;
-
-border-radius:14px;
-
-background:rgba(255,255,255,.04);
-
-}
-
-/* CTA */
-
-.cta{
-
-max-width:1000px;
-margin:40px auto;
-
-padding:40px;
-
-text-align:center;
-
-border-radius:26px;
-
-background:linear-gradient(90deg,#2ab0ff,#7b00ff);
-
-}
-
-.cta h3{
-font-size:28px;
-font-weight:900;
-}
-
-.cta a{
-
-display:inline-block;
-
-margin-top:16px;
-
-padding:12px 22px;
-
-border-radius:12px;
-
-background:white;
-
-color:#001;
-
-font-weight:900;
-
-text-decoration:none;
-
-}
-
-/* FOOTER */
-
-footer{
-
-margin:40px 18px;
-
-padding:24px;
-
-text-align:center;
-
-border-radius:20px;
-
-background:rgba(0,0,0,.35);
-
-color:rgba(220,240,255,.65);
-
-}
-
-footer a{
-color:#6ce0ff;
-text-decoration:none;
-font-weight:900;
-}
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#03050d" />
+
+  <title>Kako da gledaš – YuGo Family TV</title>
+  <meta name="description" content="Saznajte kako postaviti i gledati YuGo Family TV na Smart TV-u, telefonu, računaru, Fire Stick-u ili Android Box uređaju." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kako da gledaš – YuGo Family TV" />
+  <meta property="og:description" content="Jednostavan vodič za instalaciju IPTV usluge na svim pametnim uređajima. Počnite gledati za nekoliko minuta." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og-image.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #03050d;
+      --bg2: #070c24;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel2: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.09);
+      --border2: rgba(255, 255, 255, 0.15);
+      --text: #f1f7fc;
+      --muted: rgba(210, 230, 255, 0.65);
+
+      --neon: #2ac0ff;
+      --accent: #4a6bff;
+      --mag: #a855f7;
+      --warn: #ffd56b;
+
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      --glow: 0 0 80px rgba(42, 192, 255, 0.15);
+      --radius: 20px;
+      --radius2: 26px;
+      --max: 1240px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(1000px 700px at 10% 20%, rgba(123, 0, 255, 0.15), transparent 60%),
+        radial-gradient(1000px 700px at 80% 80%, rgba(42, 192, 255, 0.1), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; }
+    
+    /* Pozadinski efekti */
+    .bg-grid {
+      position: fixed; inset: -20%;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: rotate(3deg);
+      opacity: 0.12;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%);
+      z-index: -3;
+    }
+    .aurora {
+      position: fixed; inset: -40%;
+      background:
+        radial-gradient(closest-side at 30% 30%, rgba(168, 85, 247, 0.12), transparent 60%),
+        radial-gradient(closest-side at 75% 70%, rgba(42, 192, 255, 0.15), transparent 60%);
+      filter: blur(60px);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -4;
+      animation: drift 25s var(--ease) infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: translate3d(2%, -2%, 0) scale(1); }
+      to { transform: translate3d(-2%, 2%, 0) scale(1.05); }
+    }
+    canvas.stars {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      opacity: 0.4;
+      mix-blend-mode: screen;
+      z-index: -2;
+    }
+
+    /* Topbar / Navigacija */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3, 5, 13, 0.75);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 40px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .brand-meta { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 15px; }
+    .brand-meta small { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--text); font-weight: 700; font-size: 13px;
+      transition: all 0.25s var(--ease); user-select: none;
+    }
+    .pill:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--border2); }
+    .pill.primary {
+      border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
+      color: #000c14; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25);
+    }
+    .pill.primary:hover { box-shadow: 0 6px 24px rgba(42, 192, 255, 0.4); transform: translateY(-2px); }
+
+    .menu-toggle {
+      display: none; width: 44px; height: 44px;
+      place-items: center; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--neon); cursor: pointer; font-size: 20px;
+      transition: all 0.2s var(--ease);
+    }
+    .menu-toggle:hover { background: var(--panel2); border-color: var(--border2); }
+
+    @media (max-width: 820px) {
+      .nav-inline { display: none; }
+      .menu-toggle { display: grid; }
+    }
+
+    /* Overlay Navigacija */
+    .overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(3, 5, 13, 0.96);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s var(--ease);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .overlay-panel {
+      width: min(840px, 100%); max-height: 90vh; overflow-y: auto;
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
+    }
+    .overlay-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .overlay-top strong { font-size: 18px; font-weight: 800; }
+    .closebtn {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--text); cursor: pointer; font-size: 16px;
+      display: grid; place-items: center; transition: all 0.2s var(--ease);
+    }
+    .closebtn:hover { background: rgba(255,0,0,0.15); border-color: rgba(255,0,0,0.3); }
+    .overlay-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px; padding: 24px;
+    }
+    .overlay a {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border);
+      background: var(--panel); font-weight: 700; font-size: 14px;
+      transition: all 0.2s var(--ease);
+    }
+    .overlay a:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border2); color: #fff; }
+    .overlay a span {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 3px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sekcije i Tipografija */
+    section { padding: 40px 0; }
+    .section-head { margin-bottom: 32px; text-align: center; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid rgba(42, 192, 255, 0.2);
+      background: rgba(42, 192, 255, 0.05);
+      color: var(--neon); font-weight: 800; font-size: 11px;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    h1, h2, h3 { font-weight: 900; letter-spacing: -0.5px; line-height: 1.2; }
+    h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 8px; }
+    .lead { color: var(--muted); font-size: 16px; font-weight: 500; max-width: 720px; line-height: 1.6; margin-image: auto; }
+
+    /* Hero Centralni Blok */
+    .hero-block {
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow); padding: 56px 24px; margin-top: 24px; text-align: center;
+    }
+    .hero-block h1 { font-size: clamp(32px, 4.5vw, 54px); font-weight: 950; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+    .hero-block h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-block p { color: var(--muted); font-size: 17px; font-weight: 500; line-height: 1.6; max-width: 680px; margin: 0 auto; }
+
+    /* Grid Uređaja */
+    .devices-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .device-card {
+      border-radius: var(--radius); border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      padding: 30px 24px; transition: all 0.25s var(--ease);
+    }
+    .device-card:hover { transform: translateY(-4px); border-color: var(--border2); background: var(--panel2); box-shadow: var(--glow); }
+    .device-card .icon-label { font-size: 32px; margin-bottom: 14px; display: block; }
+    .device-card h3 { font-size: 19px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .device-card p { color: var(--muted); font-size: 14px; line-height: 1.6; font-weight: 500; }
+
+    /* Koraci Instalacije */
+    .steps-container {
+      max-width: 860px; margin: 0 auto;
+      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border);
+      padding: 32px; border-radius: var(--radius2);
+    }
+    .step-node {
+      display: flex; gap: 20px; padding: 20px; border-radius: 16px;
+      background: var(--panel); border: 1px solid transparent;
+      transition: all 0.2s var(--ease);
+    }
+    .step-node:not(:last-child) { margin-bottom: 14px; }
+    .step-node:hover { background: rgba(255,255,255,0.06); border-color: var(--border); }
+    .step-num {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(42, 192, 255, 0.15); border: 1px solid rgba(42, 192, 255, 0.3);
+      color: var(--neon); font-weight: 900; font-size: 16px;
+      display: grid; place-items: center;
+    }
+    .step-content h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .step-content p { color: var(--muted); font-size: 14px; font-weight: 500; line-height: 1.5; }
+
+    @media(max-width: 500px) {
+      .step-node { flex-direction: column; gap: 12px; }
+    }
+
+    /* CTA Blok */
+    .cta-block {
+      border-radius: var(--radius2); border: 1px solid rgba(42, 192, 255, 0.3);
+      background: linear-gradient(135deg, rgba(42, 192, 255, 0.08), rgba(74, 107, 255, 0.03));
+      padding: 44px 32px; text-align: center; box-shadow: var(--glow);
+    }
+    .cta-block h2 { font-size: clamp(24px, 3.2vw, 36px); font-weight: 950; margin-bottom: 12px; }
+    .cta-block p { color: var(--muted); font-size: 15px; font-weight: 500; max-width: 580px; margin: 0 auto 24px; }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 28px; border-radius: 14px; font-weight: 800; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 0.3px; transition: all 0.2s var(--ease);
+      user-select: none; cursor: pointer; border: none;
+      background: linear-gradient(90deg, #25D366, #1bd742);
+      color: #000c14; box-shadow: 0 4px 25px rgba(37, 211, 102, 0.25);
+    }
+    .btn:hover { transform: translateY(-2px); filter: saturate(1.15); box-shadow: 0 6px 30px rgba(37, 211, 102, 0.45); }
+
+    /* Footer */
+    footer { padding: 48px 0 32px; border-top: 1px solid var(--border); background: #01030a; margin-top: 40px; }
+    .foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .foot strong { font-size: 16px; font-weight: 900; }
+    .foot small { color: var(--muted); font-weight: 500; display: block; margin-top: 6px; font-size: 13px; }
+    .foot-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .foot-links a {
+      font-size: 12px; font-weight: 700; border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 999px; background: var(--panel); transition: all 0.2s;
+    }
+    .foot-links a:hover { background: var(--panel2); border-color: var(--border2); }
+    .copy { margin-top: 32px; color: rgba(210, 230, 255, 0.4); font-weight: 500; font-size: 12px; }
+    .copy a { color: var(--muted); font-weight: 600; }
+
+    /* Scroll Reveal */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+  </style>
 </head>
 
 <body>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
 
-<header>
+  <!-- Gornja navigacijska traka -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="YuGo Family TV">
+        <img src="logoyf.png" alt="YuGo Family TV logo" loading="eager" />
+        <div class="brand-meta">
+          <strong>YuGo Family TV</strong>
+          <small>Vaša porodica • Vaša televizija</small>
+        </div>
+      </a>
 
-<h1>YUGO-Family TV</h1>
+      <nav class="nav-inline" aria-label="Brza navigacija">
+        <a class="pill" href="status.html">📡 Status</a>
+        <a class="pill" href="aplikacije.html">📱 Aplikacije</a>
+        <a class="pill" href="business-iptv.html">🏨 Business</a>
+        <a class="pill primary" href="order.html">🛒 Naruči</a>
+      </nav>
 
-<button class="hamburger" onclick="toggleMenu()">
-<span></span>
-<span></span>
-<span></span>
-</button>
+      <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
+    </div>
+  </div>
 
-</header>
+  <!-- Mobilni Overlay Meni -->
+  <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Meni">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <strong>Navigacija</strong>
+        <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
+      </div>
+      <div class="overlay-grid">
+        <a href="index.html">Početna <span>Home</span></a>
+        <a href="onama.html">O nama <span>About</span></a>
+        <a href="kako-da-gledas.html">Kako da gledaš <span>Guide</span></a>
+        <a href="cjenovnik.html">Cijene i paketi <span>Pricing</span></a>
+        <a href="order.html">Narudžba / Checkout <span>Order</span></a>
+        <a href="business-iptv.html">Business / Hotel IPTV <span>B2B</span></a>
+        <a href="aplikacije.html">Aplikacije <span>Apps</span></a>
+        <a href="komentari.html">Komentari <span>Reviews</span></a>
+        <a href="placanje.html">Plaćanje <span>Pay</span></a>
+        <a href="status.html">Status sistema <span>Status</span></a>
+        <a href="tim.html">Postani dio tima <span>Team</span></a>
+        <a href="webstranica.html">Poruči WEB-PAGE <span>Web</span></a>
+        <a href="faq.html">FAQ <span>Help</span></a>
+        <a href="legal.html">Legal & Compliance <span>Legal</span></a>
+        <a href="kontakt.html">Kontakt / Podrška <span>Support</span></a>
+      </div>
+    </div>
+  </div>
 
-<nav id="mainMenu">
+  <main class="wrap">
+    <!-- HERO CENTRALNI BLOK -->
+    <header class="hero-block">
+      <div class="kicker">Kompatibilnost</div>
+      <h1>Kako gledati <span>YUGO-Family TV</span></h1>
+      <p>
+        Naša fleksibilna infrastruktura omogućava besprijekoran striming na apsolutno svim pametnim uređajima. 
+        Zaboravite na komplikovane sisteme – podešavanje i instalacija traju svega nekoliko minuta.
+      </p>
+    </header>
 
-<a href="index.html">Početna</a>
-<a href="onama.html">O nama</a>
-<a href="kako-da-gledas.html">Kako da gledaš</a>
-<a href="cjenovnik.html">Cijene i paketi</a>
-<a href="aplikacije.html">Aplikacije</a>
-<a href="komentari.html">Komentari</a>
-<a href="placanje.html">Plaćanje</a>
-<a href="kontakt.html">Kontakt</a>
+    <!-- PODRŽANI UREĐAJI -->
+    <section class="reveal">
+      <div class="section-head">
+        <div class="kicker">Hardver</div>
+        <h2>Izaberite svoj ekran</h2>
+      </div>
 
-</nav>
+      <div class="devices-grid">
+        <div class="device-card">
+          <span class="icon-label" aria-hidden="true">📺</span>
+          <h3>Smart TV</h3>
+          <p>Instalirajte neku od preporučenih premium aplikacija direktno na vaš Samsung (Tizen), LG (webOS) ili bilo koji Android TV.</p>
+        </div>
 
+        <div class="device-card">
+          <span class="icon-label" aria-hidden="true">📱</span>
+          <h3>Telefon / Tablet</h3>
+          <p>Potpuna podrška za Android i iOS (iPhone, iPad) uređaje. Gledajte omiljene sportske kanale i filmove u pokretu, bilo gdje.</p>
+        </div>
 
-<section class="hero">
+        <div class="device-card">
+          <span class="icon-label" aria-hidden="true">💻</span>
+          <h3>Laptop / Računar</h3>
+          <p>Uživajte u sadržaju direktno putem našeg brzog i optimizovanog Web Playera unutar bilo kojeg modernog internet pretraživača.</p>
+        </div>
 
-<h2>Kako da gledaš YUGO-Family TV</h2>
+        <div class="device-card">
+          <span class="icon-label" aria-hidden="true">🔥</span>
+          <h3>Fire Stick / Box</h3>
+          <p>Pretvorite običan TV u moćan multimedijalni centar. Savršena kompatibilnost sa Amazon Fire TV Stick-om i Android kutijama.</p>
+        </div>
+      </div>
+    </section>
 
-<p>
-Gledaj YUGO-Family TV na svim uređajima: Smart TV, telefon, laptop ili streaming uređaj.
-Instalacija traje samo nekoliko minuta.
-</p>
+    <!-- KORACI INSTALACIJE -->
+    <section class="reveal">
+      <div class="section-head">
+        <div class="kicker">Uputstvo</div>
+        <h2>Jednostavna instalacija u 4 koraka</h2>
+      </div>
 
-</section>
+      <div class="steps-container">
+        <div class="step-node">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Kontaktirajte našu tehničku podršku</h3>
+            <p>Javite nam se putem WhatsApp-a kako bismo generisali vaš jedinstveni testni nalog ili aktivirali zakupljenu pretplatu.</p>
+          </div>
+        </div>
 
+        <div class="step-node">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Instalirajte preporučenu aplikaciju</h3>
+            <p>U zavisnosti od uređaja koji posjedujete, preporučićemo vam najbolju i najstabilniju IPTV aplikaciju sa prodavnice.</p>
+          </div>
+        </div>
 
-<section class="devices">
+        <div class="step-node">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Unesite pristupne podatke</h3>
+            <p>Pažljivo prekopirajte i unesite parametre (M3U liniju ili Xtream Xtodes podatke) koje vam je dostavio naš tim.</p>
+          </div>
+        </div>
 
-<div class="device">
-<h3>📺 Smart TV</h3>
-<p>Instaliraj aplikaciju direktno na Samsung, LG ili Android TV.</p>
-</div>
+        <div class="step-node">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Uživajte u premium sadržaju</h3>
+            <p>Lista kanala i bogata videoteka se učitavaju trenutno. Prepustite se gledanju u maksimalnoj rezoluciji.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="device">
-<h3>📱 Telefon / Tablet</h3>
-<p>Android i iOS aplikacije omogućavaju gledanje bilo gdje.</p>
-</div>
+    <!-- CTA ASISTENCIJA -->
+    <section class="reveal">
+      <div class="cta-block">
+        <h2>Treba vam asistencija tokom podešavanja?</h2>
+        <p>
+          Nema potrebe da se mučite sami. Naši operateri su online i mogu vas voditi korak-po-korak kroz cijeli proces instalacije u realnom vremenu.
+        </p>
+        <a class="btn" href="https://wa.me/4915755749502">
+          💬 Pokreni WhatsApp Podršku
+        </a>
+      </div>
+    </section>
+  </main>
 
-<div class="device">
-<h3>💻 Laptop / PC</h3>
-<p>Gledanje preko web playera u browseru.</p>
-</div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <strong style="font-weight:950;">YuGo Family TV</strong>
+          <small>Premium IPTV sa privatnom infrastrukturom i podrškom 24/7.</small>
+        </div>
 
-<div class="device">
-<h3>🔥 Fire Stick / Android Box</h3>
-<p>Instalacija IPTV aplikacije na streaming uređaje.</p>
-</div>
+        <div class="foot-links" aria-label="Linkovi">
+          <a href="legal.html">Legal</a>
+          <a href="faq.html">FAQ</a>
+          <a href="status.html">Status</a>
+          <a href="kontakt.html">Podrška</a>
+        </div>
+      </div>
 
-</section>
+      <div class="copy">
+        © <span id="year">2026</span> YuGo Family TV • Sva prava zadržana.<br />
+        WhatsApp podrška: <a href="https://wa.me/4915755749502">+49 157 557 495 02</a> • Email: <a href="mailto:support@yugofamily.tv">support@yugofamily.tv</a>
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    /* ===== Overlay navigacija (Meni otvori/zatvori) ===== */
+    const overlayNav = document.getElementById("overlayNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeNavBtn = document.getElementById("closeNavBtn");
 
-<section class="steps">
+    function openNav(){ overlayNav.classList.add("open"); closeNavBtn.focus(); }
+    function closeNav(){ overlayNav.classList.remove("open"); menuBtn.focus(); }
 
-<h2 style="margin-bottom:20px">Kako instalirati</h2>
+    menuBtn.addEventListener("click", openNav);
+    closeNavBtn.addEventListener("click", closeNav);
+    overlayNav.addEventListener("click", (e) => { if(e.target === overlayNav) closeNav(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape" && overlayNav.classList.contains("open")) closeNav(); });
 
-<div class="step">1️⃣ Kontaktiraj podršku i dobiješ pristup.</div>
+    /* ===== Pozadinske zvjezdice (Canvas sistem) ===== */
+    const c = document.getElementById("stars");
+    const ctx = c.getContext("2d");
+    let W, H, stars = [];
 
-<div class="step">2️⃣ Instaliraj preporučenu aplikaciju.</div>
+    function resize(){
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
+      const count = Math.min(120, Math.floor((W * H) / 25000));
+      stars = Array.from({length: count}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.1 + 0.2,
+        a: Math.random() * 0.4 + 0.15,
+        s: Math.random() * 0.25 + 0.05
+      }));
+    }
+    window.addEventListener("resize", resize);
+    resize();
 
-<div class="step">3️⃣ Unesi podatke koje dobiješ.</div>
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for(const st of stars){
+        st.y += st.s;
+        if(st.y > H){ st.y = -10; st.x = Math.random() * W; }
+        ctx.globalAlpha = st.a;
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#2ac0ff";
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
 
-<div class="step">4️⃣ Počni gledati odmah.</div>
+    /* ===== Scroll Reveal (Glatko pojavljivanje) ===== */
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("in");
+      }
+    }, {threshold: 0.1});
+    revealEls.forEach(el => io.observe(el));
 
-</section>
-
-
-<section class="cta">
-
-<h3>Trebaš pomoć oko instalacije?</h3>
-
-<a href="https://wa.me/4915755749502">
-Kontaktiraj WhatsApp podršku
-</a>
-
-</section>
-
-
-<footer>
-
-© 2026 YUGO-Family TV |
-
-<a href="https://wa.me/4915755749502">
-WhatsApp
-</a>
-
-</footer>
-
-
-<script>
-
-function toggleMenu(){
-
-document.getElementById("mainMenu").classList.toggle("show")
-
-}
-
-document.addEventListener("keydown",e=>{
-
-if(e.key==="Escape")
-document.getElementById("mainMenu").classList.remove("show")
-
-})
-
-</script>
-
+    /* ===== Automatska Godina u Footeru ===== */
+    document.getElementById("year").innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>
-  

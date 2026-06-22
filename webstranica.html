@@ -27,23 +27,26 @@ body{
 .wrap{max-width:1100px;margin:auto;padding:0 20px}
 
 /* Header & Nav */
-header{padding:20px 0;border-bottom:1px solid var(--border);background:rgba(3,5,13,0.8);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;}
+header{padding:20px 0;border-bottom:1px solid var(--border);background:rgba(3,5,13,0.8);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;}
 .nav-flex{display:flex;justify-content:space-between;align-items:center;}
-.logo{font-weight:900;font-size:20px;letter-spacing:-0.5px;}
+.logo{font-weight:900;font-size:20px;letter-spacing:-0.5px;color:var(--neon);}
+.menu-toggle{background:var(--glass);border:1px solid var(--border);color:var(--neon);padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;}
+
+/* Overlay Meni */
+.overlay{position:fixed;inset:0;background:rgba(3,5,13,0.98);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.overlay-panel{width:100%;max-width:800px;background:var(--glass);border:1px solid var(--border);padding:30px;border-radius:20px;}
+.closebtn{color:#fff;font-size:30px;cursor:pointer;float:right;}
+.overlay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:30px;}
+.overlay-grid a{padding:15px;background:rgba(255,255,255,0.03);text-align:center;border-radius:10px;color:#fff;text-decoration:none;border:1px solid var(--border);}
+.overlay-grid a:hover{background:var(--neon);color:#000;}
 
 /* Hero */
 .hero{text-align:center;padding:80px 0;}
 .hero h1{font-size:clamp(30px,6vw,50px);margin-bottom:20px;background:linear-gradient(90deg,#fff,var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
 /* Kalkulator */
-.calc-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--border);
-  padding:40px;
-  border-radius:24px;
-  max-width:800px;
-  margin:0 auto;
-}
+.calc-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:40px;border-radius:24px;max-width:800px;margin:0 auto;}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;}
 select{width:100%;padding:15px;background:#0a0f1d;border:1px solid var(--border);border-radius:12px;color:#fff;font-weight:600;}
 .total-box{text-align:center;margin-top:30px;padding:20px;background:var(--neon);color:#000;border-radius:16px;font-size:24px;font-weight:900;}
@@ -62,10 +65,34 @@ select{width:100%;padding:15px;background:#0a0f1d;border:1px solid var(--border)
 
 <header>
   <div class="wrap nav-flex">
-    <div class="logo">YUGO-Family <span style="color:var(--neon)">STUDIO</span></div>
-    <a href="kontakt.html" style="color:var(--neon);font-weight:700;">Kontaktiraj nas</a>
+    <div class="logo">YUGO-Family STUDIO</div>
+    <button class="menu-toggle" onclick="document.getElementById('overlayNav').classList.add('open')">☰ MENU</button>
   </div>
 </header>
+
+<!-- Overlay Meni -->
+<div class="overlay" id="overlayNav">
+  <div class="overlay-panel">
+    <span class="closebtn" onclick="document.getElementById('overlayNav').classList.remove('open')">×</span>
+    <div class="overlay-grid">
+      <a href="index.html">Početna</a>
+      <a href="onama.html">O nama</a>
+      <a href="kako-da-gledas.html">Kako da gledaš</a>
+      <a href="cjenovnik.html">Cjenovnik</a>
+      <a href="order.html">Narudžba</a>
+      <a href="business-iptv.html">Business IPTV</a>
+      <a href="aplikacije.html">Aplikacije</a>
+      <a href="komentari.html">Komentari</a>
+      <a href="placanje.html">Plaćanje</a>
+      <a href="status.html">Status sistema</a>
+      <a href="tim.html">Postani dio tima</a>
+      <a href="webstranica.html">Poruči WEB-PAGE</a>
+      <a href="faq.html">FAQ</a>
+      <a href="legal.html">Legal & Compliance</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap">

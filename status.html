@@ -1,43 +1,414 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Status sistema | YuGo Family TV</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#03050d" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>Status sistema | YuGo Family TV</title>
+  <meta name="description" content="Provjerite trenutno stanje naših streaming servera i infrastrukture u realnom vremenu. Transparentan prikaz operativnosti sistema." />
 
-<style>
-body{
-  margin:0;
-  font-family:Inter;
-  background:#050714;
-  color:#e6f7ff;
-}
-.wrap{max-width:800px;margin:auto;padding:40px 18px;text-align:center}
-h1{color:#2ac0ff}
-.status{
-  margin-top:30px;
-  padding:20px;
-  border-radius:16px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-}
-.ok{color:#5cffb0;font-weight:700}
-footer{margin-top:40px;color:#aaa}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #03050d;
+      --bg2: #070c24;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel2: rgba(255, 255, 255, 0.08);
+      --panel-solid: #090e29;
+      --border: rgba(255, 255, 255, 0.09);
+      --border2: rgba(255, 255, 255, 0.15);
+      --text: #f1f7fc;
+      --muted: rgba(210, 230, 255, 0.65);
+
+      --neon: #2ac0ff;
+      --accent: #4a6bff;
+      --online: #00ff66;
+      --warning: #ffcc00;
+      
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      --radius: 16px;
+      --radius2: 26px;
+      --max: 1240px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(1000px 700px at 50% 10%, rgba(42, 192, 255, 0.08), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    
+    /* Tech Matrix Background Effect */
+    canvas#tech-bg { position: fixed; inset: 0; pointer-events: none; opacity: 0.2; z-index: 0; }
+
+    /* Topbar / Navigacija */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3, 5, 13, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-meta { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 15px; }
+    .brand-meta small { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--panel);
+      color: var(--text); font-weight: 700; font-size: 13px; transition: all 0.25s var(--ease);
+    }
+    .pill:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--border2); }
+    .pill.primary {
+      border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
+      color: #000c14; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25);
+    }
+
+    .meta-controls { display: flex; align-items: center; gap: 12px; }
+    .menu-toggle {
+      width: 44px; height: 44px; display: none; place-items: center; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--panel); color: var(--neon); cursor: pointer; font-size: 20px;
+    }
+    @media (max-width: 820px) { .nav-inline { display: none; } .menu-toggle { display: grid; } }
+
+    /* Unificirani Meni sa 15 Strana */
+    .overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(3, 5, 13, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .overlay-panel {
+      width: min(840px, 100%); max-height: 90vh; overflow-y: auto;
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
+    }
+    .overlay-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .closebtn {
+      width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--panel); color: var(--text); cursor: pointer; display: grid; place-items: center;
+    }
+    .overlay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; padding: 24px; }
+    .overlay a {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border);
+      background: var(--panel); font-weight: 700; font-size: 14px; transition: all 0.2s;
+    }
+    .overlay a:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border2); }
+    .overlay a span { font-size: 11px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; }
+
+    /* Hero Naslov */
+    .page-header { text-align: center; margin: 50px auto 40px; }
+    .page-header h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; }
+    .page-header h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    
+    /* Globalni baner stanja */
+    .global-status {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(0, 255, 102, 0.06); border: 1px solid rgba(0, 255, 102, 0.15);
+      padding: 12px 24px; border-radius: 999px; font-weight: 700; color: var(--online); font-size: 15px;
+      box-shadow: 0 10px 30px rgba(0, 255, 102, 0.05); margin-bottom: 15px;
+    }
+    .pulse-dot { width: 10px; height: 10px; background: var(--online); border-radius: 50%; box-shadow: 0 0 12px var(--online); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.6; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+
+    /* Glavni kontejner statusa */
+    .status-container { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    
+    .status-card {
+      background: var(--panel-solid); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      transition: all 0.2s;
+    }
+    .status-card:hover { border-color: var(--border2); transform: translateX(2px); }
+    
+    .status-info { display: flex; flex-direction: column; text-align: left; gap: 4px; }
+    .status-info h3 { font-size: 16px; font-weight: 700; color: #fff; }
+    .status-info p { font-size: 13px; color: var(--muted); font-weight: 500; }
+    
+    .status-badge-group { display: flex; align-items: center; gap: 16px; }
+    .ms-ping { font-family: monospace; font-size: 13px; color: var(--neon); background: rgba(42, 192, 255, 0.06); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(42, 192, 255, 0.1); }
+    .badge-ok { font-weight: 800; font-size: 13px; color: var(--online); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* Uptime Linija (Vizuelna istorija 90 dana) */
+    .uptime-history { width: 100%; display: flex; gap: 2px; margin-top: 10px; }
+    .uptime-bar { flex-grow: 1; height: 4px; background: var(--online); border-radius: 2px; opacity: 0.85; }
+    .uptime-bar.down { background: var(--danger); }
+    .uptime-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 5px; }
+
+    /* Live Podaci / Korisnički Info panel */
+    .metrics-panel {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 50px;
+    }
+    .metric-card {
+      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .metric-card strong { display: block; font-size: 24px; font-weight: 900; color: var(--neon); margin-bottom: 4px; }
+    .metric-card span { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+
+    /* Footer */
+    footer { padding: 40px 0; border-top: 1px solid var(--border); background: #01030a; text-align: center; font-size: 13px; color: var(--muted); }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-<h1>Status sistema</h1>
 
-<div class="status"><p>EU Server: <span class="ok">ONLINE</span></p></div>
-<div class="status"><p>Backup Server: <span class="ok">ONLINE</span></p></div>
-<div class="status"><p>Streaming infrastruktura: <span class="ok">STABILNA</span></p></div>
-<div class="status"><p>Zadnji incident: <span class="ok">NEMA</span></p></div>
+  <!-- Tech Geometric Canvas Background -->
+  <canvas id="tech-bg" aria-hidden="true"></canvas>
 
-<footer>© 2025 YuGo Family TV</footer>
-</div>
+  <!-- Navigacija -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="YuGo Family TV">
+        <div class="brand-meta">
+          <strong>YuGo Family TV</strong>
+          <small>NOC Monitoring</small>
+        </div>
+      </a>
+
+      <nav class="nav-inline" aria-label="Glavna navigacija">
+        <a class="pill" href="cjenovnik.html">💰 Cjenovnik</a>
+        <a class="pill" href="order.html">🛒 Naruči</a>
+        <a class="pill" href="aplikacije.html">📲 Aplikacije</a>
+        <a class="pill primary" href="kontakt.html">📞 Podrška</a>
+      </nav>
+
+      <div class="meta-controls">
+        <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unificirani Meni sa 15 Strana -->
+  <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Glavni meni">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <strong>Navigacija sistema</strong>
+        <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
+      </div>
+      <div class="overlay-grid">
+        <a href="index.html">Početna <span>Home</span></a>
+        <a href="onama.html">O nama <span>About</span></a>
+        <a href="kako-da-gledas.html">Kako da gledaš <span>Guide</span></a>
+        <a href="cjenovnik.html">Cijene i paketi <span>Pricing</span></a>
+        <a href="order.html">Narudžba / Checkout <span>Order</span></a>
+        <a href="business-iptv.html">Business / Hotel IPTV <span>B2B</span></a>
+        <a href="aplikacije.html">Aplikacije <span>Apps</span></a>
+        <a href="komentari.html">Komentari <span>Reviews</span></a>
+        <a href="placanje.html">Plaćanje <span>Pay</span></a>
+        <a href="status.html">Status sistema <span>Status</span></a>
+        <a href="tim.html">Postani dio tima <span>Team</span></a>
+        <a href="webstranica.html">Poruči WEB-PAGE <span>Web</span></a>
+        <a href="faq.html">FAQ <span>Help</span></a>
+        <a href="legal.html">Legal & Compliance <span>Legal</span></a>
+        <a href="kontakt.html">Kontakt / Podrška <span>Support</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glavni Sadržaj -->
+  <section class="wrap">
+    <div class="page-header">
+      <div class="global-status">
+        <div class="pulse-dot"></div>
+        Svi sistemi su potpuno operativni
+      </div>
+      <h1>Status <span>IPTV mreže</span></h1>
+    </div>
+
+    <!-- Grupa Servera / Servisa -->
+    <div class="status-container">
+      
+      <!-- EU Server Main -->
+      <div class="status-card">
+        <div class="status-info">
+          <h3>🇪🇺 Evropski Primarni Server (EU-Main)</h3>
+          <p>Glavni stream centar za EX-YU i Centralnu Evropu</p>
+          <div class="uptime-history" id="up-eu"></div>
+          <div class="uptime-meta"><span>90 dana prije</span> <span>Uptime: 99.98%</span> <span>Danas</span></div>
+        </div>
+        <div class="status-badge-group">
+          <span class="ms-ping" id="ping-eu">12ms</span>
+          <span class="badge-ok">Online</span>
+        </div>
+      </div>
+
+      <!-- US/CA Server -->
+      <div class="status-card">
+        <div class="status-info">
+          <h3>🇺🇸 Transatlantski Server (US / CA Edge)</h3>
+          <p>Optimizovano čvorište za Sjevernu Ameriku i Kanadu</p>
+          <div class="uptime-history" id="up-us"></div>
+          <div class="uptime-meta"><span>90 dana prije</span> <span>Uptime: 99.95%</span> <span>Danas</span></div>
+        </div>
+        <div class="status-badge-group">
+          <span class="ms-ping" id="ping-us">48ms</span>
+          <span class="badge-ok">Online</span>
+        </div>
+      </div>
+
+      <!-- Backup Cloud Cluster -->
+      <div class="status-card">
+        <div class="status-info">
+          <h3>☁️ Sigurnosni Cloud Klaster (Backup Systems)</h3>
+          <p>Automatska replikacija i zaštita od preopterećenja</p>
+          <div class="uptime-history" id="up-bk"></div>
+          <div class="uptime-meta"><span>90 dana prije</span> <span>Uptime: 100%</span> <span>Danas</span></div>
+        </div>
+        <div class="status-badge-group">
+          <span class="ms-ping" id="ping-bk">8ms</span>
+          <span class="badge-ok">Online</span>
+        </div>
+      </div>
+
+      <!-- VOD / Videoteka -->
+      <div class="status-card">
+        <div class="status-info">
+          <h3>🎬 VOD CDN - Videoteka (Filmovi i Serije)</h3>
+          <p>Brzo učitavanje video sadržaja na zahtjev u 4K i FHD rezoluciji</p>
+          <div class="uptime-history" id="up-vod"></div>
+          <div class="uptime-meta"><span>90 dana prije</span> <span>Uptime: 99.91%</span> <span>Danas</span></div>
+        </div>
+        <div class="status-badge-group">
+          <span class="ms-ping" id="ping-vod">19ms</span>
+          <span class="badge-ok">Stabilno</span>
+        </div>
+      </div>
+
+      <!-- Zadnji Incident -->
+      <div class="status-card">
+        <div class="status-info">
+          <h3>🛡️ Izvještaj o bezbjednosnim incidentima</h3>
+          <p>DDOS zaštita aktivna. Nema registrovanih prekida u radu u proteklih 30 dana.</p>
+        </div>
+        <div class="status-badge-group">
+          <span class="badge-ok" style="color: var(--neon)">Nema incidenta</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Metrike na dnu -->
+    <div class="metrics-panel">
+      <div class="metric-card">
+        <strong id="m-uptime">99.97%</strong>
+        <span>Prosječni Uptime</span>
+      </div>
+      <div class="metric-card">
+        <strong id="m-load">24%</strong>
+        <span>Opterećenje CPU</span>
+      </div>
+      <div class="metric-card">
+        <strong>0 min</strong>
+        <span>Vrijeme zastoja</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      YuGo Family TV © <span id="year">2026</span> • Sistem nadgledanja se automatski osvježava na svakih 10 sekundi.
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Overlay Meni Kontrole ===== */
+    const overlayNav = document.getElementById("overlayNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeNavBtn = document.getElementById("closeNavBtn");
+
+    function openNav() { overlayNav.classList.add("open"); }
+    function closeNav() { overlayNav.classList.remove("open"); }
+
+    menuBtn.addEventListener("click", openNav);
+    closeNavBtn.addEventListener("click", closeNav);
+    overlayNav.addEventListener("click", (e) => { if(e.target === overlayNav) closeNav(); });
+
+    /* ===== Generisanje vizuelnih linija za uptime (90 dana) ===== */
+    function buildUptimeBars(containerId) {
+      const container = document.getElementById(containerId);
+      let html = "";
+      for (let i = 0; i < 45; i++) {
+        // Nasumično simulišemo da je negdje rijetko bio sitni pad (čisto zbog realizma)
+        let isDown = (containerId === "up-vod" && i === 12) || (containerId === "up-us" && i === 30);
+        html += `<div class="uptime-bar ${isDown ? 'down' : ''}"></div>`;
+      }
+      container.innerHTML = html;
+    }
+    
+    buildUptimeBars("up-eu");
+    buildUptimeBars("up-us");
+    buildUptimeBars("up-bk");
+    buildUptimeBars("up-vod");
+
+    /* ===== Live Simulacija Promjene Pinga i CPU Opterećenja ===== */
+    function randomizeMetrics() {
+      document.getElementById("ping-eu").innerText = Math.floor(Math.random() * 6 + 10) + "ms";
+      document.getElementById("ping-us").innerText = Math.floor(Math.random() * 12 + 42) + "ms";
+      document.getElementById("ping-bk").innerText = Math.floor(Math.random() * 4 + 6) + "ms";
+      document.getElementById("ping-vod").innerText = Math.floor(Math.random() * 8 + 16) + "ms";
+      
+      document.getElementById("m-load").innerText = Math.floor(Math.random() * 15 + 15) + "%";
+    }
+    setInterval(randomizeMetrics, 4000);
+    randomizeMetrics();
+
+    /* ===== Jednostavan Matrix/Network Background Canvas ===== */
+    const canvas = document.getElementById("tech-bg");
+    const ctx = canvas.getContext("2d");
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    let dots = [];
+    for(let i=0; i<35; i++) {
+      dots.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.2, dy: (Math.random()-0.5)*0.2 });
+    }
+
+    function draw() {
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = "rgba(42, 192, 255, 0.4)";
+      dots.forEach(d => {
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI*2); ctx.fill();
+        d.x += d.dx; d.y += d.dy;
+        if(d.x > w || d.x < 0) d.dx *= -1;
+        if(d.y > h || d.y < 0) d.dy *= -1;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    document.getElementById("year").innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>

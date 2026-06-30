@@ -1,82 +1,194 @@
 <!doctype html>
 <html lang="bs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAQ – Česta pitanja | YuGo Family TV</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#03050d" />
 
-<style>
-:root{
-  --bg:#03050d;
-  --neon:#00c8ff;
-  --panel:rgba(255,255,255,0.05);
-  --border:rgba(255,255,255,0.1);
-  --muted:#94a3b8;
-}
+  <title>FAQ – Česta pitanja | YuGo Family TV</title>
+  <meta name="description" content="Imate pitanja o YuGo Family TV usluzi? Ovdje pronađite odgovore na najčešća pitanja o radu, uređajima i podršci." />
 
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:#fff;
-  line-height:1.6;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-.wrap{max-width:800px;margin:auto;padding:60px 20px;}
-h1{text-align:center;font-size:40px;margin-bottom:40px;letter-spacing:-1px;}
-h1 span{color:var(--neon);}
+  <style>
+    :root {
+      --bg: #03050d; --bg2: #070c24;
+      --panel: rgba(255, 255, 255, 0.04); --panel2: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.09); --border2: rgba(255, 255, 255, 0.15);
+      --text: #f1f7fc; --muted: rgba(210, 230, 255, 0.65);
+      --neon: #2ac0ff; --accent: #4a6bff;
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      --radius2: 26px; --max: 1240px; --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-/* FAQ Kartice */
-.faq-container{display:flex;flex-direction:column;gap:15px;}
-.faq{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px 25px;
-  cursor:pointer;
-  transition:all 0.3s ease;
-}
-.faq:hover{border-color:var(--neon);background:rgba(0,200,255,0.03);}
-.faq h3{margin:0;font-size:16px;display:flex;justify-content:space-between;align-items:center;}
-.faq p{display:none;color:var(--muted);margin:15px 0 0 0;font-size:14px;border-top:1px solid var(--border);padding-top:15px;}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: 'Inter', sans-serif; color: var(--text); background-color: var(--bg);
+      background-image: radial-gradient(1000px 700px at 10% 10%, rgba(74, 107, 255, 0.18), transparent 60%), radial-gradient(1000px 700px at 90% 15%, rgba(42, 192, 255, 0.15), transparent 55%), linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x: hidden; display: flex; flex-direction: column;
+    }
 
-/* Aktivno stanje */
-.faq.active p{display:block;}
-.faq.active h3::after{content:'−';}
-.faq h3::after{content:'+';color:var(--neon);font-size:20px;}
+    /* Shared Components (Header, Footer, Floating) - Identicno kao na ostalim stranicama */
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; width: 100%; }
+    .bg-grid { position: fixed; inset: -20%; background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; transform: rotate(-8deg); opacity: 0.15; pointer-events: none; z-index: -3; }
+    .aurora { position: fixed; inset: -40%; background: radial-gradient(closest-side at 30% 30%, rgba(42, 192, 255, 0.18), transparent 60%), radial-gradient(closest-side at 75% 45%, rgba(74, 107, 255, 0.15), transparent 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; z-index: -4; animation: drift 16s var(--ease) infinite alternate; }
+    @keyframes drift { from { transform: translate3d(-3%, -2%, 0) scale(1); } to { transform: translate3d(3%, 2%, 0) scale(1.05); } }
+    canvas.stars { position: fixed; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: screen; z-index: -2; }
 
-footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px;}
-</style>
+    /* Navigacija */
+    .topbar { position: sticky; top: 0; z-index: 100; background: rgba(3, 5, 13, 0.75); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .topbar-inner { max-width: var(--max); margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-meta strong { font-weight: 900; font-size: 15px; }
+    .brand-meta small { color: var(--muted); font-size: 11px; text-transform: uppercase; display: block; }
+    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .pill { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel); font-weight: 700; font-size: 13px; transition: all 0.25s var(--ease); }
+    .pill:hover { background: var(--panel2); }
+    .pill.primary { background: linear-gradient(90deg, var(--neon), var(--accent)); color: #000; border: none; }
+    .menu-toggle { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel); color: var(--neon); cursor: pointer; }
+    @media (max-width: 820px) { .nav-inline { display: none; } .menu-toggle { display: grid; place-items: center; } }
+
+    /* Overlay */
+    .overlay { position: fixed; inset: 0; z-index: 999; background: rgba(3, 5, 13, 0.96); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .overlay-panel { width: min(840px, 100%); border-radius: var(--radius2); border: 1px solid var(--border2); background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)); padding: 24px; position: relative; }
+    .closebtn { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); color: #fff; cursor: pointer; }
+    .overlay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 30px; }
+    .overlay-grid a { display: block; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border); background: var(--panel); font-weight: 700; }
+
+    /* FAQ Stil */
+    main { flex: 1; padding: 80px 24px; }
+    .header-text { text-align: center; margin-bottom: 60px; }
+    .header-text h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 900; letter-spacing: -2px; margin: 0 0 16px; }
+    .header-text span { color: var(--neon); }
+    .header-text p { color: var(--muted); font-size: 18px; }
+
+    .faq-container { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    .faq {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: all 0.3s var(--ease);
+    }
+    .faq:hover { border-color: var(--border2); background: rgba(255,255,255,0.06); }
+    .faq-question {
+      padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 16px;
+    }
+    .faq-question::after { content: '+'; color: var(--neon); font-size: 20px; transition: transform 0.3s; }
+    .faq.active .faq-question::after { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); padding: 0 24px; color: var(--muted); line-height: 1.7; }
+    .faq.active .faq-answer { max-height: 200px; padding-bottom: 24px; }
+
+    /* Footer & Floats */
+    footer { padding: 48px 0; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+    .float { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 90; }
+    .float a, .float button { padding: 12px 18px; border-radius: 999px; font-weight: 800; font-size: 13px; color: #fff; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.2s; cursor: pointer; }
+    .whatsapp { background: rgba(37, 211, 102, 0.85); }
+    .email { background: rgba(74, 107, 255, 0.85); }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-  <h1>Česta <span>pitanja</span></h1>
+  <div class="aurora"></div>
+  <div class="bg-grid"></div>
+  <canvas class="stars" id="stars"></canvas>
 
-  <div class="faq-container">
-    <div class="faq"><h3>Da li IPTV radi u Njemačkoj i EU?</h3><p>Da. YuGo Family TV je potpuno optimizovan za rad u Njemačkoj, Austriji, Švicarskoj i cijeloj EU. Sve što vam je potrebno je stabilna internet konekcija.</p></div>
-
-    <div class="faq"><h3>Na koliko uređaja mogu gledati?</h3><p>Standardna pretplata je namijenjena za jedan uređaj istovremeno. Za potrebe više uređaja ili poslovne prostore, nudimo posebne Business pakete.</p></div>
-
-    <div class="faq"><h3>Da li je potreban ugovor?</h3><p>Apsolutno ne. Naš model poslovanja se bazira na povjerenju – nema ugovora ni dugoročnih obaveza. Pretplatu produžavate isključivo po vašoj želji.</p></div>
-
-    <div class="faq"><h3>Koja brzina interneta je potrebna?</h3><p>Za besprijekoran HD doživljaj preporučujemo minimalno 10 Mbps, dok je za 4K sadržaje potrebno obezbijediti stabilnih 25 Mbps.</p></div>
-
-    <div class="faq"><h3>Da li nudite tehničku podršku?</h3><p>Da, uvijek smo tu za vas. Tehnička podrška je dostupna 24/7 putem WhatsAppa i emaila kako biste bezbrižno uživali u našem programu.</p></div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="logoyf.png" alt="Logo" style="height:40px; display:none;" onerror="this.style.display='none'">
+        <div class="brand-meta"><strong>YuGo Family TV</strong><small>Podrška & Pitanja</small></div>
+      </a>
+      <nav class="nav-inline">
+        <a class="pill" href="index.html">Početna</a>
+        <a class="pill primary" href="order.html">Naruči</a>
+      </nav>
+      <button class="menu-toggle" id="menuBtn">☰</button>
+    </div>
   </div>
 
-  <footer>© 2026 YuGo Family TV • Premium IPTV Servis</footer>
-</div>
+  <div class="overlay" id="overlayNav">
+    <div class="overlay-panel">
+      <button class="closebtn" id="closeNavBtn">✕</button>
+      <strong>Navigacija</strong>
+      <div class="overlay-grid">
+        <a href="index.html">Početna</a>
+        <a href="faq.html">FAQ</a>
+        <a href="kontakt.html">Kontakt</a>
+      </div>
+    </div>
+  </div>
 
-<script>
-document.querySelectorAll(".faq").forEach(faq => {
-  faq.addEventListener("click", () => {
-    // Zatvori ostale prije otvaranja novog (opciono, za ljepši UX)
-    document.querySelectorAll(".faq").forEach(f => { if(f !== faq) f.classList.remove('active'); });
-    faq.classList.toggle("active");
-  });
-});
-</script>
+  <main class="wrap">
+    <section class="reveal">
+      <div class="header-text">
+        <h1>Česta <span>pitanja</span></h1>
+        <p>Sve što trebate znati o YuGo Family TV servisu na jednom mjestu.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- FAQ Item 1 -->
+        <div class="faq">
+          <div class="faq-question">Da li IPTV radi u Njemačkoj i EU?</div>
+          <div class="faq-answer">Da. YuGo Family TV je potpuno optimizovan za rad u Njemačkoj, Austriji, Švicarskoj i cijeloj EU. Sve što vam je potrebno je stabilna internet konekcija.</div>
+        </div>
+        <!-- FAQ Item 2 -->
+        <div class="faq">
+          <div class="faq-question">Na koliko uređaja mogu gledati?</div>
+          <div class="faq-answer">Standardna pretplata je namijenjena za jedan uređaj istovremeno. Za potrebe više uređaja ili poslovne prostore, nudimo posebne Business pakete.</div>
+        </div>
+        <!-- FAQ Item 3 -->
+        <div class="faq">
+          <div class="faq-question">Da li je potreban ugovor?</div>
+          <div class="faq-answer">Apsolutno ne. Naš model poslovanja se bazira na povjerenju – nema ugovora ni dugoročnih obaveza. Pretplatu produžavate isključivo po vašoj želji.</div>
+        </div>
+        <!-- FAQ Item 4 -->
+        <div class="faq">
+          <div class="faq-question">Koja brzina interneta je potrebna?</div>
+          <div class="faq-answer">Za besprijekoran HD doživljaj preporučujemo minimalno 10 Mbps, dok je za 4K sadržaje potrebno obezbijediti stabilnih 25 Mbps.</div>
+        </div>
+        <!-- FAQ Item 5 -->
+        <div class="faq">
+          <div class="faq-question">Da li nudite tehničku podršku?</div>
+          <div class="faq-answer">Da, uvijek smo tu za vas. Tehnička podrška je dostupna 24/7 putem WhatsAppa i emaila kako biste bezbrižno uživali u našem programu.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 YuGo Family TV • Premium IPTV Servis</footer>
+
+  <div class="float">
+    <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp</a>
+    <a class="email" href="mailto:support@yugofamily.tv">✉️ Email</a>
+  </div>
+
+  <script>
+    // Navigacija
+    document.getElementById("menuBtn").onclick = () => document.getElementById("overlayNav").classList.add("open");
+    document.getElementById("closeNavBtn").onclick = () => document.getElementById("overlayNav").classList.remove("open");
+
+    // FAQ Akordeon
+    document.querySelectorAll(".faq").forEach(faq => {
+      faq.addEventListener("click", () => {
+        document.querySelectorAll(".faq").forEach(f => { if(f !== faq) f.classList.remove('active'); });
+        faq.classList.toggle("active");
+      });
+    });
+
+    // Zvijezde & Animacije
+    const c = document.getElementById("stars");
+    const ctx = c.getContext("2d");
+    let W, H, stars = [];
+    function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; stars = Array.from({length: 80}, () => ({x: Math.random()*W, y: Math.random()*H, s: Math.random()*0.3})); }
+    window.onresize = resize; resize();
+    function draw(){ ctx.clearRect(0,0,W,H); stars.forEach(st => { st.y += st.s; if(st.y > H) st.y = 0; ctx.fillStyle="#2ac0ff"; ctx.globalAlpha=0.3; ctx.beginPath(); ctx.arc(st.x, st.y, 1, 0, Math.PI*2); ctx.fill(); }); requestAnimationFrame(draw); }
+    draw();
+    setTimeout(() => document.querySelector('.reveal').classList.add('in'), 100);
+  </script>
 </body>
 </html>

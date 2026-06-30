@@ -25,6 +25,7 @@
       --panel: rgba(255, 255, 255, 0.04);
       --panel2: rgba(255, 255, 255, 0.08);
       --border: rgba(255, 255, 255, 0.09);
+      --border-hover: rgba(42, 192, 255, 0.3);
       --border2: rgba(255, 255, 255, 0.15);
       --text: #f1f7fc;
       --muted: rgba(210, 230, 255, 0.65);
@@ -34,9 +35,11 @@
       --mag: #a855f7;
       --ok: #3bf7a0;
       --warn: #ffd56b;
+      --danger: #ff4a4a;
 
       --shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
       --glow: 0 0 80px rgba(42, 192, 255, 0.15);
+      --glow-strong: 0 0 30px rgba(42, 192, 255, 0.4);
       --radius: 20px;
       --radius2: 26px;
       --max: 1240px;
@@ -96,37 +99,38 @@
       z-index: -2;
     }
 
-    /* Topbar i Navigacija */
+    /* Topbar i Navigacija (Isti kao na Indexu) */
     .topbar {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(3, 5, 13, 0.75);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: rgba(3, 5, 13, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .topbar-inner {
       max-width: var(--max); margin: 0 auto; padding: 14px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 12px; transition: transform 0.2s; }
+    .brand:hover { transform: scale(1.02); }
     .brand img { height: 40px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
     .brand-meta { display: flex; flex-direction: column; line-height: 1.2; }
-    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 15px; }
+    .brand-meta strong { font-weight: 900; letter-spacing: 0.5px; font-size: 16px; }
     .brand-meta small { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
 
-    .nav-inline { display: flex; align-items: center; gap: 10px; }
+    .nav-inline { display: flex; align-items: center; gap: 12px; }
     .pill {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 16px; border-radius: 999px;
+      padding: 8px 18px; border-radius: 999px;
       border: 1px solid var(--border); background: var(--panel);
       color: var(--text); font-weight: 700; font-size: 13px;
-      transition: all 0.25s var(--ease); user-select: none;
+      transition: all 0.3s var(--ease); user-select: none;
     }
-    .pill:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--border2); }
+    .pill:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border-hover); box-shadow: 0 4px 15px rgba(42, 192, 255, 0.1); }
     .pill.primary {
       border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
       color: #000c14; box-shadow: 0 4px 20px rgba(42, 192, 255, 0.25);
     }
-    .pill.primary:hover { box-shadow: 0 6px 24px rgba(42, 192, 255, 0.4); transform: translateY(-2px); }
+    .pill.primary:hover { box-shadow: 0 6px 24px rgba(42, 192, 255, 0.4); transform: translateY(-2px) scale(1.02); }
 
     .menu-toggle {
       display: none; width: 44px; height: 44px;
@@ -155,14 +159,14 @@
     .overlay-panel {
       width: min(840px, 100%); max-height: 90vh; overflow-y: auto;
       border-radius: var(--radius2); border: 1px solid var(--border2);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
       box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
     }
     .overlay-top {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      padding: 24px; border-bottom: 1px solid var(--border);
     }
-    .overlay-top strong { font-size: 18px; font-weight: 800; }
+    .overlay-top strong { font-size: 20px; font-weight: 800; }
     .closebtn {
       width: 40px; height: 40px; border-radius: 10px;
       border: 1px solid var(--border); background: var(--panel);
@@ -176,140 +180,174 @@
     }
     .overlay a {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border);
+      padding: 16px 20px; border-radius: 14px; border: 1px solid var(--border);
       background: var(--panel); font-weight: 700; font-size: 14px;
       transition: all 0.2s var(--ease);
     }
-    .overlay a:hover { transform: translateY(-2px); background: var(--panel2); border-color: var(--border2); color: #fff; }
+    .overlay a:hover { transform: translateY(-3px); background: var(--panel2); border-color: var(--border-hover); color: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     .overlay a span {
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       color: var(--muted); border: 1px solid var(--border);
-      padding: 3px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.2);
+      padding: 4px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.3);
     }
 
     /* Sekcije i Tipografija */
-    section { padding: 50px 0; }
-    .section-head { margin-bottom: 32px; }
+    section { padding: 80px 0; }
+    .section-head { margin-bottom: 48px; }
     .kicker {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px; border-radius: 999px;
-      border: 1px solid rgba(42, 192, 255, 0.2);
-      background: rgba(42, 192, 255, 0.05);
-      color: var(--neon); font-weight: 800; font-size: 11px;
-      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      border: 1px solid rgba(42, 192, 255, 0.3);
+      background: rgba(42, 192, 255, 0.08);
+      color: var(--neon); font-weight: 800; font-size: 12px;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px;
     }
-    h1, h2 { font-weight: 900; letter-spacing: -0.5px; line-height: 1.2; }
-    h2 { font-size: clamp(24px, 2.8vw, 36px); margin-bottom: 8px; }
-    .lead { color: var(--muted); font-size: 16px; font-weight: 500; max-width: 760px; line-height: 1.6; }
+    h1, h2 { font-weight: 900; letter-spacing: -1px; line-height: 1.15; }
+    h2 { font-size: clamp(30px, 3.5vw, 46px); margin-bottom: 12px; }
+    .lead { color: var(--muted); font-size: 17px; font-weight: 500; max-width: 760px; line-height: 1.6; }
 
     /* Hero Blok */
     .hero-block {
       border-radius: var(--radius2); border: 1px solid var(--border2);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-      box-shadow: var(--shadow); padding: 48px 40px; margin-top: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      box-shadow: var(--shadow), var(--glow); padding: 56px 48px; margin-top: 40px; position: relative; overflow: hidden;
     }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+    .hero-block::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; position: relative; z-index: 2; }
     @media (max-width: 960px) {
-      .hero-block { padding: 32px 24px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-block { padding: 40px 24px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     }
-    .hero-grid h1 { font-size: clamp(32px, 4.2vw, 52px); font-weight: 950; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
-    .hero-grid h1 span { background: linear-gradient(90deg, var(--neon), #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero-grid p { color: var(--muted); font-size: 16px; font-weight: 500; line-height: 1.6; max-width: 620px; }
+    .hero-grid h1 { font-size: clamp(38px, 5vw, 66px); font-weight: 950; letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; }
+    .hero-grid h1 span { background: linear-gradient(90deg, var(--neon), #ffffff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-grid p { color: var(--muted); font-size: 17px; font-weight: 500; line-height: 1.6; max-width: 620px; }
 
     /* Stats komponente */
-    .stats-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+    .stats-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
     .stat-box {
-      padding: 16px 24px; border-radius: 16px; border: 1px solid var(--border);
-      background: rgba(7, 12, 36, 0.5); min-width: 160px; flex: 1;
+      padding: 20px 24px; border-radius: 16px; border: 1px solid var(--border);
+      background: rgba(7, 12, 36, 0.6); backdrop-filter: blur(10px); min-width: 160px; flex: 1;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s;
     }
-    .stat-box .num { font-size: 30px; font-weight: 900; color: var(--neon); letter-spacing: -1px; margin-bottom: 4px; }
-    .stat-box .lbl { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; }
+    .stat-box:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+    .stat-box .num { font-size: 36px; font-weight: 900; color: var(--neon); letter-spacing: -1px; margin-bottom: 6px; }
+    .stat-box .lbl { font-size: 13px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
     /* Team slika omotač */
     .team-img-wrap {
       border-radius: var(--radius); border: 1px solid var(--border2);
-      background: var(--panel2); padding: 12px; position: relative; overflow: hidden;
-      box-shadow: var(--glow);
+      background: rgba(4, 8, 24, 0.5); padding: 16px; position: relative; overflow: hidden;
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.02);
     }
     .team-img-wrap img { width: 100%; height: auto; display: block; border-radius: 12px; filter: saturate(1.05); }
 
     /* Grid i Kartice */
-    .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
     .card-item {
       border-radius: var(--radius); border: 1px solid var(--border);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-      padding: 24px; transition: all 0.2s var(--ease);
+      padding: 32px; transition: all 0.3s var(--ease); position: relative; overflow: hidden;
     }
-    .card-item:hover { transform: translateY(-2px); border-color: var(--border2); background: var(--panel2); }
-    .card-item h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: #fff; letter-spacing: -0.2px; }
-    .card-item p { color: var(--muted); font-size: 14px; line-height: 1.6; font-weight: 500; }
-    
-    /* Istaknuti podnaslovi unutar kartica */
-    .card-item strong { display: block; font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--neon); }
+    .card-item:hover { transform: translateY(-5px); border-color: var(--border-hover); background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)); }
+    .card-item h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; letter-spacing: -0.2px; }
+    .card-item p { color: var(--muted); font-size: 15px; line-height: 1.6; font-weight: 500; }
+    .card-item strong { display: block; font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--neon); }
 
     /* Timeline / Razvoj */
-    .timeline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .timeline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
     .time-node {
-      padding: 24px; border-radius: var(--radius); border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02); position: relative;
+      padding: 32px; border-radius: var(--radius); border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); position: relative; transition: all 0.3s;
     }
+    .time-node:hover { transform: translateY(-5px); border-color: var(--border-hover); background: var(--panel2); }
     .time-node .year {
-      display: inline-block; padding: 4px 10px; border-radius: 8px;
-      background: rgba(74, 107, 255, 0.15); border: 1px solid rgba(74, 107, 255, 0.3);
-      color: #8cb4ff; font-weight: 900; font-size: 14px; margin-bottom: 14px;
+      display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; border-radius: 999px;
+      background: rgba(42, 192, 255, 0.1); border: 1px solid rgba(42, 192, 255, 0.3);
+      color: var(--neon); font-weight: 900; font-size: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(42,192,255,0.2);
     }
-    .time-node h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
-    .time-node p { color: var(--muted); font-size: 13px; line-height: 1.5; font-weight: 500; }
+    .time-node h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .time-node p { color: var(--muted); font-size: 15px; line-height: 1.6; font-weight: 500; }
+
+    /* Recenzije stil (Sklapano s Indexom) */
+    .quote { padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel); transition: transform 0.3s; }
+    .quote:hover { transform: translateY(-5px); border-color: var(--border-hover); background: var(--panel2); }
+    .quote p { margin: 0; color: var(--text); font-size: 15px; font-weight: 500; line-height: 1.7; font-style: italic; }
+    .quote .who-wrap { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .quote .who { display: flex; align-items: center; gap: 12px; }
+    .quote .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--neon), var(--mag)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff; }
+    .quote .details span { display: block; font-size: 14px; font-weight: 800; }
+    .quote .details small { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .stars5 { color: var(--warn); letter-spacing: 2px; font-size: 16px; }
 
     /* Dugmad i akcije */
-    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .btn-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; justify-content: center;}
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 24px; border-radius: 14px; font-weight: 800; font-size: 14px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 28px; border-radius: 14px; font-weight: 800; font-size: 15px;
       border: 1px solid var(--border2); background: var(--panel2);
-      color: var(--text); transition: all 0.2s var(--ease); user-select: none; cursor: pointer;
+      color: var(--text); transition: all 0.3s var(--ease); user-select: none; cursor: pointer;
     }
-    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+    .btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     .btn.primary {
       border: none; background: linear-gradient(90deg, var(--neon), var(--accent));
-      color: #000c14; box-shadow: 0 4px 25px rgba(42, 192, 255, 0.25);
+      color: #000c14; box-shadow: 0 4px 25px rgba(42, 192, 255, 0.3);
     }
-    .btn.primary:hover { filter: saturate(1.15); box-shadow: 0 6px 30px rgba(42, 192, 255, 0.45); }
+    .btn.primary:hover { filter: brightness(1.1); box-shadow: 0 8px 35px rgba(42, 192, 255, 0.5); }
 
-    /* Recenzije stil */
-    .review-node { background: var(--panel); border: 1px solid var(--border); padding: 20px; border-radius: 16px; }
-    .review-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--muted); }
-    .stars { color: var(--warn); letter-spacing: 1px; }
-
-    /* Footer */
-    footer { padding: 48px 0 32px; border-top: 1px solid var(--border); background: #01030a; margin-top: 40px; }
-    .foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-    .foot strong { font-size: 16px; font-weight: 900; }
-    .foot small { color: var(--muted); font-weight: 500; display: block; margin-top: 6px; font-size: 13px; }
-    .foot-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .foot-links a {
-      font-size: 12px; font-weight: 700; border: 1px solid var(--border);
-      padding: 6px 14px; border-radius: 999px; background: var(--panel); transition: all 0.2s;
+    /* Završni CTA */
+    .final-cta {
+      border-radius: var(--radius2); border: 1px solid var(--border2);
+      background: linear-gradient(135deg, rgba(42, 192, 255, 0.1), rgba(168, 85, 247, 0.05), rgba(0,0,0,0));
+      box-shadow: var(--shadow), var(--glow); padding: 60px 48px; position: relative; overflow: hidden;
+      text-align: center;
     }
-    .foot-links a:hover { background: var(--panel2); border-color: var(--border2); }
-    .copy { margin-top: 32px; color: rgba(210, 230, 255, 0.4); font-weight: 500; font-size: 12px; }
-    .copy a { color: var(--muted); font-weight: 600; }
+    .final-cta::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(800px 400px at 50% 0%, rgba(42, 192, 255, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .final-cta h2 { font-size: clamp(32px, 4vw, 48px); margin: 0; }
+    .final-cta p { margin: 0; color: var(--muted); font-weight: 500; font-size: 18px; max-width: 700px; line-height: 1.6; }
+
+    /* Footer (Kompletan iz Indexa) */
+    footer { padding: 60px 0 40px; border-top: 1px solid var(--border); background: #01030a; position: relative; margin-top: 60px; }
+    .foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .foot-brand { max-width: 300px; }
+    .foot-brand strong { font-size: 20px; font-weight: 900; display: block; margin-bottom: 12px; }
+    .foot-brand p { color: var(--muted); font-weight: 500; font-size: 14px; line-height: 1.6; margin: 0; }
+    .foot-links-wrap { display: flex; gap: 40px; flex-wrap: wrap; }
+    .foot-col { display: flex; flex-direction: column; gap: 12px; }
+    .foot-col strong { font-size: 14px; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .foot-col a { font-size: 14px; font-weight: 600; color: var(--muted); transition: color 0.2s; }
+    .foot-col a:hover { color: var(--neon); }
+    
+    .copy { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; color: rgba(210, 230, 255, 0.4); font-weight: 500; font-size: 13px; }
+    .copy a { color: var(--muted); font-weight: 600; transition: color 0.2s; }
+    .copy a:hover { color: #fff; }
 
     /* Plutajuća dugmad */
-    .float { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 90; }
-    .float a {
-      padding: 12px 18px; border-radius: 999px; font-weight: 800; font-size: 13px;
-      color: #fff; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.2s var(--ease);
+    .float { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 90; }
+    .float a, .float button {
+      padding: 14px 20px; border-radius: 999px; font-weight: 800; font-size: 14px;
+      color: #fff; display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: all 0.3s var(--ease); cursor: pointer;
     }
-    .float a:hover { transform: translateY(-2px); filter: brightness(1.1); }
-    .whatsapp { background: rgba(37, 211, 102, 0.85); border-color: rgba(37, 211, 102, 0.2); }
+    .float a:hover, .float button:hover { transform: translateY(-4px) scale(1.05); filter: brightness(1.15); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+    .whatsapp { background: rgba(37, 211, 102, 0.85); border-color: rgba(37, 211, 102, 0.3); }
+    .float button { background: rgba(255, 255, 255, 0.1); color: var(--text); font-family: inherit; }
 
     /* Scroll Reveal */
-    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
+    .reveal { opacity: 0; transform: translateY(30px) scale(0.98); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora, .reveal, .btn, .pill, .card-item, .time-node, .overlay a, .quote { animation: none !important; transition: none !important; transform: none !important; opacity: 1 !important; }
+    }
   </style>
 </head>
 
@@ -322,7 +360,7 @@
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html" aria-label="YuGo Family TV">
-        <img src="logoyf.png" alt="YuGo Family TV logo" loading="eager" />
+        <img src="logoyf.png" alt="YuGo Family TV logo" loading="eager" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNGE2YmZmIiByeD0iOCIvPjwvc3ZnPg=='" />
         <div class="brand-meta">
           <strong>YuGo Family TV</strong>
           <small>Vaša porodica • Vaša televizija</small>
@@ -333,7 +371,7 @@
         <a class="pill" href="status.html">📡 Status</a>
         <a class="pill" href="aplikacije.html">📱 Aplikacije</a>
         <a class="pill" href="business-iptv.html">🏨 Business</a>
-        <a class="pill primary" href="order.html">🛒 Naruči</a>
+        <a class="pill primary" href="order.html">🛒 Naruči odmah</a>
       </nav>
 
       <button class="menu-toggle" id="menuBtn" type="button" aria-label="Otvori meni">☰</button>
@@ -344,7 +382,7 @@
   <div class="overlay" id="overlayNav" role="dialog" aria-modal="true" aria-label="Meni">
     <div class="overlay-panel">
       <div class="overlay-top">
-        <strong>Navigacija</strong>
+        <strong>Glavni Meni</strong>
         <button class="closebtn" id="closeNavBtn" type="button" aria-label="Zatvori meni">✕</button>
       </div>
       <div class="overlay-grid">
@@ -372,7 +410,7 @@
     <header class="hero-block">
       <div class="hero-grid">
         <div>
-          <div class="badge" style="background:rgba(42, 192, 255, 0.1); color:var(--neon); border:1px solid rgba(42,192,255,0.2); padding:6px 14px; border-radius:999px; font-weight:800; font-size:11px; letter-spacing:0.8px; text-transform:uppercase; display:inline-block; margin-bottom:14px;">UPOZNAJTE NAŠ TIM</div>
+          <div class="kicker" style="margin-bottom: 20px;">Upozajmo se</div>
           <h1>Mi smo <span>YUGO-Family</span></h1>
           <p>
             Dugogodišnje iskustvo u medijima i stabilnoj distribuciji digitalnog sadržaja. 
@@ -386,7 +424,7 @@
             </div>
             <div class="stat-box">
               <div class="num" id="partnersCount">0+</div>
-              <div class="lbl">Partnera širom svijeta</div>
+              <div class="lbl">Partnera u svijetu</div>
             </div>
             <div class="stat-box">
               <div class="num">9+</div>
@@ -396,20 +434,20 @@
         </div>
 
         <div class="team-img-wrap">
-          <img src="yfteam.png" alt="YUGO Family stručni tim na okupu" loading="eager" />
+          <img src="yfteam.png" alt="YUGO Family stručni tim na okupu" loading="eager" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzA3MGMyNCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjUpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+U2xpa2EgdGltYTwvdGV4dD48L3N2Zz4='" />
         </div>
       </div>
     </header>
 
     <!-- NAŠA PRIČA -->
     <section class="reveal">
-      <div class="card-item" style="padding: 32px; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+      <div class="card-item" style="padding: 48px; background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0)); border-color: rgba(42, 192, 255, 0.2);">
         <div class="kicker">Istorijat</div>
         <h2>Naša priča</h2>
-        <p class="lead" style="font-size: 15px; margin-bottom: 14px;">
+        <p class="lead" style="font-size: 16px; margin-bottom: 16px; max-width: 100%;">
           YUGO-Family TV platforma nastala je iz čiste želje da se korisnicima na globalnom nivou ponudi ono što je godinama nedostajalo na tržištu – apsolutna stabilnost i pouzdanost prilikom pristupa digitalnim medijima. 
         </p>
-        <p class="lead" style="font-size: 15px;">
+        <p class="lead" style="font-size: 16px; max-width: 100%;">
           Kroz mukotrpan rad, kreirali smo vlastitu robusnu serversku arhitekturu, razvili široku mrežu regionalnih i evropskih partnera, te obučili tehničku podršku koja ne poznaje pojam "neradni dan". Naš inženjerski tim konstantno radi na optimizaciji bitrejta i smanjenju kašnjenja signala.
         </p>
       </div>
@@ -425,19 +463,19 @@
 
       <div class="grid-layout">
         <div class="card-item">
-          <h3>🛡️ Pouzdanost</h3>
+          <h3 style="font-size: 24px; margin-bottom: 16px;">🛡️ Pouzdanost</h3>
           <p>Privatni routing i redundantni serveri osiguravaju da vaši omiljeni kanali rade onda kada je to najpotrebnije.</p>
         </div>
         <div class="card-item">
-          <h3>💎 Transparentnost</h3>
+          <h3 style="font-size: 24px; margin-bottom: 16px;">💎 Transparentnost</h3>
           <p>Bez skrivenih troškova, bez ugovornih obaveza i sa maksimalno fer odnosom prema svakom klijentu i partneru.</p>
         </div>
         <div class="card-item">
-          <h3>⚡ Inovacija</h3>
+          <h3 style="font-size: 24px; margin-bottom: 16px;">⚡ Inovacija</h3>
           <p>Konstantno implementiramo najnovije streaming kodeke i optimizujemo aplikacije za fluidno korisničko iskustvo.</p>
         </div>
         <div class="card-item">
-          <h3>📈 Rast partnera</h3>
+          <h3 style="font-size: 24px; margin-bottom: 16px;">📈 Rast partnera</h3>
           <p>Naš jedinstveni partner program omogućava saradnicima stabilne, dugoročne i visoke pasivne prihode.</p>
         </div>
       </div>
@@ -498,7 +536,7 @@
       </div>
     </section>
 
-    <!-- ISKUSTVA KORISNIKA -->
+    <!-- ISKUSTVA KORISNIKA (Poboljšan dizajn kao na Indexu) -->
     <section class="reveal">
       <div class="section-head">
         <div class="kicker">Recenzije</div>
@@ -506,21 +544,48 @@
       </div>
 
       <div class="grid-layout">
-        <div class="card-item review-node">
+        <div class="quote">
           <p>“Nevjerovatno brza aktivacija i stabilna usluga. Na njemačkom internetu radi bez greške, promjena kanala je trenutna.”</p>
-          <div class="review-meta"><span>Marko, Njemačka</span><span class="stars">★★★★★</span></div>
+          <div class="who-wrap">
+            <div class="who">
+              <div class="avatar">MA</div>
+              <div class="details"><span>Marko</span><small>Njemačka</small></div>
+            </div>
+            <div class="stars5">★★★★★</div>
+          </div>
         </div>
-        <div class="card-item review-node">
+        
+        <div class="quote">
           <p>“Uslugu koristim već duži vremenski period i nemam apsolutno nijednu zamjerku. Podrška rješava sve upite odmah.”</p>
-          <div class="review-meta"><span>Adnan, Austrija</span><span class="stars">★★★★★</span></div>
+          <div class="who-wrap">
+            <div class="who">
+              <div class="avatar" style="background: linear-gradient(135deg, var(--accent), #ff4a4a);">AD</div>
+              <div class="details"><span>Adnan</span><small>Austrija</small></div>
+            </div>
+            <div class="stars5">★★★★★</div>
+          </div>
         </div>
-        <div class="card-item review-node">
+        
+        <div class="quote">
           <p>“Pored vrhunskog i stabilnog striminga, njihov partner program mi je omogućio odličnu dodatnu zaradu. Preporuke!”</p>
-          <div class="review-meta"><span>Ivan, Hrvatska</span><span class="stars">★★★★★</span></div>
+          <div class="who-wrap">
+            <div class="who">
+              <div class="avatar" style="background: linear-gradient(135deg, #3bf7a0, var(--neon)); color: #000;">IV</div>
+              <div class="details"><span>Ivan</span><small>Hrvatska</small></div>
+            </div>
+            <div class="stars5">★★★★★</div>
+          </div>
         </div>
-        <div class="card-item review-node">
+        
+        <div class="quote">
           <p>“Jedan od najprofesionalnijih IPTV servisa na tržištu. Slika je kristalno čista, nema zamrzavanja tokom velikih utakmica.”</p>
-          <div class="review-meta"><span>Amir, Švedska</span><span class="stars">★★★★★</span></div>
+          <div class="who-wrap">
+            <div class="who">
+              <div class="avatar" style="background: linear-gradient(135deg, #ffd56b, #ff4a4a); color: #000;">AM</div>
+              <div class="details"><span>Amir</span><small>Švedska</small></div>
+            </div>
+            <div class="stars5">★★★★★</div>
+          </div>
         </div>
       </div>
     </section>
@@ -556,49 +621,72 @@
       </div>
     </section>
 
-    <!-- PRIDRUŽI SE -->
+    <!-- PRIDRUŽI SE / FINAL CTA -->
     <section class="reveal">
-      <div class="card-item" style="border-color: rgba(42, 192, 255, 0.3); background: linear-gradient(180deg, rgba(42,192,255,0.05), transparent); padding: 40px; border-radius: var(--radius2);">
-        <div class="kicker">Postani dio porodice</div>
-        <h2>Započni saradnju sa YUGO-Family</h2>
-        <p class="lead" style="font-size: 15px; margin-bottom: 24px;">
-          Bilo da želiš da se pridružiš našem rastućem timu, postaneš zvanični distributer ili obezbijediš stabilnu televiziju za svoje poslovanje – vrata su ti otvorena. Kontaktiraj nas već danas.
-        </p>
-        <div class="btn-row">
-          <a class="btn primary" href="tim.html">Postani dio tima</a>
-          <a class="btn" href="kontakt.html">Kontaktiraj nas</a>
+      <div class="final-cta">
+        <div class="final-cta-inner">
+          <div class="kicker">Postani dio porodice</div>
+          <h2>Započni saradnju sa YUGO-Family</h2>
+          <p>
+            Bilo da želiš da se pridružiš našem rastućem timu, postaneš zvanični distributer ili obezbijediš stabilnu televiziju za svoje poslovanje – vrata su ti otvorena. Kontaktiraj nas već danas.
+          </p>
+          <div class="btn-row">
+            <a class="btn primary" href="tim.html">Postani dio tima</a>
+            <a class="btn" href="kontakt.html">Kontaktiraj nas</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (Usklađen s Indexom) -->
   <footer>
     <div class="wrap">
       <div class="foot">
-        <div>
-          <strong style="font-weight:950;">YuGo Family TV</strong>
-          <small>Premium IPTV sa privatnom infrastrukturom i podrškom 24/7.</small>
+        <div class="foot-brand">
+          <strong>YuGo Family TV</strong>
+          <p>Premium globalni IPTV servis izgrađen na privatnoj infrastrukturi. Obezbjeđujemo vrhunsku stabilnost, bogat sadržaj i tehničku podršku 24/7.</p>
         </div>
 
-        <div class="foot-links" aria-label="Linkovi">
-          <a href="legal.html">Legal</a>
-          <a href="faq.html">FAQ</a>
-          <a href="status.html">Status</a>
-          <a href="kontakt.html">Podrška</a>
+        <div class="foot-links-wrap">
+            <div class="foot-col">
+                <strong>Navigacija</strong>
+                <a href="index.html">Početna</a>
+                <a href="cjenovnik.html">Cjenovnik</a>
+                <a href="aplikacije.html">Aplikacije</a>
+                <a href="kako-da-gledas.html">Upute za gledanje</a>
+            </div>
+            <div class="foot-col">
+                <strong>Usluge</strong>
+                <a href="order.html">Naruči pretplatu</a>
+                <a href="business-iptv.html">Business IPTV</a>
+                <a href="webstranica.html">Poruči WEB-PAGE</a>
+                <a href="tim.html">Postani Reseller</a>
+            </div>
+            <div class="foot-col">
+                <strong>Pomoć & Legal</strong>
+                <a href="faq.html">FAQ (Česta pitanja)</a>
+                <a href="status.html">Status Sistema</a>
+                <a href="kontakt.html">Kontakt & Podrška</a>
+                <a href="legal.html">Legal & Compliance</a>
+            </div>
         </div>
       </div>
 
       <div class="copy">
-        © <span id="year">2026</span> YuGo Family TV • Sva prava zadržana.<br />
-        WhatsApp podrška: <a href="https://wa.me/4915755749502">+49 157 557 495 02</a> • Email: <a href="mailto:support@yugofamily.tv">support@yugofamily.tv</a>
+        <div>© <span id="year">2026</span> YuGo Family TV • Sva prava zadržana.</div>
+        <div>
+            WhatsApp podrška: <a href="https://wa.me/4915755749502">+49 157 557 495 02</a> &nbsp;|&nbsp; 
+            Email: <a href="mailto:support@yugofamily.tv">support@yugofamily.tv</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- PLUTAJUĆE AKCIJE -->
   <div class="float" aria-label="Brzi kontakti">
-    <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp</a>
+    <a class="whatsapp" href="https://wa.me/4915755749502">💬 WhatsApp Chat</a>
+    <button type="button" id="toTopBtn" aria-label="Na vrh stranice" style="opacity: 0; pointer-events: none;">⬆️ Na vrh</button>
   </div>
 
   <script>
@@ -628,10 +716,9 @@
           clearInterval(interval);
         }
         el.innerText = Math.floor(count).toLocaleString("de-DE") + "+";
-      }, 20);
+      }, 25);
     }
 
-    // Pokretanje brojača čim se stranica učita
     document.addEventListener("DOMContentLoaded", () => {
       animateCounter("usersCount", 16000);
       animateCounter("partnersCount", 117);
@@ -645,13 +732,13 @@
     function resize(){
       W = c.width = window.innerWidth;
       H = c.height = window.innerHeight;
-      const count = Math.min(120, Math.floor((W * H) / 25000));
+      const count = Math.min(160, Math.floor((W * H) / 18000));
       stars = Array.from({length: count}, () => ({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: Math.random() * 1.1 + 0.2,
-        a: Math.random() * 0.4 + 0.15,
-        s: Math.random() * 0.25 + 0.05
+        r: Math.random() * 1.2 + 0.3,
+        a: Math.random() * 0.6 + 0.2,
+        s: Math.random() * 0.4 + 0.1
       }));
     }
     window.addEventListener("resize", resize);
@@ -676,10 +763,26 @@
     const revealEls = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver((entries) => {
       for(const e of entries){
-        if(e.isIntersecting) e.target.classList.add("in");
+        if(e.isIntersecting) {
+            e.target.classList.add("in");
+        }
       }
-    }, {threshold: 0.1});
+    }, {threshold: 0.12});
     revealEls.forEach(el => io.observe(el));
+
+    /* ===== Dugme za povratak na vrh stranice ===== */
+    const toTopBtn = document.getElementById("toTopBtn");
+    toTopBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+    
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) {
+            toTopBtn.style.opacity = "1";
+            toTopBtn.style.pointerEvents = "auto";
+        } else {
+            toTopBtn.style.opacity = "0";
+            toTopBtn.style.pointerEvents = "none";
+        }
+    });
 
     /* ===== Automatska Godina u Footeru ===== */
     document.getElementById("year").innerText = new Date().getFullYear();
